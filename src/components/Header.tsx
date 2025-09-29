@@ -27,7 +27,30 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           
-          {/* Desktop Actions - Moved to Left */}
+          {/* Logo - Left side */}
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoImage} 
+              alt="Pi Expertises Logo" 
+              className="h-12 w-12 object-contain"
+            />
+          </div>
+
+          {/* Desktop Navigation - Center */}
+          <nav className={`hidden lg:flex items-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'} absolute left-1/2 transform -translate-x-1/2`}>
+            {navigationItems.map((item) => (
+              <a
+                key={item.key}
+                href={item.href}
+                className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
+              >
+                {t(item.key)}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+          </nav>
+
+          {/* Desktop Actions - Right side */}
           <div className="hidden lg:flex items-center space-x-4">
             {/* Language Selector */}
             <div className="relative group">
@@ -61,29 +84,6 @@ const Header = () => {
                 {t('nav.contact')}
               </a>
             </Button>
-          </div>
-
-          {/* Desktop Navigation - Center */}
-          <nav className={`hidden lg:flex items-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
-            {navigationItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
-              >
-                {t(item.key)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
-          </nav>
-
-          {/* Logo - Right side */}
-          <div className="flex items-center space-x-3">
-            <img 
-              src={logoImage} 
-              alt="Pi Expertises Logo" 
-              className="h-12 w-12 object-contain"
-            />
           </div>
 
           {/* Mobile Menu Button */}
