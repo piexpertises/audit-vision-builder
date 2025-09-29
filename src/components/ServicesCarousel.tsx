@@ -59,6 +59,33 @@ const ServicesCarousel = () => {
         return service.titleHe;
     }
   };
-  return;
+  return (
+    <div className="relative w-full h-64 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/20 rounded-full mb-4">
+            {React.createElement(services[currentIndex].icon, { 
+              className: "h-8 w-8 text-accent" 
+            })}
+          </div>
+          <h3 className="text-2xl font-bold text-foreground">
+            {getTitle(services[currentIndex])}
+          </h3>
+        </div>
+      </div>
+      
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {services.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentIndex ? 'bg-accent' : 'bg-accent/30'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 export default ServicesCarousel;

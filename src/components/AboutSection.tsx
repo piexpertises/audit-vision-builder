@@ -1,44 +1,26 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Award, Shield, Users, Target } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from "@/components/ui/button";
+import { Shield, Users, Award, Target, Phone, Mail } from 'lucide-react';
 import steveProfile from '@/assets/steve-profile.jpg';
 
 const AboutSection = () => {
-  const { t, isRTL } = useLanguage();
-
-  const achievements = [
-    { icon: Award, label: 'Military Experience', value: 'Lt. Col. (Ret.)' },
-    { icon: Shield, label: 'Years in Security', value: '20+' },
-    { icon: Users, label: 'Clients Served', value: '500+' },
-    { icon: Target, label: 'Success Rate', value: '100%' },
-  ];
-
-  const expertise = [
-    'Physical Security Assessment',
-    'VIP Protection Services',
-    'Event Security Management',
-    'Emergency Response Planning',
-    'Security Training & Education',
-    'Risk Management Consulting',
-  ];
-
   return (
-    <section id="about" className="py-20 bg-background">
+    <section id="about" className="py-20 bg-background" dir="rtl">
       <div className="container mx-auto px-4">
-        {/* אודותינו Section */}
+        
+        {/* Section 1 - אודות פאי אקספרטיס */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              אודותינו
+              אודות פאי אקספרטיס
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto"></div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Profile Photo */}
-            <div className="flex justify-center">
+            <div className="flex justify-center lg:order-1">
               <div className="relative">
                 <img 
                   src={steveProfile} 
@@ -50,43 +32,26 @@ const AboutSection = () => {
             </div>
 
             {/* Main About Content */}
-            <div className="space-y-6">
+            <div className="space-y-6 lg:order-2">
               <Card className="card-security">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-foreground mb-4">
-                    אודות פאי אקספרטיס
-                  </h3>
-                  <h4 className="text-xl font-semibold text-accent mb-4">
+                  <h3 className="text-xl font-semibold text-accent mb-4 text-center">
                     סטיב בלחסן | מייסד ומנהל
-                  </h4>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    פאי אקספרטיס הוא משרד בוטיק בתחום הביטחון שהוקם בשנת 2016 על ידי סטיב בלחסן, סא"ל במיל', מנהל בכיר בתחום האירועים תחת כיפת השמים.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    סטיב בלחסן מביא עימו 20 שנה של ניסיון עשיר בביטחון והגנה, עם התמחות בתחומים כמו הגנת העורף, הקמת מערכי חירום, אבטחה מונעת והדרכת ירי ולחימה. הוא בעל תואר ראשון במדעי החברה והרוח עם התמחות בביטחון והגנת העורף, ובוגר תואר שני במנהל עסקים עם התמחות בניהול משברים ובניית חוסן בארגונים. בנוסף, סטיב הוא בעל תואר שני נוסף במדעי היהדות והרוח.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    כמנהיג בתחום הביטחון, סטיב משתמש בידע המקצועי, האקדמי והמעשי שלו כדי לפתח פתרונות ביטחוניים מותאמים אישית וחדשניים. את כל הידע הזה הוא מעביר לצוות פאי אקספרטיס, שמוביל את המשרד להצלחה ומקצועיות ללא פשרות.
-                  </p>
+                  </h3>
                   
-                  <div className="space-y-4 mt-6">
-                    <Card className="bg-accent/5 border-accent/20">
-                      <CardContent className="p-4">
-                        <h4 className="text-lg font-semibold text-foreground mb-2">הגדרת הביטחון שלנו</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          ההגדרה שלנו למושג ביטחון היא אנלוגיה למספר היווני π (פאי): כל פרט, קטן ככל שיהיה, חיוני להשלמת התמונה ולהגנה אפקטיבית על המושא המאובטח.
-                        </p>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-accent/5 border-accent/20">
-                      <CardContent className="p-4">
-                        <h4 className="text-lg font-semibold text-foreground mb-2">צוות המומחים שלנו</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          הצוות שלנו מורכב מאנשי מקצוע בתחום הביטחון, בעלי רקע עשיר במוסדות ביטחוניים וניסיון של עשרות שנים בתחום. כל חבר צוות מביא עימו יכולות ייחודיות ועוסק בתפקידים שמבטיחים את ההגנה המירבת על לקוחותינו.
-                        </p>
-                      </CardContent>
-                    </Card>
+                  <div className="space-y-4 text-muted-foreground leading-relaxed">
+                    <p>
+                      פאי אקספרטיס הוא משרד בוטיק בתחום הביטחון שהוקם בשנת 2016 על ידי סטיב בלחסן, סא"ל במיל', מנהל בכיר בתחום האירועים תחת כיפת השמים.
+                    </p>
+                    <p>
+                      סטיב בלחסן מביא עימו 20 שנה של ניסיון עשיר בביטחון והגנה, עם התמחות בתחומים כמו הגנת העורף, הקמת מערכי חירום, אבטחה מונעת והדרכת ירי ולחימה. הוא בעל תואר ראשון במדעי החברה והרוח עם התמחות בביטחון והגנת העורף, ובוגר תואר שני במנהל עסקים עם התמחות בניהול משברים ובניית חוסן בארגונים. בנוסף, סטיב הוא בעל תואר שני נוסף במדעי היהדות והרוח.
+                    </p>
+                    <p>
+                      כמנהיג בתחום הביטחון, סטיב משתמש בידע המקצועי, האקדמי והמעשי שלו כדי לפתח פתרונות ביטחוניים מותאמים אישית וחדשניים. את כל הידע הזה הוא מעביר לצוות פאי אקספרטיס, שמוביל את המשרד להצלחה ומקצועיות ללא פשרות.
+                    </p>
+                    <p className="bg-accent/10 p-4 rounded-lg border border-accent/20">
+                      ההגדרה שלנו למושג ביטחון היא אנלוגיה למספר היווני π (פאי): כל פרט, קטן ככל שיהיה, חיוני להשלמת התמונה ולהגנה אפקטיבית על המושא המאובטח.
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -94,123 +59,123 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Section Header for Specializations */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            תחומי ההתמחות שלנו
-          </h2>
-          <div className="w-24 h-1 bg-accent mx-auto"></div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Founder Information */}
-          <div className="space-y-8">
-            <Card className="card-security">
-              <CardContent className="p-8">
-                {/* Founder Header */}
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">
-                    {t('about.founder_title')}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary" className="bg-accent/20 text-accent">
-                      Founder & CEO
-                    </Badge>
-                    <Badge variant="secondary" className="bg-accent/20 text-accent">
-                      Lt. Colonel (Ret.)
-                    </Badge>
-                    <Badge variant="secondary" className="bg-accent/20 text-accent">
-                      Security Expert
-                    </Badge>
+        {/* Section 2 - תחומי ההתמחות שלנו */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              תחומי ההתמחות שלנו
+            </h2>
+            <div className="w-24 h-1 bg-accent mx-auto"></div>
+          </div>
+          
+          <Card className="card-security">
+            <CardContent className="p-8">
+              <div className="space-y-6 text-muted-foreground leading-relaxed">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-3">
+                    <Shield className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+                    <span>ייעוץ ביטחוני מקצועי לכל תחום, מהעסק הפרטי ועד הגופים הגדולים והרגישים.</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Target className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+                    <span>הדרכה ואימון בתחום הירי, לחימה ואבטחה מונעת.</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Award className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+                    <span>הגנת העורף והקמת מערכי חירום.</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Users className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+                    <span>הדרכות תכנון אבטחה לאירועים תחת כיפת השמים.</span>
                   </div>
                 </div>
-
-                {/* Founder Description */}
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  {t('about.founder_desc')}
+                <div className="flex items-start gap-3">
+                  <Shield className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+                  <span>שירותים מותאמים אישית בתחום הביטחון, הטרור וריגול תעשייתי.</span>
+                </div>
+                <p className="bg-accent/10 p-4 rounded-lg border border-accent/20 font-medium">
+                  ההבנה שלנו היא שכל פרט הוא קריטי – לכל החלטה ולכל צעד יש תוצאה ישירה על מידת ההגנה שאנו מספקים ללקוחותינו.
                 </p>
-
-                {/* Expertise List */}
-                <div>
-                  <h4 className="text-lg font-semibold text-foreground mb-4">Areas of Expertise</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {expertise.map((item, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-accent rounded-full flex-shrink-0"></div>
-                        <span className="text-muted-foreground text-sm">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Achievements & Stats */}
-          <div className="space-y-8">
-            {/* Professional Achievements */}
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Professional Achievements</h3>
-              <div className="grid grid-cols-2 gap-6">
-                {achievements.map((achievement, index) => (
-                  <Card key={index} className="card-security text-center group">
-                    <CardContent className="p-6">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/20 rounded-full mb-4 group-hover:bg-accent/30 transition-colors duration-300">
-                        <achievement.icon className="h-8 w-8 text-accent" />
-                      </div>
-                      <div className="text-2xl font-bold text-accent mb-2">{achievement.value}</div>
-                      <div className="text-muted-foreground text-sm">{achievement.label}</div>
-                    </CardContent>
-                  </Card>
-                ))}
               </div>
-            </div>
-
-            {/* Company Values */}
-            <Card className="card-security">
-              <CardContent className="p-8">
-                <h4 className="text-xl font-semibold text-foreground mb-6">Our Core Values</h4>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-3 h-3 bg-accent rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <h5 className="font-semibold text-foreground mb-1">Professionalism</h5>
-                      <p className="text-muted-foreground text-sm">Unwavering commitment to excellence in every security solution we provide.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-3 h-3 bg-accent rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <h5 className="font-semibold text-foreground mb-1">Reliability</h5>
-                      <p className="text-muted-foreground text-sm">Consistent, dependable security services you can trust completely.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-3 h-3 bg-accent rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <h5 className="font-semibold text-foreground mb-1">Innovation</h5>
-                      <p className="text-muted-foreground text-sm">Cutting-edge security strategies adapted to modern threats and challenges.</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Mission Statement */}
-        <div className="mt-16">
+        {/* Section 3 - צוות המומחים שלנו */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              צוות המומחים שלנו
+            </h2>
+            <div className="w-24 h-1 bg-accent mx-auto"></div>
+          </div>
+          
+          <Card className="card-security">
+            <CardContent className="p-8">
+              <div className="space-y-6 text-muted-foreground leading-relaxed">
+                <p>
+                  הצוות שלנו מורכב מאנשי מקצוע בתחום הביטחון, בעלי רקע עשיר במוסדות ביטחוניים וניסיון של עשרות שנים בתחום. כל חבר צוות מביא עימו יכולות ייחודיות ועוסק בתפקידים שמבטיחים את ההגנה המירבת על לקוחותינו.
+                </p>
+                <p>
+                  אנו מתעדכנים באופן שוטף בשינויים ובסיכונים הגלויים בארץ ובעולם, ומספקים ללקוחותינו תדרוכים תקופתיים, אזהרות מסע ומענה מותאם אישית לכל צורך ביטחוני.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Section 4 - ההתחייבות שלנו */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              ההתחייבות שלנו
+            </h2>
+            <div className="w-24 h-1 bg-accent mx-auto"></div>
+          </div>
+          
           <Card className="card-security bg-gradient-to-r from-primary/5 to-accent/5">
-            <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold text-foreground mb-4">Our Mission</h3>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl mx-auto">
-                To provide exceptional security consulting services that protect our clients' assets, people, and reputation 
-                through innovative solutions, expert knowledge, and unwavering commitment to excellence. We believe that 
-                true security comes from understanding each client's unique needs and delivering customized protection strategies.
+            <CardContent className="p-8">
+              <p className="text-lg text-muted-foreground leading-relaxed text-center">
+                פאי אקספרטיס מתחייבת לספק שירות מקצועי, איכותי ודיסקרטי, תוך שמירה על אתיקה מקצועית והתאמת הפתרונות הביטחוניים בצורה מדויקת לצרכים של כל לקוח. אנו פועלים תמיד במסגרת החוק ומתאימים את כל השירותים והפתרונות לשינויים המתמידים במציאות הביטחונית.
               </p>
             </CardContent>
           </Card>
         </div>
+
+        {/* Section 5 - המומחים שלך בביטחון (Call to Action) */}
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              המומחים שלך בביטחון
+            </h2>
+            <div className="w-24 h-1 bg-accent mx-auto"></div>
+          </div>
+          
+          <Card className="card-security">
+            <CardContent className="p-8 text-center">
+              <div className="space-y-6">
+                <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+                  אם אתם זקוקים לייעוץ ביטחוני, קורסים בהדרכת ירי או הגנת עורף, אנחנו כאן כדי לעזור.
+                </p>
+                <p className="text-xl font-semibold text-foreground">
+                  צרו קשר עם פאי אקספרטיס וגלו איך אנחנו יכולים לשדרג את הביטחון שלכם.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+                  <Button className="bg-accent hover:bg-accent/90 text-white px-8 py-3">
+                    <Phone className="h-5 w-5 ml-2" />
+                    צור קשר טלפוני
+                  </Button>
+                  <Button variant="outline" className="border-accent text-accent hover:bg-accent/10 px-8 py-3">
+                    <Mail className="h-5 w-5 ml-2" />
+                    שלח הודעה
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
       </div>
     </section>
   );
