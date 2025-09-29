@@ -23,7 +23,7 @@ const Header = () => {
     { key: 'nav.about', href: '#about', isRoute: false },
     { key: 'nav.security-consulting', href: '/security-consulting', isRoute: true },
     { key: 'nav.mass-events', href: '/mass-event-management', isRoute: true },
-    { key: 'nav.emergency-prep', href: '#emergency-prep', isRoute: false },
+    { key: 'nav.emergency-prep', href: '/emergency-preparedness', isRoute: true },
     { key: 'nav.security-plans', href: '/security-plan-writing', isRoute: true },
   ];
 
