@@ -148,7 +148,7 @@ const Header = () => {
             className="lg:hidden text-[#D4AF37] hover:text-[#D4AF37]/80 hover:bg-white/5"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
           </Button>
         </div>
 
