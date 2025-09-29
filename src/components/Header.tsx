@@ -125,64 +125,66 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden py-6 border-t border-white/20 bg-white/95 backdrop-blur-lg">
-            <nav className={`flex flex-col space-y-4 ${isRTL ? 'text-right' : 'text-left'}`}>
-              {navigationItems.map((item) => (
-                item.isRoute ? (
-                  <Link
-                    key={item.key}
-                    to={item.href}
-                    className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {t(item.key)}
-                  </Link>
-                ) : (
-                  <a
-                    key={item.key}
-                    href={item.href}
-                    className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {t(item.key)}
-                  </a>
-                )
-              ))}
-              
-              {/* Mobile Language Selector */}
-              <div className="pt-4 border-t border-white/20">
-                <p className="text-sm text-gray-500 mb-2">Language / שפה / Langue</p>
-                <div className="flex gap-2">
-                  {languages.map((lang) => (
-                    <Button
-                      key={lang.code}
-                      variant={language === lang.code ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setLanguage(lang.code)}
-                      className="flex-1"
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-white/20 shadow-2xl z-50">
+            <div className="container mx-auto px-4 py-8">
+              <nav className={`flex flex-col space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+                {navigationItems.map((item) => (
+                  item.isRoute ? (
+                    <Link
+                      key={item.key}
+                      to={item.href}
+                      className="text-gray-800 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-primary/10 border-l-4 border-transparent hover:border-primary"
+                      onClick={() => setIsMenuOpen(false)}
                     >
-                      <span className="flex items-center gap-1">
-                        <span>{lang.flag}</span>
-                        <span className="text-xs">{lang.label}</span>
-                      </span>
-                    </Button>
-                  ))}
+                      {t(item.key)}
+                    </Link>
+                  ) : (
+                    <a
+                      key={item.key}
+                      href={item.href}
+                      className="text-gray-800 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-primary/10 border-l-4 border-transparent hover:border-primary"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {t(item.key)}
+                    </a>
+                  )
+                ))}
+                
+                {/* Mobile Language Selector */}
+                <div className="pt-6 border-t border-gray-200">
+                  <p className="text-sm font-medium text-gray-600 mb-4">Language / שפה / Langue</p>
+                  <div className="grid grid-cols-3 gap-3">
+                    {languages.map((lang) => (
+                      <Button
+                        key={lang.code}
+                        variant={language === lang.code ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setLanguage(lang.code)}
+                        className={`flex-1 ${language === lang.code ? 'bg-primary text-white' : 'hover:bg-primary/10 hover:border-primary'}`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="text-lg">{lang.flag}</span>
+                          <span className="text-sm font-medium">{lang.label}</span>
+                        </span>
+                      </Button>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Mobile Contact */}
-              <div className="pt-4 space-y-2">
-                <Button 
-                  className="w-full bg-primary hover:bg-primary/90 text-white rounded-full font-medium"
-                  asChild
-                >
-                  <a href="tel:050-730-0720">
-                    <Phone size={16} />
-                    {t('nav.phone')}
-                  </a>
-                </Button>
-              </div>
-            </nav>
+                {/* Mobile Contact */}
+                <div className="pt-6 border-t border-gray-200">
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 text-white rounded-full font-medium py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    asChild
+                  >
+                    <a href="tel:050-730-0720" className="flex items-center justify-center gap-3">
+                      <Phone size={20} />
+                      {t('nav.phone')}
+                    </a>
+                  </Button>
+                </div>
+              </nav>
+            </div>
           </div>
         )}
       </div>

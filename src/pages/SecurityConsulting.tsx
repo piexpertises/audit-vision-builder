@@ -12,14 +12,24 @@ const SecurityConsulting = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-16 bg-gradient-security">
+        <section className="pt-32 pb-20 bg-gradient-security min-h-[60vh] flex items-center">
           <div className="container mx-auto px-4 text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-up">
               ייעוץ ביטחוני | המומחים שלך בביטחון
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-up" style={{animationDelay: '0.2s'}}>
               הבטיחות שלך היא המשימה שלנו.
             </p>
+            <div className="animate-fade-up" style={{animationDelay: '0.4s'}}>
+              <Button 
+                className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 rounded-full px-8 py-4 font-medium text-lg backdrop-blur-sm transition-all duration-300"
+                asChild
+              >
+                <a href="#consultation-areas">
+                  גלה עוד
+                </a>
+              </Button>
+            </div>
           </div>
         </section>
 
@@ -53,7 +63,7 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Consulting Areas */}
-        <section className="py-16">
+        <section id="consultation-areas" className="py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               תחומי הייעוץ הביטחוני שלנו
