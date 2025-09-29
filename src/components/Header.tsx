@@ -23,7 +23,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm border-b border-white/10 transition-all duration-300 hover:backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-[100] bg-transparent backdrop-blur-sm border-b border-white/10 transition-all duration-300 hover:backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           
