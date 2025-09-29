@@ -1,0 +1,159 @@
+import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Menu, X, Phone, Globe } from 'lucide-react';
+import { useLanguage, Language } from '@/contexts/LanguageContext';
+import logoImage from '@/assets/logo-pi-expertises.png';
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, setLanguage, t, isRTL } = useLanguage();
+
+  const navigationItems = [
+    { key: 'nav.home', href: '#home' },
+    { key: 'nav.about', href: '#about' },
+    { key: 'nav.services', href: '#services' },
+    { key: 'nav.team', href: '#team' },
+    { key: 'nav.contact', href: '#contact' },
+  ];
+
+  const languages: { code: Language; label: string; flag: string }[] = [
+    { code: 'he', label: 'עברית', flag: '🇮🇱' },
+    { code: 'en', label: 'English', flag: '🇺🇸' },
+    { code: 'fr', label: 'Français', flag: '🇫🇷' },
+  ];
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoImage} 
+              alt="Pi Expertises Logo" 
+              className="h-12 w-12 object-contain"
+            />
+            <span className="text-xl font-bold text-accent">Pi Expertises</span>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-8">
+            {navigationItems.map((item) => (
+              <a
+                key={item.key}
+                href={item.href}
+                className="text-foreground hover:text-accent transition-colors duration-300 font-medium"
+              >
+                {t(item.key)}
+              </a>
+            ))}
+          </nav>
+
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {/* Language Selector */}
+            <div className="relative group">
+              <Button variant="outline" size="sm" className="gap-2">
+                <Globe size={16} />
+                <span className="hidden sm:inline">{languages.find(l => l.code === language)?.label}</span>
+              </Button>
+              <div className="absolute top-full right-0 mt-2 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => setLanguage(lang.code)}
+                    className={`block w-full px-4 py-2 text-left hover:bg-muted transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
+                      language === lang.code ? 'bg-accent/10 text-accent' : ''
+                    }`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span>{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Phone Button */}
+            <Button variant="outline" size="sm" className="gap-2" asChild>
+              <a href="tel:050-730-0720">
+                <Phone size={16} />
+                <span className="hidden sm:inline">{t('nav.phone')}</span>
+              </a>
+            </Button>
+
+            {/* CTA Button */}
+            <Button className="btn-hero">
+              {t('hero.cta')}
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="lg:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </Button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="lg:hidden py-6 border-t border-border bg-card">
+            <nav className="flex flex-col space-y-4">
+              {navigationItems.map((item) => (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  className="text-foreground hover:text-accent transition-colors duration-300 font-medium py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t(item.key)}
+                </a>
+              ))}
+              
+              {/* Mobile Language Selector */}
+              <div className="pt-4 border-t border-border">
+                <p className="text-sm text-muted-foreground mb-2">Language / שפה / Langue</p>
+                <div className="flex gap-2">
+                  {languages.map((lang) => (
+                    <Button
+                      key={lang.code}
+                      variant={language === lang.code ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setLanguage(lang.code)}
+                      className="flex-1"
+                    >
+                      <span className="flex items-center gap-1">
+                        <span>{lang.flag}</span>
+                        <span className="text-xs">{lang.label}</span>
+                      </span>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile Contact */}
+              <div className="pt-4 space-y-2">
+                <Button variant="outline" className="w-full gap-2" asChild>
+                  <a href="tel:050-730-0720">
+                    <Phone size={16} />
+                    {t('nav.phone')}
+                  </a>
+                </Button>
+                <Button className="w-full btn-hero">
+                  {t('hero.cta')}
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
