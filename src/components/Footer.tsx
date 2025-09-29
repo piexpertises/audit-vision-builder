@@ -7,20 +7,11 @@ import logoImage from '@/assets/logo-pi-expertises.png';
 const Footer = () => {
   const { t, isRTL } = useLanguage();
 
-  const services = [
-    'VIP Protection',
-    'Security Consulting',
-    'Event Security',
-    'Risk Assessment',
-    'Training Programs',
-    'Emergency Planning',
-  ];
-
   const company = [
-    { label: 'About Us', href: '#about' },
-    { label: 'Our Team', href: '#team' },
-    { label: 'Services', href: '#services' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'אודותינו', href: '#about' },
+    { label: 'הצוות שלנו', href: '#team' },
+    { label: 'שירותים', href: '#services' },
+    { label: 'צור קשר', href: '#contact' },
   ];
 
   const socialLinks = [
@@ -33,9 +24,9 @@ const Footer = () => {
     <footer className="bg-primary border-t border-border">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 py-16" dir="rtl">
           {/* Company Info */}
-          <div className="lg:col-span-2">
+          <div>
             <div className="flex items-center gap-3 mb-6">
               <img 
                 src={logoImage} 
@@ -45,64 +36,16 @@ const Footer = () => {
               <span className="text-2xl font-bold text-accent">Pi Expertises</span>
             </div>
             
-            <p className="text-foreground/80 leading-relaxed mb-6 max-w-md">
-              {t('footer.description')}
+            <p className="text-foreground/80 leading-relaxed mb-6">
+              פאי אקספרטיס הוא משרד בוטיק לייעוץ ביטחוני, הטרור ופתרונות ביטחוניים מותאמים אישית.
             </p>
-
-            {/* Contact Info */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-accent flex-shrink-0" />
-                <a 
-                  href="tel:050-730-0720" 
-                  className="text-foreground/80 hover:text-accent transition-colors duration-300"
-                >
-                  {t('contact.phone_label')}
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-accent flex-shrink-0" />
-                <a 
-                  href="mailto:pi.expertises@gmail.com" 
-                  className="text-foreground/80 hover:text-accent transition-colors duration-300"
-                >
-                  {t('contact.email_label')}
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
-                <span className="text-foreground/80">
-                  {t('contact.address')}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
-              <Shield className="h-5 w-5 text-accent" />
-              {t('footer.services_title')}
-            </h3>
-            <ul className="space-y-3">
-              {services.map((service, index) => (
-                <li key={index}>
-                  <a 
-                    href="#services" 
-                    className="text-foreground/70 hover:text-accent transition-colors duration-300 text-sm"
-                  >
-                    {service}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Company Links */}
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
               <Users className="h-5 w-5 text-accent" />
-              {t('footer.company_title')}
+              החברה
             </h3>
             <ul className="space-y-3">
               {company.map((item, index) => (
@@ -116,10 +59,46 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Contact Section */}
+          <div>
+            <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+              <Phone className="h-5 w-5 text-accent" />
+              צור קשר
+            </h3>
+            
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <Phone className="h-5 w-5 text-accent flex-shrink-0" />
+                <a 
+                  href="tel:050-730-0720" 
+                  className="text-foreground/80 hover:text-accent transition-colors duration-300"
+                >
+                  050-730-0720
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-accent flex-shrink-0" />
+                <a 
+                  href="mailto:pi.expertises@gmail.com" 
+                  className="text-foreground/80 hover:text-accent transition-colors duration-300"
+                >
+                  pi.expertises@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
+                <span className="text-foreground/80">
+                  מבשרת ציון, ישראל
+                </span>
+              </div>
+            </div>
 
             {/* Quick Contact */}
-            <div className="mt-8">
-              <h4 className="text-foreground font-medium mb-4">Quick Contact</h4>
+            <div className="mt-6">
+              <h4 className="text-foreground font-medium mb-4">קשר מהיר</h4>
               <div className="flex gap-3">
                 {socialLinks.map((link, index) => (
                   <Button
@@ -148,18 +127,18 @@ const Footer = () => {
         <div className="py-6 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-foreground/60 text-sm">
-              © 2024 {t('footer.rights')}
+              © 2024 כל הזכויות שמורות לפאי אקספרטיס
             </p>
             <div className="flex items-center gap-6 text-sm text-foreground/60">
               <a href="#" className="hover:text-accent transition-colors duration-300">
-                Privacy Policy
+                מדיניות פרטיות
               </a>
               <a href="#" className="hover:text-accent transition-colors duration-300">
-                Terms of Service
+                תנאי השירות
               </a>
               <span className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-accent" />
-                Secured by Pi Expertises
+                מוגן על ידי פאי אקספרטיס
               </span>
             </div>
           </div>
