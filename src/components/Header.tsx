@@ -81,17 +81,17 @@ const Header = () => {
             {/* Language Selector */}
             <div className="relative group">
               <Button variant="ghost" size="sm" className="gap-2 text-white/90 hover:text-white hover:bg-white/5">
-                <Globe size={16} />
-              </Button>
-              <div className="absolute top-full left-0 mt-2 bg-white/95 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => setLanguage(lang.code)}
-                    className={`block w-full px-4 py-2 text-left hover:bg-gray-100/20 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
-                      language === lang.code ? 'bg-primary/20 text-primary' : 'text-gray-700'
-                    }`}
-                  >
+            <Globe size={16} />
+          </Button>
+          <div className="absolute top-full left-0 mt-2 bg-white/95 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => setLanguage(lang.code)}
+                className={`block w-full px-4 py-2 text-left hover:bg-gold/10 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
+                  language === lang.code ? 'bg-gold/20 text-gold' : 'text-gray-700'
+                }`}
+              >
                     <span className="flex items-center gap-2">
                       <span>{lang.flag}</span>
                       <span>{lang.label}</span>
@@ -103,7 +103,7 @@ const Header = () => {
 
             {/* Contact Button */}
             <Button 
-              className="bg-primary/90 hover:bg-primary text-white rounded-full px-6 py-2 font-medium shadow-lg backdrop-blur-sm border border-white/10"
+              className="bg-gold hover:bg-gold/90 text-gold-foreground rounded-full px-6 py-2 font-medium shadow-lg backdrop-blur-sm border border-gold/20"
               asChild
             >
               <a href="tel:050-730-0720">
@@ -133,7 +133,7 @@ const Header = () => {
                     <Link
                       key={item.key}
                       to={item.href}
-                      className="text-gray-800 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-primary/10 border-l-4 border-transparent hover:border-primary"
+                      className="text-gray-800 hover:text-gold transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gold/10 border-l-4 border-transparent hover:border-gold"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {t(item.key)}
@@ -142,7 +142,7 @@ const Header = () => {
                     <a
                       key={item.key}
                       href={item.href}
-                      className="text-gray-800 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-primary/10 border-l-4 border-transparent hover:border-primary"
+                      className="text-gray-800 hover:text-gold transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gold/10 border-l-4 border-transparent hover:border-gold"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {t(item.key)}
@@ -160,7 +160,7 @@ const Header = () => {
                         variant={language === lang.code ? "default" : "outline"}
                         size="sm"
                         onClick={() => setLanguage(lang.code)}
-                        className={`flex-1 ${language === lang.code ? 'bg-primary text-white' : 'hover:bg-primary/10 hover:border-primary'}`}
+                        className={`flex-1 ${language === lang.code ? 'bg-gold text-gold-foreground' : 'hover:bg-gold/10 hover:border-gold'}`}
                       >
                         <span className="flex items-center gap-2">
                           <span className="text-lg">{lang.flag}</span>
@@ -174,7 +174,7 @@ const Header = () => {
                 {/* Mobile Contact */}
                 <div className="pt-6 border-t border-gray-200">
                   <Button 
-                    className="w-full bg-primary hover:bg-primary/90 text-white rounded-full font-medium py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-gold hover:bg-gold/90 text-gold-foreground rounded-full font-medium py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
                   >
                     <a href="tel:050-730-0720" className="flex items-center justify-center gap-3">

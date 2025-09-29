@@ -6,94 +6,78 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors - Light and vibrant theme */
-    --background: 210 20% 98%;           /* Very light background */
-    --foreground: 222.2 84% 4.9%;        /* Dark text */
+    /* Core Brand Colors - Gold & Navy Theme */
+    --background: 0 0% 100%;                 /* White background */
+    --foreground: 0 0% 4%;                   /* Black text */
     
     /* Surface Colors */
-    --card: 0 0% 100%;                   /* White cards */
-    --card-foreground: 222.2 84% 4.9%;  /* Dark card text */
+    --card: 0 0% 100%;                       /* White cards */
+    --card-foreground: 0 0% 4%;              /* Black card text */
     
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 4%;
     
-    /* Brand Primary - Professional Blue */
-    --primary: 200 100% 40%;             /* Bright blue */
-    --primary-foreground: 210 40% 98%;   /* Light text on blue */
+    /* Brand Primary - Gold Metallic */
+    --primary: 45 100% 42%;                  /* Gold metallic #D4AF37 */
+    --primary-foreground: 0 0% 100%;         /* White text on gold */
     
-    /* Secondary - Light Blue */
-    --secondary: 210 40% 96%;            /* Very light blue */
-    --secondary-foreground: 222.2 84% 4.9%; /* Dark text on light */
+    /* Secondary - Light Gray */
+    --secondary: 0 0% 96%;                   /* Light gray #F5F5F5 */
+    --secondary-foreground: 0 0% 4%;         /* Black text on light gray */
     
     /* Muted Tones */
-    --muted: 210 40% 96%;                /* Light muted */
-    --muted-foreground: 215.4 16.3% 46.9%; /* Medium text */
+    --muted: 0 0% 96%;                       /* Light gray */
+    --muted-foreground: 0 0% 17%;            /* Anthracite gray */
     
-    /* Accent - Vibrant Gold */
-    --accent: 34 100% 84%;               /* Bright warm gold */
-    --accent-foreground: 222.2 84% 4.9%; /* Dark text on gold */
+    /* Accent - Royal Blue */
+    --accent: 210 92% 53%;                   /* Royal blue #1d9bf0 */
+    --accent-foreground: 0 0% 100%;          /* White text on blue */
     
     /* Status Colors */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
     
     /* Interactive Elements */
-    --border: 214.3 31.8% 91.4%;         /* Light borders */
-    --input: 214.3 31.8% 91.4%;          /* Light input backgrounds */
-    --ring: 200 100% 40%;                 /* Blue focus rings */
+    --border: 0 0% 90%;                      /* Light gray borders */
+    --input: 0 0% 96%;                       /* Light gray input backgrounds */
+    --ring: 45 100% 42%;                     /* Gold focus rings */
     
     /* Layout */
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Brand Colors */
+    --gold: 45 100% 42%;                     /* Gold metallic */
+    --gold-foreground: 0 0% 100%;            /* White on gold */
+    --navy: 210 82% 11%;                     /* Dark navy */
+    --navy-foreground: 0 0% 100%;            /* White on navy */
+    --royal-blue: 210 92% 53%;               /* Royal blue */
+    --royal-blue-foreground: 0 0% 100%;      /* White on royal blue */
+    --anthracite: 0 0% 17%;                  /* Anthracite gray */
+    --light-gray: 0 0% 96%;                  /* Light gray */
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 17%;
+    --sidebar-primary: 45 100% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 4%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 45 100% 42%;
   }
 
-  /* Light Mode Overrides - Professional Light Theme */
-  .light {
-    --background: 210 20% 96%;          /* Light background */
-    --foreground: 216 18% 12%;          /* Dark text */
-    
-    --card: 0 0% 100%;                  /* White cards */
-    --card-foreground: 216 18% 12%;     /* Dark card text */
-    
-    --primary: 216 15% 8%;              /* Keep navy primary */
-    --primary-foreground: 210 20% 92%;  /* Light text on navy */
-    
-    --secondary: 210 15% 88%;           /* Light secondary */
-    --secondary-foreground: 216 18% 12%; /* Dark text on light */
-    
-    --muted: 210 15% 92%;               /* Light muted */
-    --muted-foreground: 216 12% 45%;    /* Medium text */
-    
-    --border: 210 15% 85%;              /* Light borders */
-    --input: 210 15% 92%;               /* Light inputs */
-  }
-  
   /* Enhanced Security Features */
   :root {
-    /* Custom Vibrant Gradients */
-    --gradient-security: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
-    --gradient-hero: linear-gradient(135deg, hsl(200 100% 50% / 0.1), hsl(34 100% 90% / 0.1));
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(210 40% 98%));
+    /* Custom Brand Gradients */
+    --gradient-security: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--royal-blue)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--navy)), hsl(var(--anthracite)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--light-gray)));
+    --gradient-gold: linear-gradient(135deg, hsl(45, 100%, 42%), hsl(45, 100%, 50%));
+    --gradient-navy: linear-gradient(135deg, hsl(210, 82%, 11%), hsl(210, 82%, 16%));
     
-    /* Light Professional Shadows */
-    --shadow-security: 0 10px 40px -15px hsl(var(--primary) / 0.15);
-    --shadow-card: 0 8px 25px -8px hsl(var(--primary) / 0.1);
-    --shadow-glow: 0 0 30px hsl(var(--accent) / 0.2);
+    /* Professional Shadows */
+    --shadow-security: 0 10px 40px -15px hsl(var(--gold) / 0.3);
+    --shadow-card: 0 8px 25px -8px hsl(var(--navy) / 0.1);
+    --shadow-glow: 0 0 30px hsl(var(--gold) / 0.4);
     
     /* Typography Hierarchy */
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -133,14 +117,14 @@
 @layer components {
   /* Professional Button Variants */
   .btn-security {
-    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground;
-    @apply hover:shadow-lg hover:scale-105 transition-all duration-300;
-    @apply border border-accent/20 backdrop-blur-sm;
+    @apply bg-gradient-to-r from-gold to-royal-blue text-gold-foreground;
+    @apply hover:shadow-glow hover:scale-105 transition-all duration-300;
+    @apply border border-gold/20 backdrop-blur-sm;
   }
   
   .btn-hero {
-    @apply bg-accent text-accent-foreground font-semibold;
-    @apply hover:bg-accent/90 hover:shadow-glow transition-all duration-300;
+    @apply bg-gold text-gold-foreground font-semibold;
+    @apply hover:bg-gold/90 hover:shadow-glow transition-all duration-300;
     @apply px-8 py-3 rounded-lg;
   }
   
@@ -167,22 +151,30 @@
   }
   
   /* Glow Effects for Security Theme */
-  .glow-accent {
-    box-shadow: 0 0 20px hsl(var(--accent) / 0.3);
+  .glow-gold {
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.3);
   }
 }
 
 @layer utilities {
   .text-security-gold {
-    @apply text-accent;
+    @apply text-gold;
   }
   
   .bg-security-gradient {
     background: var(--gradient-security);
   }
   
+  .bg-navy-gradient {
+    background: var(--gradient-navy);
+  }
+  
+  .bg-gold-gradient {
+    background: var(--gradient-gold);
+  }
+  
   .text-shadow {
-    text-shadow: 0 2px 4px hsl(var(--primary) / 0.3);
+    text-shadow: 0 2px 4px hsl(var(--navy) / 0.3);
   }
 }
 
