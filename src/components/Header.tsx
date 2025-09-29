@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Globe } from 'lucide-react';
 import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 import logoImage from '@/assets/logo-pi-expertises.png';
 
 const Header = () => {
@@ -19,11 +20,11 @@ const Header = () => {
   }, []);
 
   const navigationItems = [
-    { key: 'nav.about', href: '#about' },
-    { key: 'nav.security-consulting', href: '#security-consulting' },
-    { key: 'nav.mass-events', href: '#mass-events' },
-    { key: 'nav.emergency-prep', href: '#emergency-prep' },
-    { key: 'nav.security-plans', href: '#security-plans' },
+    { key: 'nav.about', href: '#about', isRoute: false },
+    { key: 'nav.security-consulting', href: '/security-consulting', isRoute: true },
+    { key: 'nav.mass-events', href: '#mass-events', isRoute: false },
+    { key: 'nav.emergency-prep', href: '#emergency-prep', isRoute: false },
+    { key: 'nav.security-plans', href: '#security-plans', isRoute: false },
   ];
 
   const languages: { code: Language; label: string; flag: string }[] = [
@@ -53,14 +54,25 @@ const Header = () => {
           {/* Desktop Navigation - Center */}
           <nav className={`hidden lg:flex items-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'} absolute left-1/2 transform -translate-x-1/2`}>
             {navigationItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
-              >
-                {t(item.key)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              item.isRoute ? (
+                <Link
+                  key={item.key}
+                  to={item.href}
+                  className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
+                >
+                  {t(item.key)}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              ) : (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
+                >
+                  {t(item.key)}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              )
             ))}
           </nav>
 
@@ -116,14 +128,25 @@ const Header = () => {
           <div className="lg:hidden py-6 border-t border-white/20 bg-white/95 backdrop-blur-lg">
             <nav className={`flex flex-col space-y-4 ${isRTL ? 'text-right' : 'text-left'}`}>
               {navigationItems.map((item) => (
-                <a
-                  key={item.key}
-                  href={item.href}
-                  className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {t(item.key)}
-                </a>
+                item.isRoute ? (
+                  <Link
+                    key={item.key}
+                    to={item.href}
+                    className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {t(item.key)}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.key}
+                    href={item.href}
+                    className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {t(item.key)}
+                  </a>
+                )
               ))}
               
               {/* Mobile Language Selector */}
