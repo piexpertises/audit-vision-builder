@@ -83,19 +83,19 @@ const Header = () => {
                 <Link
                   key={item.key}
                   to={item.href}
-                  className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
+                  className="text-[#D4AF37] hover:text-[#D4AF37]/80 transition-colors duration-300 font-medium relative group"
                 >
                   {t(item.key)}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               ) : (
                 <a
                   key={item.key}
                   href={item.href}
-                  className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
+                  className="text-[#D4AF37] hover:text-[#D4AF37]/80 transition-colors duration-300 font-medium relative group"
                 >
                   {t(item.key)}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
                 </a>
               )
             ))}
@@ -105,7 +105,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             {/* Language Selector */}
             <div className="relative group">
-              <Button variant="ghost" size="sm" className="gap-2 text-white/90 hover:text-white hover:bg-white/5">
+              <Button variant="ghost" size="sm" className="gap-2 text-[#D4AF37] hover:text-[#D4AF37]/80 hover:bg-white/5">
                 <Globe size={16} />
               </Button>
               <div className="absolute top-full left-0 mt-2 bg-white/95 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
@@ -128,7 +128,7 @@ const Header = () => {
 
             {/* Contact Button */}
             <Button 
-              className="bg-primary/90 hover:bg-primary text-white rounded-full px-6 py-2 font-medium shadow-lg backdrop-blur-sm border border-white/10"
+              className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0D1B2A] rounded-full px-6 py-2 font-medium shadow-lg backdrop-blur-sm border border-[#D4AF37]/20"
               asChild
             >
               <a 
