@@ -1,15 +1,18 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import steveProfile from '@/assets/steve-profile.jpg';
 
 const AboutIntroSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+
   return (
-    <section id="about-intro" className="py-20 bg-background" dir="rtl">
+    <section id="about-intro" className="py-20 bg-background" dir="rtl" ref={ref}>
       <div className="container mx-auto px-4">
         
         {/* Section 1 - אודות פאי אקספרטיס */}
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               אודות פאי אקספרטיס
             </h2>
@@ -18,20 +21,20 @@ const AboutIntroSection = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Profile Photo */}
-            <div className="flex justify-center lg:order-1">
-              <div className="relative">
+            <div className={`flex justify-center lg:order-1 transition-all duration-1000 delay-200 ${isVisible ? 'animate-slide-right-new opacity-100' : 'opacity-0 translate-x-10'}`}>
+              <div className="relative hover-lift">
                 <img 
                   src={steveProfile} 
                   alt="סטיב בלחסן - מייסד ומנהל" 
-                  className="w-80 h-96 object-cover rounded-lg shadow-lg"
+                  className="w-80 h-96 object-cover rounded-lg shadow-lg hover-glow transition-all duration-500"
                 />
                 <div className="absolute inset-0 rounded-lg ring-4 ring-accent/20"></div>
               </div>
             </div>
 
             {/* Main About Content */}
-            <div className="space-y-6 lg:order-2">
-              <Card className="card-security">
+            <div className={`space-y-6 lg:order-2 transition-all duration-1000 delay-400 ${isVisible ? 'animate-slide-left opacity-100' : 'opacity-0 -translate-x-10'}`}>
+              <Card className="card-security hover-lift">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold text-accent mb-4 text-center">
                     סטיב בלחסן | מייסד ומנהל

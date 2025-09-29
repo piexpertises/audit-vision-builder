@@ -104,6 +104,13 @@ export default {
         "slide-right": "slide-right 0.8s ease-out",
         "security-pulse": "security-pulse 3s ease-in-out infinite",
         "glow": "glow 2s ease-in-out infinite",
+        "slide-up": "slideInUp 0.8s ease-out forwards",
+        "slide-left": "slideInLeft 0.8s ease-out forwards",
+        "slide-right-new": "slideInRight 0.8s ease-out forwards",
+        "zoom-in": "zoomIn 0.6s ease-out forwards",
+        "staggered-fade": "staggeredFade 0.6s ease-out forwards",
+        "float": "float 3s ease-in-out infinite",
+        "rotate-shield": "rotateShield 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards"
       },
     },
   },

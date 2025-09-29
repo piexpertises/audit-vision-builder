@@ -1,9 +1,11 @@
 import React from 'react';
 import { Shield, Users, FileText, BookOpen, AlertTriangle, Lock } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const ServicesSection = () => {
   const { t, isRTL } = useLanguage();
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const services = [
     {
@@ -39,10 +41,10 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-secondary/30">
+    <section id="services" className="py-20 bg-secondary/30" ref={ref}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
             {t('services.title')}
           </h2>
@@ -55,9 +57,13 @@ const ServicesSection = () => {
         {/* Services List */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {services.map((service, index) => (
-            <div key={index} className="flex items-start gap-4 group">
+            <div 
+              key={index} 
+              className={`flex items-start gap-4 group hover-lift transition-all duration-700 ${isVisible ? 'animate-staggered-fade opacity-100' : 'opacity-0 translate-y-5'}`}
+              style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+            >
               {/* Icon */}
-              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors duration-300">
+              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-all duration-300 hover-scale">
                 <service.icon className="h-6 w-6 text-accent" />
               </div>
               

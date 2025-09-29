@@ -43,23 +43,23 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Hero Content */}
           <div className="animate-fade-up">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow animate-zoom-in">
               <span className="text-accent block mb-2">{t('hero.title')}</span>
             </h1>
-            <p className="text-xl text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center md:text-3xl">
+            <p className="text-xl text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center md:text-3xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
               {t('hero.subtitle')}
             </p>
           </div>
 
           {/* CTA Buttons */}
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-up ${isRTL ? 'sm:flex-row-reverse' : ''}`} style={{
-          animationDelay: '0.3s'
+          animationDelay: '0.4s'
         }}>
-            <Button size="lg" className="btn-hero group">
+            <Button size="lg" className="btn-hero group hover-scale hover-glow">
               {t('hero.cta')}
               <ArrowRight className={`ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
             </Button>
-            <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10">
+            <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale">
               {t('hero.learn_more')}
             </Button>
           </div>
@@ -68,8 +68,12 @@ const HeroSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-up" style={{
           animationDelay: '0.6s'
         }}>
-            {stats.map((stat, index) => <div key={index} className="text-center group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/20 rounded-full mb-4 group-hover:bg-accent/30 transition-colors duration-300">
+            {stats.map((stat, index) => <div 
+              key={index} 
+              className="text-center group hover-lift animate-staggered-fade" 
+              style={{ animationDelay: `${0.7 + index * 0.1}s` }}
+            >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/20 rounded-full mb-4 group-hover:bg-accent/30 transition-all duration-300 hover-scale animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
                   <stat.icon className="h-8 w-8 text-accent" />
                 </div>
                 <div className="text-3xl font-bold text-accent mb-2">{stat.value}</div>
