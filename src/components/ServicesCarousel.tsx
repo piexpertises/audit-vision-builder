@@ -59,36 +59,6 @@ const ServicesCarousel = () => {
         return service.titleHe;
     }
   };
-  return (
-    <div className="bg-primary text-primary-foreground py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center">
-          <div className="h-20 flex items-center justify-center">
-            <div className="flex items-center space-x-4 animate-pulse">
-              <div className="p-3 bg-white/20 rounded-full">
-                {React.createElement(services[currentIndex].icon, { 
-                  className: "h-8 w-8 text-white" 
-                })}
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold">
-                {getTitle(services[currentIndex])}
-              </h3>
-            </div>
-          </div>
-          
-          <div className="flex justify-center space-x-2 mt-4">
-            {services.map((_, index) => (
-              <div
-                key={index}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-white' : 'bg-white/40'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return;
 };
 export default ServicesCarousel;
