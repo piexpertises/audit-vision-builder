@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Shield, Users, Target, CheckCircle, Calendar, Award, Clock, Phone } from "lucide-react";
+import Header from "@/components/Header";
 import massEventHero from "@/assets/mass-event-hero.jpg";
 import eventCoordination from "@/assets/event-coordination.jpg";
 import eventPlanning from "@/assets/event-planning.jpg";
@@ -8,6 +9,7 @@ import eventPlanning from "@/assets/event-planning.jpg";
 const MassEventManagement = () => {
   return (
     <div className="min-h-screen bg-background" dir="rtl">
+      <Header />
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center">
         <div 
