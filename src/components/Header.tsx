@@ -22,7 +22,7 @@ const Header = () => {
   const navigationItems = [
     { key: 'nav.about', href: '#about', isRoute: false },
     { key: 'nav.security-consulting', href: '/security-consulting', isRoute: true },
-    { key: 'nav.mass-events', href: '#mass-events', isRoute: false },
+    { key: 'nav.mass-events', href: '/mass-event-management', isRoute: true },
     { key: 'nav.emergency-prep', href: '#emergency-prep', isRoute: false },
     { key: 'nav.security-plans', href: '#security-plans', isRoute: false },
   ];
