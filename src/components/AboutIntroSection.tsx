@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import steveProfile from '@/assets/steve-profile.jpg';
+import steveProfile from '@/assets/steve-profile-new.jpg';
 
 const AboutIntroSection = () => {
   return (
@@ -17,8 +17,8 @@ const AboutIntroSection = () => {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Profile Photo */}
-            <div className="flex justify-center lg:order-1">
+            {/* Profile Photo - Left Side */}
+            <div className="flex justify-center">
               <div className="relative">
                 <img 
                   src={steveProfile} 
@@ -29,8 +29,8 @@ const AboutIntroSection = () => {
               </div>
             </div>
 
-            {/* Main About Content */}
-            <div className="space-y-6 lg:order-2">
+            {/* Main About Content - Right Side */}
+            <div className="space-y-6">
               <Card className="card-security">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold text-accent mb-4 text-center">
