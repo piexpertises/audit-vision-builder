@@ -6,10 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { toast } from "sonner";
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useI18n } from '@/hooks/useI18n';
 
 const ContactSection = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useI18n();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -58,12 +58,12 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-secondary/30" dir="rtl">
+    <section id="contact" className={`py-20 bg-secondary/30 ${isRTL ? 'dir-rtl' : 'dir-ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            {t('contact.main_title')}
+            {t('contact.title')}
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
           <p className="text-lg text-muted-foreground leading-relaxed">

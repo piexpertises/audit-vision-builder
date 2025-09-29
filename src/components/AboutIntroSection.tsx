@@ -1,20 +1,22 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useI18n } from '@/hooks/useI18n';
 import steveProfile from '@/assets/steve-profile.jpg';
 
 const AboutIntroSection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { t, isRTL } = useI18n();
 
   return (
-    <section id="about-intro" className="py-20 bg-background" dir="rtl" ref={ref}>
+    <section id="about-intro" className="py-20 bg-background" dir={isRTL ? 'rtl' : 'ltr'} ref={ref}>
       <div className="container mx-auto px-4">
         
         {/* Section 1 - אודות פאי אקספרטיס */}
         <div className="max-w-6xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              אודות פאי אקספרטיס
+              {t('about.title')}
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto"></div>
           </div>
@@ -37,7 +39,7 @@ const AboutIntroSection = () => {
               <Card className="card-security hover-lift">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold text-accent mb-4 text-center">
-                    סטיב בלחסן | מייסד ומנהל
+                    {t('about.founder_title')}
                   </h3>
                   
                   <div className="space-y-4 text-muted-foreground leading-relaxed">
