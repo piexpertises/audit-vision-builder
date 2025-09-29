@@ -74,31 +74,6 @@ const ServicesSection = () => {
           ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-card-security p-8 rounded-2xl max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4 text-foreground">
-              Ready to Secure Your Business?
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Contact us today for a professional security consultation tailored to your specific needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="tel:050-730-0720"
-                className="inline-flex items-center justify-center px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-lg hover:bg-accent/90 transition-colors duration-300"
-              >
-                Call Now: {t('nav.phone')}
-              </a>
-              <a
-                href="mailto:pi.expertises@gmail.com"
-                className="inline-flex items-center justify-center px-6 py-3 border border-accent text-accent hover:bg-accent/10 font-semibold rounded-lg transition-colors duration-300"
-              >
-                Send Email
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
