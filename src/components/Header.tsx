@@ -24,7 +24,7 @@ const Header = () => {
     { key: 'nav.security-consulting', href: '/security-consulting', isRoute: true },
     { key: 'nav.mass-events', href: '/mass-event-management', isRoute: true },
     { key: 'nav.emergency-prep', href: '#emergency-prep', isRoute: false },
-    { key: 'nav.security-plans', href: '#security-plans', isRoute: false },
+    { key: 'nav.security-plans', href: '/security-plan-writing', isRoute: true },
   ];
 
   const languages: { code: Language; label: string; flag: string }[] = [
