@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Shield, Users, Award, Target, Phone, Mail } from 'lucide-react';
+import { Shield, Users, Award, Target } from 'lucide-react';
 
 const AboutSection = () => {
   return (
@@ -87,40 +86,6 @@ const AboutSection = () => {
               <p className="text-lg text-muted-foreground leading-relaxed text-center">
                 פאי אקספרטיס מתחייבת לספק שירות מקצועי, איכותי ודיסקרטי, תוך שמירה על אתיקה מקצועית והתאמת הפתרונות הביטחוניים בצורה מדויקת לצרכים של כל לקוח. אנו פועלים תמיד במסגרת החוק ומתאימים את כל השירותים והפתרונות לשינויים המתמידים במציאות הביטחונית.
               </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Section 5 - המומחים שלך בביטחון (Call to Action) */}
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              המומחים שלך בביטחון
-            </h2>
-            <div className="w-24 h-1 bg-accent mx-auto"></div>
-          </div>
-          
-          <Card className="card-security">
-            <CardContent className="p-8 text-center">
-              <div className="space-y-6">
-                <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl mx-auto">
-                  אם אתם זקוקים לייעוץ ביטחוני, קורסים בהדרכת ירי או הגנת עורף, אנחנו כאן כדי לעזור.
-                </p>
-                <p className="text-xl font-semibold text-foreground">
-                  צרו קשר עם פאי אקספרטיס וגלו איך אנחנו יכולים לשדרג את הביטחון שלכם.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-                  <Button className="bg-accent hover:bg-accent/90 text-white px-8 py-3">
-                    <Phone className="h-5 w-5 ml-2" />
-                    צור קשר טלפוני
-                  </Button>
-                  <Button variant="outline" className="border-accent text-accent hover:bg-accent/10 px-8 py-3">
-                    <Mail className="h-5 w-5 ml-2" />
-                    שלח הודעה
-                  </Button>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </div>

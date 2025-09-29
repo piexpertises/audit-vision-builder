@@ -189,43 +189,6 @@ const ContactSection = () => {
               </CardContent>
             </Card>
 
-            {/* Emergency Contact */}
-            <Card className="card-security bg-gradient-to-r from-accent/10 to-accent/5 border-accent/20">
-              <CardContent className="p-8 text-center">
-                <h4 className="text-xl font-semibold text-foreground mb-4">
-                  24/7 Emergency Response
-                </h4>
-                <p className="text-muted-foreground mb-6">
-                  For urgent security matters, our emergency response team is available around the clock.
-                </p>
-                <Button 
-                  size="lg" 
-                  className="btn-hero"
-                  asChild
-                >
-                  <a href="tel:050-730-0720">
-                    <Phone className="mr-2 h-5 w-5" />
-                    Call Emergency Line
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Button variant="outline" className="h-16 border-accent/30 hover:bg-accent/10" asChild>
-                <a href="mailto:pi.expertises@gmail.com">
-                  <Mail className="mr-2 h-5 w-5" />
-                  Send Email
-                </a>
-              </Button>
-              <Button variant="outline" className="h-16 border-accent/30 hover:bg-accent/10" asChild>
-                <a href="https://wa.me/972507300720" target="_blank" rel="noopener noreferrer">
-                  <Phone className="mr-2 h-5 w-5" />
-                  WhatsApp
-                </a>
-              </Button>
-            </div>
           </div>
         </div>
       </div>
