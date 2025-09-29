@@ -23,7 +23,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10 shadow-lg transition-all duration-300 hover:backdrop-blur-lg hover:bg-black/5">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm border-b border-white/10 transition-all duration-300 hover:backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           
@@ -31,16 +31,16 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             {/* Language Selector */}
             <div className="relative group">
-              <Button variant="ghost" size="sm" className="gap-2 text-white hover:text-white/80 hover:bg-white/10">
+              <Button variant="ghost" size="sm" className="gap-2 text-white/90 hover:text-white hover:bg-white/5">
                 <Globe size={16} />
               </Button>
-              <div className="absolute top-full left-0 mt-2 bg-black/80 backdrop-blur-md border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
+              <div className="absolute top-full left-0 mt-2 bg-white/95 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => setLanguage(lang.code)}
-                    className={`block w-full px-4 py-2 text-left hover:bg-white/10 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
-                      language === lang.code ? 'bg-primary/20 text-primary' : 'text-white'
+                    className={`block w-full px-4 py-2 text-left hover:bg-gray-100/20 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
+                      language === lang.code ? 'bg-primary/20 text-primary' : 'text-gray-700'
                     }`}
                   >
                     <span className="flex items-center gap-2">
@@ -54,7 +54,7 @@ const Header = () => {
 
             {/* Contact Button */}
             <Button 
-              className="bg-primary hover:bg-primary/90 text-white rounded-full px-6 py-2 font-medium shadow-lg backdrop-blur-sm border border-white/20"
+              className="bg-primary/90 hover:bg-primary text-white rounded-full px-6 py-2 font-medium shadow-lg backdrop-blur-sm border border-white/10"
               asChild
             >
               <a href="tel:050-730-0720">
@@ -69,10 +69,10 @@ const Header = () => {
               <a
                 key={item.key}
                 href={item.href}
-                className="text-white hover:text-primary transition-colors duration-300 font-medium relative group"
+                className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
               >
                 {t(item.key)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
           </nav>
@@ -90,7 +90,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden text-white hover:text-white/80 hover:bg-white/10"
+            className="lg:hidden text-white/90 hover:text-white hover:bg-white/5"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -99,13 +99,13 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden py-6 border-t border-white/20 bg-black/80 backdrop-blur-md">
+          <div className="lg:hidden py-6 border-t border-white/20 bg-white/95 backdrop-blur-lg">
             <nav className={`flex flex-col space-y-4 ${isRTL ? 'text-right' : 'text-left'}`}>
               {navigationItems.map((item) => (
                 <a
                   key={item.key}
                   href={item.href}
-                  className="text-white hover:text-primary transition-colors duration-300 font-medium py-2"
+                  className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {t(item.key)}
