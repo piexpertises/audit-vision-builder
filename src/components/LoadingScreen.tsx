@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ShieldCheck, Sparkles, Star } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -7,6 +8,7 @@ interface LoadingScreenProps {
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [stage, setStage] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const timer1 = setTimeout(() => setStage(1), 500);

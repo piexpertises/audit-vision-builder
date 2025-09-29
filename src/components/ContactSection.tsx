@@ -6,8 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { toast } from "sonner";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ContactSection = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -17,7 +19,7 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("הודעה נשלחה בהצלחה! נחזור אליכם בקרוב.");
+    toast.success(t('form.success'));
     setFormData({ name: '', phone: '', email: '', message: '' });
   };
 
@@ -31,26 +33,26 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: Phone,
-      label: 'טלפון',
-      value: '050-730-0720',
+      label: t('contact.phone'),
+      value: t('contact.phone_label'),
       href: 'tel:050-730-0720',
     },
     {
       icon: Mail,
-      label: 'אימייל',
-      value: 'pi.expertises@gmail.com',
+      label: t('contact.email'),
+      value: t('contact.email_label'),
       href: 'mailto:pi.expertises@gmail.com',
     },
     {
       icon: MapPin,
-      label: 'כתובת',
-      value: 'מבשרת ציון, ישראל',
+      label: t('contact.address'),
+      value: t('contact.address'),
       href: 'https://maps.google.com/?q=Mevaseret+Zion+Israel',
     },
     {
       icon: Clock,
-      label: 'שעות פעילות',
-      value: 'א-ה: 8:00-18:00',
+      label: t('contact.hours'),
+      value: t('contact.hours'),
       href: null,
     },
   ];
@@ -74,14 +76,14 @@ const ContactSection = () => {
           <Card className="card-security mb-8">
             <CardContent className="p-8">
               <h3 className="text-2xl font-semibold mb-6 text-foreground">
-                שלחו לנו הודעה
+                {t('contact.form_title')}
               </h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-foreground">
-                      שם מלא *
+                      {t('contact.name')} *
                     </Label>
                     <Input
                       id="name"
@@ -90,13 +92,13 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       required
                       className="bg-background border-border focus:border-accent"
-                      placeholder="הכניסו את השם שלכם"
+                      placeholder={t('form.name_placeholder')}
                     />
                   </div>
                   
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-foreground">
-                      טלפון *
+                      {t('contact.phone')} *
                     </Label>
                     <Input
                       id="phone"
@@ -106,14 +108,14 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       required
                       className="bg-background border-border focus:border-accent"
-                      placeholder="הכניסו את הטלפון שלכם"
+                      placeholder={t('form.phone_placeholder')}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-foreground">
-                    אימייל *
+                    {t('contact.email')} *
                   </Label>
                   <Input
                     id="email"
@@ -123,13 +125,13 @@ const ContactSection = () => {
                     onChange={handleInputChange}
                     required
                     className="bg-background border-border focus:border-accent"
-                    placeholder="הכניסו את האימייל שלכם"
+                    placeholder={t('form.email_placeholder')}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="message" className="text-foreground">
-                    הודעה *
+                    {t('contact.message')} *
                   </Label>
                   <Textarea
                     id="message"
@@ -139,13 +141,13 @@ const ContactSection = () => {
                     required
                     rows={5}
                     className="bg-background border-border focus:border-accent resize-none"
-                    placeholder="תארו את הצרכים הביטחוניים שלכם..."
+                    placeholder={t('form.message_placeholder')}
                   />
                 </div>
 
                 <Button type="submit" className="w-full btn-hero group">
                   <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  שלח הודעה
+                  {t('contact.send')}
                 </Button>
               </form>
             </CardContent>
@@ -155,10 +157,10 @@ const ContactSection = () => {
           <Card className="card-security bg-gradient-to-r from-accent/10 to-accent/5 border-accent/20">
             <CardContent className="p-8 text-center">
               <h4 className="text-xl font-semibold text-foreground mb-4">
-                זמינים 24/7 למצבי חירום
+                {t('contact.emergency_title')}
               </h4>
               <p className="text-muted-foreground mb-6">
-                לעניינים ביטחוניים דחופים, צוות המענה החירום שלנו זמין 24 שעות ביממה.
+                {t('contact.emergency_desc')}
               </p>
               <Button 
                 size="lg" 
@@ -171,7 +173,7 @@ const ContactSection = () => {
                   rel="noopener noreferrer"
                 >
                   <Phone className="ml-2 h-5 w-5" />
-                  התקשרו עכשיו
+                  {t('contact.call_now')}
                 </a>
               </Button>
             </CardContent>
