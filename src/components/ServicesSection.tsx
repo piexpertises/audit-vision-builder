@@ -1,10 +1,6 @@
 import React from 'react';
-import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, FileText, BookOpen, AlertTriangle, Lock } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import vipProtectionImage from '@/assets/service-vip-protection.jpg';
-import consultationImage from '@/assets/service-consultation.jpg';
-import eventManagementImage from '@/assets/service-event-management.jpg';
 
 const ServicesSection = () => {
   const { t, isRTL } = useLanguage();
@@ -14,37 +10,31 @@ const ServicesSection = () => {
       icon: Users,
       titleKey: 'services.vip_title',
       descKey: 'services.vip_desc',
-      image: vipProtectionImage,
     },
     {
       icon: BookOpen,
       titleKey: 'services.consultation_title',
       descKey: 'services.consultation_desc',
-      image: consultationImage,
     },
     {
       icon: Shield,
       titleKey: 'services.events_title',
       descKey: 'services.events_desc',
-      image: eventManagementImage,
     },
     {
       icon: FileText,
       titleKey: 'services.training_title',
       descKey: 'services.training_desc',
-      image: consultationImage,
     },
     {
       icon: AlertTriangle,
       titleKey: 'services.assessment_title',
       descKey: 'services.assessment_desc',
-      image: eventManagementImage,
     },
     {
       icon: Lock,
       titleKey: 'services.security_title',
       descKey: 'services.security_desc',
-      image: vipProtectionImage,
     },
   ];
 
@@ -62,40 +52,25 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Services List */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {services.map((service, index) => (
-            <Card 
-              key={index} 
-              className="card-security group hover:scale-105 transition-all duration-300 overflow-hidden"
-            >
-              {/* Service Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={t(service.titleKey)}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-                
-                {/* Icon Overlay */}
-                <div className="absolute top-4 right-4 w-12 h-12 bg-accent/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                  <service.icon className="h-6 w-6 text-accent" />
-                </div>
+            <div key={index} className="flex items-start gap-4 group">
+              {/* Icon */}
+              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors duration-300">
+                <service.icon className="h-6 w-6 text-accent" />
               </div>
-
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-accent transition-colors duration-300">
+              
+              {/* Content */}
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold mb-2 text-foreground group-hover:text-accent transition-colors duration-300">
                   {t(service.titleKey)}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed text-sm">
                   {t(service.descKey)}
                 </p>
-                
-                {/* Hover Effect Line */}
-                <div className="w-0 h-0.5 bg-accent mt-4 group-hover:w-full transition-all duration-300"></div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
 
