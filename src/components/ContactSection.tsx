@@ -61,11 +61,11 @@ const ContactSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            צור קשר
+            {t('contact.main_title')}
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            מוכנים לשדרג את הביטחון שלכם? צרו קשר עם המומחים שלנו לייעוץ מקצועי.
+            {t('contact.subtitle')}
           </p>
         </div>
 

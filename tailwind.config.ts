@@ -69,7 +69,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        'security': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ["Inter", "Heebo", "system-ui", "-apple-system", "sans-serif"],
+        hebrew: ["Heebo", "Inter", "system-ui", "sans-serif"],
+        heading: ["Playfair Display", "Heebo", "serif"],
       },
       keyframes: {
         "accordion-down": {

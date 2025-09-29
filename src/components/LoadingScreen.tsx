@@ -88,7 +88,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
         {/* Elegant Subtitle */}
         <p className={`text-white/70 text-sm mt-6 transition-all duration-1000 ${stage >= 2 ? 'opacity-100' : 'opacity-0'}`}>
-          נטען...
+          {t('loading.text')}
         </p>
       </div>
     </div>
