@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Globe } from 'lucide-react';
 import { useLanguage, Language } from '@/contexts/LanguageContext';
@@ -6,7 +6,17 @@ import logoImage from '@/assets/logo-pi-expertises.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { language, setLanguage, t, isRTL } = useLanguage();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navigationItems = [
     { key: 'nav.about', href: '#about' },
@@ -23,7 +33,11 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] bg-transparent backdrop-blur-sm border-b border-white/10 transition-all duration-300 hover:backdrop-blur-md">
+    <header className={`fixed top-0 left-0 right-0 z-[100] bg-transparent transition-all duration-300 ${
+      isScrolled 
+        ? 'backdrop-blur-sm border-b border-white/10 hover:backdrop-blur-md' 
+        : 'border-b border-transparent'
+    }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           
