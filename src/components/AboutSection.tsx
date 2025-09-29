@@ -26,10 +26,66 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
+        {/* אודותינו Section */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              אודותינו
+            </h2>
+            <div className="w-24 h-1 bg-accent mx-auto"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Main About Content */}
+            <div className="space-y-6">
+              <Card className="card-security">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">
+                    אודות פאי אקספרטיס
+                  </h3>
+                  <h4 className="text-xl font-semibold text-accent mb-4">
+                    סטיב בלחסן | מייסד ומנהל
+                  </h4>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    פאי אקספרטיס הוא משרד בוטיק בתחום הביטחון שהוקם בשנת 2016 על ידי סטיב בלחסן, סא"ל במיל', מנהל בכיר בתחום האירועים תחת כיפת השמים.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    סטיב בלחסן מביא עימו 20 שנה של ניסיון עשיר בביטחון והגנה, עם התמחות בתחומים כמו הגנת העורף, הקמת מערכי חירום, אבטחה מונעת והדרכת ירי ולחימה. הוא בעל תואר ראשון במדעי החברה והרוח עם התמחות בביטחון והגנת העורף, ובוגר תואר שני במנהל עסקים עם התמחות בניהול משברים ובניית חוסן בארגונים. בנוסף, סטיב הוא בעל תואר שני נוסף במדעי היהדות והרוח.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    כמנהיג בתחום הביטחון, סטיב משתמש בידע המקצועי, האקדמי והמעשי שלו כדי לפתח פתרונות ביטחוניים מותאמים אישית וחדשניים. את כל הידע הזה הוא מעביר לצוות פאי אקספרטיס, שמוביל את המשרד להצלחה ומקצועיות ללא פשרות.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Philosophy and Team */}
+            <div className="space-y-6">
+              <Card className="card-security">
+                <CardContent className="p-8">
+                  <h4 className="text-xl font-semibold text-foreground mb-4">הגדרת הביטחון שלנו</h4>
+                  <p className="text-muted-foreground leading-relaxed">
+                    ההגדרה שלנו למושג ביטחון היא אנלוגיה למספר היווני π) פאי): כל פרט, קטן ככל שיהיה, חיוני להשלמת התמונה ולהגנה אפקטיבית על המושא המאובטח.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="card-security">
+                <CardContent className="p-8">
+                  <h4 className="text-xl font-semibold text-foreground mb-4">צוות המומחים שלנו</h4>
+                  <p className="text-muted-foreground leading-relaxed">
+                    הצוות שלנו מורכב מאנשי מקצוע בתחום הביטחון, בעלי רקע עשיר במוסדות ביטחוניים וניסיון של עשרות שנים בתחום. כל חבר צוות מביא עימו יכולות ייחודיות ועוסק בתפקידים שמבטיחים את ההגנה המירבת על לקוחותינו.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+
+        {/* Section Header for Specializations */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            {t('about.title')}
+            תחומי ההתמחות שלנו
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto"></div>
         </div>
