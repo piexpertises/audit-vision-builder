@@ -144,33 +144,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Call to Action Section */}
-        <div className="py-8 border-t border-border/50">
-          <div className="bg-gradient-to-r from-accent/10 to-accent/5 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-foreground mb-4">
-              Ready to Secure Your Future?
-            </h3>
-            <p className="text-foreground/80 mb-6 max-w-2xl mx-auto">
-              Contact Pi Expertises today for a comprehensive security consultation. 
-              Our experts are ready to design a protection strategy tailored to your specific needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="btn-hero" asChild>
-                <a href="tel:050-730-0720">
-                  <Phone className="mr-2 h-5 w-5" />
-                  Call Now: {t('nav.phone')}
-                </a>
-              </Button>
-              <Button variant="outline" className="border-accent/30 hover:bg-accent/10" asChild>
-                <a href="#contact">
-                  <FileText className="mr-2 h-5 w-5" />
-                  Request Consultation
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="py-6 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
