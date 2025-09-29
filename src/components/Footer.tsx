@@ -31,7 +31,7 @@ const Footer = () => {
               <img 
                 src={logoImage} 
                 alt="Pi Expertises Logo" 
-                className="h-12 w-12 object-contain"
+                className="h-16 w-auto object-contain"
               />
               <span className="text-2xl font-bold text-accent">Pi Expertises</span>
             </div>
