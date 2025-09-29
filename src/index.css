@@ -6,41 +6,41 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors */
-    --background: 216 15% 8%;           /* Deep navy background */
-    --foreground: 210 20% 92%;          /* Off-white text */
+    /* Core Brand Colors - Light and vibrant theme */
+    --background: 210 20% 98%;           /* Very light background */
+    --foreground: 222.2 84% 4.9%;        /* Dark text */
     
     /* Surface Colors */
-    --card: 218 18% 12%;                /* Dark slate cards */
-    --card-foreground: 210 18% 88%;     /* Light card text */
+    --card: 0 0% 100%;                   /* White cards */
+    --card-foreground: 222.2 84% 4.9%;  /* Dark card text */
     
-    --popover: 218 20% 10%;
-    --popover-foreground: 210 18% 88%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
     
-    /* Brand Primary - Professional Navy */
-    --primary: 216 15% 8%;              /* Deep navy */
-    --primary-foreground: 210 20% 92%;  /* Light text on navy */
+    /* Brand Primary - Professional Blue */
+    --primary: 200 100% 40%;             /* Bright blue */
+    --primary-foreground: 210 40% 98%;   /* Light text on blue */
     
-    /* Secondary - Slate Blue */
-    --secondary: 218 15% 18%;           /* Slate background */
-    --secondary-foreground: 210 18% 88%; /* Light text on slate */
+    /* Secondary - Light Blue */
+    --secondary: 210 40% 96%;            /* Very light blue */
+    --secondary-foreground: 222.2 84% 4.9%; /* Dark text on light */
     
     /* Muted Tones */
-    --muted: 218 12% 15%;               /* Muted backgrounds */
-    --muted-foreground: 210 12% 68%;    /* Muted text */
+    --muted: 210 40% 96%;                /* Light muted */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Medium text */
     
-    /* Accent - Security Gold */
-    --accent: 45 85% 58%;               /* Professional gold */
-    --accent-foreground: 216 15% 8%;    /* Dark text on gold */
+    /* Accent - Vibrant Gold */
+    --accent: 34 100% 84%;               /* Bright warm gold */
+    --accent-foreground: 222.2 84% 4.9%; /* Dark text on gold */
     
     /* Status Colors */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 210 40% 98%;
     
     /* Interactive Elements */
-    --border: 218 15% 20%;              /* Subtle borders */
-    --input: 218 15% 16%;               /* Input backgrounds */
-    --ring: 45 85% 58%;                 /* Gold focus rings */
+    --border: 214.3 31.8% 91.4%;         /* Light borders */
+    --input: 214.3 31.8% 91.4%;          /* Light input backgrounds */
+    --ring: 200 100% 40%;                 /* Blue focus rings */
     
     /* Layout */
     --radius: 0.75rem;
@@ -85,15 +85,15 @@
   
   /* Enhanced Security Features */
   :root {
-    /* Custom Security Gradients */
+    /* Custom Vibrant Gradients */
     --gradient-security: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
-    --gradient-hero: linear-gradient(135deg, hsl(216 15% 8% / 0.95), hsl(218 18% 12% / 0.9));
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(218 15% 15%));
+    --gradient-hero: linear-gradient(135deg, hsl(200 100% 50% / 0.1), hsl(34 100% 90% / 0.1));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(210 40% 98%));
     
-    /* Professional Shadows */
-    --shadow-security: 0 10px 40px -15px hsl(var(--primary) / 0.3);
-    --shadow-card: 0 8px 25px -8px hsl(var(--primary) / 0.2);
-    --shadow-glow: 0 0 30px hsl(var(--accent) / 0.4);
+    /* Light Professional Shadows */
+    --shadow-security: 0 10px 40px -15px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 8px 25px -8px hsl(var(--primary) / 0.1);
+    --shadow-glow: 0 0 30px hsl(var(--accent) / 0.2);
     
     /* Typography Hierarchy */
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -186,24 +186,15 @@
   }
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@keyframes carousel {
+  0% {
+    transform: translateX(0);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  100% {
+    transform: translateX(-100%);
   }
 }
 
-@keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.animate-carousel {
+  animation: carousel 15s linear infinite;
 }

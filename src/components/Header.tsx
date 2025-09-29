@@ -25,32 +25,10 @@ const Header = () => {
   return (
     <header className="bg-white border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className={`flex items-center justify-between h-20 ${isRTL ? 'flex-row-reverse' : ''}`}>
+        <div className="flex items-center justify-between h-20">
           
-          {/* Logo - Always on the right for Hebrew */}
-          <div className="flex items-center space-x-3 order-last">
-            <img 
-              src={logoImage} 
-              alt="Pi Expertises Logo" 
-              className="h-12 w-12 object-contain"
-            />
-          </div>
-
-          {/* Desktop Navigation - RTL order */}
-          <nav className={`hidden lg:flex items-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
-            {navigationItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-              >
-                {t(item.key)}
-              </a>
-            ))}
-          </nav>
-
-          {/* Desktop Actions */}
-          <div className={`hidden lg:flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
+          {/* Desktop Actions - Moved to Left */}
+          <div className="hidden lg:flex items-center space-x-4">
             {/* Language Selector */}
             <div className="relative group">
               <Button variant="ghost" size="sm" className="gap-2 text-gray-600">
@@ -74,15 +52,37 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Phone Button */}
+            {/* Contact Button */}
             <Button 
               className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-2 font-medium"
               asChild
             >
               <a href="tel:050-730-0720">
-                {t('nav.phone')}
+                {t('nav.contact')}
               </a>
             </Button>
+          </div>
+
+          {/* Desktop Navigation - Center */}
+          <nav className={`hidden lg:flex items-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
+            {navigationItems.map((item) => (
+              <a
+                key={item.key}
+                href={item.href}
+                className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+              >
+                {t(item.key)}
+              </a>
+            ))}
+          </nav>
+
+          {/* Logo - Right side */}
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoImage} 
+              alt="Pi Expertises Logo" 
+              className="h-12 w-12 object-contain"
+            />
           </div>
 
           {/* Mobile Menu Button */}
