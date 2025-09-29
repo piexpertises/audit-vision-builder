@@ -55,9 +55,15 @@ const HeroSection = () => {
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-up ${isRTL ? 'sm:flex-row-reverse' : ''}`} style={{
           animationDelay: '0.4s'
         }}>
-            <Button size="lg" className="btn-hero group hover-scale hover-glow">
-              {t('hero.cta')}
-              <ArrowRight className={`ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
+            <Button size="lg" className="btn-hero group hover-scale hover-glow" asChild>
+              <a 
+                href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('hero.cta')}
+                <ArrowRight className={`ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
+              </a>
             </Button>
             <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale">
               {t('hero.learn_more')}

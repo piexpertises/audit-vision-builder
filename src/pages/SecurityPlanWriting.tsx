@@ -33,9 +33,16 @@ const SecurityPlanWriting = () => {
           <Button 
             size="lg" 
             className="bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white px-8 py-3 text-lg rounded-lg"
+            asChild
           >
-            <Phone className="ml-2 h-5 w-5" />
-            צור קשר
+            <a 
+              href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20כתיבת%20תוכניות%20אבטחה."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Phone className="ml-2 h-5 w-5" />
+              צור קשר
+            </a>
           </Button>
         </div>
       </section>
@@ -407,9 +414,16 @@ const SecurityPlanWriting = () => {
           <Button 
             size="lg" 
             className="bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white px-8 py-3 text-lg rounded-lg"
+            asChild
           >
-            <Phone className="ml-2 h-5 w-5" />
-            צור קשר
+            <a 
+              href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20כתיבת%20תוכניות%20אבטחה."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Phone className="ml-2 h-5 w-5" />
+              צור קשר
+            </a>
           </Button>
         </div>
       </section>

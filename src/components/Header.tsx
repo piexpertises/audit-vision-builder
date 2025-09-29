@@ -106,7 +106,11 @@ const Header = () => {
               className="bg-primary/90 hover:bg-primary text-white rounded-full px-6 py-2 font-medium shadow-lg backdrop-blur-sm border border-white/10"
               asChild
             >
-              <a href="tel:050-730-0720">
+              <a 
+                href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {t('nav.contact')}
               </a>
             </Button>
@@ -177,7 +181,12 @@ const Header = () => {
                     className="w-full bg-primary hover:bg-primary/90 text-white rounded-full font-medium py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
                   >
-                    <a href="tel:050-730-0720" className="flex items-center justify-center gap-3">
+                    <a 
+                      href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-3"
+                    >
                       <Phone size={20} />
                       {t('nav.phone')}
                     </a>

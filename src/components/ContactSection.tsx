@@ -165,7 +165,11 @@ const ContactSection = () => {
                 className="btn-hero"
                 asChild
               >
-                <a href="tel:050-730-0720">
+                <a 
+                  href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Phone className="ml-2 h-5 w-5" />
                   התקשרו עכשיו
                 </a>

@@ -42,7 +42,11 @@ const SecurityConsulting = () => {
                 className="bg-[#1d9bf0] hover:bg-[#0284c7] text-white border-0 rounded-full px-10 py-4 font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                 asChild
               >
-                <a href="tel:050-730-0720">
+                <a 
+                  href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20ייעוץ%20ביטחוני."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   צור קשר
                 </a>
               </Button>
@@ -295,7 +299,12 @@ const SecurityConsulting = () => {
                 className="bg-[#1d9bf0] hover:bg-[#0284c7] text-white rounded-full px-12 py-4 font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                 asChild
               >
-                <a href="tel:050-730-0720" className="flex items-center gap-3">
+                <a 
+                  href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20ייעוץ%20ביטחוני."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3"
+                >
                   <Phone size={24} />
                   צור קשר עכשיו
                 </a>
