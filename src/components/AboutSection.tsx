@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, Shield, Users, Target } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import steveProfile from '@/assets/steve-profile.jpg';
 
 const AboutSection = () => {
   const { t, isRTL } = useLanguage();
@@ -36,6 +37,18 @@ const AboutSection = () => {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Profile Photo */}
+            <div className="flex justify-center">
+              <div className="relative">
+                <img 
+                  src={steveProfile} 
+                  alt="סטיב בלחסן - מייסד ומנהל" 
+                  className="w-80 h-96 object-cover rounded-lg shadow-lg"
+                />
+                <div className="absolute inset-0 rounded-lg ring-4 ring-accent/20"></div>
+              </div>
+            </div>
+
             {/* Main About Content */}
             <div className="space-y-6">
               <Card className="card-security">
@@ -52,30 +65,29 @@ const AboutSection = () => {
                   <p className="text-muted-foreground leading-relaxed mb-6">
                     סטיב בלחסן מביא עימו 20 שנה של ניסיון עשיר בביטחון והגנה, עם התמחות בתחומים כמו הגנת העורף, הקמת מערכי חירום, אבטחה מונעת והדרכת ירי ולחימה. הוא בעל תואר ראשון במדעי החברה והרוח עם התמחות בביטחון והגנת העורף, ובוגר תואר שני במנהל עסקים עם התמחות בניהול משברים ובניית חוסן בארגונים. בנוסף, סטיב הוא בעל תואר שני נוסף במדעי היהדות והרוח.
                   </p>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed mb-6">
                     כמנהיג בתחום הביטחון, סטיב משתמש בידע המקצועי, האקדמי והמעשי שלו כדי לפתח פתרונות ביטחוניים מותאמים אישית וחדשניים. את כל הידע הזה הוא מעביר לצוות פאי אקספרטיס, שמוביל את המשרד להצלחה ומקצועיות ללא פשרות.
                   </p>
-                </CardContent>
-              </Card>
-            </div>
+                  
+                  <div className="space-y-4 mt-6">
+                    <Card className="bg-accent/5 border-accent/20">
+                      <CardContent className="p-4">
+                        <h4 className="text-lg font-semibold text-foreground mb-2">הגדרת הביטחון שלנו</h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          ההגדרה שלנו למושג ביטחון היא אנלוגיה למספר היווני π (פאי): כל פרט, קטן ככל שיהיה, חיוני להשלמת התמונה ולהגנה אפקטיבית על המושא המאובטח.
+                        </p>
+                      </CardContent>
+                    </Card>
 
-            {/* Philosophy and Team */}
-            <div className="space-y-6">
-              <Card className="card-security">
-                <CardContent className="p-8">
-                  <h4 className="text-xl font-semibold text-foreground mb-4">הגדרת הביטחון שלנו</h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    ההגדרה שלנו למושג ביטחון היא אנלוגיה למספר היווני π) פאי): כל פרט, קטן ככל שיהיה, חיוני להשלמת התמונה ולהגנה אפקטיבית על המושא המאובטח.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="card-security">
-                <CardContent className="p-8">
-                  <h4 className="text-xl font-semibold text-foreground mb-4">צוות המומחים שלנו</h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    הצוות שלנו מורכב מאנשי מקצוע בתחום הביטחון, בעלי רקע עשיר במוסדות ביטחוניים וניסיון של עשרות שנים בתחום. כל חבר צוות מביא עימו יכולות ייחודיות ועוסק בתפקידים שמבטיחים את ההגנה המירבת על לקוחותינו.
-                  </p>
+                    <Card className="bg-accent/5 border-accent/20">
+                      <CardContent className="p-4">
+                        <h4 className="text-lg font-semibold text-foreground mb-2">צוות המומחים שלנו</h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          הצוות שלנו מורכב מאנשי מקצוע בתחום הביטחון, בעלי רקע עשיר במוסדות ביטחוניים וניסיון של עשרות שנים בתחום. כל חבר צוות מביא עימו יכולות ייחודיות ועוסק בתפקידים שמבטיחים את ההגנה המירבת על לקוחותינו.
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </CardContent>
               </Card>
             </div>

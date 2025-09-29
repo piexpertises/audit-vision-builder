@@ -59,6 +59,43 @@ const ServicesCarousel = () => {
         return service.titleHe;
     }
   };
-  return;
+  return (
+    <div className="py-12 bg-accent/5">
+      <div className="container mx-auto px-4">
+        <div className="relative overflow-hidden">
+          <div className="flex transition-transform duration-500 ease-in-out"
+               style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+            {services.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <div key={index} className="w-full flex-shrink-0 px-4">
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/20 rounded-full mb-4">
+                      <IconComponent className="h-8 w-8 text-accent" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-foreground">
+                      {getTitle(service)}
+                    </h3>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          
+          <div className="flex justify-center mt-6 space-x-2">
+            {services.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  index === currentIndex ? 'bg-accent' : 'bg-accent/30'
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 export default ServicesCarousel;
