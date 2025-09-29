@@ -57,28 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Brand Colors
-        gold: {
-          DEFAULT: "hsl(var(--gold))",
-          foreground: "hsl(var(--gold-foreground))",
-        },
-        navy: {
-          DEFAULT: "hsl(var(--navy))",
-          foreground: "hsl(var(--navy-foreground))",
-        },
-        "royal-blue": {
-          DEFAULT: "hsl(var(--royal-blue))",
-          foreground: "hsl(var(--royal-blue-foreground))",
-        },
-        anthracite: "hsl(var(--anthracite))",
-        "light-gray": "hsl(var(--light-gray))",
       },
       boxShadow: {
-        'glow': '0 0 30px hsl(var(--gold) / 0.4)',
-        'security': '0 10px 40px -15px hsl(var(--gold) / 0.3)',
-        'card': '0 8px 25px -8px hsl(var(--navy) / 0.1)',
-        'gold-glow': '0 0 20px hsl(var(--gold) / 0.3)',
-        'navy-shadow': '0 10px 40px -15px hsl(var(--navy) / 0.2)',
+        'glow': '0 0 30px hsl(var(--accent) / 0.4)',
+        'security': '0 10px 40px -15px hsl(var(--primary) / 0.3)',
+        'card': '0 8px 25px -8px hsl(var(--primary) / 0.2)',
       },
       borderRadius: {
         lg: "var(--radius)",
