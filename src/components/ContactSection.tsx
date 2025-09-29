@@ -69,9 +69,9 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
-          <Card className="card-security">
+          <Card className="card-security mb-8">
             <CardContent className="p-8">
               <h3 className="text-2xl font-semibold mb-6 text-foreground">
                 שלחו לנו הודעה
@@ -151,63 +151,27 @@ const ContactSection = () => {
             </CardContent>
           </Card>
 
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <Card className="card-security">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-6 text-foreground">
-                  פרטי התקשרות
-                </h3>
-                
-                <div className="space-y-6">
-                  {contactInfo.map((info, index) => (
-                    <div key={index} className="flex items-start gap-4 group">
-                      <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/30 transition-colors duration-300">
-                        <info.icon className="h-6 w-6 text-accent" />
-                      </div>
-                      <div>
-                        <p className="text-muted-foreground text-sm mb-1">{info.label}</p>
-                        {info.href ? (
-                          <a
-                            href={info.href}
-                            className="text-foreground font-medium hover:text-accent transition-colors duration-300"
-                            target={info.href.startsWith('http') ? '_blank' : undefined}
-                            rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-foreground font-medium">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Call to Action */}
-            <Card className="card-security bg-gradient-to-r from-accent/10 to-accent/5 border-accent/20">
-              <CardContent className="p-8 text-center">
-                <h4 className="text-xl font-semibold text-foreground mb-4">
-                  זמינים 24/7 למצבי חירום
-                </h4>
-                <p className="text-muted-foreground mb-6">
-                  לעניינים ביטחוניים דחופים, צוות המענה החירום שלנו זמין 24 שעות ביממה.
-                </p>
-                <Button 
-                  size="lg" 
-                  className="btn-hero"
-                  asChild
-                >
-                  <a href="tel:050-730-0720">
-                    <Phone className="ml-2 h-5 w-5" />
-                    התקשרו עכשיו
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Call to Action */}
+          <Card className="card-security bg-gradient-to-r from-accent/10 to-accent/5 border-accent/20">
+            <CardContent className="p-8 text-center">
+              <h4 className="text-xl font-semibold text-foreground mb-4">
+                זמינים 24/7 למצבי חירום
+              </h4>
+              <p className="text-muted-foreground mb-6">
+                לעניינים ביטחוניים דחופים, צוות המענה החירום שלנו זמין 24 שעות ביממה.
+              </p>
+              <Button 
+                size="lg" 
+                className="btn-hero"
+                asChild
+              >
+                <a href="tel:050-730-0720">
+                  <Phone className="ml-2 h-5 w-5" />
+                  התקשרו עכשיו
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
