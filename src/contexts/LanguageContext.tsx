@@ -15,10 +15,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations: Record<Language, Record<string, string>> = {
   he: {
     // Navigation
-    'nav.home': 'בית',
     'nav.about': 'אודות',
-    'nav.services': 'שירותים',
-    'nav.team': 'הצוות',
+    'nav.security-consulting': 'ייעוץ ביטחוני',
+    'nav.mass-events': 'ניהול אירועים המוניים',
+    'nav.emergency-prep': 'היערכות לשעת חירום',
+    'nav.security-plans': 'כתיבת תוכניות אבטחה',
     'nav.contact': 'צור קשר',
     'nav.phone': '050-730-0720',
     
@@ -71,10 +72,11 @@ const translations: Record<Language, Record<string, string>> = {
   
   en: {
     // Navigation
-    'nav.home': 'Home',
     'nav.about': 'About',
-    'nav.services': 'Services',
-    'nav.team': 'Team',
+    'nav.security-consulting': 'Security Consulting',
+    'nav.mass-events': 'Mass Event Management',
+    'nav.emergency-prep': 'Emergency Preparedness',
+    'nav.security-plans': 'Security Plans Writing',
     'nav.contact': 'Contact',
     'nav.phone': '050-730-0720',
     
@@ -127,10 +129,11 @@ const translations: Record<Language, Record<string, string>> = {
   
   fr: {
     // Navigation
-    'nav.home': 'Accueil',
     'nav.about': 'À propos',
-    'nav.services': 'Services',
-    'nav.team': 'Équipe',
+    'nav.security-consulting': 'Conseil en Sécurité',
+    'nav.mass-events': 'Gestion Événements de Masse',
+    'nav.emergency-prep': 'Préparation d\'Urgence',
+    'nav.security-plans': 'Rédaction Plans de Sécurité',
     'nav.contact': 'Contact',
     'nav.phone': '050-730-0720',
     
