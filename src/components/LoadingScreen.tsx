@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Shield, Sparkles } from 'lucide-react';
+import { ShieldCheck, Sparkles, Star } from 'lucide-react';
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -37,7 +37,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           <div className="relative w-40 h-40 mx-auto">
             {/* Main Shield with Slow Rotation */}
             <div className={`absolute inset-0 flex items-center justify-center transition-all duration-2000 ${stage >= 1 ? 'rotate-[360deg]' : 'rotate-0'}`}>
-              <Shield 
+              <ShieldCheck 
                 className={`w-28 h-28 text-accent drop-shadow-2xl transition-all duration-1500 ${stage >= 2 ? 'scale-110 brightness-125' : 'scale-100'}`}
                 style={{
                   filter: `drop-shadow(0 0 25px rgba(212, 175, 55, ${stage >= 2 ? '0.8' : '0.4'}))`,
