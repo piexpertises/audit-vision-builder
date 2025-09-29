@@ -6,7 +6,6 @@ import securityPlanDocument from "@/assets/security-plan-document.jpg";
 import securityFacilityMap from "@/assets/security-facility-map.jpg";
 import securityTechnology from "@/assets/security-technology-systems.jpg";
 import securityConsultation from "@/assets/security-consultation-meeting.jpg";
-import securityPlanChecklist from "@/assets/security-plan-checklist.jpg";
 
 const SecurityPlanWriting = () => {
   return (
@@ -44,15 +43,6 @@ const SecurityPlanWriting = () => {
       {/* Introduction Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6 max-w-6xl">
-          <div className="text-center mb-12">
-            <div className="relative mb-8">
-              <img 
-                src={securityPlanChecklist} 
-                alt="תוכנית אבטחה מקצועית ורשימת בדיקות" 
-                className="w-full h-64 object-cover rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-[#0d1b2a] mb-6">

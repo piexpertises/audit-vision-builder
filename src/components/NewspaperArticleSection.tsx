@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import pressMediaSpotlight from '@/assets/press-media-spotlight.jpg';
 
 const NewspaperArticleSection = () => {
   return (
@@ -11,14 +10,7 @@ const NewspaperArticleSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#D4AF37' }}>
               כתבה בעיתון כלכלי
             </h2>
-            <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#D4AF37' }}></div>
-            <div className="relative mb-8">
-              <img 
-                src={pressMediaSpotlight} 
-                alt="זרקור תקשורתי על פאי אקספרטיס" 
-                className="w-full h-48 object-cover rounded-xl shadow-lg"
-              />
-            </div>
+            <div className="w-24 h-1 mx-auto" style={{ backgroundColor: '#D4AF37' }}></div>
           </div>
           
           <Card className="bg-card border border-border/20 shadow-lg">

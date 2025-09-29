@@ -5,7 +5,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Shield, CheckCircle, Phone, Users, Target, Clock, Award } from 'lucide-react';
 import securityBg from '@/assets/security-hero-bg.jpg';
-import securityConsultingStrategy from '@/assets/security-consulting-strategy.jpg';
 
 const SecurityConsulting = () => {
   return (
@@ -54,21 +53,12 @@ const SecurityConsulting = () => {
         {/* Introduction Section */}
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#0d1b2a]">
-                  פאי אקספרטיס - שותפכם לביטחון מקסימלי
-                </h2>
-                <div className="w-24 h-1 bg-[#1d9bf0] mx-auto mb-8"></div>
-                <div className="relative mb-12">
-                  <img 
-                    src={securityConsultingStrategy} 
-                    alt="ייעוץ ביטחוני ואסטרטגיה מקצועית" 
-                    className="w-full h-64 object-cover rounded-xl shadow-lg"
-                  />
-                </div>
-              </div>
-              <p className="text-lg leading-relaxed text-gray-700 max-w-4xl mx-auto text-center">
+            <div className="max-w-5xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#0d1b2a]">
+                פאי אקספרטיס - שותפכם לביטחון מקסימלי
+              </h2>
+              <div className="w-24 h-1 bg-[#1d9bf0] mx-auto mb-8"></div>
+              <p className="text-lg leading-relaxed text-gray-700 max-w-4xl mx-auto">
                 בפאי אקספרטיס, אנו מבינים את החשיבות של ביטחון איכותי ומקצועי, המתואם לצרכים הספציפיים של כל לקוח. אנחנו כאן כדי להבטיח שלביטחון שלך יש את הפתרונות המתקדמים ביותר, תוך התאמה אישית לכל אתגר, מהעסקים הגדולים ביותר ועד לארגונים קטנים ופרטיים.
               </p>
             </div>
