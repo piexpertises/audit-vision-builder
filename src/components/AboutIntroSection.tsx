@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import steveProfile from '@/assets/steve-profile.jpg';
+import aboutTeamwork from '@/assets/about-teamwork-security.jpg';
 
 const AboutIntroSection = () => {
   return (
@@ -13,7 +14,14 @@ const AboutIntroSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               אודות פאי אקספרטיס
             </h2>
-            <div className="w-24 h-1 bg-accent mx-auto"></div>
+            <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
+            <div className="relative mb-12">
+              <img 
+                src={aboutTeamwork} 
+                alt="צוות ביטחון מקצועי ומנהיגות" 
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
+            </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">

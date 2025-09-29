@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import massEventHero from "@/assets/mass-event-hero.jpg";
 import eventCoordination from "@/assets/event-coordination.jpg";
 import eventPlanning from "@/assets/event-planning.jpg";
+import massEventSecurityPlanning from "@/assets/mass-event-security-planning.jpg";
 
 const MassEventManagement = () => {
   return (
@@ -44,6 +45,15 @@ const MassEventManagement = () => {
       {/* Introduction Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center mb-12">
+            <div className="relative mb-8">
+              <img 
+                src={massEventSecurityPlanning} 
+                alt="תכנון אבטחה לאירועים המוניים" 
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-[#0d1b2a] mb-6">
