@@ -19,6 +19,31 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close menu on outside click
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleEscape);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [isMenuOpen]);
+
+  const handleMenuItemClick = () => {
+    setIsMenuOpen(false);
+  };
+
   const navigationItems = [
     { key: 'nav.about', href: '/#about', isRoute: false },
     { key: 'nav.security-consulting', href: '/security-consulting', isRoute: true },
@@ -34,10 +59,10 @@ const Header = () => {
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 z-[100] bg-transparent transition-all duration-300 ${
       isScrolled 
-        ? 'bg-primary/95 backdrop-blur-md border-b border-white/10' 
-        : 'bg-primary/80 backdrop-blur-sm border-b border-transparent'
+        ? 'backdrop-blur-sm border-b border-white/10 hover:backdrop-blur-md' 
+        : 'border-b border-transparent'
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -47,7 +72,7 @@ const Header = () => {
             <img 
               src={logoImage} 
               alt="Pi Expertises Logo" 
-              className="h-16 w-auto object-contain"
+              className="h-12 w-12 object-contain"
             />
           </div>
 
@@ -58,19 +83,19 @@ const Header = () => {
                 <Link
                   key={item.key}
                   to={item.href}
-                   className="text-white hover:text-accent transition-colors duration-300 font-medium relative group"
+                  className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
                 >
                   {t(item.key)}
-                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               ) : (
                 <a
                   key={item.key}
                   href={item.href}
-                  className="text-white hover:text-accent transition-colors duration-300 font-medium relative group"
+                  className="text-white/90 hover:text-white transition-colors duration-300 font-medium relative group"
                 >
                   {t(item.key)}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
               )
             ))}
@@ -80,7 +105,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             {/* Language Selector */}
             <div className="relative group">
-              <Button variant="ghost" size="sm" className="gap-2 text-white hover:text-accent hover:bg-white/10">
+              <Button variant="ghost" size="sm" className="gap-2 text-white/90 hover:text-white hover:bg-white/5">
                 <Globe size={16} />
               </Button>
               <div className="absolute top-full left-0 mt-2 bg-white/95 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
@@ -120,65 +145,113 @@ const Header = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden text-white hover:text-accent hover:bg-white/10"
+            className="lg:hidden text-white/90 hover:text-white hover:bg-white/5"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </Button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Full-Screen Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-white/20 shadow-2xl z-50">
-            <div className="container mx-auto px-4 py-8">
-              <nav className={`flex flex-col space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
-                {navigationItems.map((item) => (
-                  item.isRoute ? (
-                    <Link
-                      key={item.key}
-                      to={item.href}
-                      className="text-gray-800 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-primary/10 border-l-4 border-transparent hover:border-primary"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {t(item.key)}
-                    </Link>
-                  ) : (
-                    <a
-                      key={item.key}
-                      href={item.href}
-                      className="text-gray-800 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-primary/10 border-l-4 border-transparent hover:border-primary"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {t(item.key)}
-                    </a>
-                  )
-                ))}
-                
-                {/* Mobile Language Selector */}
-                <div className="pt-6 border-t border-gray-200">
-                  <p className="text-sm font-medium text-gray-600 mb-4">Language / שפה / Langue</p>
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] lg:hidden animate-fade-in"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            
+            {/* Menu Panel */}
+            <div 
+              className={`fixed top-0 ${isRTL ? 'right-0' : 'left-0'} bottom-0 w-full max-w-md bg-[#0D1B2A] z-[160] lg:hidden overflow-y-auto ${
+                isRTL ? 'animate-slide-in-right' : 'animate-slide-in-left'
+              }`}
+            >
+              {/* Close Button */}
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <img 
+                  src={logoImage} 
+                  alt="Pi Expertises Logo" 
+                  className="h-10 w-10 object-contain"
+                />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:text-[#D4AF37] hover:bg-white/5 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <X size={28} />
+                </Button>
+              </div>
+
+              {/* Navigation Menu */}
+              <nav className="px-6 py-8">
+                <div className={`flex flex-col space-y-2 ${isRTL ? 'text-right' : 'text-left'}`}>
+                  {navigationItems.map((item) => (
+                    item.isRoute ? (
+                      <Link
+                        key={item.key}
+                        to={item.href}
+                        className="text-white hover:text-[#D4AF37] transition-all duration-300 font-medium text-lg py-4 px-4 rounded-lg hover:bg-white/5 border-l-4 border-transparent hover:border-[#D4AF37]"
+                        style={{
+                          borderLeftWidth: isRTL ? '0' : '4px',
+                          borderRightWidth: isRTL ? '4px' : '0',
+                        }}
+                        onClick={handleMenuItemClick}
+                      >
+                        {t(item.key)}
+                      </Link>
+                    ) : (
+                      <a
+                        key={item.key}
+                        href={item.href}
+                        className="text-white hover:text-[#D4AF37] transition-all duration-300 font-medium text-lg py-4 px-4 rounded-lg hover:bg-white/5 border-l-4 border-transparent hover:border-[#D4AF37]"
+                        style={{
+                          borderLeftWidth: isRTL ? '0' : '4px',
+                          borderRightWidth: isRTL ? '4px' : '0',
+                        }}
+                        onClick={handleMenuItemClick}
+                      >
+                        {t(item.key)}
+                      </a>
+                    )
+                  ))}
+                </div>
+
+                {/* Language Selector */}
+                <div className="pt-8 mt-8 border-t border-white/10">
+                  <p className={`text-sm font-medium text-white/60 mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+                    {language === 'he' ? 'בחר שפה' : language === 'en' ? 'Select Language' : 'Choisir la langue'}
+                  </p>
                   <div className="grid grid-cols-3 gap-3">
                     {languages.map((lang) => (
                       <Button
                         key={lang.code}
-                        variant={language === lang.code ? "default" : "outline"}
+                        variant="outline"
                         size="sm"
-                        onClick={() => setLanguage(lang.code)}
-                        className={`flex-1 ${language === lang.code ? 'bg-primary text-white' : 'hover:bg-primary/10 hover:border-primary'}`}
+                        onClick={() => {
+                          setLanguage(lang.code);
+                          handleMenuItemClick();
+                        }}
+                        className={`${
+                          language === lang.code 
+                            ? 'bg-[#D4AF37] text-[#0D1B2A] border-[#D4AF37] hover:bg-[#D4AF37]/90' 
+                            : 'bg-transparent text-white border-white/20 hover:bg-white/5 hover:border-[#D4AF37] hover:text-[#D4AF37]'
+                        } transition-all duration-300`}
                       >
-                        <span className="flex items-center gap-2">
-                          <span className="text-lg">{lang.flag}</span>
-                          <span className="text-sm font-medium">{lang.label}</span>
+                        <span className="flex flex-col items-center gap-1">
+                          <span className="text-xl">{lang.flag}</span>
+                          <span className="text-xs font-medium">{lang.label}</span>
                         </span>
                       </Button>
                     ))}
                   </div>
                 </div>
 
-                {/* Mobile Contact */}
-                <div className="pt-6 border-t border-gray-200">
+                {/* WhatsApp CTA */}
+                <div className="pt-8 mt-8 border-t border-white/10">
                   <Button 
-                    className="w-full bg-primary hover:bg-primary/90 text-white rounded-full font-medium py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0D1B2A] rounded-full font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     asChild
                   >
                     <a 
@@ -186,15 +259,25 @@ const Header = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-3"
+                      onClick={handleMenuItemClick}
                     >
-                      <Phone size={20} />
-                      {t('nav.phone')}
+                      <Phone size={22} />
+                      {t('nav.contact')}
                     </a>
                   </Button>
+                  
+                  {/* Phone Number */}
+                  <a 
+                    href="tel:+972505730072"
+                    className="block text-center text-white/80 hover:text-[#D4AF37] transition-colors mt-4 text-sm"
+                    onClick={handleMenuItemClick}
+                  >
+                    {t('nav.phone')}
+                  </a>
                 </div>
               </nav>
             </div>
-          </div>
+          </>
         )}
       </div>
     </header>
