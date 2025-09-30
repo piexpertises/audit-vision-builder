@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useI18n } from '@/hooks/useI18n';
 import { Home, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
-  const { t } = useLanguage();
+  const { t } = useI18n();
 
   return (
     <div 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useI18n } from '@/hooks/useI18n';
 import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
 import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
 import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
@@ -9,7 +9,7 @@ const HeroSection = () => {
   const {
     t,
     isRTL
-  } = useLanguage();
+  } = useI18n();
   
   // Carousel state
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];

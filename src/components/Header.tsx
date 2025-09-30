@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Globe } from 'lucide-react';
-import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { Language } from '@/contexts/LanguageContext';
+import { useI18n } from '@/hooks/useI18n';
 import { Link } from 'react-router-dom';
 import logoImage from '@/assets/logo-pi-expertises-new.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { language, setLanguage, t, isRTL } = useLanguage();
+  const { language, setLanguage, t, isRTL } = useI18n();
 
   useEffect(() => {
     const handleScroll = () => {

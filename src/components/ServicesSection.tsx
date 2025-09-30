@@ -1,10 +1,10 @@
 import React from 'react';
 import { Shield, Users, FileText, BookOpen, AlertTriangle, Lock } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useI18n } from '@/hooks/useI18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const ServicesSection = () => {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL } = useI18n();
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const services = [

@@ -8,10 +8,10 @@ import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useI18n } from '@/hooks/useI18n';
 
 const Index = () => {
-  const { t } = useLanguage();
+  const { t } = useI18n();
   
   return (
     <div className="min-h-screen bg-background">

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Globe, Shield, Users, FileText } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useI18n } from '@/hooks/useI18n';
 import logoImage from '@/assets/logo-pi-expertises-new.png';
 
 const Footer = () => {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL } = useI18n();
 
   const company = [
     { label: t('footer.about_us'), href: '#about' },
