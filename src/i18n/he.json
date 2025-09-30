@@ -157,7 +157,11 @@
     "message_placeholder": "תארו את הצרכים הביטחוניים שלכם..."
   },
   "loading": {
-    "text": "נטען..."
+    "text": "נטען...",
+    "initializing": "מאתחל מערכות...",
+    "loading_systems": "טוען מערכות ביטחון...",
+    "establishing_connections": "מקים חיבורים...",
+    "finalizing": "מסיים הכנות..."
   },
   "meta": {
     "title": "Pi Expertises - Professional Security Consulting | פאי אקספרטיס",

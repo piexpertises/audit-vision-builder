@@ -157,7 +157,11 @@
     "message_placeholder": "Describe your security needs..."
   },
   "loading": {
-    "text": "Loading..."
+    "text": "Loading...",
+    "initializing": "Initializing systems...",
+    "loading_systems": "Loading security systems...",
+    "establishing_connections": "Establishing connections...",
+    "finalizing": "Finalizing setup..."
   },
   "meta": {
     "title": "Pi Expertises - Professional Security Consulting",
