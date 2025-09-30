@@ -84,38 +84,38 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
         {/* Logo container with breathing animation */}
         <div 
-          className="relative mb-8"
+          className="relative"
           style={{
-            animation: 'breathe 2.8s ease-in-out infinite',
+            animation: 'breathe 3s ease-in-out infinite',
           }}
         >
-          {/* Glow effect behind logo */}
+          {/* Subtle glow effect behind logo */}
           <div 
-            className="absolute inset-0 rounded-full opacity-30"
+            className="absolute inset-0 rounded-full opacity-20"
             style={{
-              background: 'radial-gradient(circle, #D4AF37 0%, transparent 70%)',
-              filter: 'blur(50px)',
-              transform: 'scale(1.8)',
+              background: 'radial-gradient(circle, #D4AF37 0%, transparent 60%)',
+              filter: 'blur(40px)',
+              transform: 'scale(1.5)',
             }}
           />
 
           {/* Logo with shimmer effect */}
-          <div className="relative w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 flex items-center justify-center">
+          <div className="relative w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center">
             <img 
               src={logoImage}
               alt="Pi Expertises Logo"
               className="w-full h-full object-contain relative z-10"
               style={{
-                filter: 'drop-shadow(0 4px 20px rgba(212, 175, 55, 0.4)) drop-shadow(0 0 60px rgba(212, 175, 55, 0.2))',
+                filter: 'drop-shadow(0 8px 16px rgba(212, 175, 55, 0.3))',
               }}
             />
             
-            {/* Shimmer overlay */}
+            {/* Shimmer overlay that passes over the logo */}
             <div 
               className="absolute inset-0 overflow-hidden"
               style={{
-                background: 'linear-gradient(110deg, transparent 0%, transparent 40%, rgba(255, 255, 255, 0.5) 50%, transparent 60%, transparent 100%)',
-                animation: 'shimmer 4.5s ease-in-out infinite',
+                background: 'linear-gradient(120deg, transparent 0%, transparent 45%, rgba(255, 255, 255, 0.6) 50%, transparent 55%, transparent 100%)',
+                animation: 'shimmer 5s ease-in-out infinite',
                 mixBlendMode: 'overlay',
               }}
             />
@@ -124,17 +124,17 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
         {/* Company name */}
         <div 
-          className={`text-center transition-all duration-300 ${
+          className={`text-center mt-8 transition-all duration-300 ${
             fadeOut ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2" style={{
-            textShadow: '0 2px 30px rgba(212, 175, 55, 0.4)',
-            letterSpacing: '0.02em',
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-2" style={{
+            textShadow: '0 2px 20px rgba(212, 175, 55, 0.3)',
+            letterSpacing: '0.03em',
           }}>
             Pi Expertises
           </h1>
-          <p className="text-base md:text-lg text-white/80 font-light tracking-wide">
+          <p className="text-sm md:text-base text-white/70 font-light tracking-wide">
             מומחי הביטחון שלכם
           </p>
         </div>
@@ -147,16 +147,19 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             transform: scale(1);
           }
           50% {
-            transform: scale(1.06);
+            transform: scale(1.07);
           }
         }
 
         @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
+          0%, 20% {
+            transform: translateX(-150%);
+          }
+          40% {
+            transform: translateX(150%);
           }
           100% {
-            transform: translateX(200%);
+            transform: translateX(150%);
           }
         }
 
