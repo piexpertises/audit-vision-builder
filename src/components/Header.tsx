@@ -172,173 +172,130 @@ const Header = () => {
           </Button>
         </div>
 
-        {/* Full-Screen Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <>
-            {/* Backdrop Overlay */}
+          <div className="fixed inset-0 z-[9998] lg:hidden">
+            {/* Backdrop */}
             <div 
-              className="fixed inset-0 bg-black/35 z-[9998] lg:hidden animate-fade-in"
-              style={{ 
-                backdropFilter: 'blur(6px)',
-                WebkitBackdropFilter: 'blur(6px)'
-              }}
+              className="absolute inset-0 bg-[#0D1B2A]/60 backdrop-blur-md animate-fade-in"
               onClick={() => setIsMenuOpen(false)}
-              aria-hidden="true"
             />
             
-            {/* Drawer Container */}
+            {/* Menu Panel */}
             <div 
-              id="mobile-menu"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation menu"
-              className={`fixed top-0 ${isRTL ? 'right-0' : 'left-0'} h-full w-full max-w-md z-[9999] lg:hidden ${
+              className={`absolute top-0 ${isRTL ? 'right-0' : 'left-0'} h-full w-full max-w-sm bg-gradient-to-b from-[#0D1B2A] to-[#0A1929] shadow-2xl ${
                 isRTL ? 'animate-slide-in-right' : 'animate-slide-in-left'
               }`}
               style={{
-                background: 'linear-gradient(180deg, #0D1B2A 0%, #0A1929 100%)',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-                borderRadius: isRTL ? '20px 0 0 20px' : '0 20px 20px 0',
-                overscrollBehavior: 'contain'
+                borderRadius: isRTL ? '0 0 0 24px' : '0 0 24px 0',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.1)'
               }}
             >
-              {/* Scrollable Content Container */}
               <div className="h-full overflow-y-auto overscroll-contain flex flex-col">
-                {/* Header Section */}
-                <div className={`flex items-center justify-between p-6 md:p-8 border-b ${isRTL ? 'flex-row-reverse' : 'flex-row'}`} 
-                  style={{ borderColor: 'rgba(255, 255, 255, 0.08)' }}>
+                {/* Header */}
+                <div className={`flex items-center justify-between p-6 border-b border-[#D4AF37]/10 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <img 
                     src={logoImage} 
-                    alt="Pi Expertises Logo" 
-                    className="h-8 md:h-9 w-auto object-contain"
+                    alt="Pi Expertises" 
+                    className="h-10 w-auto"
                   />
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-white hover:text-[#D4AF37] hover:bg-white/5 transition-all duration-300 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-[#1d9bf0]"
+                  <button
                     onClick={() => setIsMenuOpen(false)}
+                    className="p-2 text-white hover:text-[#D4AF37] transition-colors rounded-lg hover:bg-white/5"
                     aria-label="Close menu"
                   >
                     <X size={28} strokeWidth={2.5} />
-                  </Button>
+                  </button>
                 </div>
 
-                {/* Navigation Menu */}
-                <nav className="flex-1 px-6 md:px-8 py-6" role="navigation">
-                  <div className={`flex flex-col space-y-1 ${isRTL ? 'text-right' : 'text-left'}`}>
-                    {navigationItems.map((item, index) => (
-                      item.isRoute ? (
+                {/* Navigation */}
+                <nav className="flex-1 p-6">
+                  <div className={`space-y-2 ${isRTL ? 'text-right' : 'text-left'}`}>
+                    {navigationItems.map((item) => {
+                      const isActive = item.isRoute && window.location.pathname === item.href;
+                      return item.isRoute ? (
                         <Link
                           key={item.key}
                           to={item.href}
-                          className={`relative text-white hover:text-[#D4AF37] transition-all duration-300 font-semibold text-lg md:text-xl py-4 px-5 rounded-xl group focus:outline-none focus:ring-2 focus:ring-[#1d9bf0] ${
-                            window.location.pathname === item.href 
-                              ? 'text-[#D4AF37]' 
-                              : ''
-                          }`}
-                          style={{
-                            fontWeight: 600,
-                            ...(window.location.pathname === item.href ? {
-                              backgroundColor: 'rgba(212, 175, 55, 0.10)'
-                            } : {})
-                          }}
                           onClick={handleMenuItemClick}
-                          tabIndex={0}
+                          className={`block px-4 py-4 rounded-lg text-lg font-semibold transition-all duration-300 ${
+                            isActive
+                              ? 'text-[#D4AF37] bg-[#D4AF37]/10 border-r-4 border-[#D4AF37]'
+                              : 'text-white hover:text-[#D4AF37] hover:bg-white/5'
+                          } ${isRTL ? 'border-r-4 border-transparent hover:border-r-[#D4AF37]' : 'border-l-4 border-transparent hover:border-l-[#D4AF37]'}`}
                         >
-                          {/* Indicator Bar */}
-                          <div 
-                            className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'right-0' : 'left-0'} w-1 h-0 bg-[#D4AF37] group-hover:h-8 transition-all duration-300 rounded-full ${
-                              window.location.pathname === item.href ? 'h-8' : ''
-                            }`}
-                          />
-                          <span className={isRTL ? 'mr-4' : 'ml-4'}>{t(item.key)}</span>
+                          {t(item.key)}
                         </Link>
                       ) : (
                         <a
                           key={item.key}
                           href={item.href}
-                          className={`relative text-white hover:text-[#D4AF37] transition-all duration-300 font-semibold text-lg md:text-xl py-4 px-5 rounded-xl group focus:outline-none focus:ring-2 focus:ring-[#1d9bf0]`}
-                          style={{ fontWeight: 600 }}
                           onClick={handleMenuItemClick}
-                          tabIndex={0}
+                          className={`block px-4 py-4 rounded-lg text-lg font-semibold text-white hover:text-[#D4AF37] hover:bg-white/5 transition-all duration-300 ${
+                            isRTL ? 'border-r-4 border-transparent hover:border-r-[#D4AF37]' : 'border-l-4 border-transparent hover:border-l-[#D4AF37]'
+                          }`}
                         >
-                          {/* Indicator Bar */}
-                          <div 
-                            className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'right-0' : 'left-0'} w-1 h-0 bg-[#D4AF37] group-hover:h-8 transition-all duration-300 rounded-full`}
-                          />
-                          <span className={isRTL ? 'mr-4' : 'ml-4'}>{t(item.key)}</span>
+                          {t(item.key)}
                         </a>
-                      )
-                    ))}
+                      );
+                    })}
                   </div>
                 </nav>
 
                 {/* Bottom Section */}
-                <div className="px-6 md:px-8 pb-6 md:pb-8 mt-auto space-y-6">
-                  {/* Language Selector Title */}
-                  <div className="pt-6 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.08)' }}>
-                    <p className={`text-sm font-medium text-white/60 mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
-                      {language === 'he' ? 'בחר שפה' : language === 'en' ? 'Select Language' : 'Choisir la langue'}
-                    </p>
-                    
-                    {/* Language Pills */}
-                    <div className="grid grid-cols-3 gap-3">
-                      {languages.map((lang) => (
-                        <Button
-                          key={lang.code}
-                          variant="outline"
-                          size="sm"
-                          onClick={() => {
-                            setLanguage(lang.code);
-                          }}
-                          className={`${
-                            language === lang.code 
-                              ? 'bg-[#D4AF37] text-[#0A0A0A] border-[#D4AF37] hover:bg-[#D4AF37]/90 font-bold' 
-                              : 'bg-[#1e3a52] text-white border-[#1e3a52] hover:bg-[#2a4a5f] hover:border-[#D4AF37]/30'
-                          } transition-all duration-300 h-auto py-3 focus:outline-none focus:ring-2 focus:ring-[#1d9bf0]`}
-                          tabIndex={0}
-                        >
-                          <span className="flex flex-col items-center gap-1">
-                            <span className="text-xl">{lang.flag}</span>
-                            <span className="text-xs font-semibold">{lang.label}</span>
-                          </span>
-                        </Button>
-                      ))}
-                    </div>
+                <div className="p-6 space-y-6 border-t border-[#D4AF37]/10">
+                  {/* Language Title */}
+                  <p className={`text-sm text-white/60 font-medium ${isRTL ? 'text-right' : 'text-left'}`}>
+                    {language === 'he' ? 'בחר שפה' : language === 'en' ? 'Select Language' : 'Choisir la langue'}
+                  </p>
+                  
+                  {/* Language Selector */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code);
+                          handleMenuItemClick();
+                        }}
+                        className={`py-3 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                          language === lang.code
+                            ? 'bg-[#D4AF37] text-[#0D1B2A]'
+                            : 'bg-white/10 text-white hover:bg-white/20'
+                        }`}
+                      >
+                        <div className="flex flex-col items-center gap-1">
+                          <span className="text-xl">{lang.flag}</span>
+                          <span className="text-xs">{lang.label}</span>
+                        </div>
+                      </button>
+                    ))}
                   </div>
 
                   {/* WhatsApp CTA */}
-                  <Button 
-                    className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0A0A0A] rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#1d9bf0]"
-                    style={{ height: '48px' }}
-                    asChild
-                  >
-                    <a 
-                      href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3"
-                      onClick={handleMenuItemClick}
-                      tabIndex={0}
-                    >
-                      <Phone size={22} />
-                      {t('nav.contact')}
-                    </a>
-                  </Button>
-                  
-                  {/* Phone Number Link */}
-                  <a 
-                    href="tel:+972505730072"
-                    className="block text-center text-white/70 hover:text-[#D4AF37] transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#1d9bf0] rounded"
+                  <a
+                    href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={handleMenuItemClick}
-                    tabIndex={0}
+                    className="flex items-center justify-center gap-3 w-full py-4 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0D1B2A] rounded-lg font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    <Phone size={22} />
+                    {t('nav.contact')}
+                  </a>
+                  
+                  {/* Phone */}
+                  <a
+                    href="tel:+972505730072"
+                    onClick={handleMenuItemClick}
+                    className="block text-center text-white/70 hover:text-[#D4AF37] text-sm transition-colors"
                   >
                     {t('nav.phone')}
                   </a>
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </header>
