@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useI18n } from '@/hooks/useI18n';
 
 interface SEOProps {
   title?: string;
@@ -10,7 +10,7 @@ interface SEOProps {
 }
 
 const SEO = ({ title, description, keywords, canonical, ogImage }: SEOProps) => {
-  const { language } = useLanguage();
+  const { language } = useI18n();
 
   useEffect(() => {
     // Update document title
