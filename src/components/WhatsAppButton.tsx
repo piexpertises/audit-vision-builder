@@ -2,7 +2,8 @@ import React from 'react';
 
 const WhatsAppButton = () => {
   const whatsappNumber = '972507300720';
-  const defaultMessage = 'שלום%2C%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20השירותים%20שלכם.';
+  const defaultMessage = 'שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם';
+  
   
   
   return (
