@@ -1,162 +1,341 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Shield, AlertTriangle, Users, CheckCircle, Target, Award, Clock, Phone, Heart, Zap, Database, TrendingUp } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import emergencyResponsePlanning from "@/assets/emergency-response-planning.jpg";
-import disasterRecoverySystems from "@/assets/disaster-recovery-systems.jpg";
-import psychologicalResilience from "@/assets/psychological-resilience-teamwork.jpg";
-import naturalDisasterPreparedness from "@/assets/natural-disaster-preparedness.jpg";
-import { useI18n } from "@/hooks/useI18n";
-import SEO from "@/components/SEO";
+import React from 'react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { AlertTriangle, TrendingUp, Database, Server, Heart, Users, GraduationCap, Target, CheckCircle, FileText, Shield, Award, Zap, ClipboardCheck } from 'lucide-react';
+import emergencyResponsePlanning from '@/assets/emergency-response-planning.jpg';
+import { useI18n } from '@/hooks/useI18n';
+import SEO from '@/components/SEO';
 
 const EmergencyPreparedness = () => {
   const { t, isRTL } = useI18n();
+  const whatsappUrl = "https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם";
+
+  const processSteps = [
+    { num: "01", title: t('emergency_prep.process_step1_title'), desc: t('emergency_prep.process_step1_desc'), icon: Target },
+    { num: "02", title: t('emergency_prep.process_step2_title'), desc: t('emergency_prep.process_step2_desc'), icon: FileText },
+    { num: "03", title: t('emergency_prep.process_step3_title'), desc: t('emergency_prep.process_step3_desc'), icon: GraduationCap },
+    { num: "04", title: t('emergency_prep.process_step4_title'), desc: t('emergency_prep.process_step4_desc'), icon: Heart },
+    { num: "05", title: t('emergency_prep.process_step5_title'), desc: t('emergency_prep.process_step5_desc'), icon: Zap },
+  ];
+
+  const services = [
+    { icon: ClipboardCheck, text: t('emergency_prep.service1') },
+    { icon: GraduationCap, text: t('emergency_prep.service2') },
+    { icon: Database, text: t('emergency_prep.service3') },
+    { icon: Heart, text: t('emergency_prep.service4') },
+    { icon: Shield, text: t('emergency_prep.service5') },
+  ];
 
   return (
     <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEO 
         title={`${t('emergency_prep.title')} | Pi Expertises`}
         description={t('emergency_prep.intro')}
-        keywords="emergency preparedness, crisis management, disaster response, business continuity"
+        keywords="emergency preparedness, crisis management, business continuity, disaster recovery, organizational resilience"
         canonical="https://pi-expertises.com/emergency-preparedness"
       />
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
+      <main>
+        {/* Hero Section */}
+        <section 
+          className="relative pt-32 pb-24 min-h-[75vh] flex items-center justify-center overflow-hidden"
           style={{
-            backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.85), rgba(13, 27, 42, 0.75)), url(${emergencyResponsePlanning})`
+            backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.88), rgba(27, 73, 101, 0.85)), url(${emergencyResponsePlanning})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
           }}
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-white/30 to-white z-10 pointer-events-none" />
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <div className="mb-8">
-            <AlertTriangle className="w-20 h-20 mx-auto mb-6 text-[#1d9bf0]" />
+        >
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            {t('emergency_prep.title')}
-          </h1>
-          <p className="text-2xl md:text-3xl font-light mb-4 text-[#1d9bf0]">
-            {t('emergency_prep.subtitle')}
-          </p>
-          <p className="text-xl mb-8">
-            {t('emergency_prep.tagline')}
-          </p>
-          <Button 
-            size="lg" 
-            className="bg-[#1d9bf0] hover:bg-[#1a8cd8] text-white px-8 py-3 text-lg rounded-lg"
-            asChild
-          >
-            <a 
-              href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Phone className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5`} />
-              {t('nav.contact')}
-            </a>
-          </Button>
-        </div>
-      </section>
 
-      {/* Introduction */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6 text-foreground">
-              {t('emergency_prep.intro_title')}
-            </h2>
-            <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              {t('emergency_prep.intro')}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Grid */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-4 text-foreground">
-            {t('emergency_prep.services_title')}
-          </h2>
-          <div className="w-24 h-1 bg-accent mx-auto mb-16"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/30 to-background z-10 pointer-events-none" />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {[1, 2, 3, 4].map((num) => (
-              <Card key={num} className="hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+          <div className="container mx-auto px-4 text-center relative z-20">
+            <div className="max-w-5xl mx-auto">
+              <div className="mb-8 animate-zoom-in">
+                <div className="w-24 h-24 bg-gradient-to-br from-primary via-primary/80 to-accent rounded-2xl flex items-center justify-center mx-auto shadow-2xl hover-glow rotate-3 hover:rotate-0 transition-transform duration-500">
+                  <AlertTriangle className="text-white" size={48} />
+                </div>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 text-white leading-tight animate-fade-up">
+                {t('emergency_prep.title')}
+              </h1>
+              
+              <p className="text-xl md:text-3xl mb-12 text-gray-100 font-light leading-relaxed animate-fade-up" style={{ animationDelay: '0.1s' }}>
+                {t('emergency_prep.subtitle')}
+              </p>
+              
+              <Button 
+                className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white border-0 rounded-full px-12 py-6 font-bold text-lg shadow-2xl hover:shadow-glow transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 animate-fade-up"
+                style={{ animationDelay: '0.2s' }}
+                asChild
+              >
+                <a 
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('nav.contact')}
+                </a>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Introduction Section */}
+        <section className="relative py-24 bg-gradient-to-b from-background via-secondary/20 to-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto text-center">
+              <p className="text-lg md:text-xl leading-relaxed text-foreground max-w-5xl mx-auto animate-fade-up">
+                {t('emergency_prep.intro')}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Help Section */}
+        <section className="relative py-24 bg-gradient-to-b from-background to-secondary/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground animate-fade-up">
+                {t('emergency_prep.help_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
+              
+              <div className="bg-gradient-to-br from-card via-secondary/30 to-card rounded-3xl p-8 md:p-16 shadow-card hover-glow border border-border/50 backdrop-blur-sm">
+                <p className="text-lg md:text-xl leading-relaxed text-foreground/90 text-center">
+                  {t('emergency_prep.help_desc')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* BCP Section */}
+        <section className="relative py-24 bg-gradient-to-b from-secondary/30 to-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <Card className="border-2 border-border/50 bg-card/80 backdrop-blur-sm overflow-hidden hover-lift">
+                <CardContent className="p-8 md:p-12">
+                  <div className="flex items-start gap-6 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <TrendingUp className="w-8 h-8 text-white" />
+                    </div>
                     <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">
-                        {t(`emergency_prep.service${num}_title`)}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {t(`emergency_prep.service${num}_desc`)}
-                      </p>
+                      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-foreground">
+                        {t('emergency_prep.bcp_title')}
+                      </h2>
                     </div>
                   </div>
+                  <p className="text-lg md:text-xl leading-relaxed text-foreground/90">
+                    {t('emergency_prep.bcp_desc')}
+                  </p>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Images */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src={disasterRecoverySystems} 
-                alt={t('emergency_prep.title')}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src={psychologicalResilience} 
-                alt={t('emergency_prep.title')}
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#0d1b2a] to-[#1b4965]">
-        <div className="container mx-auto px-6 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6 text-white">
-              {t('contact.title')}
-            </h2>
-            <p className="text-xl mb-8 text-gray-200">
-              {t('contact.subtitle')}
-            </p>
-            <Button 
-              size="lg"
-              className="bg-[#1d9bf0] hover:bg-[#0284c7] text-white px-10 py-4 text-lg rounded-full shadow-xl"
-              asChild
-            >
-              <a 
-                href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
-                target="_blank"
-                rel="noopener noreferrer"
+        {/* DRP Section */}
+        <section className="relative py-24 bg-gradient-to-b from-background to-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <Card className="border-2 border-border/50 bg-card/80 backdrop-blur-sm overflow-hidden hover-lift">
+                <CardContent className="p-8 md:p-12">
+                  <div className="flex items-start gap-6 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <Server className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-foreground">
+                        {t('emergency_prep.drp_title')}
+                      </h2>
+                    </div>
+                  </div>
+                  <p className="text-lg md:text-xl leading-relaxed text-foreground/90">
+                    {t('emergency_prep.drp_desc')}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Resilience Section - Highlighted */}
+        <section className="relative py-24 bg-gradient-to-b from-secondary/20 to-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <Card className="border-2 border-primary/30 bg-gradient-to-br from-primary/5 via-accent/5 to-card rounded-3xl overflow-hidden shadow-security">
+                <CardContent className="p-8 md:p-12">
+                  <div className="flex items-start gap-6 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg animate-pulse">
+                      <Heart className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-foreground">
+                        {t('emergency_prep.resilience_title')}
+                      </h2>
+                    </div>
+                  </div>
+                  <p className="text-lg md:text-xl leading-relaxed text-foreground/90">
+                    {t('emergency_prep.resilience_desc')}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Advantage Section */}
+        <section className="relative py-24 bg-gradient-to-b from-background to-secondary/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
+                {t('emergency_prep.advantage_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
+              
+              <div className="bg-gradient-to-br from-card to-secondary/30 rounded-3xl p-8 md:p-12 shadow-card border border-border/50 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
+                
+                <div className="relative z-10">
+                  <p className="text-lg md:text-xl leading-relaxed text-foreground/90 text-center">
+                    {t('emergency_prep.advantage_desc')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Process Timeline Section */}
+        <section className="relative py-24 bg-gradient-to-b from-secondary/30 to-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
+                {t('emergency_prep.process_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-20"></div>
+
+              <div className="relative">
+                {/* Vertical Line */}
+                <div className={`absolute ${isRTL ? 'right-8 md:right-1/2 md:mr-0.5' : 'left-8 md:left-1/2 md:ml-0.5'} top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-primary hidden md:block`}></div>
+
+                <div className="space-y-16">
+                  {processSteps.map((step, idx) => (
+                    <div 
+                      key={idx} 
+                      className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${
+                        idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                      }`}
+                    >
+                      {/* Number Badge */}
+                      <div className={`flex-shrink-0 ${idx % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'} ${isRTL && idx % 2 === 0 ? 'md:mr-auto md:ml-0' : ''} ${isRTL && idx % 2 !== 0 ? 'md:ml-auto md:mr-0' : ''}`}>
+                        <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-lg relative z-10">
+                          <span className="text-2xl font-bold text-white">{step.num}</span>
+                        </div>
+                      </div>
+
+                      {/* Content Card */}
+                      <Card className={`flex-1 hover-lift border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 ${
+                        idx % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'
+                      } ${isRTL && idx % 2 === 0 ? 'md:ml-auto md:mr-0' : ''} ${isRTL && idx % 2 !== 0 ? 'md:mr-auto md:ml-0' : ''}`}>
+                        <CardContent className="p-8">
+                          <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                              <step.icon className="w-6 h-6 text-primary" />
+                            </div>
+                            <div>
+                              <h3 className="text-xl md:text-2xl font-bold mb-3 text-foreground">
+                                {step.title}
+                              </h3>
+                              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                                {step.desc}
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section className="relative py-24 bg-gradient-to-b from-background to-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
+                {t('emergency_prep.services_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {services.map((service, idx) => (
+                  <Card 
+                    key={idx} 
+                    className="hover-lift group border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-all duration-300"
+                  >
+                    <CardContent className="p-6 flex items-start gap-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <service.icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <p className="text-base text-foreground leading-relaxed">
+                        {service.text}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="relative py-24 bg-gradient-to-br from-foreground via-foreground/95 to-primary/20 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+                {t('emergency_prep.cta_title')}
+              </h2>
+              <p className="text-lg md:text-xl mb-10 text-gray-100 leading-relaxed">
+                {t('emergency_prep.cta_desc')}
+              </p>
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white px-12 py-6 text-xl rounded-full shadow-2xl hover:shadow-glow transform hover:-translate-y-1 hover:scale-105 transition-all duration-300"
+                asChild
               >
-                <Phone className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5`} />
-                {t('contact.call_now')}
-              </a>
-            </Button>
+                <a 
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('nav.contact')}
+                </a>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      </main>
+      
       <Footer />
     </div>
   );
