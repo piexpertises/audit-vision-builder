@@ -35,12 +35,91 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       className={`fixed inset-0 z-[9999] transition-opacity duration-500 ${
         fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
-      style={{
-        backgroundColor: 'rgba(13, 27, 42, 0.70)',
-        backdropFilter: 'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
-      }}
     >
+      {/* Galaxy Background Layer */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Base Gradient */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, #0D1B2A 0%, #151B3C 50%, #221C4D 100%)',
+          }}
+        />
+
+        {/* Glowing Blobs */}
+        <div
+          className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(29, 155, 240, 0.25) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+            animation: 'pulse1 8s ease-in-out infinite',
+          }}
+        />
+        <div
+          className="absolute bottom-[-15%] right-[-15%] w-[700px] h-[700px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(106, 90, 205, 0.2) 0%, transparent 70%)',
+            filter: 'blur(90px)',
+            animation: 'pulse2 10s ease-in-out infinite 2s',
+          }}
+        />
+        <div
+          className="absolute top-[30%] right-[10%] w-[400px] h-[400px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(138, 123, 255, 0.15) 0%, transparent 70%)',
+            filter: 'blur(70px)',
+            animation: 'pulse3 12s ease-in-out infinite 4s',
+          }}
+        />
+        <div
+          className="absolute bottom-[20%] left-[15%] w-[500px] h-[500px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(29, 155, 240, 0.18) 0%, transparent 70%)',
+            filter: 'blur(85px)',
+            animation: 'pulse1 9s ease-in-out infinite 1s',
+          }}
+        />
+
+        {/* Particle Field */}
+        <div className="absolute inset-0">
+          {/* Generate particles */}
+          {Array.from({ length: 80 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                width: `${Math.random() * 3 + 1}px`,
+                height: `${Math.random() * 3 + 1}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                opacity: Math.random() * 0.6 + 0.2,
+                animation: `twinkle ${Math.random() * 4 + 3}s ease-in-out infinite ${Math.random() * 3}s, drift${(i % 3) + 1} ${Math.random() * 20 + 25}s linear infinite ${Math.random() * 10}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Film Grain/Noise Overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            opacity: 0.05,
+            mixBlendMode: 'overlay',
+          }}
+        />
+
+        {/* Glass Blur Layer */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundColor: 'rgba(13, 27, 42, 0.55)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+          }}
+        />
+      </div>
+
       {/* 3D Scene Container */}
       <div 
         className="relative h-full flex flex-col items-center justify-center px-4"
@@ -364,6 +443,86 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           }
           100% {
             opacity: 1;
+          }
+        }
+
+        /* Particle Animations */
+        @keyframes twinkle {
+          0%, 100% {
+            opacity: 0.2;
+          }
+          50% {
+            opacity: 0.8;
+          }
+        }
+
+        @keyframes drift1 {
+          0% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(30px, -40px);
+          }
+          100% {
+            transform: translate(0, 0);
+          }
+        }
+
+        @keyframes drift2 {
+          0% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(-25px, 35px);
+          }
+          100% {
+            transform: translate(0, 0);
+          }
+        }
+
+        @keyframes drift3 {
+          0% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(40px, 30px);
+          }
+          100% {
+            transform: translate(0, 0);
+          }
+        }
+
+        /* Blob Pulse Animations */
+        @keyframes pulse1 {
+          0%, 100% {
+            opacity: 0.85;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.05);
+          }
+        }
+
+        @keyframes pulse2 {
+          0%, 100% {
+            opacity: 0.8;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.08);
+          }
+        }
+
+        @keyframes pulse3 {
+          0%, 100% {
+            opacity: 0.75;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.06);
           }
         }
 
