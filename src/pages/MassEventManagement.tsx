@@ -39,7 +39,7 @@ const MassEventManagement = () => {
             asChild
           >
             <a 
-              href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20ניהול%20אירועים%20המוניים."
+              href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -332,7 +332,7 @@ const MassEventManagement = () => {
             asChild
           >
             <a 
-              href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20ניהול%20אירועים%20המוניים."
+              href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
               target="_blank"
               rel="noopener noreferrer"
             >

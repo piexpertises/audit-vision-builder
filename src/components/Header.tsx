@@ -159,7 +159,7 @@ const Header = () => {
               asChild
             >
               <a 
-                href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -369,7 +369,7 @@ const Header = () => {
 
                   {/* WhatsApp CTA */}
                   <a
-                    href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                    href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleMenuItemClick}
@@ -393,7 +393,7 @@ const Header = () => {
                   
                   {/* Phone */}
                   <a
-                    href="tel:+972505730072"
+                    href="tel:+972507300720"
                     onClick={handleMenuItemClick}
                     className="block text-center text-sm transition-colors"
                     style={{ color: 'rgba(255, 255, 255, 0.80)' }}

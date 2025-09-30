@@ -46,7 +46,7 @@ const SecurityConsulting = () => {
                 asChild
               >
                 <a 
-                  href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20ייעוץ%20ביטחוני."
+                  href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -313,7 +313,7 @@ const SecurityConsulting = () => {
                 asChild
               >
                 <a 
-                  href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20על%20ייעוץ%20ביטחוני."
+                  href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3"
