@@ -273,6 +273,24 @@
     "terms": "Conditions de Service",
     "protected": "Protégé par Pi Expertises"
   },
+  "newspaper": {
+    "title": "Questions Fréquemment Posées",
+    "subtitle": "Réponses professionnelles à toutes vos questions de sécurité",
+    "faq1_q": "Que comprend le service de conseil en sécurité?",
+    "faq1_a": "Le service de conseil en sécurité comprend l'analyse des menaces et des risques, la construction de plans de sécurité personnalisés, la formation d'équipes et la mise en œuvre de solutions de sécurité avancées. Nous fournissons un conseil complet aux entreprises, organisations et institutions, tout en maintenant les normes professionnelles les plus élevées.",
+    "faq2_q": "Combien de temps faut-il pour préparer un plan de sécurité?",
+    "faq2_a": "Le temps nécessaire pour préparer un plan de sécurité dépend de l'ampleur et de la complexité du projet. En général, un plan de base est préparé en 2-3 semaines, tandis qu'un plan complet pour une grande installation peut prendre 4-6 semaines. Nous travaillons en étroite collaboration avec le client pour respecter les délais requis.",
+    "faq3_q": "Fournissez-vous une formation pour les équipes de sécurité?",
+    "faq3_a": "Oui, nous fournissons une formation complète pour les équipes de sécurité à tous les niveaux. La formation comprend les procédures de sécurité, la réponse aux incidents, l'utilisation des systèmes de sécurité et une formation spécialisée selon les besoins spécifiques de l'organisation. Toute la formation est dispensée par des experts ayant une vaste expérience sur le terrain.",
+    "faq4_q": "Selon quelles normes travaillez-vous?",
+    "faq4_a": "Nous travaillons selon les normes israéliennes les plus strictes, y compris SI 5688 pour les événements de masse, les exigences de la police israélienne, le ministère de la Sécurité intérieure et les normes ISO internationales. Nous nous mettons continuellement à jour sur tous les changements et mises à jour des normes et exigences légales.",
+    "faq5_q": "Fournissez-vous des services en dehors d'Israël?",
+    "faq5_a": "Oui, nous fournissons des services de conseil en sécurité et de protection en dehors d'Israël également. Nous avons de l'expérience dans l'accompagnement de clients lors de voyages internationaux, le conseil sur des projets internationaux et la formation d'équipes de sécurité dans différents pays. Nous adaptons nos services aux exigences locales de chaque destination.",
+    "faq6_q": "Comment pouvons-nous commencer à travailler avec vous?",
+    "faq6_a": "Commencer est simple - contactez-nous pour une consultation initiale sans engagement. Nous effectuerons une évaluation préliminaire de vos besoins, proposerons une solution personnalisée et expliquerons le processus et les coûts. Ensuite, nous pourrons établir un plan de travail détaillé et commencer à mettre en œuvre la solution de sécurité appropriée pour vous.",
+    "cta_title": "Besoin de Conseil en Sécurité Professionnel?",
+    "cta_subtitle": "Contactez-nous maintenant pour une proposition personnalisée"
+  },
   "form": {
     "required": "Champ requis",
     "success": "Message envoyé avec succès ! Nous vous recontacterons bientôt.",

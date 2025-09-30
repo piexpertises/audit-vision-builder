@@ -273,6 +273,24 @@
     "terms": "Terms of Service",
     "protected": "Protected by Pi Expertises"
   },
+  "newspaper": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Professional answers to all your security questions",
+    "faq1_q": "What does security consulting service include?",
+    "faq1_a": "Security consulting service includes threat and risk analysis, building customized security plans, team training, and implementing advanced security solutions. We provide comprehensive consulting for businesses, organizations, and institutions, while maintaining the highest professional standards.",
+    "faq2_q": "How long does it take to prepare a security plan?",
+    "faq2_a": "The time required to prepare a security plan depends on the scope and complexity of the project. Typically, a basic plan is prepared within 2-3 weeks, while a comprehensive plan for a large facility can take 4-6 weeks. We work in close collaboration with the client to meet required timelines.",
+    "faq3_q": "Do you provide training for security teams?",
+    "faq3_a": "Yes, we provide comprehensive training for security teams at all levels. Training includes security procedures, incident response, security system usage, and specialized training according to the organization's specific needs. All training is delivered by experts with extensive field experience.",
+    "faq4_q": "What standards do you work according to?",
+    "faq4_a": "We work according to the strictest Israeli standards, including SI 5688 for mass events, Israel Police requirements, Ministry of Internal Security, and international ISO standards. We continuously update ourselves on all changes and updates in standards and legal requirements.",
+    "faq5_q": "Do you provide services outside of Israel?",
+    "faq5_a": "Yes, we provide security consulting and protection services outside of Israel as well. We have experience accompanying clients on international travel, consulting on international projects, and training security teams in various countries. We adapt our services to the local requirements of each destination.",
+    "faq6_q": "How can we start working with you?",
+    "faq6_a": "Getting started is simple - contact us for an initial consultation with no obligation. We will conduct a preliminary assessment of your needs, offer a customized solution, and explain the process and costs. Afterward, we can establish a detailed work plan and begin implementing the appropriate security solution for you.",
+    "cta_title": "Need Professional Security Consulting?",
+    "cta_subtitle": "Contact us now for a personalized proposal"
+  },
   "form": {
     "required": "Required field",
     "success": "Message sent successfully! We will get back to you soon.",

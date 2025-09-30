@@ -10,7 +10,7 @@ import SEO from '@/components/SEO';
 
 const SecurityPlanWriting = () => {
   const { t, isRTL } = useI18n();
-  const whatsappUrl = "https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם";
+  const whatsappUrl = `https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`;
 
   const requiredList = [
     { icon: Building2, text: t('security_plans.required1') },

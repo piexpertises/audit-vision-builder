@@ -103,7 +103,7 @@ const HeroSection = () => {
         }}>
             <Button size="lg" className="btn-hero group hover-scale hover-glow" asChild>
               <a 
-                href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
+                href={`https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

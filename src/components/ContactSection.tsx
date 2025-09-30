@@ -306,11 +306,11 @@ const ContactSection = () => {
                 className="btn-hero"
                 asChild
               >
-                <a 
-                  href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+              <a 
+                href={`https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                   <Phone className="ml-2 h-5 w-5" />
                   {t('contact.call_now')}
                 </a>
