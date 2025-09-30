@@ -16,7 +16,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Phone, href: 'tel:050-730-0720', label: 'Phone' },
-    { icon: Mail, href: 'mailto:pi.expertises@gmail.com', label: 'Email' },
+    { icon: Mail, href: 'mailto:infos.piexpertises@gmail.com', label: 'Email' },
     { icon: Globe, href: '#', label: 'Website' },
   ];
 
@@ -105,10 +105,10 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-accent flex-shrink-0" />
                 <a 
-                  href="mailto:pi.expertises@gmail.com" 
+                  href="mailto:infos.piexpertises@gmail.com" 
                   className="text-foreground/80 hover:text-accent transition-colors duration-300"
                 >
-                  pi.expertises@gmail.com
+                  infos.piexpertises@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-3">

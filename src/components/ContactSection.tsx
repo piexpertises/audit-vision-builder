@@ -35,7 +35,7 @@ const ContactSection = () => {
         from_email: formData.email,
         from_phone: formData.phone,
         message: formData.message,
-        to_email: 'pi.expertises@gmail.com',
+        to_email: 'infos.piexpertises@gmail.com',
         language: language,
         page: 'Contact Form'
       };
@@ -99,7 +99,7 @@ const ContactSection = () => {
       icon: Mail,
       label: t('contact.email'),
       value: t('contact.email_label'),
-      href: 'mailto:pi.expertises@gmail.com',
+      href: 'mailto:infos.piexpertises@gmail.com',
     },
     {
       icon: MapPin,

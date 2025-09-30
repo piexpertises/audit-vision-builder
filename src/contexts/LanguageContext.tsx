@@ -65,7 +65,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.emergency_desc': 'לעניינים ביטחוניים דחופים, צוות המענה החירום שלנו זמין 24 שעות ביממה.',
     'contact.call_now': 'התקשרו עכשיו',
     'contact.phone_label': '050-730-0720',
-    'contact.email_label': 'pi.expertises@gmail.com',
+    'contact.email_label': 'infos.piexpertises@gmail.com',
     'contact.address': 'מבשרת ציון, ישראל',
     'contact.hours': 'א-ה: 8:00-18:00',
     
@@ -159,7 +159,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.emergency_desc': 'For urgent security matters, our emergency response team is available 24 hours a day.',
     'contact.call_now': 'Call Now',
     'contact.phone_label': '050-730-0720',
-    'contact.email_label': 'pi.expertises@gmail.com',
+    'contact.email_label': 'infos.piexpertises@gmail.com',
     'contact.address': 'Mevaseret Zion, Israel',
     'contact.hours': 'Sun-Thu: 8:00-18:00',
     
@@ -253,7 +253,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.emergency_desc': 'Pour les questions de sécurité urgentes, notre équipe d\'intervention d\'urgence est disponible 24 heures sur 24.',
     'contact.call_now': 'Appelez Maintenant',
     'contact.phone_label': '050-730-0720',
-    'contact.email_label': 'pi.expertises@gmail.com',
+    'contact.email_label': 'infos.piexpertises@gmail.com',
     'contact.address': 'Mevaseret Zion, Israël',
     'contact.hours': 'Dim-Jeu: 8:00-18:00',
     
