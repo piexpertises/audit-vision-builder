@@ -155,48 +155,49 @@ const Header = () => {
         {/* Full-Screen Mobile Menu Overlay */}
         {isMenuOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop with blur effect */}
             <div 
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] lg:hidden animate-fade-in"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[150] lg:hidden animate-fade-in"
               onClick={() => setIsMenuOpen(false)}
             />
             
-            {/* Menu Panel */}
+            {/* Menu Panel with 3D effect */}
             <div 
-              className={`fixed top-0 ${isRTL ? 'right-0' : 'left-0'} bottom-0 w-full max-w-md bg-[#0D1B2A] z-[160] lg:hidden overflow-y-auto ${
+              className={`fixed top-0 ${isRTL ? 'right-0' : 'left-0'} bottom-0 w-full max-w-sm bg-[#0D1B2A] z-[160] lg:hidden overflow-y-auto shadow-2xl ${
                 isRTL ? 'animate-slide-in-right' : 'animate-slide-in-left'
               }`}
+              style={{
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1)'
+              }}
             >
-              {/* Close Button */}
-              <div className="flex items-center justify-between p-6 border-b border-white/10">
+              {/* Header with Logo and Close Button */}
+              <div className={`flex items-center justify-between p-6 border-b border-white/10 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
                 <img 
                   src={logoImage} 
                   alt="Pi Expertises Logo" 
-                  className="h-12 w-auto object-contain"
+                  className="h-14 w-auto object-contain"
                 />
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-white hover:text-[#D4AF37] hover:bg-white/5 transition-colors"
+                  className="text-white hover:text-[#D4AF37] hover:bg-white/5 transition-all duration-300 rounded-full p-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <X size={28} />
+                  <X size={28} strokeWidth={2.5} />
                 </Button>
               </div>
 
               {/* Navigation Menu */}
-              <nav className="px-6 py-8">
-                <div className={`flex flex-col space-y-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                  {navigationItems.map((item) => (
+              <nav className="px-6 py-8 flex-1">
+                <div className={`flex flex-col space-y-1 ${isRTL ? 'text-right' : 'text-left'}`}>
+                  {navigationItems.map((item, index) => (
                     item.isRoute ? (
                       <Link
                         key={item.key}
                         to={item.href}
-                        className="text-white hover:text-[#D4AF37] transition-all duration-300 font-medium text-lg py-4 px-4 rounded-lg hover:bg-white/5 border-l-4 border-transparent hover:border-[#D4AF37]"
-                        style={{
-                          borderLeftWidth: isRTL ? '0' : '4px',
-                          borderRightWidth: isRTL ? '4px' : '0',
-                        }}
+                        className={`text-white hover:text-[#D4AF37] hover:bg-white/5 transition-all duration-300 font-medium text-lg py-4 px-5 rounded-lg ${
+                          isRTL ? 'border-r-4' : 'border-l-4'
+                        } border-transparent hover:border-[#D4AF37]`}
                         onClick={handleMenuItemClick}
                       >
                         {t(item.key)}
@@ -205,11 +206,9 @@ const Header = () => {
                       <a
                         key={item.key}
                         href={item.href}
-                        className="text-white hover:text-[#D4AF37] transition-all duration-300 font-medium text-lg py-4 px-4 rounded-lg hover:bg-white/5 border-l-4 border-transparent hover:border-[#D4AF37]"
-                        style={{
-                          borderLeftWidth: isRTL ? '0' : '4px',
-                          borderRightWidth: isRTL ? '4px' : '0',
-                        }}
+                        className={`text-white hover:text-[#D4AF37] hover:bg-white/5 transition-all duration-300 font-medium text-lg py-4 px-5 rounded-lg ${
+                          isRTL ? 'border-r-4' : 'border-l-4'
+                        } border-transparent hover:border-[#D4AF37]`}
                         onClick={handleMenuItemClick}
                       >
                         {t(item.key)}
@@ -217,9 +216,12 @@ const Header = () => {
                     )
                   ))}
                 </div>
+              </nav>
 
+              {/* Bottom Section - Language and WhatsApp */}
+              <div className="px-6 pb-8 mt-auto">
                 {/* Language Selector */}
-                <div className="pt-8 mt-8 border-t border-white/10">
+                <div className="mb-6 pb-6 border-t border-white/10 pt-6">
                   <p className={`text-sm font-medium text-white/60 mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
                     {language === 'he' ? 'בחר שפה' : language === 'en' ? 'Select Language' : 'Choisir la langue'}
                   </p>
@@ -235,13 +237,13 @@ const Header = () => {
                         }}
                         className={`${
                           language === lang.code 
-                            ? 'bg-[#D4AF37] text-[#0D1B2A] border-[#D4AF37] hover:bg-[#D4AF37]/90' 
-                            : 'bg-transparent text-white border-white/20 hover:bg-white/5 hover:border-[#D4AF37] hover:text-[#D4AF37]'
-                        } transition-all duration-300`}
+                            ? 'bg-[#D4AF37] text-[#0D1B2A] border-[#D4AF37] hover:bg-[#D4AF37]/90 font-bold' 
+                            : 'bg-transparent text-white border-white/30 hover:bg-white/10 hover:border-[#D4AF37] hover:text-[#D4AF37]'
+                        } transition-all duration-300 h-auto py-3`}
                       >
                         <span className="flex flex-col items-center gap-1">
                           <span className="text-xl">{lang.flag}</span>
-                          <span className="text-xs font-medium">{lang.label}</span>
+                          <span className="text-xs">{lang.label}</span>
                         </span>
                       </Button>
                     ))}
@@ -249,33 +251,31 @@ const Header = () => {
                 </div>
 
                 {/* WhatsApp CTA */}
-                <div className="pt-8 mt-8 border-t border-white/10">
-                  <Button 
-                    className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0D1B2A] rounded-full font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    asChild
-                  >
-                    <a 
-                      href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3"
-                      onClick={handleMenuItemClick}
-                    >
-                      <Phone size={22} />
-                      {t('nav.contact')}
-                    </a>
-                  </Button>
-                  
-                  {/* Phone Number */}
+                <Button 
+                  className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0D1B2A] rounded-lg font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+                  asChild
+                >
                   <a 
-                    href="tel:+972505730072"
-                    className="block text-center text-white/80 hover:text-[#D4AF37] transition-colors mt-4 text-sm"
+                    href="https://wa.me/972505730072?text=שלום%20פאי%20אקספרטיס,%20אני%20מעוניין%20לקבל%20פרטים%20נוספים%20ולקבוע%20שיחה."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3"
                     onClick={handleMenuItemClick}
                   >
-                    {t('nav.phone')}
+                    <Phone size={22} />
+                    {t('nav.contact')}
                   </a>
-                </div>
-              </nav>
+                </Button>
+                
+                {/* Phone Number */}
+                <a 
+                  href="tel:+972505730072"
+                  className="block text-center text-white/70 hover:text-[#D4AF37] transition-colors mt-4 text-sm"
+                  onClick={handleMenuItemClick}
+                >
+                  {t('nav.phone')}
+                </a>
+              </div>
             </div>
           </>
         )}
