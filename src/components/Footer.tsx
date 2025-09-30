@@ -114,7 +114,7 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
                 <span className="text-foreground/80">
-                  מבשרת ציון, ישראל
+                  Mevaseret Zion, Israel
                 </span>
               </div>
             </div>
