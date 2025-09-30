@@ -20,6 +20,8 @@ const SecurityPlanWriting = () => {
             backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.85), rgba(13, 27, 42, 0.75)), url(${securityPlanDocument})`
           }}
         />
+        {/* Bottom gradient fade for smooth transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-white/30 to-white z-10 pointer-events-none" />
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="mb-8">
             <FileText className="w-20 h-20 mx-auto mb-6 text-[#1d9bf0]" />
@@ -48,7 +50,9 @@ const SecurityPlanWriting = () => {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -74,7 +78,9 @@ const SecurityPlanWriting = () => {
       </section>
 
       {/* Who Needs Security Plan Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">מי חייב בתוכנית אבטחה?</h2>
           <div className="w-20 h-1 bg-[#1d9bf0] mx-auto mb-12"></div>
@@ -132,7 +138,9 @@ const SecurityPlanWriting = () => {
       </section>
 
       {/* Purpose Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -158,7 +166,9 @@ const SecurityPlanWriting = () => {
       </section>
 
       {/* Key Components Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">
             נושאים מרכזיים הכלולים בתוכנית אבטחה
@@ -219,7 +229,9 @@ const SecurityPlanWriting = () => {
       </section>
 
       {/* How We Work Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">
             איך אנחנו עובדים?
@@ -281,7 +293,9 @@ const SecurityPlanWriting = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0d1b2a]/10 to-[#0d1b2a] pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">

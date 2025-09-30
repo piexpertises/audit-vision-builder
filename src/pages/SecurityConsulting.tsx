@@ -22,6 +22,9 @@ const SecurityConsulting = () => {
             backgroundRepeat: 'no-repeat'
           }}
         >
+          {/* Bottom gradient fade for smooth transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-gray-50/30 to-gray-50 z-10 pointer-events-none" />
+          
           <div className="container mx-auto px-4 text-center relative z-10">
             <div className="max-w-4xl mx-auto">
               <div className="mb-8">
@@ -55,7 +58,9 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Introduction Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="relative py-20 bg-gray-50">
+          {/* Bottom gradient fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#0d1b2a]">
@@ -70,7 +75,9 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Why Choose Us Section */}
-        <section className="py-20 bg-white">
+        <section className="relative py-20 bg-white">
+          {/* Bottom gradient fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-gray-50 pointer-events-none" />
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#0d1b2a]">
@@ -107,7 +114,9 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Consulting Areas Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="relative py-20 bg-gray-50">
+          {/* Bottom gradient fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#0d1b2a]">
@@ -193,7 +202,9 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Professional Consulting Section */}
-        <section className="py-20 bg-white">
+        <section className="relative py-20 bg-white">
+          {/* Bottom gradient fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-gray-50 pointer-events-none" />
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#0d1b2a]">
@@ -214,7 +225,9 @@ const SecurityConsulting = () => {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="relative py-20 bg-gray-50">
+          {/* Bottom gradient fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0d1b2a]/10 to-[#0d1b2a] pointer-events-none" />
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#0d1b2a]">

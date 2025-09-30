@@ -41,7 +41,9 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-secondary/30" ref={ref}>
+    <section id="services" className="relative py-20 bg-secondary/30" ref={ref}>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-background pointer-events-none" />
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>

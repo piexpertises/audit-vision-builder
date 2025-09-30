@@ -4,7 +4,9 @@ import { Shield, Users, Award, Target } from 'lucide-react';
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 bg-background" dir="rtl">
+    <section id="about" className="relative py-20 bg-background" dir="rtl">
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-secondary/30 pointer-events-none" />
       <div className="container mx-auto px-4">
 
         {/* Section 3 - צוות המומחים שלנו */}

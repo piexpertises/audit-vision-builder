@@ -20,6 +20,8 @@ const EmergencyPreparedness = () => {
             backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.85), rgba(13, 27, 42, 0.75)), url(${emergencyResponsePlanning})`
           }}
         />
+        {/* Bottom gradient fade for smooth transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-white/30 to-white z-10 pointer-events-none" />
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="mb-8">
             <AlertTriangle className="w-20 h-20 mx-auto mb-6 text-[#1d9bf0]" />
@@ -51,7 +53,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -77,7 +81,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* How We Help Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">איך אנחנו עוזרים לך להיערך?</h2>
           <div className="w-20 h-1 bg-[#1d9bf0] mx-auto mb-12"></div>
@@ -101,7 +107,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* BCP Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -127,7 +135,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* DRP Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -156,7 +166,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* Psychological Resilience Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">
             חוסן נפשי בארגונים – הגורם המוביל להצלחה
@@ -182,7 +194,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* Business Advantage Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">יתרון עסקי בשעת משבר</h2>
           <div className="w-20 h-1 bg-[#1d9bf0] mx-auto mb-12"></div>
@@ -206,7 +220,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* How We Work Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">
             איך אנחנו עובדים?
@@ -269,7 +285,9 @@ const EmergencyPreparedness = () => {
       </section>
 
       {/* Our Services Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0d1b2a]/10 to-[#0d1b2a] pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">כל השירותים שלנו:</h2>
           <div className="w-20 h-1 bg-[#1d9bf0] mx-auto mb-12"></div>

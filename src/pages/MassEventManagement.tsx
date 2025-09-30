@@ -18,6 +18,8 @@ const MassEventManagement = () => {
             backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.85), rgba(13, 27, 42, 0.75)), url(${massEventHero})`
           }}
         />
+        {/* Bottom gradient fade for smooth transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-white/30 to-white z-10 pointer-events-none" />
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="mb-8">
             <Shield className="w-20 h-20 mx-auto mb-6 text-[#1d9bf0]" />
@@ -49,7 +51,9 @@ const MassEventManagement = () => {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -75,7 +79,9 @@ const MassEventManagement = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">למה לבחור בנו?</h2>
           <div className="w-20 h-1 bg-[#1d9bf0] mx-auto mb-12"></div>
@@ -99,7 +105,9 @@ const MassEventManagement = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">
             שירותים שכוללים ניהול אירועים המוניים
@@ -159,7 +167,9 @@ const MassEventManagement = () => {
       </section>
 
       {/* Standards Section */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -185,7 +195,9 @@ const MassEventManagement = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-20 bg-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">
             שלב אחר שלב – איך אנחנו פועלים?
@@ -247,7 +259,9 @@ const MassEventManagement = () => {
       </section>
 
       {/* Why Us Highlights */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0d1b2a]/10 to-[#0d1b2a] pointer-events-none" />
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-[#0d1b2a] text-center mb-4">למה אנחנו?</h2>
           <div className="w-20 h-1 bg-[#1d9bf0] mx-auto mb-12"></div>

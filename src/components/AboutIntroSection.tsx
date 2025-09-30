@@ -9,7 +9,9 @@ const AboutIntroSection = () => {
   const { t, isRTL } = useI18n();
 
   return (
-    <section id="about-intro" className="py-20 bg-background" dir={isRTL ? 'rtl' : 'ltr'} ref={ref}>
+    <section id="about-intro" className="relative py-20 bg-background" dir={isRTL ? 'rtl' : 'ltr'} ref={ref}>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#F5F5F5] pointer-events-none" />
       <div className="container mx-auto px-4">
         
         {/* Section 1 - אודות פאי אקספרטיס */}

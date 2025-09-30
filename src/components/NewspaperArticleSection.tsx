@@ -6,7 +6,9 @@ const NewspaperArticleSection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 });
 
   return (
-    <section className="py-20 bg-[#F5F5F5]" dir="rtl" ref={ref}>
+    <section className="relative py-20 bg-[#F5F5F5]" dir="rtl" ref={ref}>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-background pointer-events-none" />
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
