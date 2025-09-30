@@ -1,12 +1,12 @@
 import React from 'react';
-import MagneticLoader from './MagneticLoader';
+import Loader from './Loader';
 
 interface LoadingScreenProps {
   onComplete: () => void;
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
-  return <MagneticLoader onComplete={onComplete} duration={4000} />;
+  return <Loader onComplete={onComplete} duration={4000} minVisibleMs={5500} />;
 };
 
 export default LoadingScreen;
