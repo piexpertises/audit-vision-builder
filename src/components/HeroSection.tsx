@@ -27,7 +27,7 @@ const HeroSection = () => {
   const stats = [{
     icon: Shield,
     label: 'Years Experience',
-    value: '8+'
+    value: '20+'
   }, {
     icon: Users,
     label: 'Clients Protected',
