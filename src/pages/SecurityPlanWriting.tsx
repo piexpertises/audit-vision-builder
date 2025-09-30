@@ -129,8 +129,31 @@ const SecurityPlanWriting = () => {
           </div>
         </section>
 
-        {/* Required Section */}
+        {/* Purpose Section */}
         <section className="relative py-24 bg-gradient-to-b from-background to-secondary/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
+                {t('security_plans.purpose_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
+              
+              <div className="bg-gradient-to-br from-card to-secondary/30 rounded-3xl p-8 md:p-12 shadow-card border border-border/50 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
+                
+                <div className="relative z-10">
+                  <p className="text-lg md:text-xl leading-relaxed text-foreground/90">
+                    {t('security_plans.purpose_desc')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Required Section */}
+        <section className="relative py-24 bg-gradient-to-b from-secondary/30 to-background">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground animate-fade-up">
@@ -154,29 +177,6 @@ const SecurityPlanWriting = () => {
                     </CardContent>
                   </Card>
                 ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Purpose Section */}
-        <section className="relative py-24 bg-gradient-to-b from-secondary/30 to-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
-                {t('security_plans.purpose_title')}
-              </h2>
-              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
-              
-              <div className="bg-gradient-to-br from-card to-secondary/30 rounded-3xl p-8 md:p-12 shadow-card border border-border/50 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
-                
-                <div className="relative z-10">
-                  <p className="text-lg md:text-xl leading-relaxed text-foreground/90">
-                    {t('security_plans.purpose_desc')}
-                  </p>
-                </div>
               </div>
             </div>
           </div>
