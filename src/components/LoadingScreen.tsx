@@ -1,98 +1,231 @@
-import React, { useEffect, useState } from 'react';
-import { ShieldCheck, Sparkles, Star } from 'lucide-react';
-import { useI18n } from '@/hooks/useI18n';
+import React, { useEffect, useState, useRef, Suspense } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Float, Text3D, Center, MeshTransmissionMaterial } from '@react-three/drei';
+import { Shield, Lock, Globe, Users, Calendar } from 'lucide-react';
+import * as THREE from 'three';
+import logoImage from '@/assets/logo-pi-expertises-new.png';
 
 interface LoadingScreenProps {
   onComplete: () => void;
 }
 
-const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
-  const [stage, setStage] = useState(0);
-  const { t } = useI18n();
+// 3D Rotating Icon Component
+const RotatingIcon = ({ 
+  position, 
+  icon, 
+  orbitRadius = 3, 
+  orbitSpeed = 1,
+  delay = 0 
+}: { 
+  position: [number, number, number];
+  icon: string;
+  orbitRadius?: number;
+  orbitSpeed?: number;
+  delay?: number;
+}) => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const [hovered, setHovered] = useState(false);
+  
+  useFrame((state) => {
+    if (meshRef.current) {
+      const time = state.clock.getElapsedTime() + delay;
+      meshRef.current.position.x = Math.cos(time * orbitSpeed) * orbitRadius;
+      meshRef.current.position.z = Math.sin(time * orbitSpeed) * orbitRadius;
+      meshRef.current.rotation.y += 0.02;
+      meshRef.current.rotation.x += 0.01;
+    }
+  });
+
+  return (
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <mesh
+        ref={meshRef}
+        position={position}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+        scale={hovered ? 1.2 : 1}
+      >
+        <boxGeometry args={[0.6, 0.6, 0.6]} />
+        <meshStandardMaterial
+          color={hovered ? "#1d9bf0" : "#D4AF37"}
+          emissive="#1d9bf0"
+          emissiveIntensity={0.3}
+          metalness={0.8}
+          roughness={0.2}
+        />
+      </mesh>
+      {/* Glow effect */}
+      <pointLight
+        position={[meshRef.current?.position.x || 0, 0, meshRef.current?.position.z || 0]}
+        color="#1d9bf0"
+        intensity={0.5}
+        distance={2}
+      />
+    </Float>
+  );
+};
+
+// Central Logo Component
+const CentralLogo = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const textureRef = useRef<THREE.Texture>();
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setStage(1), 500);
-    const timer2 = setTimeout(() => setStage(2), 1800);
-    const timer3 = setTimeout(() => setStage(3), 3200);
-    const timer4 = setTimeout(() => onComplete(), 4000);
+    const loader = new THREE.TextureLoader();
+    loader.load(logoImage, (loadedTexture) => {
+      setTexture(loadedTexture);
+    });
+  }, []);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.1;
+      meshRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.1;
+    }
+  });
+
+  return (
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
+      <mesh ref={meshRef} position={[0, 0, 0]}>
+        <planeGeometry args={[2.5, 2.5]} />
+        {texture && (
+          <meshStandardMaterial
+            map={texture}
+            transparent
+            side={THREE.DoubleSide}
+            emissive="#D4AF37"
+            emissiveIntensity={0.2}
+            metalness={0.6}
+            roughness={0.4}
+          />
+        )}
+      </mesh>
+      {/* Glow around logo */}
+      <pointLight position={[0, 0, 1]} color="#D4AF37" intensity={1} distance={5} />
+      <pointLight position={[0, 0, -1]} color="#1d9bf0" intensity={0.5} distance={5} />
+    </Float>
+  );
+};
+
+// Orbiting Ring
+const OrbitRing = () => {
+  const ringRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (ringRef.current) {
+      ringRef.current.rotation.z = state.clock.getElapsedTime() * 0.2;
+    }
+  });
+
+  return (
+    <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
+      <torusGeometry args={[3.5, 0.02, 16, 100]} />
+      <meshStandardMaterial
+        color="#1d9bf0"
+        emissive="#1d9bf0"
+        emissiveIntensity={0.5}
+        transparent
+        opacity={0.3}
+      />
+    </mesh>
+  );
+};
+
+// 3D Scene
+const Scene = () => {
+  return (
+    <>
+      {/* Ambient lighting */}
+      <ambientLight intensity={0.4} />
+      <pointLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#1d9bf0" />
+      
+      {/* Central Logo */}
+      <CentralLogo />
+      
+      {/* Orbiting Ring */}
+      <OrbitRing />
+      
+      {/* Rotating Icons */}
+      <RotatingIcon position={[3, 0, 0]} icon="shield" orbitSpeed={0.3} delay={0} />
+      <RotatingIcon position={[-3, 0, 0]} icon="lock" orbitSpeed={0.3} delay={1.26} />
+      <RotatingIcon position={[0, 0, 3]} icon="globe" orbitSpeed={0.3} delay={2.52} />
+      <RotatingIcon position={[0, 0, -3]} icon="users" orbitSpeed={0.3} delay={3.78} />
+      <RotatingIcon position={[2, 0, 2]} icon="calendar" orbitSpeed={0.3} delay={5.04} />
+    </>
+  );
+};
+
+const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
+  const [fadeOut, setFadeOut] = useState(false);
+  const [show3D, setShow3D] = useState(false);
+
+  useEffect(() => {
+    // Show 3D scene after initial mount
+    const showTimer = setTimeout(() => setShow3D(true), 100);
+    
+    // Start fade out after 3 seconds
+    const fadeTimer = setTimeout(() => setFadeOut(true), 3000);
+    
+    // Complete loading after fade out animation
+    const completeTimer = setTimeout(() => onComplete(), 4000);
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
+      clearTimeout(showTimer);
+      clearTimeout(fadeTimer);
+      clearTimeout(completeTimer);
     };
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-gradient-to-br from-primary via-primary/90 to-secondary flex items-center justify-center overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-security-pulse" />
-        <div className="absolute bottom-20 right-20 w-24 h-24 bg-accent/20 rounded-full blur-2xl animate-security-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-accent/15 rounded-full blur-xl animate-security-pulse" style={{ animationDelay: '2s' }} />
-      </div>
-
-      <div className="relative z-10 text-center">
-        {/* 3D Shield Animation - Slower and More Elegant */}
-        <div className={`relative mb-8 transition-all duration-1000 ${stage >= 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
-          <div className="relative w-40 h-40 mx-auto">
-            {/* Main Shield with Slow Rotation */}
-            <div className={`absolute inset-0 flex items-center justify-center transition-all duration-2000 ${stage >= 1 ? 'rotate-[360deg]' : 'rotate-0'}`}>
-              <ShieldCheck 
-                className={`w-28 h-28 text-accent drop-shadow-2xl transition-all duration-1500 ${stage >= 2 ? 'scale-110 brightness-125' : 'scale-100'}`}
-                style={{
-                  filter: `drop-shadow(0 0 25px rgba(212, 175, 55, ${stage >= 2 ? '0.8' : '0.4'}))`,
-                }}
-              />
-            </div>
-            
-            {/* Slow Rotating Ring */}
-            <div 
-              className={`absolute inset-0 border-2 border-accent/30 rounded-full transition-all duration-1000 ${stage >= 1 ? 'animate-spin opacity-100' : 'opacity-0'}`} 
-              style={{ animationDuration: '6s' }}
-            >
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-            </div>
-
-            {/* Elegant Sparkle Effects */}
-            {stage >= 2 && (
-              <>
-                <Sparkles className="absolute -top-6 -right-6 w-8 h-8 text-accent animate-pulse opacity-80 transition-all duration-1000" />
-                <Sparkles className="absolute -bottom-6 -left-6 w-6 h-6 text-accent animate-pulse opacity-60 transition-all duration-1000" style={{ animationDelay: '0.7s' }} />
-                <Sparkles className="absolute top-10 -left-8 w-4 h-4 text-accent animate-pulse opacity-40 transition-all duration-1000" style={{ animationDelay: '1.4s' }} />
-              </>
-            )}
-          </div>
+    <div 
+      className={`fixed inset-0 z-[9999] transition-opacity duration-1000 ${
+        fadeOut ? 'opacity-0' : 'opacity-100'
+      }`}
+      style={{
+        background: 'linear-gradient(180deg, #0D1B2A 0%, #1d9bf0 50%, rgba(255,255,255,0.1) 100%)',
+        backdropFilter: 'blur(10px)'
+      }}
+    >
+      {/* 3D Canvas */}
+      {show3D && (
+        <div className={`w-full h-full transition-all duration-1000 ${
+          fadeOut ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+        }`}>
+          <Canvas
+            camera={{ position: [0, 0, 8], fov: 50 }}
+            style={{ background: 'transparent' }}
+          >
+            <Suspense fallback={null}>
+              <Scene />
+            </Suspense>
+          </Canvas>
         </div>
+      )}
 
-        {/* Pi Symbol Formation - Slower */}
-        <div className={`text-7xl font-bold text-accent mb-6 transition-all duration-1500 ${stage >= 2 ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 rotate-45'}`}>
-          π
-        </div>
-
-        {/* Company Name - Elegant Fade In */}
-        <div className={`space-y-3 transition-all duration-1200 ${stage >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h1 className="text-3xl font-bold text-white mb-3">Pi Expertises</h1>
-          <p className="text-white/90 text-lg font-medium">מומחי הביטחון שלכם</p>
-        </div>
-
-        {/* Elegant Loading Bar */}
-        <div className={`w-80 h-1.5 bg-white/20 rounded-full mt-10 mx-auto overflow-hidden transition-all duration-1000 ${stage >= 1 ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Company Name Overlay */}
+      <div 
+        className={`absolute bottom-20 left-0 right-0 text-center transition-all duration-1000 ${
+          fadeOut ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+        }`}
+        style={{ transitionDelay: '200ms' }}
+      >
+        <h1 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">Pi Expertises</h1>
+        <p className="text-white/90 text-lg font-medium">מומחי הביטחון שלכם</p>
+        
+        {/* Loading bar */}
+        <div className="w-64 h-1 bg-white/20 rounded-full mt-6 mx-auto overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-accent via-accent/90 to-accent rounded-full transition-all duration-2000 loading-shimmer"
-            style={{
-              width: stage >= 3 ? '100%' : stage >= 2 ? '75%' : stage >= 1 ? '45%' : '0%'
-            }}
+            className="h-full bg-gradient-to-r from-[#D4AF37] to-[#1d9bf0] rounded-full transition-all duration-3000 ease-out"
+            style={{ width: fadeOut ? '100%' : '0%' }}
           />
         </div>
-
-        {/* Elegant Subtitle */}
-        <p className={`text-white/70 text-sm mt-6 transition-all duration-1000 ${stage >= 2 ? 'opacity-100' : 'opacity-0'}`}>
-          {t('loading.text')}
-        </p>
       </div>
+
+      {/* Decorative corner accents */}
+      <div className="absolute top-8 left-8 w-20 h-20 border-t-2 border-l-2 border-[#D4AF37]/30 rounded-tl-lg" />
+      <div className="absolute bottom-8 right-8 w-20 h-20 border-b-2 border-r-2 border-[#1d9bf0]/30 rounded-br-lg" />
     </div>
   );
 };
