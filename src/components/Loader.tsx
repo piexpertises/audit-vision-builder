@@ -114,11 +114,11 @@ const Loader: React.FC<LoaderProps> = ({
       {/* CSS Variables */}
       <style>{`
         :root {
-          --brand-sky-blue: #4A90E2;
-          --brand-deep-blue: #2E5B8A;
+          --brand-blue: #4A90E2;
           --brand-gold: #E6B800;
           --brand-light-gold: #F4D03F;
-          --brand-white: #FFFFFF;
+          --brand-cream: #F5F5DC;
+          --brand-light-gray: #DCE4F0;
         }
       `}</style>
 
@@ -127,9 +127,9 @@ const Loader: React.FC<LoaderProps> = ({
           animateOut ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
         }`}
         style={{
-          background: 'linear-gradient(135deg, rgba(74, 144, 226, 0.15) 0%, rgba(46, 91, 138, 0.25) 100%)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          background: 'linear-gradient(135deg, rgba(220, 228, 240, 0.96) 0%, rgba(200, 215, 235, 0.98) 100%)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
         }}
       >
         {/* Magnetic Field Lines */}
@@ -141,8 +141,8 @@ const Loader: React.FC<LoaderProps> = ({
               style={{
                 width: `${(i + 1) * 90}px`,
                 height: `${(i + 1) * 70}px`,
-                borderColor: 'var(--brand-sky-blue)',
-                opacity: magnetismActive ? '0.12' : '0',
+                borderColor: 'var(--brand-blue)',
+                opacity: magnetismActive ? '0.08' : '0',
                 animation: magnetismActive ? `magneticPulse ${3.5 + i * 0.6}s ease-in-out infinite ${i * 0.3}s` : 'none',
                 transition: 'opacity 0.8s ease-out',
               }}
@@ -154,16 +154,16 @@ const Loader: React.FC<LoaderProps> = ({
         {particles.map((particle) => (
           <div
             key={particle.id}
-            className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
+            className="absolute w-2 h-2 rounded-full pointer-events-none"
             style={{
               left: `${particle.startX}%`,
               top: `${particle.startY}%`,
-              background: Math.random() > 0.6 ? 'var(--brand-gold)' : 'var(--brand-sky-blue)',
-              boxShadow: magnetismActive ? `0 0 10px ${Math.random() > 0.6 ? 'var(--brand-light-gold)' : 'var(--brand-sky-blue)'}` : 'none',
+              background: Math.random() > 0.6 ? 'var(--brand-gold)' : 'var(--brand-blue)',
+              boxShadow: magnetismActive ? `0 0 8px ${Math.random() > 0.6 ? 'var(--brand-gold)' : 'var(--brand-blue)'}` : 'none',
               transform: textVisible ? 
                 `translate(${particle.targetX - particle.startX}%, ${particle.targetY - particle.startY}%)` : 
                 'translate(0, 0)',
-              opacity: magnetismActive ? 1 : 0,
+              opacity: magnetismActive ? 0.8 : 0,
               transition: `all ${1.4 + particle.delay / 1000}s cubic-bezier(0.34, 1.56, 0.64, 1) ${particle.delay}ms`,
             }}
           />
@@ -186,8 +186,8 @@ const Loader: React.FC<LoaderProps> = ({
                 style={{
                   width: '80px',
                   height: '80px',
-                  borderColor: 'var(--brand-sky-blue)',
-                  opacity: '0.15',
+                  borderColor: 'var(--brand-blue)',
+                  opacity: '0.12',
                   animation: 'magneticRingPulse 2.5s ease-in-out infinite',
                 }}
               />
@@ -196,8 +196,8 @@ const Loader: React.FC<LoaderProps> = ({
                 style={{
                   width: '96px',
                   height: '96px',
-                  borderColor: 'var(--brand-light-gold)',
-                  opacity: '0.1',
+                  borderColor: 'var(--brand-gold)',
+                  opacity: '0.08',
                   animation: 'magneticRingPulse 2.5s ease-in-out infinite 0.8s reverse',
                 }}
               />
@@ -215,11 +215,15 @@ const Loader: React.FC<LoaderProps> = ({
               <h1 
                 className="text-4xl md:text-6xl font-bold tracking-wider"
                 style={{
-                  color: 'var(--brand-white)',
+                  background: 'linear-gradient(135deg, var(--brand-cream) 0%, var(--brand-light-gold) 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
                   textShadow: textVisible ? 
-                    `0 0 25px var(--brand-gold), 0 0 50px var(--brand-light-gold), 0 0 3px var(--brand-sky-blue)` : 
+                    `0 0 40px rgba(230, 184, 0, 0.8), 0 0 80px rgba(230, 184, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1)` : 
                     'none',
                   transition: 'text-shadow 0.8s ease-out',
+                  letterSpacing: '0.02em',
                 }}
               >
                 Pi Expertises
@@ -227,8 +231,11 @@ const Loader: React.FC<LoaderProps> = ({
               <p 
                 className="text-lg mt-2"
                 style={{
-                  color: 'var(--brand-white)',
-                  opacity: '0.8',
+                  color: 'rgba(74, 144, 226, 0.9)',
+                  opacity: textVisible ? 0.8 : 0,
+                  transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                  letterSpacing: '0.05em',
                 }}
               >
                 Your Security Experts
@@ -247,28 +254,28 @@ const Loader: React.FC<LoaderProps> = ({
             <div 
               className="relative h-3 rounded-full overflow-hidden"
               style={{
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: 'rgba(255, 255, 255, 0.4)',
                 backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                border: '1px solid rgba(74, 144, 226, 0.2)',
               }}
             >
               <div
                 className="absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-out"
                 style={{
                   width: `${progress}%`,
-                  background: `linear-gradient(90deg, var(--brand-sky-blue), var(--brand-gold))`,
-                  boxShadow: '0 0 16px var(--brand-gold)',
+                  background: `linear-gradient(90deg, var(--brand-blue), var(--brand-gold))`,
+                  boxShadow: '0 0 16px rgba(230, 184, 0, 0.6)',
                 }}
               />
             </div>
             
             <div className="flex justify-between items-center mt-3 text-sm">
-              <span style={{ color: 'var(--brand-white)', opacity: '0.7' }}>
+              <span style={{ color: 'rgba(74, 144, 226, 0.8)', opacity: '0.8' }}>
                 Establishing connections...
               </span>
               <span 
                 className="font-mono"
-                style={{ color: 'var(--brand-gold)' }}
+                style={{ color: 'var(--brand-blue)', fontWeight: '600' }}
               >
                 {Math.round(progress)}%
               </span>
@@ -293,20 +300,20 @@ const Loader: React.FC<LoaderProps> = ({
                 className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-500"
                 style={{
                   background: statusStates[key as keyof typeof statusStates] ? 
-                    'rgba(230, 184, 0, 0.2)' : 
-                    'rgba(74, 144, 226, 0.1)',
+                    'rgba(74, 144, 226, 0.15)' : 
+                    'rgba(255, 255, 255, 0.3)',
                   border: `1px solid ${statusStates[key as keyof typeof statusStates] ? 
-                    'var(--brand-gold)' : 
+                    'var(--brand-blue)' : 
                     'rgba(74, 144, 226, 0.3)'}`,
                   color: statusStates[key as keyof typeof statusStates] ? 
-                    'var(--brand-gold)' : 
-                    'var(--brand-white)',
+                    'var(--brand-blue)' : 
+                    'rgba(74, 144, 226, 0.6)',
                   boxShadow: statusStates[key as keyof typeof statusStates] ? 
-                    '0 0 12px rgba(230, 184, 0, 0.4)' : 
+                    '0 0 12px rgba(74, 144, 226, 0.3)' : 
                     'none',
                   backdropFilter: 'blur(8px)',
                   WebkitBackdropFilter: 'blur(8px)',
-                  opacity: statusStates[key as keyof typeof statusStates] ? '1' : '0.6',
+                  opacity: statusStates[key as keyof typeof statusStates] ? '1' : '0.7',
                 }}
               >
                 {label}
@@ -320,22 +327,22 @@ const Loader: React.FC<LoaderProps> = ({
           @keyframes magneticPulse {
             0%, 100% {
               transform: scale(1) rotate(0deg);
-              opacity: 0.08;
+              opacity: 0.05;
             }
             50% {
               transform: scale(1.15) rotate(180deg);
-              opacity: 0.15;
+              opacity: 0.12;
             }
           }
 
           @keyframes magneticRingPulse {
             0%, 100% {
               transform: scale(1);
-              opacity: 0.1;
+              opacity: 0.08;
             }
             50% {
               transform: scale(1.3);
-              opacity: 0.2;
+              opacity: 0.15;
             }
           }
 
