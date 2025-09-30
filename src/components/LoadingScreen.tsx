@@ -10,22 +10,22 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Smooth progress animation
+    // Smooth progress animation - adjusted for 5 second duration
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 2;
+        return prev + 1.25; // Slower increment for 5s total
       });
     }, 60);
 
-    // Start fade out after 3 seconds minimum
-    const fadeTimer = setTimeout(() => setFadeOut(true), 3000);
+    // Start fade out after 5 seconds minimum (increased from 3s)
+    const fadeTimer = setTimeout(() => setFadeOut(true), 5000);
     
-    // Complete loading after fade animation
-    const completeTimer = setTimeout(() => onComplete(), 4000);
+    // Complete loading after fade animation (increased from 4s to 6s)
+    const completeTimer = setTimeout(() => onComplete(), 6000);
 
     return () => {
       clearInterval(progressInterval);
@@ -58,14 +58,14 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           className="absolute top-20 left-20 w-32 h-32 rounded-full opacity-20"
           style={{
             background: 'radial-gradient(circle, #1d9bf0 0%, transparent 70%)',
-            animation: 'float 6s ease-in-out infinite',
+            animation: 'float 8s ease-in-out infinite',
           }}
         />
         <div 
           className="absolute bottom-32 right-32 w-40 h-40 rounded-full opacity-15"
           style={{
             background: 'radial-gradient(circle, #D4AF37 0%, transparent 70%)',
-            animation: 'float 8s ease-in-out infinite',
+            animation: 'float 10s ease-in-out infinite',
             animationDelay: '2s',
           }}
         />
@@ -73,7 +73,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full opacity-10"
           style={{
             background: 'radial-gradient(circle, #1d9bf0 0%, transparent 70%)',
-            animation: 'float 7s ease-in-out infinite',
+            animation: 'float 9s ease-in-out infinite',
             animationDelay: '4s',
           }}
         />
@@ -85,7 +85,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         <div 
           className="relative mb-12"
           style={{
-            animation: 'breathe 4s ease-in-out infinite',
+            animation: 'breathe 6s ease-in-out infinite',
           }}
         >
           {/* Glow effect behind logo */}
@@ -104,7 +104,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             style={{
               background: 'radial-gradient(circle, transparent 40%, #1d9bf0 70%, transparent 100%)',
               filter: 'blur(20px)',
-              animation: 'pulse 3s ease-in-out infinite',
+              animation: 'pulse 4s ease-in-out infinite',
             }}
           />
 
@@ -124,7 +124,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
               className="absolute inset-0 overflow-hidden rounded-full"
               style={{
                 background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)',
-                animation: 'shimmer 3s ease-in-out infinite',
+                animation: 'shimmer 4s ease-in-out infinite',
                 mixBlendMode: 'overlay',
               }}
             />
@@ -135,7 +135,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             className="absolute inset-0 rounded-full opacity-30"
             style={{
               border: '2px solid #1d9bf0',
-              animation: 'rotate 12s linear infinite',
+              animation: 'rotate 15s linear infinite',
               transform: 'scale(1.3)',
             }}
           >
@@ -185,7 +185,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                 className="absolute inset-0"
                 style={{
                   background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%)',
-                  animation: 'shimmer-bar 2s ease-in-out infinite',
+                  animation: 'shimmer-bar 2.5s ease-in-out infinite',
                 }}
               />
             </div>
