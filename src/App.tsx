@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Index from "./pages/Index";
 import SecurityConsulting from "./pages/SecurityConsulting";
 import MassEventManagement from "./pages/MassEventManagement";
@@ -22,6 +23,7 @@ const App = () => {
           <div>
             <Toaster />
             <Sonner />
+            <WhatsAppButton />
             <BrowserRouter
               future={{
                 v7_startTransition: true,

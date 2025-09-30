@@ -22,13 +22,13 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-primary border-t border-border">
-      {/* Gradient Fade Transition */}
+      {/* Gradient Fade Transition - Réduit et plus subtil */}
       <div 
         className="absolute top-0 left-0 right-0 pointer-events-none"
         style={{
-          height: '200px',
+          height: '100px',
           transform: 'translateY(-100%)',
-          background: 'linear-gradient(to bottom, transparent 0%, hsl(var(--primary)) 100%)',
+          background: 'linear-gradient(to bottom, transparent 0%, hsl(var(--primary) / 0.3) 70%, hsl(var(--primary)) 100%)',
         }}
       />
       
