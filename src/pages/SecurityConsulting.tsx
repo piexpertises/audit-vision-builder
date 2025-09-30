@@ -3,16 +3,41 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Shield, CheckCircle, Phone, Users, Target, Clock, Award } from 'lucide-react';
+import { Shield, Users, Target, Award, CheckCircle, MessageSquare, FileText, HeartHandshake, Globe, Clock, TrendingUp, Star } from 'lucide-react';
 import securityBg from '@/assets/security-hero-bg.jpg';
 import { useI18n } from '@/hooks/useI18n';
 import SEO from '@/components/SEO';
 
 const SecurityConsulting = () => {
   const { t, isRTL } = useI18n();
+  const whatsappUrl = "https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם";
+
+  const services = [
+    { icon: Users, title: t('security_consulting.service1_title'), desc: t('security_consulting.service1_desc') },
+    { icon: Shield, title: t('security_consulting.service2_title'), desc: t('security_consulting.service2_desc') },
+    { icon: Target, title: t('security_consulting.service3_title'), desc: t('security_consulting.service3_desc') },
+    { icon: Award, title: t('security_consulting.service4_title'), desc: t('security_consulting.service4_desc') },
+    { icon: Clock, title: t('security_consulting.service5_title'), desc: t('security_consulting.service5_desc') },
+    { icon: HeartHandshake, title: t('security_consulting.service6_title'), desc: t('security_consulting.service6_desc') },
+  ];
+
+  const processSteps = [
+    { num: "01", title: t('security_consulting.process_step1_title'), desc: t('security_consulting.process_step1_desc'), icon: MessageSquare },
+    { num: "02", title: t('security_consulting.process_step2_title'), desc: t('security_consulting.process_step2_desc'), icon: FileText },
+    { num: "03", title: t('security_consulting.process_step3_title'), desc: t('security_consulting.process_step3_desc'), icon: Target },
+    { num: "04", title: t('security_consulting.process_step4_title'), desc: t('security_consulting.process_step4_desc'), icon: HeartHandshake },
+  ];
+
+  const reasons = [
+    { icon: Award, text: t('security_consulting.reason1') },
+    { icon: Users, text: t('security_consulting.reason2') },
+    { icon: Target, text: t('security_consulting.reason3') },
+    { icon: Shield, text: t('security_consulting.reason4') },
+    { icon: Globe, text: t('security_consulting.reason5') },
+  ];
 
   return (
-    <div className="min-h-screen bg-white" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEO 
         title={`${t('security_consulting.title')} | Pi Expertises`}
         description={t('security_consulting.intro')}
@@ -24,38 +49,45 @@ const SecurityConsulting = () => {
       <main>
         {/* Hero Section */}
         <section 
-          className="relative pt-32 pb-24 min-h-[70vh] flex items-center justify-center overflow-hidden"
+          className="relative pt-32 pb-24 min-h-[75vh] flex items-center justify-center overflow-hidden"
           style={{
-            backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.85), rgba(13, 27, 42, 0.75)), url(${securityBg})`,
+            backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.88), rgba(27, 73, 101, 0.85)), url(${securityBg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           }}
         >
-          <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-gray-50/30 to-gray-50 z-10 pointer-events-none" />
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/30 to-background z-10 pointer-events-none" />
           
-          <div className="container mx-auto px-4 text-center relative z-10">
-            <div className="max-w-4xl mx-auto">
-              <div className="mb-8">
-                <div className="w-20 h-20 bg-gradient-to-r from-[#1d9bf0] to-[#0284c7] rounded-full flex items-center justify-center mx-auto shadow-2xl mb-8">
-                  <Shield className="text-white" size={40} />
+          <div className="container mx-auto px-4 text-center relative z-20">
+            <div className="max-w-5xl mx-auto">
+              <div className="mb-8 animate-zoom-in">
+                <div className="w-24 h-24 bg-gradient-to-br from-primary via-primary/80 to-accent rounded-2xl flex items-center justify-center mx-auto shadow-2xl hover-glow rotate-3 hover:rotate-0 transition-transform duration-500">
+                  <Shield className="text-white" size={48} />
                 </div>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 text-white leading-tight animate-fade-up">
                 {t('security_consulting.title')}
               </h1>
               
-              <p className="text-xl md:text-2xl mb-12 text-gray-200 font-light">
+              <p className="text-xl md:text-3xl mb-12 text-gray-100 font-light leading-relaxed animate-fade-up" style={{ animationDelay: '0.1s' }}>
                 {t('security_consulting.subtitle')}
               </p>
               
               <Button 
-                className="bg-[#1d9bf0] hover:bg-[#0284c7] text-white border-0 rounded-full px-10 py-4 font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white border-0 rounded-full px-12 py-6 font-bold text-lg shadow-2xl hover:shadow-glow transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 animate-fade-up"
+                style={{ animationDelay: '0.2s' }}
                 asChild
               >
                 <a 
-                  href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -67,15 +99,10 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Introduction Section */}
-        <section className="relative py-20 bg-gray-50">
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
+        <section className="relative py-24 bg-gradient-to-b from-background via-secondary/20 to-background">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#0d1b2a]">
-                {t('security_consulting.intro_title')}
-              </h2>
-              <div className="w-24 h-1 bg-[#1d9bf0] mx-auto mb-8"></div>
-              <p className="text-lg leading-relaxed text-gray-700 max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto text-center">
+              <p className="text-lg md:text-xl leading-relaxed text-foreground max-w-5xl mx-auto animate-fade-up">
                 {t('security_consulting.intro')}
               </p>
             </div>
@@ -83,36 +110,41 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Why Choose Us Section */}
-        <section className="relative py-20 bg-white">
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-gray-50 pointer-events-none" />
+        <section className="relative py-24 bg-gradient-to-b from-background to-secondary/30">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#0d1b2a]">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground animate-fade-up">
                 {t('security_consulting.why_title')}
               </h2>
-              <div className="w-24 h-1 bg-[#1d9bf0] mx-auto mb-16"></div>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
               
-              <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-12 shadow-lg">
-                <p className="text-lg leading-relaxed text-gray-700 text-center mb-12">
+              <div className="bg-gradient-to-br from-card via-secondary/30 to-card rounded-3xl p-8 md:p-16 shadow-card hover-glow border border-border/50 backdrop-blur-sm">
+                <p className="text-lg md:text-xl leading-relaxed text-foreground/90 text-center mb-16">
                   {t('security_consulting.why_desc')}
                 </p>
                 
                 {/* Key Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                  <div className="space-y-4">
-                    <Award className="w-12 h-12 text-[#1d9bf0] mx-auto" />
-                    <div className="text-3xl font-bold text-[#0d1b2a]">20+</div>
-                    <div className="text-gray-600 font-medium">{t('hero.stats.experience')}</div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                  <div className="space-y-4 group animate-fade-up" style={{ animationDelay: '0.1s' }}>
+                    <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-primary/70 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Award className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">20+</div>
+                    <div className="text-muted-foreground font-semibold text-lg">{t('hero.stats.experience')}</div>
                   </div>
-                  <div className="space-y-4">
-                    <Users className="w-12 h-12 text-[#1d9bf0] mx-auto" />
-                    <div className="text-3xl font-bold text-[#0d1b2a]">500+</div>
-                    <div className="text-gray-600 font-medium">{t('hero.stats.clients')}</div>
+                  <div className="space-y-4 group animate-fade-up" style={{ animationDelay: '0.2s' }}>
+                    <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-primary/70 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">500+</div>
+                    <div className="text-muted-foreground font-semibold text-lg">{t('hero.stats.clients')}</div>
                   </div>
-                  <div className="space-y-4">
-                    <Target className="w-12 h-12 text-[#1d9bf0] mx-auto" />
-                    <div className="text-3xl font-bold text-[#0d1b2a]">200+</div>
-                    <div className="text-gray-600 font-medium">{t('hero.stats.projects')}</div>
+                  <div className="space-y-4 group animate-fade-up" style={{ animationDelay: '0.3s' }}>
+                    <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-primary/70 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Target className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">200+</div>
+                    <div className="text-muted-foreground font-semibold text-lg">{t('hero.stats.projects')}</div>
                   </div>
                 </div>
               </div>
@@ -121,30 +153,32 @@ const SecurityConsulting = () => {
         </section>
 
         {/* Services Section */}
-        <section className="relative py-20 bg-gray-50">
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-white pointer-events-none" />
+        <section className="relative py-24 bg-gradient-to-b from-secondary/30 to-background">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#0d1b2a]">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
                 {t('security_consulting.services_title')}
               </h2>
-              <div className="w-24 h-1 bg-[#1d9bf0] mx-auto mb-16"></div>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-20"></div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {[1, 2, 3, 4].map((num) => (
-                  <Card key={num} className="hover:shadow-lg transition-all duration-300">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {services.map((service, idx) => (
+                  <Card 
+                    key={idx} 
+                    className="hover-lift group border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 overflow-hidden"
+                  >
                     <CardContent className="p-8">
-                      <div className="flex items-start gap-4">
-                        <CheckCircle className="w-6 h-6 text-[#1d9bf0] flex-shrink-0 mt-1" />
-                        <div>
-                          <h3 className="text-xl font-semibold mb-3 text-[#0d1b2a]">
-                            {t(`security_consulting.service${num}_title`)}
-                          </h3>
-                          <p className="text-gray-600 leading-relaxed">
-                            {t(`security_consulting.service${num}_desc`)}
-                          </p>
+                      <div className="mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <service.icon className="w-8 h-8 text-primary" />
                         </div>
                       </div>
+                      <h3 className="text-xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors duration-300">
+                        {service.title}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {service.desc}
+                      </p>
                     </CardContent>
                   </Card>
                 ))}
@@ -153,30 +187,163 @@ const SecurityConsulting = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="relative py-20 bg-gradient-to-r from-[#0d1b2a] to-[#1b4965]">
-          <div className="container mx-auto px-4 text-center">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                {t('contact.title')}
+        {/* Expert Section */}
+        <section className="relative py-24 bg-gradient-to-b from-background to-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
+                {t('security_consulting.expert_title')}
               </h2>
-              <p className="text-xl mb-8 text-gray-200">
-                {t('contact.subtitle')}
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
+              
+              <div className="bg-gradient-to-br from-card to-secondary/30 rounded-3xl p-8 md:p-12 shadow-card border border-border/50">
+                <p className="text-lg md:text-xl leading-relaxed text-foreground/90 text-center">
+                  {t('security_consulting.expert_desc')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Process Timeline Section */}
+        <section className="relative py-24 bg-gradient-to-b from-secondary/20 to-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
+                {t('security_consulting.process_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-20"></div>
+
+              <div className="relative">
+                {/* Vertical Line */}
+                <div className={`absolute ${isRTL ? 'right-8 md:right-1/2 md:mr-0.5' : 'left-8 md:left-1/2 md:ml-0.5'} top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-primary hidden md:block`}></div>
+
+                <div className="space-y-16">
+                  {processSteps.map((step, idx) => (
+                    <div 
+                      key={idx} 
+                      className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${
+                        idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                      }`}
+                    >
+                      {/* Number Badge */}
+                      <div className={`flex-shrink-0 ${idx % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'} ${isRTL && idx % 2 === 0 ? 'md:mr-auto md:ml-0' : ''} ${isRTL && idx % 2 !== 0 ? 'md:ml-auto md:mr-0' : ''}`}>
+                        <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-lg relative z-10">
+                          <span className="text-2xl font-bold text-white">{step.num}</span>
+                        </div>
+                      </div>
+
+                      {/* Content Card */}
+                      <Card className={`flex-1 hover-lift border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 ${
+                        idx % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'
+                      } ${isRTL && idx % 2 === 0 ? 'md:ml-auto md:mr-0' : ''} ${isRTL && idx % 2 !== 0 ? 'md:mr-auto md:ml-0' : ''}`}>
+                        <CardContent className="p-8">
+                          <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                              <step.icon className="w-6 h-6 text-primary" />
+                            </div>
+                            <div>
+                              <h3 className="text-xl md:text-2xl font-bold mb-3 text-foreground">
+                                {step.title}
+                              </h3>
+                              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                                {step.desc}
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="relative py-24 bg-gradient-to-br from-foreground via-foreground/95 to-primary/20 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+                {t('security_consulting.cta_title')}
+              </h2>
+              <p className="text-lg md:text-xl mb-10 text-gray-100 leading-relaxed">
+                {t('security_consulting.cta_desc')}
               </p>
               <Button 
                 size="lg"
-                className="bg-[#1d9bf0] hover:bg-[#0284c7] text-white px-10 py-4 text-lg rounded-full shadow-xl"
+                className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white px-12 py-6 text-xl rounded-full shadow-2xl hover:shadow-glow transform hover:-translate-y-1 hover:scale-105 transition-all duration-300"
                 asChild
               >
                 <a 
-                  href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Phone className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5`} />
-                  {t('contact.call_now')}
+                  {t('nav.contact')}
                 </a>
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Reasons Section */}
+        <section className="relative py-24 bg-gradient-to-b from-background to-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 text-foreground">
+                {t('security_consulting.reasons_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {reasons.map((reason, idx) => (
+                  <Card 
+                    key={idx} 
+                    className="hover-lift group border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-all duration-300"
+                  >
+                    <CardContent className="p-8 flex items-center gap-6">
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <reason.icon className="w-8 h-8 text-primary" />
+                      </div>
+                      <p className="text-lg font-semibold text-foreground">
+                        {reason.text}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Clients Section */}
+        <section className="relative py-24 bg-gradient-to-b from-secondary/20 to-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto text-center">
+              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-foreground">
+                {t('security_consulting.clients_title')}
+              </h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-16"></div>
+
+              <div className="bg-gradient-to-br from-card to-secondary/30 rounded-3xl p-8 md:p-12 shadow-card border border-border/50">
+                <p className="text-lg md:text-xl leading-relaxed text-foreground/90">
+                  {t('security_consulting.clients_desc')}
+                </p>
+                
+                {/* Star Rating */}
+                <div className="flex justify-center gap-2 mt-8">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-8 h-8 fill-accent text-accent" />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
