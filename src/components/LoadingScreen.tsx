@@ -23,65 +23,88 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
   return (
     <div 
-      className={`fixed inset-0 z-[9999] transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[9999] transition-opacity duration-400 ${
         fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
       style={{
-        background: 'linear-gradient(135deg, #0D1B2A 0%, #1b4965 50%, #1d9bf0 100%)',
+        backgroundColor: 'rgba(13, 27, 42, 0.75)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
       }}
     >
-      {/* Subtle overlay for depth */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'radial-gradient(circle at center, transparent 0%, rgba(13, 27, 42, 0.3) 100%)',
-        }}
-      />
-
       {/* Main content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
-        {/* Logo with gentle animation */}
-        <div 
-          className="relative mb-8"
-          style={{
-            animation: 'gentleBreath 4s ease-in-out infinite',
-          }}
-        >
-          {/* Soft glow behind logo */}
+        
+        {/* Logo with circular loader */}
+        <div className="relative flex items-center justify-center">
+          
+          {/* Circular loader ring */}
           <div 
-            className="absolute inset-0"
+            className="absolute inset-0 flex items-center justify-center"
             style={{
-              background: 'radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%)',
-              filter: 'blur(30px)',
-              transform: 'scale(1.5)',
+              width: '160px',
+              height: '160px',
             }}
-          />
+          >
+            <svg 
+              className="w-full h-full"
+              viewBox="0 0 100 100"
+              style={{
+                animation: 'rotate 2.5s linear infinite',
+              }}
+            >
+              {/* Background circle */}
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.1)"
+                strokeWidth="2"
+              />
+              {/* Animated circle */}
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                fill="none"
+                stroke="#1d9bf0"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeDasharray="283"
+                strokeDashoffset="70"
+                style={{
+                  filter: 'drop-shadow(0 0 8px rgba(29, 155, 240, 0.6))',
+                }}
+              />
+            </svg>
+          </div>
 
           {/* Logo */}
-          <div className="relative w-[100px] h-[100px] md:w-[140px] md:h-[140px] flex items-center justify-center">
+          <div className="relative w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center z-10">
             <img 
               src={logoImage}
               alt="Pi Expertises"
               className="w-full h-full object-contain"
               style={{
-                filter: 'drop-shadow(0 4px 12px rgba(212, 175, 55, 0.25))',
+                filter: 'drop-shadow(0 4px 16px rgba(212, 175, 55, 0.3))',
               }}
             />
           </div>
         </div>
 
         {/* Company name */}
-        <div className="text-center">
+        <div className="text-center mt-12">
           <h1 
-            className="text-3xl md:text-4xl font-bold text-white mb-2"
+            className="text-2xl md:text-3xl font-bold text-white mb-2"
             style={{
-              textShadow: '0 2px 20px rgba(255, 255, 255, 0.1)',
+              textShadow: '0 2px 20px rgba(255, 255, 255, 0.2)',
               letterSpacing: '0.05em',
             }}
           >
             Pi Expertises
           </h1>
-          <p className="text-base md:text-lg text-white/80 font-light">
+          <p className="text-sm md:text-base text-white/80 font-light">
             מומחי הביטחון שלכם
           </p>
         </div>
@@ -89,14 +112,12 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
       {/* CSS Animation */}
       <style>{`
-        @keyframes gentleBreath {
-          0%, 100% {
-            transform: scale(1);
-            opacity: 1;
+        @keyframes rotate {
+          0% {
+            transform: rotate(0deg);
           }
-          50% {
-            transform: scale(1.05);
-            opacity: 0.95;
+          100% {
+            transform: rotate(360deg);
           }
         }
       `}</style>
