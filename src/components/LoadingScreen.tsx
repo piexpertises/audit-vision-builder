@@ -37,19 +37,19 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           setStatusText('finalizing');
         }
         
-        return prev + Math.random() * 3 + 1;
+        return prev + Math.random() * 4 + 2;
       });
-    }, 80);
+    }, 60);
 
-    // Minimum display time of 6 seconds
+    // Reduced display time to 3.5 seconds
     const timer = setTimeout(() => {
       setFadeOut(true);
-    }, 5500);
+    }, 3200);
 
     // Call onComplete after fade-out transition completes
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 6000);
+    }, 3600);
 
     return () => {
       clearTimeout(timer);
