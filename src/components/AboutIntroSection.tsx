@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useI18n } from '@/hooks/useI18n';
-import steveProfile from '@/assets/steve-profile-2025.png';
+import steveProfile from '@/assets/steve-belhasen-profile.jpg';
 
 const AboutIntroSection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
