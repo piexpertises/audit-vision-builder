@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import heroImage from '@/assets/hero-security.jpg';
+import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
+import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
+import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
 const HeroSection = () => {
   const {
     t,
     isRTL
   } = useLanguage();
+  
+  // Carousel state
+  const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
+  
   const stats = [{
     icon: Shield,
     label: 'Years Experience',
@@ -22,10 +38,25 @@ const HeroSection = () => {
     value: '200+'
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Carousel with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img src={heroImage} alt="Professional Security Consultation" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80" />
+        {carouselImages.map((image, index) => (
+          <div
+            key={index}
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{
+              opacity: currentImageIndex === index ? 1 : 0,
+              zIndex: currentImageIndex === index ? 1 : 0
+            }}
+          >
+            <img 
+              src={image} 
+              alt={`Security Professional ${index + 1}`} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
       </div>
 
       {/* Animated Background Elements */}
