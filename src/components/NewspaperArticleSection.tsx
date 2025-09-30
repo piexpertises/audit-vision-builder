@@ -12,16 +12,16 @@ const NewspaperArticleSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#D4AF37' }}>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#D4AF37]">
               כתבה בעיתון כלכלי
             </h2>
-            <div className="w-24 h-1 mx-auto" style={{ backgroundColor: '#D4AF37' }}></div>
+            <div className="w-24 h-1 bg-[#D4AF37] mx-auto"></div>
           </div>
           
           <Card className={`bg-card border border-border/20 shadow-lg hover-lift transition-all duration-1000 delay-200 ${isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'}`}>
             <CardContent className="p-8 md:p-12">
               <div className={`space-y-8 text-foreground leading-relaxed transition-all duration-1000 delay-400 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-5'}`}>
-                <h3 className="text-2xl md:text-3xl font-bold text-center mb-8" style={{ color: '#D4AF37' }}>
+                <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-[#D4AF37]">
                   "פאי אקספרטיס – המומחים שלכם בביטחון"
                 </h3>
                 
@@ -30,7 +30,7 @@ const NewspaperArticleSection = () => {
                 </p>
 
                 <div>
-                  <h4 className="text-xl font-bold mb-4" style={{ color: '#D4AF37' }}>
+                  <h4 className="text-xl font-bold mb-4 text-[#D4AF37]">
                     החזון שמאחורי פאי אקספרטיס
                   </h4>
                   <p>
@@ -39,7 +39,7 @@ const NewspaperArticleSection = () => {
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-bold mb-4" style={{ color: '#D4AF37' }}>
+                  <h4 className="text-xl font-bold mb-4 text-[#D4AF37]">
                     מה הופך את פאי אקספרטיס לבחירה המובילה?
                   </h4>
                   <p>
@@ -51,7 +51,7 @@ const NewspaperArticleSection = () => {
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-bold mb-4" style={{ color: '#D4AF37' }}>
+                  <h4 className="text-xl font-bold mb-4 text-[#D4AF37]">
                     שירותים שמספקים שקט נפשי
                   </h4>
                   <p>פאי אקספרטיס מציעה מגוון רחב של שירותים, הכוללים:</p>
@@ -65,7 +65,7 @@ const NewspaperArticleSection = () => {
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-bold mb-4" style={{ color: '#D4AF37' }}>
+                  <h4 className="text-xl font-bold mb-4 text-[#D4AF37]">
                     ניהול אירועים המוניים – מנגישים בטיחות ברמה הגבוהה ביותר
                   </h4>
                   <p>
@@ -74,7 +74,7 @@ const NewspaperArticleSection = () => {
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-bold mb-4" style={{ color: '#D4AF37' }}>
+                  <h4 className="text-xl font-bold mb-4 text-[#D4AF37]">
                     הבטחה לשירות יוצא דופן
                   </h4>
                   <p>
@@ -89,7 +89,7 @@ const NewspaperArticleSection = () => {
                 </div>
 
                 <div className="text-center pt-8 border-t border-border/20">
-                  <p className="text-lg font-semibold" style={{ color: '#D4AF37' }}>
+                  <p className="text-lg font-semibold text-[#D4AF37]">
                     מעוניינים להבטיח את הביטחון שלכם? צרו קשר עם פאי אקספרטיס – כי על ביטחון לא מתפשרים.
                   </p>
                 </div>

@@ -164,5 +164,10 @@
     "description": "Conseil expert en sécurité, protection VIP, et services d'intervention d'urgence par le Lieutenant-Colonel Steve Belhasen. Solutions de sécurité professionnelles en Israël.",
     "og_title": "Pi Expertises - Services de Conseil en Sécurité Professionnels",
     "og_description": "Conseil expert en sécurité, protection VIP, et services d'intervention d'urgence par le Lieutenant-Colonel Steve Belhasen. Solutions de sécurité professionnelles en Israël."
+  },
+  "error": {
+    "pageNotFound": "Page Non Trouvée",
+    "pageNotFoundDesc": "La page que vous recherchez n'existe pas.",
+    "returnHome": "Retour à l'Accueil"
   }
 }

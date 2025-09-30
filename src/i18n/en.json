@@ -164,5 +164,10 @@
     "description": "Expert security consulting, VIP protection, and emergency response services by Lt. Col. Steve Belhasen. Professional security solutions in Israel.",
     "og_title": "Pi Expertises - Professional Security Consulting Services",
     "og_description": "Expert security consulting, VIP protection, and emergency response services by Lt. Col. Steve Belhasen. Professional security solutions in Israel."
+  },
+  "error": {
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundDesc": "The page you are looking for does not exist.",
+    "returnHome": "Return to Home"
   }
 }

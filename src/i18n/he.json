@@ -164,5 +164,10 @@
     "description": "Pi Expertises: Professional security consulting, VIP protection, and emergency response services. Founded by Lt. Col. Steve Belhasen. Expert security solutions in Israel.",
     "og_title": "Pi Expertises - Professional Security Consulting Services",
     "og_description": "Expert security consulting, VIP protection, and emergency response services by Lt. Col. Steve Belhasen. Professional security solutions in Israel."
+  },
+  "error": {
+    "pageNotFound": "הדף לא נמצא",
+    "pageNotFoundDesc": "הדף שאתה מחפש אינו קיים.",
+    "returnHome": "חזרה לעמוד הבית"
   }
 }

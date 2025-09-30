@@ -32,7 +32,12 @@ const App = () => {
           <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
             <Toaster />
             <Sonner />
-            <BrowserRouter>
+            <BrowserRouter
+              future={{
+                v7_startTransition: true,
+                v7_relativeSplatPath: true,
+              }}
+            >
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/security-consulting" element={<SecurityConsulting />} />
