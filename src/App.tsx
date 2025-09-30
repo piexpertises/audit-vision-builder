@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import LoadingScreen from "@/components/LoadingScreen";
 import Index from "./pages/Index";
 import SecurityConsulting from "./pages/SecurityConsulting";
 import MassEventManagement from "./pages/MassEventManagement";
@@ -16,20 +15,11 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
-
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-    setTimeout(() => setShowContent(true), 100);
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <TooltipProvider>
-          {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
-          <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+          <div>
             <Toaster />
             <Sonner />
             <BrowserRouter
