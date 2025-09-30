@@ -175,49 +175,55 @@ const Header = () => {
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
           <div className="fixed inset-0 z-[9998] lg:hidden">
-            {/* Backdrop with light blur */}
+            {/* Backdrop */}
             <div 
-              className="absolute inset-0 bg-primary/20 animate-fade-in"
+              className="absolute inset-0 animate-fade-in"
               style={{
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)'
+                background: 'rgba(13, 27, 42, 0.3)',
+                backdropFilter: 'blur(6px)',
+                WebkitBackdropFilter: 'blur(6px)'
               }}
               onClick={() => setIsMenuOpen(false)}
             />
             
-            {/* Glass Menu Panel */}
+            {/* Brand Glass Drawer */}
             <div 
               className={`absolute top-0 ${isRTL ? 'right-0' : 'left-0'} h-full w-full max-w-sm ${
                 isRTL ? 'animate-slide-in-right' : 'animate-slide-in-left'
               }`}
               style={{
-                background: 'linear-gradient(180deg, rgba(13, 27, 42, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%)',
-                backdropFilter: 'blur(10px)',
-                WebkitBackdropFilter: 'blur(10px)',
-                borderRadius: isRTL ? '0 0 0 24px' : '0 0 24px 0',
-                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 0 0 1px rgba(212, 175, 55, 0.1)'
+                background: 'linear-gradient(180deg, rgba(13,27,42,0.94) 0%, rgba(13,27,42,0.88) 50%, rgba(29,155,240,0.35) 100%)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                borderRadius: isRTL ? '0 0 0 16px' : '0 0 16px 0',
+                boxShadow: '0 6px 28px rgba(0, 0, 0, 0.25)'
               }}
             >
-              {/* Subtle top gradient highlight */}
-              <div 
-                className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, transparent 100%)'
-                }}
-              />
-              
               <div className="relative h-full overflow-y-auto overscroll-contain flex flex-col">
                 {/* Header */}
                 <div className={`flex items-center justify-between p-6 border-b ${isRTL ? 'flex-row-reverse' : ''}`}
-                  style={{ borderColor: 'rgba(212, 175, 55, 0.15)' }}>
+                  style={{ borderColor: 'rgba(212, 175, 55, 0.20)' }}>
                   <img 
                     src={logoImage} 
                     alt="Pi Expertises" 
-                    className="h-10 w-auto drop-shadow-lg"
+                    className="h-9 w-auto"
+                    style={{ filter: 'drop-shadow(0 2px 8px rgba(212, 175, 55, 0.3))' }}
                   />
                   <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="p-2 text-foreground/80 hover:text-[#D4AF37] transition-all duration-200 rounded-lg hover:bg-white/10"
+                    className="p-2 transition-all duration-200 rounded-lg"
+                    style={{ 
+                      color: '#FFFFFF',
+                      background: 'transparent'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#D4AF37';
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#FFFFFF';
+                      e.currentTarget.style.background = 'transparent';
+                    }}
                     aria-label="Close menu"
                   >
                     <X size={28} strokeWidth={2.5} />
@@ -234,33 +240,38 @@ const Header = () => {
                           key={item.key}
                           to={item.href}
                           onClick={handleMenuItemClick}
-                          className={`block px-5 py-4 rounded-xl text-lg font-semibold transition-all duration-200 relative overflow-hidden group ${
-                            isActive
-                              ? 'text-[#D4AF37] bg-gradient-to-r from-[#FFD700]/15 to-[#D4AF37]/15'
-                              : 'text-white hover:text-transparent hover:bg-clip-text'
+                          className={`block px-5 py-4 rounded-xl text-lg font-semibold transition-all duration-200 relative ${
+                            isActive ? '' : ''
                           }`}
-                          style={!isActive ? {
-                            backgroundImage: 'linear-gradient(90deg, #FFD700, #D4AF37)',
-                            backgroundClip: 'text',
-                            WebkitBackgroundClip: 'text',
-                            webkitTextFillColor: isActive ? '#D4AF37' : '#FFFFFF'
-                          } as React.CSSProperties : {}}
+                          style={{
+                            color: isActive ? '#D4AF37' : '#FFFFFF',
+                            background: isActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
+                            borderLeft: !isRTL && isActive ? '3px solid #D4AF37' : !isRTL ? '3px solid transparent' : 'none',
+                            borderRight: isRTL && isActive ? '3px solid #D4AF37' : isRTL ? '3px solid transparent' : 'none'
+                          }}
                           onMouseEnter={(e) => {
                             if (!isActive) {
-                              (e.currentTarget.style as any).webkitTextFillColor = 'transparent';
-                              e.currentTarget.style.textShadow = '0 0 20px rgba(255, 215, 0, 0.5)';
+                              e.currentTarget.style.color = '#D4AF37';
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                              if (isRTL) {
+                                e.currentTarget.style.borderRight = '3px solid #D4AF37';
+                              } else {
+                                e.currentTarget.style.borderLeft = '3px solid #D4AF37';
+                              }
                             }
                           }}
                           onMouseLeave={(e) => {
                             if (!isActive) {
-                              (e.currentTarget.style as any).webkitTextFillColor = '#FFFFFF';
-                              e.currentTarget.style.textShadow = 'none';
+                              e.currentTarget.style.color = '#FFFFFF';
+                              e.currentTarget.style.background = 'transparent';
+                              if (isRTL) {
+                                e.currentTarget.style.borderRight = '3px solid transparent';
+                              } else {
+                                e.currentTarget.style.borderLeft = '3px solid transparent';
+                              }
                             }
                           }}
                         >
-                          {isActive && (
-                            <div className={`absolute bottom-2 ${isRTL ? 'right-5' : 'left-5'} w-12 h-1 bg-gradient-to-r from-[#FFD700] to-[#D4AF37] rounded-full`} />
-                          )}
                           {t(item.key)}
                         </Link>
                       ) : (
@@ -268,20 +279,30 @@ const Header = () => {
                           key={item.key}
                           href={item.href}
                           onClick={handleMenuItemClick}
-                          className="block px-5 py-4 rounded-xl text-lg font-semibold text-white hover:text-transparent hover:bg-clip-text transition-all duration-200"
+                          className="block px-5 py-4 rounded-xl text-lg font-semibold transition-all duration-200"
                           style={{
-                            backgroundImage: 'linear-gradient(90deg, #FFD700, #D4AF37)',
-                            backgroundClip: 'text',
-                            WebkitBackgroundClip: 'text',
-                            webkitTextFillColor: '#FFFFFF'
-                          } as React.CSSProperties}
+                            color: '#FFFFFF',
+                            background: 'transparent',
+                            borderLeft: !isRTL ? '3px solid transparent' : 'none',
+                            borderRight: isRTL ? '3px solid transparent' : 'none'
+                          }}
                           onMouseEnter={(e) => {
-                            (e.currentTarget.style as any).webkitTextFillColor = 'transparent';
-                            e.currentTarget.style.textShadow = '0 0 20px rgba(255, 215, 0, 0.5)';
+                            e.currentTarget.style.color = '#D4AF37';
+                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                            if (isRTL) {
+                              e.currentTarget.style.borderRight = '3px solid #D4AF37';
+                            } else {
+                              e.currentTarget.style.borderLeft = '3px solid #D4AF37';
+                            }
                           }}
                           onMouseLeave={(e) => {
-                            (e.currentTarget.style as any).webkitTextFillColor = '#FFFFFF';
-                            e.currentTarget.style.textShadow = 'none';
+                            e.currentTarget.style.color = '#FFFFFF';
+                            e.currentTarget.style.background = 'transparent';
+                            if (isRTL) {
+                              e.currentTarget.style.borderRight = '3px solid transparent';
+                            } else {
+                              e.currentTarget.style.borderLeft = '3px solid transparent';
+                            }
                           }}
                         >
                           {t(item.key)}
@@ -293,9 +314,10 @@ const Header = () => {
 
                 {/* Bottom Section */}
                 <div className="px-6 pb-8 space-y-6 border-t"
-                  style={{ borderColor: 'rgba(212, 175, 55, 0.15)' }}>
+                  style={{ borderColor: 'rgba(255, 255, 255, 0.10)' }}>
                   {/* Language Title */}
-                  <p className={`text-sm text-foreground/60 font-medium pt-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+                  <p className={`text-sm font-medium pt-6 ${isRTL ? 'text-right' : 'text-left'}`}
+                    style={{ color: 'rgba(255, 255, 255, 0.80)' }}>
                     {language === 'he' ? 'בחר שפה' : language === 'en' ? 'Select Language' : 'Choisir la langue'}
                   </p>
                   
@@ -308,11 +330,24 @@ const Header = () => {
                           setLanguage(lang.code);
                           handleMenuItemClick();
                         }}
-                        className={`py-3 rounded-xl text-sm font-semibold transition-all duration-200 backdrop-blur-sm ${
-                          language === lang.code
-                            ? 'bg-gradient-to-r from-[#FFD700] to-[#D4AF37] text-primary shadow-lg'
-                            : 'bg-white/20 text-foreground hover:bg-white/30'
-                        }`}
+                        className="py-3 rounded-xl text-sm font-semibold transition-all duration-200"
+                        style={{
+                          background: language === lang.code ? '#D4AF37' : 'rgba(13, 27, 42, 0.6)',
+                          color: language === lang.code ? '#0A0A0A' : '#FFFFFF',
+                          border: language === lang.code ? 'none' : '1px solid rgba(255, 255, 255, 0.18)'
+                        }}
+                        onMouseEnter={(e) => {
+                          if (language !== lang.code) {
+                            e.currentTarget.style.background = 'rgba(13, 27, 42, 0.8)';
+                            e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (language !== lang.code) {
+                            e.currentTarget.style.background = 'rgba(13, 27, 42, 0.6)';
+                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)';
+                          }
+                        }}
                       >
                         <div className="flex flex-col items-center gap-1">
                           <span className="text-xl">{lang.flag}</span>
@@ -328,7 +363,19 @@ const Header = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleMenuItemClick}
-                    className="flex items-center justify-center gap-3 w-full py-4 bg-gradient-to-r from-[#FFD700] to-[#D4AF37] hover:from-[#D4AF37] hover:to-[#FFD700] text-primary rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]"
+                    className="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg"
+                    style={{
+                      background: '#D4AF37',
+                      color: '#0A0A0A'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#C79C2E';
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = '#D4AF37';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
                   >
                     <Phone size={22} />
                     {t('nav.contact')}
@@ -338,7 +385,14 @@ const Header = () => {
                   <a
                     href="tel:+972505730072"
                     onClick={handleMenuItemClick}
-                    className="block text-center text-foreground/70 hover:text-[#D4AF37] text-sm transition-colors"
+                    className="block text-center text-sm transition-colors"
+                    style={{ color: 'rgba(255, 255, 255, 0.80)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#D4AF37';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.80)';
+                    }}
                   >
                     {t('nav.phone')}
                   </a>
