@@ -160,7 +160,7 @@ const Header = () => {
               asChild
             >
               <a 
-                href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
+                href={`https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -370,7 +370,7 @@ const Header = () => {
 
                   {/* WhatsApp CTA */}
                   <a
-                    href="https://wa.me/972507300720?text=שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם"
+                    href={`https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleMenuItemClick}

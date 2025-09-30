@@ -1,18 +1,18 @@
 import React from 'react';
+import { useI18n } from '@/hooks/useI18n';
 
 const WhatsAppButton = () => {
+  const { t } = useI18n();
   const whatsappNumber = '972507300720';
-  const defaultMessage = 'שלום+אני+מעוניין+לקבל+פרטים+נוספים+על+השירותים+שלכם';
-  
-  
+  const message = encodeURIComponent(t('navigation.whatsapp_message'));
   
   return (
     <a
-      href={`https://wa.me/${whatsappNumber}?text=${defaultMessage}`}
+      href={`https://wa.me/${whatsappNumber}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 animate-pulse"
-      aria-label="Contactez-nous sur WhatsApp"
+      aria-label={t('navigation.contact')}
     >
       <svg
         viewBox="0 0 24 24"
