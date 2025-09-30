@@ -113,9 +113,14 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
-                <span className="text-foreground/80">
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Mevaseret+Zion,+Israel" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/80 hover:text-accent transition-colors duration-300"
+                >
                   Mevaseret Zion, Israel
-                </span>
+                </a>
               </div>
             </div>
 
