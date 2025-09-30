@@ -1,22 +1,21 @@
-# Welcome to your Lovable project
+# Pi Expertises - Professional Security Consulting
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/e323b844-9774-424f-89a1-e60e14046516
+**Company**: Pi Expertises (פאי אקספרטיס)
+**Website**: https://pi-expertises.com
+
+## About
+
+This is the official website for Pi Expertises, a professional security consulting firm founded by Lt. Col. Steve Belhasen.
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/e323b844-9774-424f-89a1-e60e14046516) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +61,10 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/e323b844-9774-424f-89a1-e60e14046516) and click on Share -> Publish.
+Simply run `npm run build` to create a production build, then deploy the `dist` folder to your hosting service.
 
-## Can I connect a custom domain to my Lovable project?
+## Contact
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+For questions or inquiries, please contact Pi Expertises:
+- Phone: +972-50-730-0720
+- Email: pi.expertises@gmail.com

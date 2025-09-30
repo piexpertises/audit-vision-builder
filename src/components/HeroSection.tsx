@@ -75,11 +75,24 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 z-20 relative">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Hero Content */}
-          <div className="animate-fade-up">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow animate-zoom-in">
+          <div className="animate-fade-up pt-20 md:pt-0">
+            <h1 
+              className="font-bold mb-6 text-shadow animate-zoom-in px-4"
+              style={{
+                fontSize: 'clamp(2rem, 8vw, 4.5rem)',
+                lineHeight: '1.2',
+                marginTop: 'clamp(80px, 12vh, 120px)'
+              }}
+            >
               <span className="text-accent block mb-2">{t('hero.title')}</span>
             </h1>
-            <p className="text-xl text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center md:text-3xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <p 
+              className="text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center animate-slide-up px-4" 
+              style={{ 
+                animationDelay: '0.2s',
+                fontSize: 'clamp(1.125rem, 3vw, 1.875rem)'
+              }}
+            >
               {t('hero.subtitle')}
             </p>
           </div>

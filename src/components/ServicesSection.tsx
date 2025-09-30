@@ -44,37 +44,54 @@ const ServicesSection = () => {
     <section id="services" className="relative py-20 bg-secondary/30" ref={ref}>
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-background pointer-events-none" />
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+          <h2 
+            className="font-bold mb-6 text-foreground"
+            style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}
+          >
             {t('services.title')}
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p 
+            className="text-muted-foreground leading-relaxed px-4"
+            style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
+          >
             {t('footer.description')}
           </p>
         </div>
 
         {/* Services List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className={`flex items-start gap-4 group hover-lift transition-all duration-700 ${isVisible ? 'animate-staggered-fade opacity-100' : 'opacity-0 translate-y-5'}`}
+              className={`flex items-start gap-4 p-4 rounded-lg group hover-lift transition-all duration-700 ${isVisible ? 'animate-staggered-fade opacity-100' : 'opacity-0 translate-y-5'}`}
               style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+              role="article"
+              aria-label={t(service.titleKey)}
             >
               {/* Icon */}
-              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-all duration-300 hover-scale">
+              <div 
+                className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-all duration-300 hover-scale"
+                aria-hidden="true"
+              >
                 <service.icon className="h-6 w-6 text-accent" />
               </div>
               
               {/* Content */}
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold mb-2 text-foreground group-hover:text-accent transition-colors duration-300">
+              <div className="flex-1 min-w-0">
+                <h3 
+                  className="font-semibold mb-2 text-foreground group-hover:text-accent transition-colors duration-300"
+                  style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
+                >
                   {t(service.titleKey)}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm">
+                <p 
+                  className="text-muted-foreground leading-relaxed"
+                  style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}
+                >
                   {t(service.descKey)}
                 </p>
               </div>

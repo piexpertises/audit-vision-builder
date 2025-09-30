@@ -80,16 +80,26 @@ const Header = () => {
       isScrolled 
         ? 'backdrop-blur-sm border-b border-white/10 hover:backdrop-blur-md' 
         : 'border-b border-transparent'
-    }`}>
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+    }`}
+      style={{
+        minHeight: 'clamp(64px, 8vh, 80px)',
+        paddingTop: 'max(env(safe-area-inset-top), 0px)'
+      }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between" style={{ height: 'clamp(64px, 8vh, 80px)' }}>
           
           {/* Logo - Left side */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center">
             <img 
               src={logoImage} 
               alt="Pi Expertises Logo" 
-              className="h-16 w-auto object-contain max-h-20"
+              style={{
+                height: 'clamp(40px, 6vh, 56px)',
+                width: 'auto',
+                maxWidth: '160px',
+                objectFit: 'contain'
+              }}
             />
           </div>
 
