@@ -192,9 +192,9 @@ const Header = () => {
                 isRTL ? 'animate-slide-in-right' : 'animate-slide-in-left'
               }`}
               style={{
-                background: 'linear-gradient(180deg, rgba(13,27,42,0.94) 0%, rgba(13,27,42,0.88) 50%, rgba(29,155,240,0.35) 100%)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
+                background: 'linear-gradient(180deg, rgba(13,27,42,0.92) 0%, rgba(29,155,240,0.65) 50%, rgba(255,255,255,0.1) 100%)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 borderRadius: isRTL ? '0 0 0 16px' : '0 0 16px 0',
                 boxShadow: '0 6px 28px rgba(0, 0, 0, 0.25)'
               }}
@@ -202,12 +202,11 @@ const Header = () => {
               <div className="relative h-full overflow-y-auto overscroll-contain flex flex-col">
                 {/* Header */}
                 <div className={`flex items-center justify-between p-6 border-b ${isRTL ? 'flex-row-reverse' : ''}`}
-                  style={{ borderColor: 'rgba(212, 175, 55, 0.20)' }}>
+                  style={{ borderColor: 'rgba(255, 255, 255, 0.15)' }}>
                   <img 
                     src={logoImage} 
                     alt="Pi Expertises" 
                     className="h-9 w-auto"
-                    style={{ filter: 'drop-shadow(0 2px 8px rgba(212, 175, 55, 0.3))' }}
                   />
                   <button
                     onClick={() => setIsMenuOpen(false)}
@@ -217,8 +216,8 @@ const Header = () => {
                       background: 'transparent'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#D4AF37';
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                      e.currentTarget.style.color = '#1d9bf0';
+                      e.currentTarget.style.background = 'rgba(29, 155, 240, 0.1)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = '#FFFFFF';
@@ -244,19 +243,19 @@ const Header = () => {
                             isActive ? '' : ''
                           }`}
                           style={{
-                            color: isActive ? '#D4AF37' : '#FFFFFF',
-                            background: isActive ? 'rgba(212, 175, 55, 0.12)' : 'transparent',
-                            borderLeft: !isRTL && isActive ? '3px solid #D4AF37' : !isRTL ? '3px solid transparent' : 'none',
-                            borderRight: isRTL && isActive ? '3px solid #D4AF37' : isRTL ? '3px solid transparent' : 'none'
+                            color: isActive ? '#FFFFFF' : '#FFFFFF',
+                            background: isActive ? 'rgba(29, 155, 240, 0.25)' : 'transparent',
+                            borderLeft: !isRTL && isActive ? '3px solid #1d9bf0' : !isRTL ? '3px solid transparent' : 'none',
+                            borderRight: isRTL && isActive ? '3px solid #1d9bf0' : isRTL ? '3px solid transparent' : 'none'
                           }}
                           onMouseEnter={(e) => {
                             if (!isActive) {
-                              e.currentTarget.style.color = '#D4AF37';
-                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                              e.currentTarget.style.color = '#1d9bf0';
+                              e.currentTarget.style.background = 'rgba(29, 155, 240, 0.1)';
                               if (isRTL) {
-                                e.currentTarget.style.borderRight = '3px solid #D4AF37';
+                                e.currentTarget.style.borderRight = '3px solid #1d9bf0';
                               } else {
-                                e.currentTarget.style.borderLeft = '3px solid #D4AF37';
+                                e.currentTarget.style.borderLeft = '3px solid #1d9bf0';
                               }
                             }
                           }}
@@ -287,12 +286,12 @@ const Header = () => {
                             borderRight: isRTL ? '3px solid transparent' : 'none'
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.color = '#D4AF37';
-                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                            e.currentTarget.style.color = '#1d9bf0';
+                            e.currentTarget.style.background = 'rgba(29, 155, 240, 0.1)';
                             if (isRTL) {
-                              e.currentTarget.style.borderRight = '3px solid #D4AF37';
+                              e.currentTarget.style.borderRight = '3px solid #1d9bf0';
                             } else {
-                              e.currentTarget.style.borderLeft = '3px solid #D4AF37';
+                              e.currentTarget.style.borderLeft = '3px solid #1d9bf0';
                             }
                           }}
                           onMouseLeave={(e) => {
@@ -332,20 +331,21 @@ const Header = () => {
                         }}
                         className="py-3 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
-                          background: language === lang.code ? '#D4AF37' : 'rgba(13, 27, 42, 0.6)',
-                          color: language === lang.code ? '#0A0A0A' : '#FFFFFF',
-                          border: language === lang.code ? 'none' : '1px solid rgba(255, 255, 255, 0.18)'
+                          background: language === lang.code ? '#1d9bf0' : 'transparent',
+                          color: '#FFFFFF',
+                          border: language === lang.code ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+                          boxShadow: language === lang.code ? '0 2px 8px rgba(29, 155, 240, 0.3)' : 'none'
                         }}
                         onMouseEnter={(e) => {
                           if (language !== lang.code) {
-                            e.currentTarget.style.background = 'rgba(13, 27, 42, 0.8)';
-                            e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+                            e.currentTarget.style.background = 'rgba(29, 155, 240, 0.15)';
+                            e.currentTarget.style.boxShadow = '0 2px 8px rgba(29, 155, 240, 0.2)';
                           }
                         }}
                         onMouseLeave={(e) => {
                           if (language !== lang.code) {
-                            e.currentTarget.style.background = 'rgba(13, 27, 42, 0.6)';
-                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)';
+                            e.currentTarget.style.background = 'transparent';
+                            e.currentTarget.style.boxShadow = 'none';
                           }
                         }}
                       >
@@ -365,15 +365,15 @@ const Header = () => {
                     onClick={handleMenuItemClick}
                     className="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg"
                     style={{
-                      background: '#D4AF37',
-                      color: '#0A0A0A'
+                      background: '#1d9bf0',
+                      color: '#FFFFFF'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#C79C2E';
+                      e.currentTarget.style.background = '#1878c8';
                       e.currentTarget.style.transform = 'scale(1.02)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '#D4AF37';
+                      e.currentTarget.style.background = '#1d9bf0';
                       e.currentTarget.style.transform = 'scale(1)';
                     }}
                   >
@@ -388,7 +388,7 @@ const Header = () => {
                     className="block text-center text-sm transition-colors"
                     style={{ color: 'rgba(255, 255, 255, 0.80)' }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#D4AF37';
+                      e.currentTarget.style.color = '#1d9bf0';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = 'rgba(255, 255, 255, 0.80)';
