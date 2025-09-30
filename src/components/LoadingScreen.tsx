@@ -10,22 +10,22 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Smooth progress animation - adjusted for 4 second duration
+    // Smooth progress animation - adjusted for 2.5 second duration
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 1.5; // Increment for 4s total
+        return prev + 2.5; // Increment for 2.5s total
       });
     }, 60);
 
-    // Start fade out after 4 seconds minimum
-    const fadeTimer = setTimeout(() => setFadeOut(true), 4000);
+    // Start fade out after 2.5 seconds
+    const fadeTimer = setTimeout(() => setFadeOut(true), 2500);
     
-    // Complete loading after fade animation (5s total)
-    const completeTimer = setTimeout(() => onComplete(), 5000);
+    // Complete loading after fade animation (3s total)
+    const completeTimer = setTimeout(() => onComplete(), 3000);
 
     return () => {
       clearInterval(progressInterval);
