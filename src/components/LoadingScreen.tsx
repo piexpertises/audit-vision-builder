@@ -36,88 +36,44 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* Galaxy Background Layer */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Base Gradient */}
+      {/* Clean Glass Background Layer */}
+      <div className="absolute inset-0">
+        {/* Transparent Glass Blur Layer */}
         <div 
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(135deg, #0D1B2A 0%, #151B3C 50%, #221C4D 100%)',
+            backgroundColor: 'rgba(255, 255, 255, 0.12)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         />
 
-        {/* Glowing Blobs */}
-        <div
-          className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full"
+        {/* Subtle border glow for separation */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(29, 155, 240, 0.25) 0%, transparent 70%)',
-            filter: 'blur(80px)',
-            animation: 'pulse1 8s ease-in-out infinite',
-          }}
-        />
-        <div
-          className="absolute bottom-[-15%] right-[-15%] w-[700px] h-[700px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(106, 90, 205, 0.2) 0%, transparent 70%)',
-            filter: 'blur(90px)',
-            animation: 'pulse2 10s ease-in-out infinite 2s',
-          }}
-        />
-        <div
-          className="absolute top-[30%] right-[10%] w-[400px] h-[400px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(138, 123, 255, 0.15) 0%, transparent 70%)',
-            filter: 'blur(70px)',
-            animation: 'pulse3 12s ease-in-out infinite 4s',
-          }}
-        />
-        <div
-          className="absolute bottom-[20%] left-[15%] w-[500px] h-[500px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(29, 155, 240, 0.18) 0%, transparent 70%)',
-            filter: 'blur(85px)',
-            animation: 'pulse1 9s ease-in-out infinite 1s',
+            boxShadow: 'inset 0 0 120px rgba(255, 255, 255, 0.08)',
           }}
         />
 
-        {/* Particle Field */}
-        <div className="absolute inset-0">
-          {/* Generate particles */}
-          {Array.from({ length: 80 }).map((_, i) => (
+        {/* Very subtle particle field (minimal) */}
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 30 }).map((_, i) => (
             <div
               key={i}
-              className="absolute rounded-full bg-white"
+              className="absolute rounded-full"
               style={{
-                width: `${Math.random() * 3 + 1}px`,
-                height: `${Math.random() * 3 + 1}px`,
+                width: `${Math.random() * 2 + 1}px`,
+                height: `${Math.random() * 2 + 1}px`,
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.6 + 0.2,
-                animation: `twinkle ${Math.random() * 4 + 3}s ease-in-out infinite ${Math.random() * 3}s, drift${(i % 3) + 1} ${Math.random() * 20 + 25}s linear infinite ${Math.random() * 10}s`,
+                backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                opacity: Math.random() * 0.3 + 0.1,
+                animation: `subtleTwinkle ${Math.random() * 4 + 3}s ease-in-out infinite ${Math.random() * 3}s`,
               }}
             />
           ))}
         </div>
-
-        {/* Film Grain/Noise Overlay */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            opacity: 0.05,
-            mixBlendMode: 'overlay',
-          }}
-        />
-
-        {/* Glass Blur Layer */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundColor: 'rgba(13, 27, 42, 0.55)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-          }}
-        />
       </div>
 
       {/* 3D Scene Container */}
@@ -310,9 +266,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         {/* Company Name */}
         <div className="text-center mt-8">
           <h1 
-            className="text-2xl md:text-3xl font-bold text-white mb-2"
+            className="text-2xl md:text-3xl font-bold mb-2"
             style={{
-              textShadow: '0 2px 20px rgba(255, 255, 255, 0.3)',
+              color: '#D4AF37',
+              textShadow: '0 2px 12px rgba(212, 175, 55, 0.4), 0 0 40px rgba(255, 255, 255, 0.8)',
               letterSpacing: '0.05em',
               animation: 'fadeInUp 1s ease-out 0.8s backwards',
             }}
@@ -320,8 +277,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             Pi Expertises
           </h1>
           <p 
-            className="text-sm md:text-base text-white/90 font-light"
+            className="text-sm md:text-base font-light"
             style={{
+              color: '#0D1B2A',
+              textShadow: '0 0 20px rgba(255, 255, 255, 0.9)',
               animation: 'fadeInUp 1s ease-out 1s backwards',
             }}
           >
@@ -446,83 +405,13 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           }
         }
 
-        /* Particle Animations */
-        @keyframes twinkle {
+        /* Subtle Particle Animation */
+        @keyframes subtleTwinkle {
           0%, 100% {
-            opacity: 0.2;
+            opacity: 0.1;
           }
           50% {
-            opacity: 0.8;
-          }
-        }
-
-        @keyframes drift1 {
-          0% {
-            transform: translate(0, 0);
-          }
-          50% {
-            transform: translate(30px, -40px);
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-
-        @keyframes drift2 {
-          0% {
-            transform: translate(0, 0);
-          }
-          50% {
-            transform: translate(-25px, 35px);
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-
-        @keyframes drift3 {
-          0% {
-            transform: translate(0, 0);
-          }
-          50% {
-            transform: translate(40px, 30px);
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-
-        /* Blob Pulse Animations */
-        @keyframes pulse1 {
-          0%, 100% {
-            opacity: 0.85;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.05);
-          }
-        }
-
-        @keyframes pulse2 {
-          0%, 100% {
-            opacity: 0.8;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.08);
-          }
-        }
-
-        @keyframes pulse3 {
-          0%, 100% {
-            opacity: 0.75;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.06);
+            opacity: 0.4;
           }
         }
 
