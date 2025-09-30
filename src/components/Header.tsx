@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Globe } from 'lucide-react';
 import { useLanguage, Language } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import logoImage from '@/assets/logo-pi-expertises.png';
+import logoImage from '@/assets/logo-pi-expertises-new.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,7 +72,7 @@ const Header = () => {
             <img 
               src={logoImage} 
               alt="Pi Expertises Logo" 
-              className="h-12 w-12 object-contain"
+              className="h-16 w-auto object-contain max-h-20"
             />
           </div>
 
@@ -172,7 +172,7 @@ const Header = () => {
                 <img 
                   src={logoImage} 
                   alt="Pi Expertises Logo" 
-                  className="h-10 w-10 object-contain"
+                  className="h-12 w-auto object-contain"
                 />
                 <Button
                   variant="ghost"

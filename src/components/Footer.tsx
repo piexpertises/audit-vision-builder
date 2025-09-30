@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Globe, Shield, Users, FileText } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import logoImage from '@/assets/logo-pi-expertises.png';
+import logoImage from '@/assets/logo-pi-expertises-new.png';
 
 const Footer = () => {
   const { t, isRTL } = useLanguage();
@@ -27,11 +27,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 py-16" dir="rtl">
           {/* Company Info */}
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex flex-col items-center text-center mb-6">
               <img 
                 src={logoImage} 
                 alt="Pi Expertises Logo" 
-                className="h-12 w-12 object-contain"
+                className="h-16 w-auto object-contain mb-3"
               />
               <span className="text-2xl font-bold text-accent">Pi Expertises</span>
             </div>
