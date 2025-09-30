@@ -10,22 +10,22 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Smooth progress animation - adjusted for 2.5 second duration
+    // Smooth progress animation - adjusted for 5.5 second duration
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 2.5; // Increment for 2.5s total
+        return prev + 1.2; // Increment for 5.5s total
       });
     }, 60);
 
-    // Start fade out after 2.5 seconds
-    const fadeTimer = setTimeout(() => setFadeOut(true), 2500);
+    // Start fade out after 5.5 seconds
+    const fadeTimer = setTimeout(() => setFadeOut(true), 5500);
     
-    // Complete loading after fade animation (3s total)
-    const completeTimer = setTimeout(() => onComplete(), 3000);
+    // Complete loading after fade animation (6s total)
+    const completeTimer = setTimeout(() => onComplete(), 6000);
 
     return () => {
       clearInterval(progressInterval);
@@ -36,41 +36,42 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
   return (
     <div 
-      className={`fixed inset-0 z-[9999] transition-all duration-1000 ${
-        fadeOut ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+      className={`fixed inset-0 z-[9999] transition-all duration-300 ${
+        fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
       style={{
-        background: 'linear-gradient(180deg, #0D1B2A 0%, #1d9bf0 60%, rgba(135, 206, 250, 0.4) 100%)',
+        background: 'linear-gradient(180deg, #0D1B2A 0%, #1d9bf0 55%, rgba(255, 255, 255, 0.1) 100%)',
       }}
     >
       {/* Glassmorphism overlay */}
       <div 
         className="absolute inset-0"
         style={{
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          background: 'rgba(255, 255, 255, 0.02)',
         }}
       />
 
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute top-20 left-20 w-32 h-32 rounded-full opacity-20"
+          className="absolute top-20 left-20 w-40 h-40 rounded-full opacity-10 blur-3xl"
           style={{
             background: 'radial-gradient(circle, #1d9bf0 0%, transparent 70%)',
             animation: 'float 8s ease-in-out infinite',
           }}
         />
         <div 
-          className="absolute bottom-32 right-32 w-40 h-40 rounded-full opacity-15"
+          className="absolute bottom-32 right-32 w-48 h-48 rounded-full opacity-8 blur-3xl"
           style={{
-            background: 'radial-gradient(circle, #D4AF37 0%, transparent 70%)',
+            background: 'radial-gradient(circle, #0D1B2A 0%, transparent 70%)',
             animation: 'float 10s ease-in-out infinite',
             animationDelay: '2s',
           }}
         />
         <div 
-          className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full opacity-10"
+          className="absolute top-1/2 left-1/3 w-32 h-32 rounded-full opacity-6 blur-3xl"
           style={{
             background: 'radial-gradient(circle, #1d9bf0 0%, transparent 70%)',
             animation: 'float 9s ease-in-out infinite',
@@ -81,68 +82,41 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
       {/* Main content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
-        {/* Logo container with 3D effect */}
+        {/* Logo container with breathing animation */}
         <div 
-          className="relative mb-12"
+          className="relative mb-8"
           style={{
-            animation: 'breathe 6s ease-in-out infinite',
+            animation: 'breathe 2.8s ease-in-out infinite',
           }}
         >
           {/* Glow effect behind logo */}
           <div 
-            className="absolute inset-0 rounded-full opacity-40"
+            className="absolute inset-0 rounded-full opacity-30"
             style={{
-              background: 'radial-gradient(circle, #D4AF37 0%, #1d9bf0 50%, transparent 70%)',
-              filter: 'blur(40px)',
-              transform: 'scale(1.5)',
-            }}
-          />
-          
-          {/* Royal blue glow ring */}
-          <div 
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: 'radial-gradient(circle, transparent 40%, #1d9bf0 70%, transparent 100%)',
-              filter: 'blur(20px)',
-              animation: 'pulse 4s ease-in-out infinite',
+              background: 'radial-gradient(circle, #D4AF37 0%, transparent 70%)',
+              filter: 'blur(50px)',
+              transform: 'scale(1.8)',
             }}
           />
 
           {/* Logo with shimmer effect */}
-          <div className="relative w-48 h-48 md:w-64 md:h-64 flex items-center justify-center">
+          <div className="relative w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 flex items-center justify-center">
             <img 
               src={logoImage}
               alt="Pi Expertises Logo"
               className="w-full h-full object-contain relative z-10"
               style={{
-                filter: 'drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 40px rgba(212, 175, 55, 0.3))',
+                filter: 'drop-shadow(0 4px 20px rgba(212, 175, 55, 0.4)) drop-shadow(0 0 60px rgba(212, 175, 55, 0.2))',
               }}
             />
             
             {/* Shimmer overlay */}
             <div 
-              className="absolute inset-0 overflow-hidden rounded-full"
+              className="absolute inset-0 overflow-hidden"
               style={{
-                background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)',
-                animation: 'shimmer 4s ease-in-out infinite',
+                background: 'linear-gradient(110deg, transparent 0%, transparent 40%, rgba(255, 255, 255, 0.5) 50%, transparent 60%, transparent 100%)',
+                animation: 'shimmer 4.5s ease-in-out infinite',
                 mixBlendMode: 'overlay',
-              }}
-            />
-          </div>
-
-          {/* Rotating ring accent */}
-          <div 
-            className="absolute inset-0 rounded-full opacity-30"
-            style={{
-              border: '2px solid #1d9bf0',
-              animation: 'rotate 15s linear infinite',
-              transform: 'scale(1.3)',
-            }}
-          >
-            <div 
-              className="absolute top-0 left-1/2 w-3 h-3 rounded-full bg-[#D4AF37] -translate-x-1/2 -translate-y-1/2"
-              style={{
-                boxShadow: '0 0 12px #D4AF37',
               }}
             />
           </div>
@@ -150,68 +124,20 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
         {/* Company name */}
         <div 
-          className={`text-center mb-8 transition-all duration-1000 ${
-            fadeOut ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+          className={`text-center transition-all duration-300 ${
+            fadeOut ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3" style={{
-            textShadow: '0 2px 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(29, 155, 240, 0.3)',
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2" style={{
+            textShadow: '0 2px 30px rgba(212, 175, 55, 0.4)',
+            letterSpacing: '0.02em',
           }}>
             Pi Expertises
           </h1>
-          <p className="text-lg md:text-xl text-white/90 font-medium">
+          <p className="text-base md:text-lg text-white/80 font-light tracking-wide">
             מומחי הביטחון שלכם
           </p>
         </div>
-
-        {/* Loading bar */}
-        <div className="w-72 md:w-96 mx-auto mb-4">
-          <div 
-            className="h-1.5 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm"
-            style={{
-              boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.3)',
-            }}
-          >
-            <div 
-              className="h-full rounded-full transition-all duration-300 ease-out relative overflow-hidden"
-              style={{
-                width: `${progress}%`,
-                background: 'linear-gradient(90deg, #D4AF37 0%, #1d9bf0 100%)',
-                boxShadow: '0 0 10px rgba(212, 175, 55, 0.5)',
-              }}
-            >
-              {/* Shimmer on progress bar */}
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%)',
-                  animation: 'shimmer-bar 2.5s ease-in-out infinite',
-                }}
-              />
-            </div>
-          </div>
-          <p className="text-white/60 text-sm text-center mt-3">
-            {progress}%
-          </p>
-        </div>
-
-        {/* Decorative corner accents */}
-        <div 
-          className="absolute top-8 left-8 w-16 h-16 md:w-24 md:h-24 opacity-30"
-          style={{
-            borderTop: '2px solid #D4AF37',
-            borderLeft: '2px solid #D4AF37',
-            borderTopLeftRadius: '12px',
-          }}
-        />
-        <div 
-          className="absolute bottom-8 right-8 w-16 h-16 md:w-24 md:h-24 opacity-30"
-          style={{
-            borderBottom: '2px solid #1d9bf0',
-            borderRight: '2px solid #1d9bf0',
-            borderBottomRightRadius: '12px',
-          }}
-        />
       </div>
 
       {/* CSS Animations */}
@@ -221,34 +147,16 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             transform: scale(1);
           }
           50% {
-            transform: scale(1.1);
+            transform: scale(1.06);
           }
         }
 
         @keyframes shimmer {
           0% {
-            transform: translateX(-100%) rotate(45deg);
-          }
-          50%, 100% {
-            transform: translateX(200%) rotate(45deg);
-          }
-        }
-
-        @keyframes shimmer-bar {
-          0% {
             transform: translateX(-100%);
           }
           100% {
-            transform: translateX(300%);
-          }
-        }
-
-        @keyframes rotate {
-          0% {
-            transform: scale(1.3) rotate(0deg);
-          }
-          100% {
-            transform: scale(1.3) rotate(360deg);
+            transform: translateX(200%);
           }
         }
 
@@ -257,18 +165,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             transform: translateY(0) scale(1);
           }
           50% {
-            transform: translateY(-20px) scale(1.05);
-          }
-        }
-
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: scale(1.1);
+            transform: translateY(-30px) scale(1.08);
           }
         }
       `}</style>
