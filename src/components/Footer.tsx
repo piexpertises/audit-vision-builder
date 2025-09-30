@@ -21,7 +21,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary border-t border-border">
+    <footer className="relative bg-primary">
+      {/* Gradient transition overlay */}
+      <div 
+        className="absolute top-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '200px',
+          background: 'linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 20%, hsl(var(--background) / 0.4) 50%, transparent 100%)',
+          transform: 'translateY(-100%)',
+        }}
+      />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 py-12 lg:py-16" dir="rtl">
