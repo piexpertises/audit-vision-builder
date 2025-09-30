@@ -7,60 +7,62 @@ import {
   AccordionTrigger 
 } from "@/components/ui/accordion";
 import { Shield, CheckCircle, Users, List, Calendar, Award } from 'lucide-react';
-
-const faqItems = [
-  {
-    id: "1",
-    question: "מה החזון של פאי אקספרטיס?",
-    answer: "הפילוסופיה של פאי אקספרטיס נובעת משמו של המספר היווני \"π\" (פאי) – המסמל שלמות שמורכבת מאינספור פרטים קטנים. כל פרט, קטן ככל שיהיה, חיוני להגנה מיטבית. כך, כל שירות שהחברה מציעה – החל מתכנון אבטחה לאירועים המוניים, דרך ייעוץ אישי למנהלים, ועד להדרכות בתחום הירי והלחימה – מתוכנן עד לפרטים הקטנים ביותר.",
-    icon: Shield
-  },
-  {
-    id: "2",
-    question: "למה לבחור בפאי אקספרטיס?",
-    answer: "סטיב בלחסן, המייסד והמנהיג המקצועי, מביא עימו לא רק ניסיון שטח עשיר, אלא גם ידע אקדמי רחב, עם תארים מתקדמים בניהול משברים, ביטחון והגנת העורף. שילוב זה מאפשר לחברה להציע פתרונות חדשניים ומדויקים, שמתאימים לצרכים המשתנים של לקוחותיה. בישראל, שבה מתקיימים אירועים גדולים ומגוונים לאורך השנה, השירות של פאי אקספרטיס הופך לבלתי ניתן להחלפה.",
-    icon: CheckCircle
-  },
-  {
-    id: "3",
-    question: "מי הצוות שמוביל את פאי אקספרטיס?",
-    answer: "הצוות המוביל של פאי אקספרטיס כולל אנשי מקצוע בעלי רקע מוסדי מרשים וניסיון מוכח במגזר הביטחוני. החברה הוקמה בשנת 2016 על ידי סטיב בלחסן, סא\"ל במילואים ובעל ותק של מעל 20 שנה בתחום הביטחון. הצוות מקפיד להתעדכן בהתפתחויות הגלובליות, ומספק מענה מהיר ומותאם אישית לאיומים עכשוויים.",
-    icon: Users
-  },
-  {
-    id: "4",
-    question: "אילו שירותים מספקת החברה?",
-    answer: "פאי אקספרטיס מציעה מגוון רחב של שירותים: ייעוץ ביטחוני מותאם אישית לעסקים, מוסדות ולקוחות פרטיים | ניהול אירועים המוניים – תכנון וביצוע פתרונות בטיחות לאירועים תחת כיפת השמיים | תכנון מערכי חירום והגנת עורף למוסדות ציבוריים ולחברות פרטיות | הדרכות מתקדמות בתחום הירי, הלחימה והאבטחה המונעת | פתרונות ייחודיים לארגונים רגישים – כולל טיפול בנושאי ריגול תעשייתי.",
-    icon: List
-  },
-  {
-    id: "5",
-    question: "איך החברה מנהלת אירועים המוניים?",
-    answer: "בישראל, שבה מתקיימים אירועים גדולים ומגוונים לאורך השנה, השירות של פאי אקספרטיס לניהול אירועים המוניים הופך לבלתי ניתן להחלפה. החברה פועלת לפי תקן ת\"י 5688 ומציעה פתרונות בטיחות מותאמים אישית, החל מתכנון מערכות האבטחה ועד לפיקוח בזמן אמת. כל פרט מתוכנן עד הסוף להבטחת בטיחות מקסימלית.",
-    icon: Calendar
-  },
-  {
-    id: "6",
-    question: "מה מבטיח השירות של פאי אקספרטיס?",
-    answer: "פאי אקספרטיס פועלת מתוך מחויבות בלתי מתפשרת לאתיקה מקצועית ודיסקרטיות. החברה מעניקה שירותים בארץ ובעולם, תוך שמירה על התאמה לתנאים ולתקנות בכל יעד שבו היא פועלת. במציאות שבה איומים חדשים מופיעים בכל יום, פאי אקספרטיס מציעה את השקט הנפשי הנדרש, עם צוות מקצועי ופתרונות שלא משאירים מקום לטעויות.",
-    icon: Award
-  }
-];
+import { useI18n } from '@/hooks/useI18n';
 
 const NewspaperArticleSection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { t, isRTL } = useI18n();
+
+  const faqItems = [
+    {
+      id: "1",
+      question: t('newspaper.faq1_q'),
+      answer: t('newspaper.faq1_a'),
+      icon: Shield
+    },
+    {
+      id: "2",
+      question: t('newspaper.faq2_q'),
+      answer: t('newspaper.faq2_a'),
+      icon: CheckCircle
+    },
+    {
+      id: "3",
+      question: t('newspaper.faq3_q'),
+      answer: t('newspaper.faq3_a'),
+      icon: Users
+    },
+    {
+      id: "4",
+      question: t('newspaper.faq4_q'),
+      answer: t('newspaper.faq4_a'),
+      icon: List
+    },
+    {
+      id: "5",
+      question: t('newspaper.faq5_q'),
+      answer: t('newspaper.faq5_a'),
+      icon: Calendar
+    },
+    {
+      id: "6",
+      question: t('newspaper.faq6_q'),
+      answer: t('newspaper.faq6_a'),
+      icon: Award
+    }
+  ];
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-background via-muted/20 to-background" dir="rtl" ref={ref}>
+    <section className="relative py-20 bg-gradient-to-b from-background via-muted/20 to-background" dir={isRTL ? 'rtl' : 'ltr'} ref={ref}>
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#D4AF37]">
-              שאלות נפוצות
+              {t('newspaper.title')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              כל מה שרציתם לדעת על פאי אקספרטיס – המומחים שלכם בביטחון
+              {t('newspaper.subtitle')}
             </p>
             <div className="w-24 h-1 bg-[#D4AF37] mx-auto mt-6"></div>
           </div>
@@ -108,10 +110,10 @@ const NewspaperArticleSection = () => {
           <div className={`text-center mt-12 transition-all duration-1000 delay-500 ${isVisible ? 'animate-fade-in opacity-100' : 'opacity-0'}`}>
             <div className="bg-gradient-to-r from-[#0D1B2A] via-[#1b4965] to-[#0D1B2A] rounded-xl p-8 shadow-lg border border-[#D4AF37]/20">
               <p className="text-xl md:text-2xl font-semibold text-[#D4AF37] mb-2">
-                מעוניינים להבטיח את הביטחון שלכם?
+                {t('newspaper.cta_title')}
               </p>
               <p className="text-base md:text-lg text-white/90">
-                צרו קשר עם פאי אקספרטיס – כי על ביטחון לא מתפשרים
+                {t('newspaper.cta_subtitle')}
               </p>
             </div>
           </div>

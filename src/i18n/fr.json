@@ -12,7 +12,12 @@
     "title": "Pi Expertises",
     "subtitle": "Cabinet de conseil en sécurité boutique établi en 2016 par Steve Belhasen, fondateur et directeur",
     "cta": "Nous contacter",
-    "learn_more": "En savoir plus"
+    "learn_more": "En savoir plus",
+    "stats": {
+      "experience": "Années d'Expérience",
+      "clients": "Clients Protégés",
+      "projects": "Projets de Sécurité"
+    }
   },
   "about": {
     "title": "À propos de Pi Expertises",
@@ -21,7 +26,12 @@
     "experience": "Steve Belhasen apporte avec lui 20 ans d'expérience riche en sécurité et défense, se spécialisant dans des domaines tels que la défense civile, l'établissement de systèmes d'urgence, la sécurité préventive et la formation aux armes à feu et au combat.",
     "education": "Il détient un diplôme de licence en Sciences Sociales et Humaines avec une spécialisation en sécurité et défense civile, et un diplôme de master en Administration des Affaires avec un focus sur la gestion de crise et le renforcement de la résilience organisationnelle. De plus, Steve détient un autre master en Études Juives et Humaines.",
     "mission": "En tant que leader dans le domaine de la sécurité, Steve utilise ses connaissances professionnelles, académiques et pratiques pour développer des solutions de sécurité personnalisées et innovantes. Il transmet toutes ces connaissances à l'équipe Pi Expertises, qui mène l'entreprise vers le succès et le professionnalisme sans compromis.",
-    "philosophy": "Notre définition de la sécurité est une analogie au nombre grec π (pi) : chaque détail, aussi petit soit-il, est vital pour compléter l'image et protéger efficacement l'objet sécurisé."
+    "philosophy": "Notre définition de la sécurité est une analogie au nombre grec π (pi) : chaque détail, aussi petit soit-il, est vital pour compléter l'image et protéger efficacement l'objet sécurisé.",
+    "team_title": "Notre Équipe d'Experts",
+    "team_desc_1": "Notre équipe se compose de professionnels de la sécurité avec des antécédents riches dans les institutions de sécurité et des décennies d'expérience dans le domaine. Chaque membre de l'équipe apporte des capacités uniques et s'engage dans des rôles qui assurent une protection maximale pour nos clients.",
+    "team_desc_2": "Nous nous mettons continuellement à jour sur les changements et les risques exposés en Israël et dans le monde, fournissant à nos clients des briefings périodiques, des avertissements de voyage et des réponses personnalisées à chaque besoin de sécurité.",
+    "commitment_title": "Notre Engagement",
+    "commitment_desc": "Pi Expertises s'engage à fournir un service professionnel, de qualité et discret, tout en maintenant l'éthique professionnelle et en adaptant précisément les solutions de sécurité aux besoins de chaque client. Nous opérons toujours dans le cadre de la loi et adaptons tous les services et solutions aux changements constants dans la réalité de la sécurité."
   },
   "services": {
     "title": "Nos Domaines d'Expertise",

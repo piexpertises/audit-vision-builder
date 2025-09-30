@@ -1,10 +1,13 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, Award, Target } from 'lucide-react';
+import { useI18n } from '@/hooks/useI18n';
 
 const AboutSection = () => {
+  const { t, isRTL } = useI18n();
+  
   return (
-    <section id="about" className="relative py-20" dir="rtl">
+    <section id="about" className="relative py-20" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Glass Background Layer */}
       <div className="absolute inset-0">
         <div 
@@ -37,7 +40,7 @@ const AboutSection = () => {
               }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-                צוות המומחים שלנו
+                {t('about.team_title')}
               </h2>
               <div className="w-24 h-1 bg-accent mx-auto mt-4"></div>
             </div>
@@ -55,10 +58,10 @@ const AboutSection = () => {
           >
             <div className="space-y-6 text-foreground leading-relaxed">
               <p>
-                הצוות שלנו מורכב מאנשי מקצוע בתחום הביטחון, בעלי רקע עשיר במוסדות ביטחוניים וניסיון של עשרות שנים בתחום. כל חבר צוות מביא עימו יכולות ייחודיות ועוסק בתפקידים שמבטיחים את ההגנה המירבת על לקוחותינו.
+                {t('about.team_desc_1')}
               </p>
               <p>
-                אנו מתעדכנים באופן שוטף בשינויים ובסיכונים הגלויים בארץ ובעולם, ומספקים ללקוחותינו תדרוכים תקופתיים, אזהרות מסע ומענה מותאם אישית לכל צורך ביטחוני.
+                {t('about.team_desc_2')}
               </p>
             </div>
           </div>
@@ -79,7 +82,7 @@ const AboutSection = () => {
               }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-                ההתחייבות שלנו
+                {t('about.commitment_title')}
               </h2>
               <div className="w-24 h-1 bg-accent mx-auto mt-4"></div>
             </div>
@@ -96,7 +99,7 @@ const AboutSection = () => {
             }}
           >
             <p className="text-lg text-foreground leading-relaxed text-center">
-              פאי אקספרטיס מתחייבת לספק שירות מקצועי, איכותי ודיסקרטי, תוך שמירה על אתיקה מקצועית והתאמת הפתרונות הביטחוניים בצורה מדויקת לצרכים של כל לקוח. אנו פועלים תמיד במסגרת החוק ומתאימים את כל השירותים והפתרונות לשינויים המתמידים במציאות הביטחונית.
+              {t('about.commitment_desc')}
             </p>
           </div>
         </div>

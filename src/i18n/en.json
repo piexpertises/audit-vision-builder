@@ -12,7 +12,12 @@
     "title": "Pi Expertises",
     "subtitle": "Boutique security consulting firm established in 2016 by Steve Belhasen, founder and director",
     "cta": "Contact Us",
-    "learn_more": "Learn More"
+    "learn_more": "Learn More",
+    "stats": {
+      "experience": "Years Experience",
+      "clients": "Clients Protected",
+      "projects": "Security Projects"
+    }
   },
   "about": {
     "title": "About Pi Expertises",
@@ -21,7 +26,12 @@
     "experience": "Steve Belhasen brings with him 20 years of rich experience in security and defense, specializing in areas such as civil defense, emergency system establishment, preventive security, and firearms and combat training.",
     "education": "He holds a Bachelor's degree in Social Sciences and Humanities with a specialization in security and civil defense, and a Master's degree in Business Administration with a focus on crisis management and organizational resilience building. Additionally, Steve holds another Master's degree in Jewish and Humanities Studies.",
     "mission": "As a leader in the security field, Steve uses his professional, academic and practical knowledge to develop customized and innovative security solutions. He passes all this knowledge to the Pi Expertises team, which leads the firm to success and uncompromising professionalism.",
-    "philosophy": "Our definition of security is an analogy to the Greek number π (pi): every detail, no matter how small, is vital to completing the picture and effectively protecting the secured object."
+    "philosophy": "Our definition of security is an analogy to the Greek number π (pi): every detail, no matter how small, is vital to completing the picture and effectively protecting the secured object.",
+    "team_title": "Our Expert Team",
+    "team_desc_1": "Our team consists of security professionals with rich backgrounds in security institutions and decades of experience in the field. Each team member brings unique capabilities and engages in roles that ensure maximum protection for our clients.",
+    "team_desc_2": "We continuously update ourselves on changes and exposed risks in Israel and worldwide, providing our clients with periodic briefings, travel warnings, and personalized responses to every security need.",
+    "commitment_title": "Our Commitment",
+    "commitment_desc": "Pi Expertises is committed to providing professional, quality and discreet service, while maintaining professional ethics and precisely adapting security solutions to each client's needs. We always operate within the law and adapt all services and solutions to the constant changes in the security reality."
   },
   "services": {
     "title": "Our Areas of Expertise",

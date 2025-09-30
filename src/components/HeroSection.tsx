@@ -26,15 +26,15 @@ const HeroSection = () => {
   
   const stats = [{
     icon: Shield,
-    label: 'Years Experience',
+    label: t('hero.stats.experience'),
     value: '20+'
   }, {
     icon: Users,
-    label: 'Clients Protected',
+    label: t('hero.stats.clients'),
     value: '500+'
   }, {
     icon: Award,
-    label: 'Security Projects',
+    label: t('hero.stats.projects'),
     value: '200+'
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">

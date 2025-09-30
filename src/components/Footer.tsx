@@ -8,10 +8,10 @@ const Footer = () => {
   const { t, isRTL } = useLanguage();
 
   const company = [
-    { label: 'אודותינו', href: '#about' },
-    { label: 'הצוות שלנו', href: '#team' },
-    { label: 'שירותים', href: '#services' },
-    { label: 'צור קשר', href: '#contact' },
+    { label: t('footer.about_us'), href: '#about' },
+    { label: t('footer.our_team'), href: '#team' },
+    { label: t('footer.services'), href: '#services' },
+    { label: t('contact.title'), href: '#contact' },
   ];
 
   const socialLinks = [
@@ -21,7 +21,17 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary border-t border-border">
+    <footer className="relative bg-primary border-t border-border">
+      {/* Gradient Fade Transition */}
+      <div 
+        className="absolute top-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '200px',
+          transform: 'translateY(-100%)',
+          background: 'linear-gradient(to bottom, transparent 0%, hsl(var(--primary)) 100%)',
+        }}
+      />
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 py-12 lg:py-16" dir="rtl">
@@ -50,7 +60,7 @@ const Footer = () => {
               className="text-foreground/80 leading-relaxed mb-6 text-center"
               style={{ fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}
             >
-              פאי אקספרטיס הוא משרד בוטיק לייעוץ ביטחוני, הטרור ופתרונות ביטחוניים מותאמים אישית.
+              {t('footer.description')}
             </p>
           </div>
 
@@ -58,7 +68,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
               <Users className="h-5 w-5 text-accent" />
-              החברה
+              {t('footer.company_title')}
             </h3>
             <ul className="space-y-3">
               {company.map((item, index) => (
@@ -78,7 +88,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
               <Phone className="h-5 w-5 text-accent" />
-              צור קשר
+              {t('footer.contact_title')}
             </h3>
             
             {/* Contact Info */}
@@ -111,7 +121,7 @@ const Footer = () => {
 
             {/* Quick Contact */}
             <div className="mt-6">
-              <h4 className="text-foreground font-medium mb-4">קשר מהיר</h4>
+              <h4 className="text-foreground font-medium mb-4">{t('footer.quick_contact')}</h4>
               <div className="flex gap-3">
                 {socialLinks.map((link, index) => (
                   <Button
@@ -143,7 +153,7 @@ const Footer = () => {
               className="text-foreground/60"
               style={{ fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}
             >
-              © 2025 כל הזכויות שמורות לפאי אקספרטיס
+              © 2025 {t('footer.rights')}
             </p>
             <div 
               className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-foreground/60"
@@ -153,17 +163,17 @@ const Footer = () => {
                 href="#privacy" 
                 className="hover:text-accent transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent rounded px-2 py-1"
               >
-                מדיניות פרטיות
+                {t('footer.privacy')}
               </a>
               <a 
                 href="#terms" 
                 className="hover:text-accent transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent rounded px-2 py-1"
               >
-                תנאי השירות
+                {t('footer.terms')}
               </a>
               <span className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-accent flex-shrink-0" aria-hidden="true" />
-                <span>מוגן על ידי פאי אקספרטיס</span>
+                <span>{t('footer.protected')}</span>
               </span>
             </div>
           </div>
