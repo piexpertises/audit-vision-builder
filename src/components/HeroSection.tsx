@@ -57,6 +57,8 @@ const HeroSection = () => {
           </div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
+        {/* Bottom gradient fade for smooth transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/30 to-background z-10" />
       </div>
 
       {/* Animated Background Elements */}
