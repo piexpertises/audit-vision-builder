@@ -453,16 +453,21 @@ const AccessibilityWidget = () => {
           filter: contrast(1.1) saturate(1.1);
         }
 
-        html.acc-filter-on body {
+        html.acc-filter-on body > *:not(.acc-toggler):not(.acc-panel):not(#acc-reading-guide) {
           filter: var(--acc-filter) !important;
         }
 
-        html.acc-monochrome body {
+        html.acc-monochrome body > *:not(.acc-toggler):not(.acc-panel):not(#acc-reading-guide) {
           filter: grayscale(1) contrast(1.2) !important;
         }
 
-        html.acc-grayscale body {
+        html.acc-grayscale body > *:not(.acc-toggler):not(.acc-panel):not(#acc-reading-guide) {
           filter: grayscale(1) !important;
+        }
+        
+        /* Toujours garder le widget visible */
+        .acc-toggler, .acc-panel, #acc-reading-guide {
+          filter: none !important;
         }
 
         html.acc-underline a,
