@@ -26,22 +26,24 @@ const App = () => {
             <Sonner />
             <WhatsAppButton />
             <AccessibilityWidget />
-            <BrowserRouter
-              future={{
-                v7_startTransition: true,
-                v7_relativeSplatPath: true,
-              }}
-            >
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/security-consulting" element={<SecurityConsulting />} />
-                <Route path="/mass-event-management" element={<MassEventManagement />} />
-                <Route path="/security-plan-writing" element={<SecurityPlanWriting />} />
-                <Route path="/emergency-preparedness" element={<EmergencyPreparedness />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
+            <div id="main-app-content">
+              <BrowserRouter
+                future={{
+                  v7_startTransition: true,
+                  v7_relativeSplatPath: true,
+                }}
+              >
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/security-consulting" element={<SecurityConsulting />} />
+                  <Route path="/mass-event-management" element={<MassEventManagement />} />
+                  <Route path="/security-plan-writing" element={<SecurityPlanWriting />} />
+                  <Route path="/emergency-preparedness" element={<EmergencyPreparedness />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </div>
           </div>
         </TooltipProvider>
       </LanguageProvider>

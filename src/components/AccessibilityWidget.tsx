@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useI18n } from '@/hooks/useI18n';
 
 const ACC_STORAGE_KEY = 'acc_prefs_v3';
@@ -417,7 +418,7 @@ const AccessibilityWidget = () => {
     </div>
   );
 
-  return (
+  return createPortal(
     <>
       <style>{`
         /* Skip link */
@@ -466,24 +467,22 @@ const AccessibilityWidget = () => {
           filter: contrast(1.1) saturate(1.1);
         }
 
-        /* Filters applied to body children, excluding accessibility widget */
-        html.acc-filter-on body > *:not(.acc-toggler):not(.acc-quick-reset) {
+        /* Create main content wrapper for filters */
+        #main-app-content {
+          min-height: 100vh;
+        }
+
+        /* Apply filters only to main content, NOT to widget */
+        html.acc-filter-on #main-app-content {
           filter: var(--acc-filter) !important;
         }
 
-        html.acc-monochrome body > *:not(.acc-toggler):not(.acc-quick-reset) {
+        html.acc-monochrome #main-app-content {
           filter: grayscale(1) contrast(1.2) !important;
         }
 
-        html.acc-grayscale body > *:not(.acc-toggler):not(.acc-quick-reset) {
+        html.acc-grayscale #main-app-content {
           filter: grayscale(1) !important;
-        }
-        
-        /* Force widget elements to always be visible with max z-index and no filter */
-        .acc-toggler, .acc-panel, .acc-quick-reset, #acc-reading-guide {
-          filter: none !important;
-          position: fixed !important;
-          z-index: 99999 !important;
         }
 
         html.acc-underline a,
@@ -918,7 +917,8 @@ const AccessibilityWidget = () => {
 
       {/* Reading guide overlay */}
       <div id="acc-reading-guide" ref={guideRef} aria-hidden="true" />
-    </>
+    </>,
+    document.body
   );
 };
 
