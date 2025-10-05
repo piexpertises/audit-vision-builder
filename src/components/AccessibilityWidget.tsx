@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useI18n } from '@/hooks/useI18n';
 
-const ACC_STORAGE_KEY = 'acc_prefs_v2';
+const ACC_STORAGE_KEY = 'acc_prefs_v3';
 
 interface AccPrefs {
   fontPercent?: number;
@@ -26,6 +26,7 @@ const AccessibilityWidget = () => {
   const { t, language } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [prefs, setPrefs] = useState<AccPrefs>({});
+  const [showQuickReset, setShowQuickReset] = useState(false);
   const guideRef = useRef<HTMLDivElement>(null);
 
   const texts = {
@@ -116,6 +117,7 @@ const AccessibilityWidget = () => {
         const parsed = JSON.parse(saved);
         setPrefs(parsed);
         applyPreferences(parsed);
+        checkQuickReset(parsed);
       }
     } catch (e) {
       console.error('Error loading accessibility preferences:', e);
@@ -178,10 +180,20 @@ const AccessibilityWidget = () => {
     }
   };
 
+  const checkQuickReset = (p: AccPrefs) => {
+    const isActive = Object.keys(p).some(k => {
+      if (k === 'fontPercent') return p[k] !== 100;
+      if (k === 'wordSpacing' || k === 'letterSpacing') return (p[k as keyof AccPrefs] as number) > 0;
+      return !!p[k as keyof AccPrefs];
+    });
+    setShowQuickReset(isActive);
+  };
+
   const savePrefs = (newPrefs: AccPrefs) => {
     localStorage.setItem(ACC_STORAGE_KEY, JSON.stringify(newPrefs));
     setPrefs(newPrefs);
     applyPreferences(newPrefs);
+    checkQuickReset(newPrefs);
   };
 
   const handleToggle = (key: keyof AccPrefs) => {
@@ -233,6 +245,7 @@ const AccessibilityWidget = () => {
   const handleReset = () => {
     localStorage.removeItem(ACC_STORAGE_KEY);
     setPrefs({});
+    setShowQuickReset(false);
     
     const html = document.documentElement;
     html.classList.remove(
@@ -453,20 +466,21 @@ const AccessibilityWidget = () => {
           filter: contrast(1.1) saturate(1.1);
         }
 
-        html.acc-filter-on body > *:not(.acc-toggler):not(.acc-panel):not(#acc-reading-guide) {
+        /* Filters applied to body, widget excluded */
+        html.acc-filter-on body {
           filter: var(--acc-filter) !important;
         }
 
-        html.acc-monochrome body > *:not(.acc-toggler):not(.acc-panel):not(#acc-reading-guide) {
+        html.acc-monochrome body {
           filter: grayscale(1) contrast(1.2) !important;
         }
 
-        html.acc-grayscale body > *:not(.acc-toggler):not(.acc-panel):not(#acc-reading-guide) {
+        html.acc-grayscale body {
           filter: grayscale(1) !important;
         }
         
-        /* Toujours garder le widget visible */
-        .acc-toggler, .acc-panel, #acc-reading-guide {
+        /* Always keep widget visible - force no filter */
+        .acc-toggler, .acc-panel, .acc-quick-reset, #acc-reading-guide {
           filter: none !important;
         }
 
@@ -475,13 +489,25 @@ const AccessibilityWidget = () => {
           text-decoration: underline !important;
         }
 
-        html.acc-hide-images img,
-        html.acc-hide-images picture,
-        html.acc-hide-images figure {
+        /* ===== SAFE 'hide images' (never hide inside the widget itself) ===== */
+        html.acc-hide-images body img,
+        html.acc-hide-images body picture,
+        html.acc-hide-images body figure {
           display: none !important;
         }
-        html.acc-hide-images * {
+        html.acc-hide-images body * {
           background-image: none !important;
+        }
+        /* Restore inside widget */
+        html.acc-hide-images #acc-panel img,
+        html.acc-hide-images #acc-panel picture,
+        html.acc-hide-images #acc-panel figure {
+          display: initial !important;
+        }
+        html.acc-hide-images #acc-panel *,
+        html.acc-hide-images #acc-toggler,
+        html.acc-hide-images #acc-quick-reset {
+          background-image: initial !important;
         }
 
         @font-face {
@@ -572,6 +598,38 @@ const AccessibilityWidget = () => {
         }
         .acc-toggler:hover {
           transform: scale(1.05);
+        }
+
+        /* Quick reset button */
+        .acc-quick-reset {
+          position: fixed;
+          inset-inline-end: 78px;
+          inset-block-end: 22px;
+          z-index: 99999;
+          display: none;
+          align-items: center;
+          gap: 0.4rem;
+          background: hsl(var(--background));
+          border: 1px solid hsl(var(--border));
+          border-radius: 999px;
+          padding: 0.3rem 0.6rem;
+          font-size: 12px;
+          font-weight: 600;
+          color: hsl(var(--primary));
+          cursor: pointer;
+          box-shadow: 0 6px 16px rgba(2, 8, 23, 0.12);
+          transition: all 0.2s ease;
+        }
+        .acc-quick-reset.show {
+          display: inline-flex;
+        }
+        .acc-quick-reset:hover {
+          background: hsl(var(--muted));
+          transform: scale(1.05);
+        }
+        .acc-quick-reset:focus-visible {
+          outline: 3px solid hsl(var(--ring));
+          outline-offset: 2px;
         }
 
         /* Panel */
@@ -733,6 +791,16 @@ const AccessibilityWidget = () => {
         aria-label={l.label}
       >
         ♿
+      </button>
+
+      {/* Quick reset button */}
+      <button
+        className={`acc-quick-reset ${showQuickReset ? 'show' : ''}`}
+        type="button"
+        onClick={handleReset}
+        aria-label={l.reset}
+      >
+        ↺ {l.reset}
       </button>
 
       {/* Panel */}
