@@ -587,7 +587,9 @@ const AccessibilityWidget = () => {
 
         /* Widget button */
         .acc-toggler {
-          position: fixed;
+          position: fixed !important;
+          right: 16px;
+          bottom: 16px;
           inset-inline-end: 16px;
           inset-block-end: 16px;
           width: 54px;
@@ -598,23 +600,38 @@ const AccessibilityWidget = () => {
           background: hsl(var(--primary));
           color: hsl(var(--primary-foreground));
           box-shadow: 0 8px 24px rgba(2, 8, 23, 0.18);
-          display: flex;
+          display: flex !important;
           align-items: center;
           justify-content: center;
           font-size: 24px;
-          z-index: 99999;
+          z-index: 999999 !important;
           transition: transform 0.2s ease;
+          pointer-events: auto !important;
+          visibility: visible !important;
+          opacity: 1 !important;
         }
         .acc-toggler:hover {
           transform: scale(1.05);
         }
+        
+        @media (max-width: 768px) {
+          .acc-toggler {
+            width: 56px;
+            height: 56px;
+            right: 12px;
+            bottom: 12px;
+            font-size: 26px;
+          }
+        }
 
         /* Quick reset button */
         .acc-quick-reset {
-          position: fixed;
+          position: fixed !important;
+          right: 78px;
+          bottom: 22px;
           inset-inline-end: 78px;
           inset-block-end: 22px;
-          z-index: 99999;
+          z-index: 999999 !important;
           display: none;
           align-items: center;
           gap: 0.4rem;
@@ -628,9 +645,11 @@ const AccessibilityWidget = () => {
           cursor: pointer;
           box-shadow: 0 6px 16px rgba(2, 8, 23, 0.12);
           transition: all 0.2s ease;
+          pointer-events: auto !important;
+          visibility: visible !important;
         }
         .acc-quick-reset.show {
-          display: inline-flex;
+          display: inline-flex !important;
         }
         .acc-quick-reset:hover {
           background: hsl(var(--muted));
@@ -640,10 +659,21 @@ const AccessibilityWidget = () => {
           outline: 3px solid hsl(var(--ring));
           outline-offset: 2px;
         }
+        
+        @media (max-width: 768px) {
+          .acc-quick-reset {
+            right: 76px;
+            bottom: 18px;
+            font-size: 11px;
+            padding: 0.25rem 0.5rem;
+          }
+        }
 
         /* Panel */
         .acc-panel {
-          position: fixed;
+          position: fixed !important;
+          right: 16px;
+          bottom: 80px;
           inset-inline-end: 16px;
           inset-block-end: 80px;
           width: min(92vw, 360px);
@@ -655,12 +685,23 @@ const AccessibilityWidget = () => {
           border-radius: 14px;
           box-shadow: 0 12px 32px rgba(2, 8, 23, 0.18);
           padding: 12px;
-          z-index: 99999;
+          z-index: 999999 !important;
           display: none;
+          pointer-events: auto !important;
+          visibility: visible !important;
         }
         .acc-panel.open {
-          display: block;
+          display: block !important;
           animation: slideUp 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+          .acc-panel {
+            right: 8px;
+            bottom: 76px;
+            width: min(95vw, 360px);
+            max-height: 70vh;
+          }
         }
 
         @keyframes slideUp {
