@@ -77,10 +77,10 @@ const Header = () => {
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[100] bg-transparent transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
       isScrolled 
-        ? 'backdrop-blur-sm border-b border-white/10 hover:backdrop-blur-md' 
-        : 'border-b border-transparent'
+        ? 'bg-[#0D1B2A]/95 backdrop-blur-md border-b border-white/10' 
+        : 'bg-[#0D1B2A]/80 backdrop-blur-sm border-b border-white/5'
     }`}
       style={{
         minHeight: 'clamp(64px, 8vh, 80px)',
