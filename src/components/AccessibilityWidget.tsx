@@ -1,22 +1,114 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useI18n } from '@/hooks/useI18n';
 
-const ACC_STORAGE_KEY = 'acc_prefs_v1';
+const ACC_STORAGE_KEY = 'acc_prefs_v2';
 
 interface AccPrefs {
-  zoomLevel?: number;
+  fontPercent?: number;
+  wordSpacing?: number;
+  letterSpacing?: number;
   contrast?: boolean;
   grayscale?: boolean;
+  invert?: boolean;
+  monochrome?: boolean;
   underline?: boolean;
+  hideImages?: boolean;
+  readable?: boolean;
   dyslexia?: boolean;
+  guide?: boolean;
+  cursorLight?: boolean;
+  cursorDark?: boolean;
+  highlightH?: boolean;
+  noAnim?: boolean;
 }
 
 const AccessibilityWidget = () => {
   const { t, language } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [prefs, setPrefs] = useState<AccPrefs>({});
+  const guideRef = useRef<HTMLDivElement>(null);
 
-  // Load preferences from localStorage
+  const texts = {
+    he: {
+      skip: 'דלג לתוכן הראשי',
+      title: 'כְּלֵי נְגִישׁוּת',
+      grayscale: 'גווני אפור',
+      contrast: 'ניגודית גבוהה',
+      invert: 'ניגודיות הפוכה',
+      monochrome: 'שחור לבן',
+      underline: 'הדגשת קישורים',
+      hideImages: 'הסתרת תמונות',
+      readable: 'גופן קריא',
+      dyslexia: 'גופן דיסלקסיה',
+      reading: 'הקראת טקסט',
+      guide: 'מדריך קריאה',
+      cursorLight: 'סמן גדול בהיר',
+      cursorDark: 'סמן גדול כהה',
+      highlightH: 'הדגשת כותרות',
+      noAnim: 'ביטול אנימציות',
+      reset: 'איפוס הגדרות',
+      fontSize: 'התאמת גודל גופן',
+      wordSpacing: 'התאמת ריווח בין מילים',
+      letterSpacing: 'התאמת ריווח בין אותיות',
+      statement: 'הצהרת נגישות',
+      shortcuts: 'קיצורי דרך: Alt+Shift+A לפתיחה · C ניגודיות · I הפיכת צבעים · U קישורים · G גווני אפור · M שחור־לבן · X ביטול אנימציות · R איפוס · =/-/0 טקסט',
+      label: 'כלי נגישות'
+    },
+    fr: {
+      skip: 'Aller au contenu principal',
+      title: 'Outils d\'accessibilité',
+      grayscale: 'Niveaux de gris',
+      contrast: 'Contraste élevé',
+      invert: 'Inverser les couleurs',
+      monochrome: 'Noir et blanc',
+      underline: 'Souligner les liens',
+      hideImages: 'Masquer les images',
+      readable: 'Police lisible',
+      dyslexia: 'Police dyslexie',
+      reading: 'Lecture vocale',
+      guide: 'Guide de lecture',
+      cursorLight: 'Grand curseur clair',
+      cursorDark: 'Grand curseur foncé',
+      highlightH: 'Surligner les titres',
+      noAnim: 'Désactiver animations',
+      reset: 'Réinitialiser',
+      fontSize: 'Taille du texte',
+      wordSpacing: 'Espacement des mots',
+      letterSpacing: 'Espacement des lettres',
+      statement: 'Déclaration d\'accessibilité',
+      shortcuts: 'Raccourcis: Alt+Shift+A ouvrir · C contraste · I inverser · U liens · G gris · M monochrome · X animations · R réinitialiser',
+      label: 'Outils d\'accessibilité'
+    },
+    en: {
+      skip: 'Skip to main content',
+      title: 'Accessibility Tools',
+      grayscale: 'Grayscale',
+      contrast: 'High contrast',
+      invert: 'Invert colors',
+      monochrome: 'Monochrome',
+      underline: 'Underline links',
+      hideImages: 'Hide images',
+      readable: 'Readable font',
+      dyslexia: 'Dyslexia font',
+      reading: 'Text to speech',
+      guide: 'Reading guide',
+      cursorLight: 'Large light cursor',
+      cursorDark: 'Large dark cursor',
+      highlightH: 'Highlight headings',
+      noAnim: 'Disable animations',
+      reset: 'Reset settings',
+      fontSize: 'Text size',
+      wordSpacing: 'Word spacing',
+      letterSpacing: 'Letter spacing',
+      statement: 'Accessibility statement',
+      shortcuts: 'Shortcuts: Alt+Shift+A open · C contrast · I invert · U links · G grayscale · M monochrome · X animations · R reset',
+      label: 'Accessibility tools'
+    }
+  };
+
+  const l = texts[language as keyof typeof texts] || texts.en;
+
+  // Load preferences
   useEffect(() => {
     try {
       const saved = localStorage.getItem(ACC_STORAGE_KEY);
@@ -33,19 +125,57 @@ const AccessibilityWidget = () => {
   const applyPreferences = (p: AccPrefs) => {
     const html = document.documentElement;
     
-    // Remove all classes first
-    html.classList.remove('acc-zoom-1', 'acc-zoom-2', 'acc-zoom-3', 'acc-contrast', 'acc-grayscale', 'acc-underline', 'acc-dyslexia');
+    // Font size
+    if (p.fontPercent) {
+      html.style.fontSize = (p.fontPercent / 100 * 16) + 'px';
+    }
     
-    // Apply zoom
-    if (p.zoomLevel === 1) html.classList.add('acc-zoom-1');
-    if (p.zoomLevel === 2) html.classList.add('acc-zoom-2');
-    if (p.zoomLevel === 3) html.classList.add('acc-zoom-3');
+    // Spacing
+    if (p.wordSpacing !== undefined) {
+      html.style.setProperty('--acc-word-spacing', p.wordSpacing + 'em');
+    }
+    if (p.letterSpacing !== undefined) {
+      html.style.setProperty('--acc-letter-spacing', p.letterSpacing + 'em');
+    }
     
-    // Apply toggles
+    // Classes
+    html.classList.remove(
+      'acc-contrast', 'acc-grayscale', 'acc-invert', 'acc-monochrome',
+      'acc-underline', 'acc-hide-images', 'acc-readable', 'acc-dyslexia',
+      'acc-guide', 'acc-cursor-light', 'acc-cursor-dark', 'acc-highlight-h',
+      'acc-no-anim', 'acc-filter-on'
+    );
+    
     if (p.contrast) html.classList.add('acc-contrast');
     if (p.grayscale) html.classList.add('acc-grayscale');
+    if (p.invert) html.classList.add('acc-invert');
+    if (p.monochrome) html.classList.add('acc-monochrome');
     if (p.underline) html.classList.add('acc-underline');
+    if (p.hideImages) html.classList.add('acc-hide-images');
+    if (p.readable) html.classList.add('acc-readable');
     if (p.dyslexia) html.classList.add('acc-dyslexia');
+    if (p.guide) html.classList.add('acc-guide');
+    if (p.cursorLight) html.classList.add('acc-cursor-light');
+    if (p.cursorDark) html.classList.add('acc-cursor-dark');
+    if (p.highlightH) html.classList.add('acc-highlight-h');
+    if (p.noAnim) html.classList.add('acc-no-anim');
+    
+    rebuildFilter(p);
+  };
+
+  const rebuildFilter = (p: AccPrefs) => {
+    const html = document.documentElement;
+    const filters: string[] = [];
+    
+    if (p.invert) filters.push('invert(1) hue-rotate(180deg)');
+    if (p.grayscale) filters.push('grayscale(1)');
+    
+    html.style.setProperty('--acc-filter', filters.join(' '));
+    if (filters.length) {
+      html.classList.add('acc-filter-on');
+    } else {
+      html.classList.remove('acc-filter-on');
+    }
   };
 
   const savePrefs = (newPrefs: AccPrefs) => {
@@ -54,22 +184,82 @@ const AccessibilityWidget = () => {
     applyPreferences(newPrefs);
   };
 
-  const handleZoom = (level: number) => {
-    savePrefs({ ...prefs, zoomLevel: level });
+  const handleToggle = (key: keyof AccPrefs) => {
+    const newPrefs = { ...prefs, [key]: !prefs[key] };
+    
+    // Enforce cursor exclusivity
+    if (key === 'cursorLight' && newPrefs.cursorLight) {
+      newPrefs.cursorDark = false;
+    }
+    if (key === 'cursorDark' && newPrefs.cursorDark) {
+      newPrefs.cursorLight = false;
+    }
+    
+    savePrefs(newPrefs);
   };
 
-  const handleToggle = (key: keyof AccPrefs) => {
-    savePrefs({ ...prefs, [key]: !prefs[key] });
+  const handleSlider = (key: keyof AccPrefs, value: number) => {
+    savePrefs({ ...prefs, [key]: value });
+  };
+
+  const handleReading = () => {
+    try {
+      const synth = window.speechSynthesis;
+      if (!synth) {
+        alert('Your browser does not support text-to-speech.');
+        return;
+      }
+      
+      let text = window.getSelection()?.toString().trim();
+      if (!text) {
+        text = document.body.innerText.slice(0, 1000);
+      }
+      
+      synth.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      
+      const voices = synth.getVoices();
+      const langVoice = voices.find(v => v.lang.startsWith(language));
+      if (langVoice) utter.voice = langVoice;
+      
+      utter.rate = 1;
+      utter.pitch = 1;
+      synth.speak(utter);
+    } catch (e) {
+      console.error('Speech synthesis error:', e);
+    }
   };
 
   const handleReset = () => {
     localStorage.removeItem(ACC_STORAGE_KEY);
     setPrefs({});
-    applyPreferences({});
-    window.location.reload();
+    
+    const html = document.documentElement;
+    html.classList.remove(
+      'acc-contrast', 'acc-grayscale', 'acc-invert', 'acc-monochrome',
+      'acc-underline', 'acc-hide-images', 'acc-readable', 'acc-dyslexia',
+      'acc-guide', 'acc-cursor-light', 'acc-cursor-dark', 'acc-highlight-h',
+      'acc-no-anim', 'acc-filter-on'
+    );
+    html.style.removeProperty('font-size');
+    html.style.removeProperty('--acc-word-spacing');
+    html.style.removeProperty('--acc-letter-spacing');
+    html.style.removeProperty('--acc-filter');
   };
 
-  const togglePanel = () => setIsOpen(!isOpen);
+  // Mouse tracking for reading guide
+  useEffect(() => {
+    if (!prefs.guide) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (guideRef.current) {
+        guideRef.current.style.transform = `translateY(${e.clientY - 19}px)`;
+      }
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, [prefs.guide]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -79,11 +269,15 @@ const AccessibilityWidget = () => {
       
       if (k === 'a') {
         e.preventDefault();
-        togglePanel();
+        setIsOpen(!isOpen);
       }
       if (k === 'c') {
         e.preventDefault();
         handleToggle('contrast');
+      }
+      if (k === 'i') {
+        e.preventDefault();
+        handleToggle('invert');
       }
       if (k === 'u') {
         e.preventDefault();
@@ -93,24 +287,41 @@ const AccessibilityWidget = () => {
         e.preventDefault();
         handleToggle('grayscale');
       }
-      if (k === 'd') {
+      if (k === 'm') {
         e.preventDefault();
-        handleToggle('dyslexia');
+        handleToggle('monochrome');
+      }
+      if (k === 'x') {
+        e.preventDefault();
+        handleToggle('noAnim');
+      }
+      if (k === 'h') {
+        e.preventDefault();
+        handleToggle('highlightH');
+      }
+      if (k === 'l') {
+        e.preventDefault();
+        handleToggle('hideImages');
+      }
+      if (k === 'r') {
+        e.preventDefault();
+        handleReset();
       }
       if (k === '=' || k === '+') {
         e.preventDefault();
-        handleZoom(Math.min((prefs.zoomLevel || 0) + 1, 3));
+        const newVal = Math.min((prefs.fontPercent || 100) + 5, 160);
+        handleSlider('fontPercent', newVal);
       }
       if (k === '-') {
         e.preventDefault();
-        handleZoom(Math.max((prefs.zoomLevel || 0) - 1, 0));
+        const newVal = Math.max((prefs.fontPercent || 100) - 5, 80);
+        handleSlider('fontPercent', newVal);
       }
       if (k === '0') {
         e.preventDefault();
-        handleZoom(0);
+        handleSlider('fontPercent', 100);
       }
       
-      // Escape to close
       if (e.key === 'Escape' && isOpen) {
         setIsOpen(false);
       }
@@ -119,6 +330,79 @@ const AccessibilityWidget = () => {
     document.addEventListener('keydown', handleKeyboard);
     return () => document.removeEventListener('keydown', handleKeyboard);
   }, [isOpen, prefs]);
+
+  const Tile = ({ id, checked, onClick, children }: { id: string; checked: boolean; onClick: () => void; children: React.ReactNode }) => (
+    <button
+      type="button"
+      className={`acc-tile ${checked ? 'active' : ''}`}
+      id={id}
+      role="switch"
+      aria-checked={checked}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+
+  const ActionTile = ({ id, onClick, children }: { id: string; onClick: () => void; children: React.ReactNode }) => (
+    <button
+      type="button"
+      className="acc-tile"
+      id={id}
+      role="button"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+
+  const RangeControl = ({ 
+    title, 
+    min, 
+    max, 
+    step, 
+    value, 
+    format, 
+    onChange 
+  }: { 
+    title: string; 
+    min: number; 
+    max: number; 
+    step: number; 
+    value: number; 
+    format: (v: number) => string; 
+    onChange: (v: number) => void;
+  }) => (
+    <div className="acc-range">
+      <h4>{title}</h4>
+      <div className="acc-range-row">
+        <button 
+          type="button" 
+          onClick={() => onChange(Math.max(min, value - step))}
+          aria-label="Decrease"
+        >
+          -
+        </button>
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => onChange(parseFloat(e.target.value))}
+          aria-label={title}
+        />
+        <div className="acc-range-val">{format(value)}</div>
+        <button 
+          type="button" 
+          onClick={() => onChange(Math.min(max, value + step))}
+          aria-label="Increase"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -145,11 +429,19 @@ const AccessibilityWidget = () => {
           overflow: visible;
         }
 
-        /* Accessibility states */
-        html.acc-zoom-1 { font-size: calc(16px * 1.1); }
-        html.acc-zoom-2 { font-size: calc(16px * 1.25); }
-        html.acc-zoom-3 { font-size: calc(16px * 1.4); }
+        /* Variables */
+        :root {
+          --acc-letter-spacing: normal;
+          --acc-word-spacing: normal;
+          --acc-filter: none;
+        }
 
+        body {
+          letter-spacing: var(--acc-letter-spacing);
+          word-spacing: var(--acc-word-spacing);
+        }
+
+        /* States */
         html.acc-contrast {
           --background: 222.2 84% 4.9%;
           --card: 222.2 84% 4.9%;
@@ -157,13 +449,20 @@ const AccessibilityWidget = () => {
           --muted: 217.2 32.6% 17.5%;
           --muted-foreground: 215 20.2% 65.1%;
         }
-        html.acc-contrast img,
-        html.acc-contrast video {
+        html.acc-contrast img, html.acc-contrast video {
           filter: contrast(1.1) saturate(1.1);
         }
 
+        html.acc-filter-on body {
+          filter: var(--acc-filter) !important;
+        }
+
+        html.acc-monochrome body {
+          filter: grayscale(1) contrast(1.2) !important;
+        }
+
         html.acc-grayscale body {
-          filter: grayscale(1);
+          filter: grayscale(1) !important;
         }
 
         html.acc-underline a,
@@ -171,9 +470,73 @@ const AccessibilityWidget = () => {
           text-decoration: underline !important;
         }
 
+        html.acc-hide-images img,
+        html.acc-hide-images picture,
+        html.acc-hide-images figure {
+          display: none !important;
+        }
+        html.acc-hide-images * {
+          background-image: none !important;
+        }
+
+        @font-face {
+          font-family: AccReadableFallback;
+          font-weight: 400;
+          font-style: normal;
+          src: local("Atkinson Hyperlegible"), local("Inter"), local("Arial");
+        }
+        html.acc-readable {
+          font-family: AccReadableFallback, system-ui, Arial, sans-serif;
+        }
+
+        @font-face {
+          font-family: AccDyslexicFallback;
+          font-weight: 400;
+          font-style: normal;
+          src: local("OpenDyslexic"), local("Atkinson Hyperlegible"), local("Arial");
+        }
         html.acc-dyslexia {
-          font-family: 'Atkinson Hyperlegible', 'OpenDyslexic', Arial, sans-serif;
+          font-family: AccDyslexicFallback, system-ui, Arial, sans-serif;
           letter-spacing: 0.0125em;
+        }
+
+        html.acc-no-anim * {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+
+        html.acc-highlight-h h1,
+        html.acc-highlight-h h2,
+        html.acc-highlight-h h3,
+        html.acc-highlight-h h4,
+        html.acc-highlight-h h5,
+        html.acc-highlight-h h6 {
+          background: hsl(var(--accent) / 0.3);
+          outline: 2px dashed hsl(var(--primary));
+          padding-inline: 6px;
+          border-radius: 6px;
+        }
+
+        html.acc-cursor-light * {
+          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="12" cy="12" r="10" fill="white" stroke="black" stroke-width="2"/></svg>') 2 2, auto !important;
+        }
+
+        html.acc-cursor-dark * {
+          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="12" cy="12" r="10" fill="black" stroke="white" stroke-width="2"/></svg>') 2 2, auto !important;
+        }
+
+        #acc-reading-guide {
+          position: fixed;
+          inset-inline: 0;
+          height: 38px;
+          pointer-events: none;
+          z-index: 99999;
+          background: linear-gradient(to bottom, transparent 0, rgba(255, 235, 150, 0.6) 40%, rgba(255, 235, 150, 0.6) 60%, transparent 100%);
+          display: none;
+        }
+        html.acc-guide #acc-reading-guide {
+          display: block;
         }
 
         /* Enhanced focus */
@@ -212,14 +575,14 @@ const AccessibilityWidget = () => {
           inset-inline-end: 16px;
           inset-block-end: 80px;
           width: min(92vw, 360px);
-          max-height: 70vh;
+          max-height: 78vh;
           overflow: auto;
           background: hsl(var(--card));
           color: hsl(var(--card-foreground));
           border: 1px solid hsl(var(--border));
           border-radius: 14px;
           box-shadow: 0 12px 32px rgba(2, 8, 23, 0.18);
-          padding: 16px;
+          padding: 12px;
           z-index: 99999;
           display: none;
         }
@@ -240,82 +603,92 @@ const AccessibilityWidget = () => {
         }
 
         .acc-panel h3 {
-          margin: 0 0 12px;
+          margin: 0 0 10px;
           font-size: 18px;
           font-weight: 700;
-          color: hsl(var(--foreground));
-        }
-
-        .acc-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 8px;
-          padding: 10px 8px;
-          border-radius: 10px;
-          background: hsl(var(--muted));
-          margin-block: 8px;
-        }
-
-        .acc-row label {
-          font-size: 14px;
-          font-weight: 600;
-          color: hsl(var(--foreground));
-        }
-
-        .acc-zoom-btns {
-          display: flex;
-          gap: 6px;
-        }
-
-        .acc-zoom-btn {
-          padding: 4px 8px;
-          border: 1px solid hsl(var(--border));
-          border-radius: 6px;
-          background: hsl(var(--background));
-          cursor: pointer;
-          transition: all 0.2s ease;
-          color: hsl(var(--foreground));
-        }
-
-        .acc-zoom-btn.active {
+          text-align: center;
+          padding: 8px;
+          border-radius: 8px;
           background: hsl(var(--primary));
           color: hsl(var(--primary-foreground));
-          border-color: hsl(var(--primary));
         }
 
-        .acc-switch {
-          position: relative;
-          width: 46px;
-          height: 26px;
+        #acc-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 10px;
+        }
+
+        .acc-tile {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 14px 6px;
+          border: 2px solid hsl(var(--primary));
+          border-radius: 14px;
+          background: hsl(var(--muted));
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+          user-select: none;
+          transition: all 0.2s ease;
+          color: hsl(var(--foreground));
+        }
+
+        .acc-tile.active,
+        .acc-tile[aria-checked="true"] {
+          background: hsl(var(--primary) / 0.2);
+          outline: 2px solid hsl(var(--primary));
+        }
+
+        .acc-tile:hover {
+          background: hsl(var(--primary) / 0.1);
+        }
+
+        .acc-range {
+          background: hsl(var(--muted));
+          padding: 12px;
+          border-radius: 12px;
+          margin: 12px 0;
+        }
+
+        .acc-range h4 {
+          margin: 0 0 8px;
+          font-size: 15px;
+          font-weight: 700;
+          text-align: center;
+          color: hsl(var(--primary));
+        }
+
+        .acc-range-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .acc-range button {
+          width: 36px;
+          height: 36px;
           border-radius: 999px;
           border: 1px solid hsl(var(--border));
           background: hsl(var(--background));
           cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          transition: all 0.2s ease;
+          font-size: 20px;
+          color: hsl(var(--foreground));
         }
 
-        .acc-switch .dot {
-          width: 20px;
-          height: 20px;
-          border-radius: 999px;
-          background: hsl(var(--muted-foreground));
-          position: absolute;
-          inset-block-start: 2px;
-          inset-inline-start: 2px;
-          transition: all 0.2s ease;
+        .acc-range input[type="range"] {
+          flex: 1;
+          accent-color: hsl(var(--primary));
         }
 
-        .acc-switch.active {
-          background: hsl(var(--primary));
-          border-color: hsl(var(--primary));
-        }
-
-        .acc-switch.active .dot {
-          background: hsl(var(--primary-foreground));
-          inset-inline-start: 24px;
+        .acc-range-val {
+          min-width: 56px;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 700;
+          color: hsl(var(--foreground));
         }
 
         .acc-actions {
@@ -323,22 +696,7 @@ const AccessibilityWidget = () => {
           gap: 12px;
           align-items: center;
           padding: 8px 6px;
-        }
-
-        .acc-reset-btn {
-          padding: 8px 16px;
-          border: 1px solid hsl(var(--border));
-          border-radius: 8px;
-          background: hsl(var(--background));
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 600;
-          color: hsl(var(--foreground));
-          transition: all 0.2s ease;
-        }
-
-        .acc-reset-btn:hover {
-          background: hsl(var(--muted));
+          flex-wrap: wrap;
         }
 
         .acc-policy-link {
@@ -357,17 +715,17 @@ const AccessibilityWidget = () => {
 
       {/* Skip link */}
       <a href="#main-content" className="acc-skip">
-        {language === 'he' ? 'דלג לתוכן הראשי' : language === 'fr' ? 'Aller au contenu principal' : 'Skip to main content'}
+        {l.skip}
       </a>
 
       {/* Toggle button */}
       <button
         className="acc-toggler"
         type="button"
-        onClick={togglePanel}
+        onClick={() => setIsOpen(!isOpen)}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        aria-label={language === 'he' ? 'כלי נגישות' : language === 'fr' ? 'Outils d\'accessibilité' : 'Accessibility tools'}
+        aria-label={l.label}
       >
         ♿
       </button>
@@ -379,119 +737,112 @@ const AccessibilityWidget = () => {
         aria-modal={isOpen}
         dir={language === 'he' ? 'rtl' : 'ltr'}
       >
-        <h3>
-          {language === 'he' ? 'כלי נגישות' : language === 'fr' ? 'Outils d\'accessibilité' : 'Accessibility Tools'}
-        </h3>
+        <h3>{l.title}</h3>
 
-        {/* Text size */}
-        <div className="acc-row">
-          <label>
-            {language === 'he' ? 'גודל טקסט' : language === 'fr' ? 'Taille du texte' : 'Text size'}
-          </label>
-          <div className="acc-zoom-btns">
-            {[0, 1, 2, 3].map((level) => (
-              <button
-                key={level}
-                type="button"
-                className={`acc-zoom-btn ${prefs.zoomLevel === level ? 'active' : ''}`}
-                onClick={() => handleZoom(level)}
-                style={{ fontSize: level === 0 ? '1em' : `${1 + level * 0.15}em` }}
-                aria-pressed={prefs.zoomLevel === level}
-              >
-                A
-              </button>
-            ))}
-          </div>
+        {/* Grid of tiles */}
+        <div id="acc-grid" aria-label={l.title}>
+          <Tile id="btn-grayscale" checked={!!prefs.grayscale} onClick={() => handleToggle('grayscale')}>
+            {l.grayscale}
+          </Tile>
+          <Tile id="btn-contrast" checked={!!prefs.contrast} onClick={() => handleToggle('contrast')}>
+            {l.contrast}
+          </Tile>
+          <Tile id="btn-invert" checked={!!prefs.invert} onClick={() => handleToggle('invert')}>
+            {l.invert}
+          </Tile>
+
+          <Tile id="btn-monochrome" checked={!!prefs.monochrome} onClick={() => handleToggle('monochrome')}>
+            {l.monochrome}
+          </Tile>
+          <Tile id="btn-underline" checked={!!prefs.underline} onClick={() => handleToggle('underline')}>
+            {l.underline}
+          </Tile>
+          <Tile id="btn-hide-images" checked={!!prefs.hideImages} onClick={() => handleToggle('hideImages')}>
+            {l.hideImages}
+          </Tile>
+
+          <Tile id="btn-readable" checked={!!prefs.readable} onClick={() => handleToggle('readable')}>
+            {l.readable}
+          </Tile>
+          <Tile id="btn-dyslexia" checked={!!prefs.dyslexia} onClick={() => handleToggle('dyslexia')}>
+            {l.dyslexia}
+          </Tile>
+          <ActionTile id="btn-reading" onClick={handleReading}>
+            {l.reading}
+          </ActionTile>
+
+          <Tile id="btn-guide" checked={!!prefs.guide} onClick={() => handleToggle('guide')}>
+            {l.guide}
+          </Tile>
+          <Tile id="btn-cursor-light" checked={!!prefs.cursorLight} onClick={() => handleToggle('cursorLight')}>
+            {l.cursorLight}
+          </Tile>
+          <Tile id="btn-cursor-dark" checked={!!prefs.cursorDark} onClick={() => handleToggle('cursorDark')}>
+            {l.cursorDark}
+          </Tile>
+
+          <Tile id="btn-highlight-h" checked={!!prefs.highlightH} onClick={() => handleToggle('highlightH')}>
+            {l.highlightH}
+          </Tile>
+          <Tile id="btn-no-anim" checked={!!prefs.noAnim} onClick={() => handleToggle('noAnim')}>
+            {l.noAnim}
+          </Tile>
+          <ActionTile id="btn-reset" onClick={handleReset}>
+            {l.reset}
+          </ActionTile>
         </div>
 
-        {/* High contrast */}
-        <div className="acc-row">
-          <label>
-            {language === 'he' ? 'ניגודיות גבוהה' : language === 'fr' ? 'Contraste élevé' : 'High contrast'}
-          </label>
-          <button
-            type="button"
-            className={`acc-switch ${prefs.contrast ? 'active' : ''}`}
-            onClick={() => handleToggle('contrast')}
-            role="switch"
-            aria-checked={!!prefs.contrast}
-          >
-            <span className="dot" aria-hidden="true" />
-          </button>
-        </div>
+        {/* Range controls */}
+        <RangeControl
+          title={l.fontSize}
+          min={80}
+          max={160}
+          step={5}
+          value={prefs.fontPercent || 100}
+          format={(v) => Math.round(v) + '%'}
+          onChange={(v) => handleSlider('fontPercent', v)}
+        />
 
-        {/* Grayscale */}
-        <div className="acc-row">
-          <label>
-            {language === 'he' ? 'גווני אפור' : language === 'fr' ? 'Niveaux de gris' : 'Grayscale'}
-          </label>
-          <button
-            type="button"
-            className={`acc-switch ${prefs.grayscale ? 'active' : ''}`}
-            onClick={() => handleToggle('grayscale')}
-            role="switch"
-            aria-checked={!!prefs.grayscale}
-          >
-            <span className="dot" aria-hidden="true" />
-          </button>
-        </div>
+        <RangeControl
+          title={l.wordSpacing}
+          min={0}
+          max={1.2}
+          step={0.1}
+          value={prefs.wordSpacing || 0}
+          format={(v) => v.toFixed(1)}
+          onChange={(v) => handleSlider('wordSpacing', v)}
+        />
 
-        {/* Underline links */}
-        <div className="acc-row">
-          <label>
-            {language === 'he' ? 'הדגשת קישורים' : language === 'fr' ? 'Souligner les liens' : 'Underline links'}
-          </label>
-          <button
-            type="button"
-            className={`acc-switch ${prefs.underline ? 'active' : ''}`}
-            onClick={() => handleToggle('underline')}
-            role="switch"
-            aria-checked={!!prefs.underline}
-          >
-            <span className="dot" aria-hidden="true" />
-          </button>
-        </div>
-
-        {/* Dyslexia font */}
-        <div className="acc-row">
-          <label>
-            {language === 'he' ? 'גופן ידידותי לדיסלקסיה' : language === 'fr' ? 'Police pour dyslexie' : 'Dyslexia-friendly font'}
-          </label>
-          <button
-            type="button"
-            className={`acc-switch ${prefs.dyslexia ? 'active' : ''}`}
-            onClick={() => handleToggle('dyslexia')}
-            role="switch"
-            aria-checked={!!prefs.dyslexia}
-          >
-            <span className="dot" aria-hidden="true" />
-          </button>
-        </div>
+        <RangeControl
+          title={l.letterSpacing}
+          min={0}
+          max={0.2}
+          step={0.01}
+          value={prefs.letterSpacing || 0}
+          format={(v) => v.toFixed(2)}
+          onChange={(v) => handleSlider('letterSpacing', v)}
+        />
 
         {/* Actions */}
         <div className="acc-actions">
-          <button type="button" className="acc-reset-btn" onClick={handleReset}>
-            {language === 'he' ? 'איפוס' : language === 'fr' ? 'Réinitialiser' : 'Reset'}
-          </button>
           <a
             className="acc-policy-link"
             href="/accessibility-statement"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {language === 'he' ? 'הצהרת נגישות' : language === 'fr' ? 'Déclaration d\'accessibilité' : 'Accessibility statement'}
+            {l.statement}
           </a>
         </div>
 
         {/* Help text */}
         <p className="acc-help-text">
-          {language === 'he'
-            ? 'קיצור מקלדת: Alt+Shift+A לפתיחה/סגירה · Alt+Shift+C ניגודיות · Alt+Shift+U קישורים'
-            : language === 'fr'
-            ? 'Raccourcis: Alt+Shift+A ouvrir/fermer · Alt+Shift+C contraste · Alt+Shift+U liens'
-            : 'Shortcuts: Alt+Shift+A open/close · Alt+Shift+C contrast · Alt+Shift+U links'}
+          {l.shortcuts}
         </p>
       </div>
+
+      {/* Reading guide overlay */}
+      <div id="acc-reading-guide" ref={guideRef} aria-hidden="true" />
     </>
   );
 };
