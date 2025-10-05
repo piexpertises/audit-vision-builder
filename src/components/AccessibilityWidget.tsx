@@ -466,22 +466,24 @@ const AccessibilityWidget = () => {
           filter: contrast(1.1) saturate(1.1);
         }
 
-        /* Filters applied to body, widget excluded */
-        html.acc-filter-on body {
+        /* Filters applied to body children, excluding accessibility widget */
+        html.acc-filter-on body > *:not(.acc-toggler):not(.acc-quick-reset) {
           filter: var(--acc-filter) !important;
         }
 
-        html.acc-monochrome body {
+        html.acc-monochrome body > *:not(.acc-toggler):not(.acc-quick-reset) {
           filter: grayscale(1) contrast(1.2) !important;
         }
 
-        html.acc-grayscale body {
+        html.acc-grayscale body > *:not(.acc-toggler):not(.acc-quick-reset) {
           filter: grayscale(1) !important;
         }
         
-        /* Always keep widget visible - force no filter */
+        /* Force widget elements to always be visible with max z-index and no filter */
         .acc-toggler, .acc-panel, .acc-quick-reset, #acc-reading-guide {
           filter: none !important;
+          position: fixed !important;
+          z-index: 99999 !important;
         }
 
         html.acc-underline a,
