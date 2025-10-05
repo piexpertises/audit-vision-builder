@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import AccessibilityWidget from "@/components/AccessibilityWidget";
 import Index from "./pages/Index";
 import SecurityConsulting from "./pages/SecurityConsulting";
 import MassEventManagement from "./pages/MassEventManagement";
@@ -24,6 +25,7 @@ const App = () => {
             <Toaster />
             <Sonner />
             <WhatsAppButton />
+            <AccessibilityWidget />
             <BrowserRouter
               future={{
                 v7_startTransition: true,
