@@ -143,21 +143,20 @@ const AccessibilityWidget = () => {
     
     // Classes
     html.classList.remove(
-      'acc-contrast', 'acc-grayscale', 'acc-invert', 'acc-monochrome',
+      'acc-contrast', 'acc-grayscale', 'acc-monochrome',
       'acc-underline', 'acc-hide-images', 'acc-readable', 'acc-dyslexia',
       'acc-guide', 'acc-cursor-light', 'acc-cursor-dark', 'acc-highlight-h',
-      'acc-no-anim', 'acc-filter-on'
+      'acc-no-anim', 'acc-filter-on', 'acc-reading-guide'
     );
     
     if (p.contrast) html.classList.add('acc-contrast');
     if (p.grayscale) html.classList.add('acc-grayscale');
-    if (p.invert) html.classList.add('acc-invert');
     if (p.monochrome) html.classList.add('acc-monochrome');
     if (p.underline) html.classList.add('acc-underline');
     if (p.hideImages) html.classList.add('acc-hide-images');
     if (p.readable) html.classList.add('acc-readable');
     if (p.dyslexia) html.classList.add('acc-dyslexia');
-    if (p.guide) html.classList.add('acc-guide');
+    if (p.guide) html.classList.add('acc-reading-guide');
     if (p.cursorLight) html.classList.add('acc-cursor-light');
     if (p.cursorDark) html.classList.add('acc-cursor-dark');
     if (p.highlightH) html.classList.add('acc-highlight-h');
@@ -170,14 +169,21 @@ const AccessibilityWidget = () => {
     const html = document.documentElement;
     const filters: string[] = [];
     
+    // Only handle invert in the filter variable, grayscale and monochrome are handled by CSS classes
     if (p.invert) filters.push('invert(1) hue-rotate(180deg)');
-    if (p.grayscale) filters.push('grayscale(1)');
     
     html.style.setProperty('--acc-filter', filters.join(' '));
     if (filters.length) {
       html.classList.add('acc-filter-on');
     } else {
       html.classList.remove('acc-filter-on');
+    }
+    
+    // Monochrome is separate
+    if (p.monochrome) {
+      html.classList.add('acc-monochrome');
+    } else {
+      html.classList.remove('acc-monochrome');
     }
   };
 
@@ -250,10 +256,10 @@ const AccessibilityWidget = () => {
     
     const html = document.documentElement;
     html.classList.remove(
-      'acc-contrast', 'acc-grayscale', 'acc-invert', 'acc-monochrome',
+      'acc-contrast', 'acc-grayscale', 'acc-monochrome',
       'acc-underline', 'acc-hide-images', 'acc-readable', 'acc-dyslexia',
       'acc-guide', 'acc-cursor-light', 'acc-cursor-dark', 'acc-highlight-h',
-      'acc-no-anim', 'acc-filter-on'
+      'acc-no-anim', 'acc-filter-on', 'acc-reading-guide'
     );
     html.style.removeProperty('font-size');
     html.style.removeProperty('--acc-word-spacing');
@@ -472,7 +478,7 @@ const AccessibilityWidget = () => {
           min-height: 100vh;
         }
 
-        /* Apply filters only to main content, NOT to widget */
+        /* Apply filters - each gets its own rule */
         html.acc-filter-on #main-app-content {
           filter: var(--acc-filter) !important;
         }
@@ -483,6 +489,11 @@ const AccessibilityWidget = () => {
 
         html.acc-grayscale #main-app-content {
           filter: grayscale(1) !important;
+        }
+        
+        /* Invert handled separately to allow combinations */
+        html.acc-reading-guide #acc-reading-guide {
+          display: block;
         }
 
         html.acc-underline a,
@@ -566,9 +577,6 @@ const AccessibilityWidget = () => {
           z-index: 99999;
           background: linear-gradient(to bottom, transparent 0, rgba(255, 235, 150, 0.6) 40%, rgba(255, 235, 150, 0.6) 60%, transparent 100%);
           display: none;
-        }
-        html.acc-guide #acc-reading-guide {
-          display: block;
         }
 
         /* Enhanced focus */
