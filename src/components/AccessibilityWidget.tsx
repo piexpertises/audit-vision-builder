@@ -577,6 +577,8 @@ const AccessibilityWidget = () => {
           z-index: 2147483646;
           background: linear-gradient(to bottom, transparent 0, rgba(255, 235, 150, 0.6) 40%, rgba(255, 235, 150, 0.6) 60%, transparent 100%);
           display: none;
+          transform: translateZ(0);
+          will-change: transform;
         }
 
         /* Enhanced focus */
@@ -610,6 +612,8 @@ const AccessibilityWidget = () => {
           visibility: visible !important;
           opacity: 1 !important;
           isolation: isolate;
+          transform: translateZ(0);
+          will-change: transform;
         }
         .acc-toggler:hover {
           transform: scale(1.05);
@@ -649,6 +653,8 @@ const AccessibilityWidget = () => {
           pointer-events: auto !important;
           visibility: visible !important;
           isolation: isolate;
+          transform: translateZ(0);
+          will-change: transform;
         }
         .acc-quick-reset.show {
           display: inline-flex !important;
@@ -692,6 +698,8 @@ const AccessibilityWidget = () => {
           pointer-events: auto !important;
           visibility: visible !important;
           isolation: isolate;
+          transform: translateZ(0);
+          will-change: transform;
         }
         .acc-panel.open {
           display: block !important;
