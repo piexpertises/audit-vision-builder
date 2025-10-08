@@ -75,6 +75,7 @@ const WhatsAppButton = () => {
   }, [isDragging, dragOffset, position, isUnlocked]);
   
   const handleMouseDown = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Don't follow link
     e.preventDefault();
     
     // Start long press timer
@@ -93,25 +94,27 @@ const WhatsAppButton = () => {
         });
         setIsDragging(true);
       }
-    }, 1000);
+    }, 800);
   };
   
   const handleMouseUp = () => {
-    // Clear long press timer if released before 1 second
+    // Clear long press timer if released before timeout
     if (longPressTimer.current) {
       clearTimeout(longPressTimer.current);
       longPressTimer.current = null;
     }
+    
+    // If was dragging, stop and reset unlock
+    if (isDragging) {
+      setIsDragging(false);
+      setTimeout(() => setIsUnlocked(false), 100);
+    }
   };
   
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Prevent navigation if dragging or just unlocked
+    // Prevent navigation if unlocked or dragging
     if (isDragging || isUnlocked) {
       e.preventDefault();
-    }
-    // Reset unlock after action
-    if (isUnlocked && !isDragging) {
-      setIsUnlocked(false);
     }
   };
   

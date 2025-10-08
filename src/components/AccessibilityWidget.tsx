@@ -345,6 +345,9 @@ const AccessibilityWidget = () => {
   }, [isDragging, dragOffset, position, isUnlocked]);
   
   const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Don't start timer if clicking normally
+    e.preventDefault();
+    
     // Start long press timer
     longPressTimer.current = setTimeout(() => {
       setIsUnlocked(true);
@@ -361,25 +364,29 @@ const AccessibilityWidget = () => {
         });
         setIsDragging(true);
       }
-    }, 1000);
+    }, 800);
   };
   
-  const handleMouseUp = () => {
-    // Clear long press timer if released before 1 second
+  const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Clear long press timer if released before timeout
     if (longPressTimer.current) {
       clearTimeout(longPressTimer.current);
       longPressTimer.current = null;
     }
+    
+    // If was dragging, stop and reset unlock
+    if (isDragging) {
+      setIsDragging(false);
+      setTimeout(() => setIsUnlocked(false), 100);
+    }
   };
   
-  const handleClick = () => {
-    // Only open panel if not dragging and not unlocked
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Only open panel if not currently unlocked/dragging
     if (!isDragging && !isUnlocked) {
       setIsOpen(!isOpen);
-    }
-    // Reset unlock after action
-    if (isUnlocked && !isDragging) {
-      setIsUnlocked(false);
+    } else {
+      e.preventDefault();
     }
   };
 
