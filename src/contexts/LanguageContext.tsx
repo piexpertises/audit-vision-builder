@@ -22,6 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.security-plans': 'כתיבת תוכניות אבטחה',
     'nav.contact': 'צור קשר',
     'nav.phone': '050-730-0720',
+    'navigation.whatsapp_message': 'שלום אני מעוניין לקבל פרטים נוספים על השירותים שלכם',
     
     // Hero Section
     'hero.title': 'פאי אקספרטיס',
@@ -116,6 +117,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.security-plans': 'Security Plans Writing',
     'nav.contact': 'Contact',
     'nav.phone': '050-730-0720',
+    'navigation.whatsapp_message': 'Hello, I would like to receive more information about your services',
     
     // Hero Section
     'hero.title': 'Pi Expertises',
@@ -210,6 +212,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.security-plans': 'Rédaction Plans de Sécurité',
     'nav.contact': 'Contact',
     'nav.phone': '050-730-0720',
+    'navigation.whatsapp_message': 'Bonjour, je souhaiterais recevoir plus d\'informations sur vos services',
     
     // Hero Section
     'hero.title': 'Pi Expertises',
