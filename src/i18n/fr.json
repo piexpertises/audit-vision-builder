@@ -47,7 +47,7 @@
     "assessment_title": "Évaluations d'Urgence",
     "assessment_desc": "Pour les événements et activités en extérieur.",
     "security_title": "Gestionnaire de Sécurité (MNB'T) pour Licences Commerciales",
-    "security_desc": "Supervision étroite, enquêtes de risques, préparation de plans de sécurité et gestion du système de sécurité conformément aux exigences de la police et des autorités."
+    "security_desc": "Personnalisés selon les besoins et directives sécurisées."
   },
   "security_consulting": {
     "title": "Conseil en Sécurité | Vos Experts en Sécurité",
@@ -165,8 +165,8 @@
     "cta_desc": "La préparation précoce aux urgences peut non seulement sauver des vies, mais aussi maintenir votre stabilité commerciale dans le temps. Pi Expertises vous offre les connaissances, outils et formations les plus appropriés pour maintenir la continuité des activités, résilience psychologique et capacité à faire face à toute crise à venir. Contactez-nous aujourd'hui pour commencer votre processus de préparation d'urgence."
   },
   "security_plans": {
-    "title": "Gestionnaire de Sécurité (MNB'T) pour Licences Commerciales",
-    "subtitle": "Supervision étroite, enquêtes de risques, préparation de plans de sécurité et gestion du système de sécurité conformément aux exigences de la police et des autorités.",
+    "title": "Rédaction de Plan de Sécurité | Votre Sécurité, Notre Plan",
+    "subtitle": "Votre sécurité, notre plan",
     "intro": "Chez Pi Expertises, nous comprenons l'importance d'un plan de sécurité personnalisé pour chaque organisation ou entreprise. Selon la loi sur les licences commerciales (1968) et les exigences de la police israélienne (référence 90.029.978), toute entreprise ou lieu employant des travailleurs ou recevant du public doit soumettre un plan de sécurité professionnel adapté aux besoins spécifiques du lieu. Le plan est conçu non seulement pour assurer la sécurité des employés et des clients, mais aussi pour fournir des outils pour une réponse rapide et efficace en cas d'urgence.",
     "required_title": "Qui a Besoin d'un Plan de Sécurité?",
     "required1": "Entreprises employant des travailleurs ou recevant du public – magasins, salles d'événements, restaurants, centres commerciaux, bureaux, etc.",
