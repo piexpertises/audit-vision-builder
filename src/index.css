@@ -30,8 +30,8 @@
     --muted-foreground: 215.4 16.3% 46.9%; /* Medium text */
     
     /* Accent - Vibrant Gold */
-    --accent: 34 100% 84%;               /* Bright warm gold */
-    --accent-foreground: 222.2 84% 4.9%; /* Dark text on gold */
+    --accent: 34 100% 55%;               /* Rich warm gold - more visible */
+    --accent-foreground: 0 0% 100%; /* White text on gold */
     
     /* Status Colors */
     --destructive: 0 84% 60%;
