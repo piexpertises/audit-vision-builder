@@ -69,7 +69,7 @@ const HeroSection = () => {
             lineHeight: '1.2',
             marginTop: 'clamp(80px, 12vh, 120px)'
           }}>
-              <span className="text-accent block mb-2">{t('hero.title')}</span>
+              <span className="block mb-2" style={{ color: 'hsl(42 88% 65%)' }}>{t('hero.title')}</span>
             </h1>
             <p className="text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center animate-slide-up px-4" style={{
             animationDelay: '0.2s',
@@ -103,12 +103,13 @@ const HeroSection = () => {
             {stats.map((stat, index) => <div key={index} className="text-center group hover-lift animate-staggered-fade flex flex-col items-center justify-center min-h-[200px] md:min-h-[180px]" style={{
             animationDelay: `${0.7 + index * 0.1}s`
           }}>
-                <div className="inline-flex items-center justify-center w-20 h-20 md:w-16 md:h-16 bg-accent/20 rounded-full mb-6 md:mb-4 group-hover:bg-accent/30 transition-all duration-300 hover-scale animate-float flex-shrink-0" style={{
-              animationDelay: `${index * 0.5}s`
+                <div className="inline-flex items-center justify-center w-20 h-20 md:w-16 md:h-16 rounded-full mb-6 md:mb-4 transition-all duration-300 hover-scale animate-float flex-shrink-0" style={{
+              animationDelay: `${index * 0.5}s`,
+              backgroundColor: 'hsl(42 88% 65% / 0.2)'
             }}>
-                  <stat.icon className="h-10 w-10 md:h-8 md:w-8 text-accent" />
+                  <stat.icon className="h-10 w-10 md:h-8 md:w-8" style={{ color: 'hsl(42 88% 65%)' }} />
                 </div>
-                <div className="text-4xl md:text-3xl font-bold text-accent mb-3 md:mb-2">{stat.value}</div>
+                <div className="text-4xl md:text-3xl font-bold mb-3 md:mb-2" style={{ color: 'hsl(42 88% 65%)' }}>{stat.value}</div>
                 <div className="text-foreground/70 text-base md:text-sm uppercase tracking-wider px-2">{stat.label}</div>
               </div>)}
           </div>
