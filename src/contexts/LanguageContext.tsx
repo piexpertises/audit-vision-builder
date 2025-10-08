@@ -25,7 +25,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     'hero.title': 'פאי אקספרטיס',
-    'hero.subtitle': 'משרד בוטיק אשר הוקם ב 2016 ע"י סטיב בלחסן מייסד ומנהל',
+    'hero.subtitle': 'בניית תוכניות אבטחה, ייעוץ ביטחוני וניהול מערך אבטחה',
     'hero.cta': 'צור קשר',
     'hero.learn_more': 'למד עוד',
     
