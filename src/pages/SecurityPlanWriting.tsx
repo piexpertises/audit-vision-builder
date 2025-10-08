@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, Building2, Factory, Users, Hotel, Shield, MapPin, AlertTriangle, Camera, FileCheck, ClipboardCheck, GraduationCap, TrendingUp, Award, UserCheck, Target, Calendar, CheckCircle } from 'lucide-react';
-import securityPlanDocument from '@/assets/security-plan-document.jpg';
+import securityPlansBackground from '@/assets/security-plans-background.jpg';
 import { useI18n } from '@/hooks/useI18n';
 import SEO from '@/components/SEO';
 
@@ -71,7 +71,7 @@ const SecurityPlanWriting = () => {
         <section 
           className="relative pt-32 pb-24 min-h-[75vh] flex items-center justify-center overflow-hidden"
           style={{
-            backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.88), rgba(27, 73, 101, 0.85)), url(${securityPlanDocument})`,
+            backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.88), rgba(27, 73, 101, 0.85)), url(${securityPlansBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
