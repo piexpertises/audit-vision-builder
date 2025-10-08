@@ -121,7 +121,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     'hero.title': 'Pi Expertises',
-    'hero.subtitle': 'Boutique security consulting firm established in 2016 by Steve Belhasen, founder and director',
+    'hero.subtitle': 'Security plan writing, security consulting and security system management',
     'hero.cta': 'Contact Us',
     'hero.learn_more': 'Learn More',
     
@@ -216,7 +216,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     'hero.title': 'Pi Expertises',
-    'hero.subtitle': 'Cabinet de conseil en sécurité boutique établi en 2016 par Steve Belhasen, fondateur et directeur',
+    'hero.subtitle': 'Rédaction de plans de sécurité, conseil en sécurité et gestion de système de sécurité',
     'hero.cta': 'Nous contacter',
     'hero.learn_more': 'En savoir plus',
     
