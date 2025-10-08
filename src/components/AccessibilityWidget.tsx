@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useI18n } from '@/hooks/useI18n';
+import { User } from 'lucide-react';
 
 const ACC_STORAGE_KEY = 'acc_prefs_v3';
 
@@ -681,21 +682,12 @@ const AccessibilityWidget = () => {
           cursor: grabbing;
           transform: scale(1.1);
         }
-        .acc-toggler svg {
-          width: 32px;
-          height: 32px;
-          fill: currentColor;
-        }
         
         @media (max-width: 768px) {
           .acc-toggler {
             width: 56px;
             height: 56px;
             font-size: 26px;
-          }
-          .acc-toggler svg {
-            width: 28px;
-            height: 28px;
           }
         }
 
@@ -929,10 +921,7 @@ const AccessibilityWidget = () => {
           bottom: 'auto'
         }}
       >
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="5" r="2.5" />
-          <path d="M12 9 L12 15 M7 12 L17 12 M8 15 L8 21 M16 15 L16 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
+        <User size={32} strokeWidth={2.5} />
       </button>
 
       {/* Quick reset button */}
