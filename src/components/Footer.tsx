@@ -214,6 +214,20 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+        {/* Developer Credit */}
+        <div className="py-4 border-t border-border/30 text-center">
+          <p className="text-foreground/50 text-sm">
+            Copyright © 2025 - <a 
+              href="https://zyflows.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-accent transition-colors duration-300"
+            >
+              Raphael Belhassen
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
