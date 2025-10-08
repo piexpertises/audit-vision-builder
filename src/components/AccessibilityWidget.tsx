@@ -693,7 +693,7 @@ const AccessibilityWidget = () => {
         .acc-toggler {
           position: fixed !important;
           right: 16px;
-          bottom: 16px;
+          bottom: 88px;
           width: 56px;
           height: 56px;
           border-radius: 50%;
@@ -733,7 +733,7 @@ const AccessibilityWidget = () => {
             width: 48px;
             height: 48px;
             right: 12px;
-            bottom: 12px;
+            bottom: 80px;
           }
         }
         
@@ -741,6 +741,7 @@ const AccessibilityWidget = () => {
           .acc-toggler {
             width: 44px;
             height: 44px;
+            bottom: 76px;
           }
         }
 
