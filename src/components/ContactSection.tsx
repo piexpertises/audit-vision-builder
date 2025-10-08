@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Phone, Mail, MapPin, Clock, Send, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { toast } from "sonner";
 import { useI18n } from '@/hooks/useI18n';
 
@@ -16,69 +16,32 @@ const ContactSection = () => {
     email: '',
     message: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      // EmailJS configuration
-      const serviceId = 'service_pi_expertises'; // À configurer dans EmailJS
-      const templateId = 'template_contact_form'; // À configurer dans EmailJS
-      const publicKey = 'YOUR_PUBLIC_KEY'; // À configurer dans EmailJS
-      
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        from_phone: formData.phone,
-        message: formData.message,
-        to_email: 'infos.piexpertises@gmail.com',
-        language: language,
-        page: 'Contact Form'
-      };
-
-      // Envoyer via EmailJS
-      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          service_id: serviceId,
-          template_id: templateId,
-          user_id: publicKey,
-          template_params: templateParams
-        })
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        toast.success(t('form.success'), {
-          description: language === 'he' ? 'נחזור אליך בהקדם' : language === 'fr' ? 'Nous vous répondrons bientôt' : 'We will get back to you soon'
-        });
-        setFormData({ name: '', phone: '', email: '', message: '' });
-      } else {
-        throw new Error('Failed to send email');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-      setSubmitStatus('error');
-      toast.error(
-        language === 'he' ? 'שגיאה בשליחת הטופס' : language === 'fr' ? 'Erreur lors de l\'envoi' : 'Error sending form',
-        {
-          description: language === 'he' 
-            ? 'אנא נסה שוב או צור קשר טלפוני' 
-            : language === 'fr' 
-            ? 'Veuillez réessayer ou nous contacter par téléphone' 
-            : 'Please try again or contact us by phone'
-        }
-      );
-    } finally {
-      setIsSubmitting(false);
+    
+    // Build WhatsApp message with form data
+    const nameLabel = language === 'he' ? 'שם' : language === 'fr' ? 'Nom' : 'Name';
+    const phoneLabel = language === 'he' ? 'טלפון' : language === 'fr' ? 'Téléphone' : 'Phone';
+    const emailLabel = language === 'he' ? 'אימייל' : language === 'fr' ? 'Email' : 'Email';
+    const messageLabel = language === 'he' ? 'הודעה' : language === 'fr' ? 'Message' : 'Message';
+    
+    let whatsappMessage = `${nameLabel}: ${formData.name}\n${phoneLabel}: ${formData.phone}\n${emailLabel}: ${formData.email}`;
+    
+    if (formData.message.trim()) {
+      whatsappMessage += `\n${messageLabel}: ${formData.message}`;
     }
+    
+    const whatsappUrl = `https://wa.me/972507300720?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Reset form and show success message
+    setFormData({ name: '', phone: '', email: '', message: '' });
+    toast.success(t('form.success'), {
+      description: language === 'he' ? 'פותח WhatsApp...' : language === 'fr' ? 'Ouverture de WhatsApp...' : 'Opening WhatsApp...'
+    });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -144,29 +107,6 @@ const ContactSection = () => {
               </h3>
               
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                {submitStatus === 'success' && (
-                  <div 
-                    className="flex items-center gap-3 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800"
-                    role="alert"
-                    aria-live="polite"
-                  >
-                    <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
-                    <p className="text-sm font-medium">{t('form.success')}</p>
-                  </div>
-                )}
-                
-                {submitStatus === 'error' && (
-                  <div 
-                    className="flex items-center gap-3 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800"
-                    role="alert"
-                    aria-live="polite"
-                  >
-                    <AlertCircle className="h-5 w-5 flex-shrink-0" />
-                    <p className="text-sm font-medium">
-                      {language === 'he' ? 'שגיאה בשליחת הטופס' : language === 'fr' ? 'Erreur lors de l\'envoi' : 'Error sending form'}
-                    </p>
-                  </div>
-                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label 
@@ -248,21 +188,18 @@ const ContactSection = () => {
                     htmlFor="message" 
                     className="text-foreground font-medium text-sm"
                   >
-                    {t('contact.message')} *
+                    {t('contact.message')}
                   </Label>
                   <Textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    required
-                    minLength={10}
                     maxLength={1000}
                     rows={5}
                     className="bg-background border-border focus:border-accent focus:ring-2 focus:ring-accent/20 resize-none"
                     placeholder={t('form.message_placeholder')}
                     dir={isRTL ? 'rtl' : 'ltr'}
-                    aria-required="true"
                     aria-label={t('contact.message')}
                   />
                   <p className="text-xs text-muted-foreground" dir={isRTL ? 'rtl' : 'ltr'}>
@@ -273,20 +210,9 @@ const ContactSection = () => {
                 <Button 
                   type="submit" 
                   className="w-full btn-hero group min-h-[44px] text-base font-semibold"
-                  disabled={isSubmitting}
-                  aria-busy={isSubmitting}
                 >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                      {language === 'he' ? 'שולח...' : language === 'fr' ? 'Envoi...' : 'Sending...'}
-                    </span>
-                  ) : (
-                    <>
-                      <Send className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5 group-hover:translate-x-1 transition-transform`} />
-                      {t('contact.send')}
-                    </>
-                  )}
+                  <Send className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5 group-hover:translate-x-1 transition-transform`} />
+                  {t('contact.send')}
                 </Button>
               </form>
             </CardContent>
