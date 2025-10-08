@@ -72,7 +72,7 @@ const HeroSection = () => {
       }} />
       </div>
 
-      <div className="container mx-auto px-4 relative" style={{ zIndex: 20 }}>
+      <div className="container mx-auto px-4 relative">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Hero Content */}
           <div className="animate-fade-up pt-20 md:pt-0">
@@ -136,7 +136,7 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2" style={{ zIndex: 20 }}>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
         <div className="w-6 h-10 border-2 border-accent/50 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-accent rounded-full mt-2 animate-bounce" />
         </div>
