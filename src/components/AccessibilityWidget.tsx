@@ -29,6 +29,12 @@ const AccessibilityWidget = () => {
   const [prefs, setPrefs] = useState<AccPrefs>({});
   const [showQuickReset, setShowQuickReset] = useState(false);
   const guideRef = useRef<HTMLDivElement>(null);
+  
+  // Widget position state
+  const [position, setPosition] = useState({ x: 16, y: 16 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const togglerRef = useRef<HTMLButtonElement>(null);
 
   const texts = {
     he: {
@@ -110,7 +116,7 @@ const AccessibilityWidget = () => {
 
   const l = texts[language as keyof typeof texts] || texts.en;
 
-  // Load preferences
+  // Load preferences and position
   useEffect(() => {
     try {
       const saved = localStorage.getItem(ACC_STORAGE_KEY);
@@ -119,6 +125,12 @@ const AccessibilityWidget = () => {
         setPrefs(parsed);
         applyPreferences(parsed);
         checkQuickReset(parsed);
+      }
+      
+      // Load saved position
+      const savedPos = localStorage.getItem('acc_widget_position');
+      if (savedPos) {
+        setPosition(JSON.parse(savedPos));
       }
     } catch (e) {
       console.error('Error loading accessibility preferences:', e);
@@ -280,6 +292,56 @@ const AccessibilityWidget = () => {
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
   }, [prefs.guide]);
+
+  // Dragging functionality
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      
+      const newX = e.clientX - dragOffset.x;
+      const newY = e.clientY - dragOffset.y;
+      
+      // Keep within viewport bounds
+      const maxX = window.innerWidth - 64;
+      const maxY = window.innerHeight - 64;
+      
+      const boundedX = Math.max(16, Math.min(newX, maxX));
+      const boundedY = Math.max(16, Math.min(newY, maxY));
+      
+      setPosition({ x: boundedX, y: boundedY });
+    };
+    
+    const handleMouseUp = () => {
+      if (isDragging) {
+        setIsDragging(false);
+        // Save position
+        localStorage.setItem('acc_widget_position', JSON.stringify(position));
+      }
+    };
+    
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.body.style.userSelect = 'none';
+    }
+    
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.userSelect = '';
+    };
+  }, [isDragging, dragOffset, position]);
+  
+  const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (togglerRef.current) {
+      const rect = togglerRef.current.getBoundingClientRect();
+      setDragOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      });
+      setIsDragging(true);
+    }
+  };
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -590,24 +652,20 @@ const AccessibilityWidget = () => {
         /* Widget button */
         .acc-toggler {
           position: fixed !important;
-          right: 16px;
-          bottom: 16px;
-          inset-inline-end: 16px;
-          inset-block-end: 16px;
-          width: 54px;
-          height: 54px;
-          border-radius: 999px;
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
           border: none;
-          cursor: pointer;
-          background: hsl(var(--primary));
-          color: hsl(var(--primary-foreground));
-          box-shadow: 0 8px 24px rgba(2, 8, 23, 0.18);
+          cursor: move;
+          background: #0091EA;
+          color: white;
+          box-shadow: 0 8px 24px rgba(0, 145, 234, 0.4);
           display: flex !important;
           align-items: center;
           justify-content: center;
           font-size: 24px;
           z-index: 2147483647 !important;
-          transition: transform 0.2s ease;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
           pointer-events: auto !important;
           visibility: visible !important;
           opacity: 1 !important;
@@ -617,15 +675,27 @@ const AccessibilityWidget = () => {
         }
         .acc-toggler:hover {
           transform: scale(1.05);
+          box-shadow: 0 8px 28px rgba(0, 145, 234, 0.5);
+        }
+        .acc-toggler.dragging {
+          cursor: grabbing;
+          transform: scale(1.1);
+        }
+        .acc-toggler svg {
+          width: 32px;
+          height: 32px;
+          fill: currentColor;
         }
         
         @media (max-width: 768px) {
           .acc-toggler {
             width: 56px;
             height: 56px;
-            right: 12px;
-            bottom: 12px;
             font-size: 26px;
+          }
+          .acc-toggler svg {
+            width: 28px;
+            height: 28px;
           }
         }
 
@@ -844,14 +914,25 @@ const AccessibilityWidget = () => {
 
       {/* Toggle button */}
       <button
-        className="acc-toggler"
+        ref={togglerRef}
+        className={`acc-toggler ${isDragging ? 'dragging' : ''}`}
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => !isDragging && setIsOpen(!isOpen)}
+        onMouseDown={handleMouseDown}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-label={l.label}
+        style={{
+          left: `${position.x}px`,
+          top: `${position.y}px`,
+          right: 'auto',
+          bottom: 'auto'
+        }}
       >
-        ♿
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="5" r="2.5" />
+          <path d="M12 9 L12 15 M7 12 L17 12 M8 15 L8 21 M16 15 L16 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
       </button>
 
       {/* Quick reset button */}
