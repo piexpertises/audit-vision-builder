@@ -117,19 +117,19 @@ const HeroSection = () => {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-up" style={{
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto animate-fade-up px-4" style={{
           animationDelay: '0.6s'
         }}>
             {stats.map((stat, index) => <div 
               key={index} 
-              className="text-center group hover-lift animate-staggered-fade" 
+              className="text-center group hover-lift animate-staggered-fade flex flex-col items-center justify-center min-h-[200px] md:min-h-[180px]" 
               style={{ animationDelay: `${0.7 + index * 0.1}s` }}
             >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/20 rounded-full mb-4 group-hover:bg-accent/30 transition-all duration-300 hover-scale animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
-                  <stat.icon className="h-8 w-8 text-accent" />
+                <div className="inline-flex items-center justify-center w-20 h-20 md:w-16 md:h-16 bg-accent/20 rounded-full mb-6 md:mb-4 group-hover:bg-accent/30 transition-all duration-300 hover-scale animate-float flex-shrink-0" style={{ animationDelay: `${index * 0.5}s` }}>
+                  <stat.icon className="h-10 w-10 md:h-8 md:w-8 text-accent" />
                 </div>
-                <div className="text-3xl font-bold text-accent mb-2">{stat.value}</div>
-                <div className="text-foreground/70 text-sm uppercase tracking-wider">{stat.label}</div>
+                <div className="text-4xl md:text-3xl font-bold text-accent mb-3 md:mb-2">{stat.value}</div>
+                <div className="text-foreground/70 text-base md:text-sm uppercase tracking-wider px-2">{stat.label}</div>
               </div>)}
           </div>
         </div>
