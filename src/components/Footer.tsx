@@ -2,10 +2,17 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Globe, Shield, Users, FileText } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
+import { Language } from '@/contexts/LanguageContext';
 import logoImage from '@/assets/logo-pi-expertises-new.png';
 
 const Footer = () => {
-  const { t, isRTL } = useI18n();
+  const { t, isRTL, language, setLanguage } = useI18n();
+
+  const languages: { code: Language; label: string; flag: string }[] = [
+    { code: 'he', label: 'עברית', flag: '🇮🇱' },
+    { code: 'en', label: 'English', flag: '🇬🇧' },
+    { code: 'fr', label: 'Français', flag: '🇫🇷' },
+  ];
 
   const company = [
     { label: t('footer.about_us'), href: '#about' },
@@ -34,7 +41,7 @@ const Footer = () => {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 py-12 lg:py-16" dir="rtl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 py-12 lg:py-16" dir="rtl">
           {/* Company Info */}
           <div>
             <div className="flex flex-col items-center text-center mb-6">
@@ -147,6 +154,30 @@ const Footer = () => {
                   </Button>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* Language Selector Section */}
+          <div>
+            <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+              <Globe className="h-5 w-5 text-accent" />
+              {language === 'he' ? 'בחר שפה' : language === 'en' ? 'Select Language' : 'Choisir la langue'}
+            </h3>
+            <div className="space-y-3">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-300 ${
+                    language === lang.code 
+                      ? 'bg-accent/20 text-accent border border-accent/40' 
+                      : 'border border-border/30 text-foreground/70 hover:bg-accent/10 hover:border-accent/30'
+                  }`}
+                >
+                  <span className="text-xl">{lang.flag}</span>
+                  <span className="font-medium">{lang.label}</span>
+                </button>
+              ))}
             </div>
           </div>
         </div>

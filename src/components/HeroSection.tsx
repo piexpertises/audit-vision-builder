@@ -111,8 +111,10 @@ const HeroSection = () => {
                 <ArrowRight className={`ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
               </a>
             </Button>
-            <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale">
-              {t('hero.learn_more')}
+            <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale" asChild>
+              <a href="#about">
+                {t('hero.learn_more')}
+              </a>
             </Button>
           </div>
 
@@ -141,6 +143,15 @@ const HeroSection = () => {
           <div className="w-1 h-3 bg-accent rounded-full mt-2 animate-bounce" />
         </div>
       </div>
+
+      {/* Enhanced Gradient Fade to Next Section */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 pointer-events-none z-10"
+        style={{
+          height: '150px',
+          background: 'linear-gradient(to bottom, transparent 0%, hsl(var(--background) / 0.4) 50%, hsl(var(--background)) 100%)',
+        }}
+      />
     </section>;
 };
 export default HeroSection;
