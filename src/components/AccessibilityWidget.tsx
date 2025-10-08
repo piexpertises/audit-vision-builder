@@ -574,7 +574,7 @@ const AccessibilityWidget = () => {
           inset-inline: 0;
           height: 38px;
           pointer-events: none;
-          z-index: 99999;
+          z-index: 2147483646;
           background: linear-gradient(to bottom, transparent 0, rgba(255, 235, 150, 0.6) 40%, rgba(255, 235, 150, 0.6) 60%, transparent 100%);
           display: none;
         }
@@ -604,11 +604,12 @@ const AccessibilityWidget = () => {
           align-items: center;
           justify-content: center;
           font-size: 24px;
-          z-index: 999999 !important;
+          z-index: 2147483647 !important;
           transition: transform 0.2s ease;
           pointer-events: auto !important;
           visibility: visible !important;
           opacity: 1 !important;
+          isolation: isolate;
         }
         .acc-toggler:hover {
           transform: scale(1.05);
@@ -631,7 +632,7 @@ const AccessibilityWidget = () => {
           bottom: 22px;
           inset-inline-end: 78px;
           inset-block-end: 22px;
-          z-index: 999999 !important;
+          z-index: 2147483647 !important;
           display: none;
           align-items: center;
           gap: 0.4rem;
@@ -647,6 +648,7 @@ const AccessibilityWidget = () => {
           transition: all 0.2s ease;
           pointer-events: auto !important;
           visibility: visible !important;
+          isolation: isolate;
         }
         .acc-quick-reset.show {
           display: inline-flex !important;
@@ -685,10 +687,11 @@ const AccessibilityWidget = () => {
           border-radius: 14px;
           box-shadow: 0 12px 32px rgba(2, 8, 23, 0.18);
           padding: 12px;
-          z-index: 999999 !important;
+          z-index: 2147483647 !important;
           display: none;
           pointer-events: auto !important;
           visibility: visible !important;
+          isolation: isolate;
         }
         .acc-panel.open {
           display: block !important;
