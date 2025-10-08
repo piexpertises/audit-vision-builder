@@ -72,6 +72,7 @@ export default {
         sans: ["Inter", "Heebo", "system-ui", "-apple-system", "sans-serif"],
         hebrew: ["Heebo", "Inter", "system-ui", "sans-serif"],
         heading: ["Playfair Display", "Heebo", "serif"],
+        rubik: ["Rubik", "Heebo", "system-ui", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

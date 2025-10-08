@@ -64,7 +64,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Hero Content */}
           <div className="animate-fade-up pt-20 md:pt-0">
-            <h1 className="font-bold mb-6 text-shadow animate-zoom-in px-4" style={{
+            <h1 className="font-bold mb-6 text-shadow animate-zoom-in px-4 font-rubik" style={{
             fontSize: 'clamp(2rem, 8vw, 4.5rem)',
             lineHeight: '1.2',
             marginTop: 'clamp(80px, 12vh, 120px)'
