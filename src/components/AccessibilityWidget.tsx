@@ -34,10 +34,9 @@ const AccessibilityWidget = () => {
   // Widget position state - null means use default sticky position
   const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isUnlocked, setIsUnlocked] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [dragStartTime, setDragStartTime] = useState(0);
   const togglerRef = useRef<HTMLButtonElement>(null);
-  const longPressTimer = useRef<NodeJS.Timeout | null>(null);
 
   const texts = {
     he: {
@@ -302,17 +301,17 @@ const AccessibilityWidget = () => {
   // Dragging functionality
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging || !isUnlocked) return;
+      if (!isDragging) return;
       
       const newX = e.clientX - dragOffset.x;
       const newY = e.clientY - dragOffset.y;
       
       // Keep within viewport bounds
-      const maxX = window.innerWidth - 64;
-      const maxY = window.innerHeight - 64;
+      const maxX = window.innerWidth - 60;
+      const maxY = window.innerHeight - 60;
       
-      const boundedX = Math.max(16, Math.min(newX, maxX));
-      const boundedY = Math.max(16, Math.min(newY, maxY));
+      const boundedX = Math.max(10, Math.min(newX, maxX));
+      const boundedY = Math.max(10, Math.min(newY, maxY));
       
       setPosition({ x: boundedX, y: boundedY });
     };
@@ -335,24 +334,24 @@ const AccessibilityWidget = () => {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
       document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'grabbing';
     }
     
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
       document.body.style.userSelect = '';
+      document.body.style.cursor = '';
     };
-  }, [isDragging, dragOffset, position, isUnlocked]);
+  }, [isDragging, dragOffset, position]);
   
   const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // Don't start timer if clicking normally
-    e.preventDefault();
+    setDragStartTime(Date.now());
     
-    // Start long press timer
-    longPressTimer.current = setTimeout(() => {
-      setIsUnlocked(true);
+    if (e.shiftKey || e.altKey) {
+      // Modifier key pressed = drag mode
+      e.preventDefault();
       if (togglerRef.current) {
-        // Get current position if using default
         if (!position) {
           const rect = togglerRef.current.getBoundingClientRect();
           setPosition({ x: rect.left, y: rect.top });
@@ -364,28 +363,22 @@ const AccessibilityWidget = () => {
         });
         setIsDragging(true);
       }
-    }, 800);
+    }
   };
   
-  const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // Clear long press timer if released before timeout
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current);
-      longPressTimer.current = null;
+  const handleMouseUp = () => {
+    const clickDuration = Date.now() - dragStartTime;
+    
+    // If was a short click (< 200ms) and not dragging, open panel
+    if (clickDuration < 200 && !isDragging) {
+      setIsOpen(!isOpen);
     }
     
-    // If was dragging, stop and reset unlock
-    if (isDragging) {
-      setIsDragging(false);
-      setTimeout(() => setIsUnlocked(false), 100);
-    }
+    setIsDragging(false);
   };
   
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // Only open panel if not currently unlocked/dragging
-    if (!isDragging && !isUnlocked) {
-      setIsOpen(!isOpen);
-    } else {
+    if (isDragging) {
       e.preventDefault();
     }
   };
@@ -699,16 +692,16 @@ const AccessibilityWidget = () => {
         /* Widget button */
         .acc-toggler {
           position: fixed !important;
-          right: 16px;
-          bottom: 88px;
+          right: 20px;
+          bottom: 92px;
           width: 56px;
           height: 56px;
           border-radius: 50%;
           border: none;
-          cursor: pointer;
+          cursor: grab;
           background: #0091EA;
           color: white;
-          box-shadow: 0 8px 24px rgba(0, 145, 234, 0.4);
+          box-shadow: 0 4px 12px rgba(0, 145, 234, 0.3);
           display: flex !important;
           align-items: center;
           justify-content: center;
@@ -720,35 +713,32 @@ const AccessibilityWidget = () => {
           isolation: isolate;
           transform: translateZ(0);
           will-change: transform;
+          user-select: none;
         }
         .acc-toggler:hover {
           transform: scale(1.05);
-          box-shadow: 0 8px 28px rgba(0, 145, 234, 0.5);
-        }
-        .acc-toggler.unlocked {
-          cursor: move;
-          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5), 0 8px 24px rgba(0, 145, 234, 0.4);
+          box-shadow: 0 6px 16px rgba(0, 145, 234, 0.4);
         }
         .acc-toggler.dragging {
-          cursor: grabbing;
+          cursor: grabbing !important;
           transform: scale(1.1);
-          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0 12px 32px rgba(0, 145, 234, 0.6);
+          box-shadow: 0 8px 24px rgba(0, 145, 234, 0.5);
         }
         
         @media (max-width: 768px) {
           .acc-toggler {
-            width: 48px;
-            height: 48px;
-            right: 12px;
-            bottom: 80px;
+            width: 52px;
+            height: 52px;
+            right: 16px;
+            bottom: 84px;
           }
         }
         
         @media (max-width: 480px) {
           .acc-toggler {
-            width: 44px;
-            height: 44px;
-            bottom: 76px;
+            width: 50px;
+            height: 50px;
+            bottom: 80px;
           }
         }
 
@@ -968,15 +958,15 @@ const AccessibilityWidget = () => {
       {/* Toggle button */}
       <button
         ref={togglerRef}
-        className={`acc-toggler ${isDragging ? 'dragging' : ''} ${isUnlocked ? 'unlocked' : ''}`}
+        className={`acc-toggler ${isDragging ? 'dragging' : ''}`}
         type="button"
         onClick={handleClick}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-label={l.label}
+        title={l.label + " (Shift+glisser pour déplacer)"}
         style={position ? {
           left: `${position.x}px`,
           top: `${position.y}px`,
@@ -984,7 +974,7 @@ const AccessibilityWidget = () => {
           bottom: 'auto'
         } : undefined}
       >
-        <Accessibility size={28} strokeWidth={2.5} />
+        <Accessibility size={26} strokeWidth={2.5} />
       </button>
 
       {/* Quick reset button */}
