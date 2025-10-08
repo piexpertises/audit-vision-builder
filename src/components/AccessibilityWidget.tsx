@@ -844,10 +844,40 @@ const AccessibilityWidget = () => {
           font-size: 18px;
           font-weight: 700;
           text-align: center;
-          padding: 8px;
+          padding: 8px 40px 8px 8px;
           border-radius: 8px;
           background: hsl(var(--primary));
           color: hsl(var(--primary-foreground));
+          position: relative;
+        }
+        
+        .acc-panel-close {
+          position: absolute;
+          top: 50%;
+          right: 8px;
+          transform: translateY(-50%);
+          width: 28px;
+          height: 28px;
+          border: none;
+          background: rgba(255, 255, 255, 0.2);
+          color: hsl(var(--primary-foreground));
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          line-height: 1;
+          transition: background 0.2s ease;
+        }
+        
+        .acc-panel-close:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .acc-panel-close:focus-visible {
+          outline: 2px solid hsl(var(--primary-foreground));
+          outline-offset: 2px;
         }
 
         #acc-grid {
@@ -994,7 +1024,17 @@ const AccessibilityWidget = () => {
         aria-modal={isOpen}
         dir={language === 'he' ? 'rtl' : 'ltr'}
       >
-        <h3>{l.title}</h3>
+        <h3>
+          {l.title}
+          <button
+            className="acc-panel-close"
+            type="button"
+            onClick={() => setIsOpen(false)}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </h3>
 
         {/* Grid of tiles */}
         <div id="acc-grid" aria-label={l.title}>
