@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useI18n } from '@/hooks/useI18n';
-import { User } from 'lucide-react';
+import { Accessibility } from 'lucide-react';
 
 const ACC_STORAGE_KEY = 'acc_prefs_v3';
 
@@ -653,8 +653,8 @@ const AccessibilityWidget = () => {
         /* Widget button */
         .acc-toggler {
           position: fixed !important;
-          width: 64px;
-          height: 64px;
+          width: 56px;
+          height: 56px;
           border-radius: 50%;
           border: none;
           cursor: move;
@@ -664,7 +664,6 @@ const AccessibilityWidget = () => {
           display: flex !important;
           align-items: center;
           justify-content: center;
-          font-size: 24px;
           z-index: 2147483647 !important;
           transition: transform 0.2s ease, box-shadow 0.2s ease;
           pointer-events: auto !important;
@@ -685,9 +684,15 @@ const AccessibilityWidget = () => {
         
         @media (max-width: 768px) {
           .acc-toggler {
-            width: 56px;
-            height: 56px;
-            font-size: 26px;
+            width: 48px;
+            height: 48px;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .acc-toggler {
+            width: 44px;
+            height: 44px;
           }
         }
 
@@ -921,7 +926,7 @@ const AccessibilityWidget = () => {
           bottom: 'auto'
         }}
       >
-        <User size={32} strokeWidth={2.5} />
+        <Accessibility size={28} strokeWidth={2.5} />
       </button>
 
       {/* Quick reset button */}
