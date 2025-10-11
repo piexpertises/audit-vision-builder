@@ -107,20 +107,15 @@ const HeroSection = () => {
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-up ${isRTL ? 'sm:flex-row-reverse' : ''}`} style={{
           animationDelay: '0.4s'
         }}>
-            <a 
-              href={`https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
+            <a href="#about-intro" className="inline-block">
               <Button size="lg" className="btn-hero group hover-scale hover-glow">
-                {t('hero.cta')}
+                {t('hero.learn_more')}
                 <ArrowRight className={`ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
               </Button>
             </a>
-            <a href="#about" className="inline-block">
+            <a href="#contact" className="inline-block">
               <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale">
-                {t('hero.learn_more')}
+                {t('hero.cta')}
               </Button>
             </a>
           </div>
