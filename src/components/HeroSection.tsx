@@ -14,6 +14,30 @@ const HeroSection = () => {
   // Carousel state
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+
+  // Preload images
+  useEffect(() => {
+    let loadedCount = 0;
+    carouselImages.forEach((src, index) => {
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        setLoadedImages(prev => new Set(prev).add(index));
+        if (loadedCount === carouselImages.length) {
+          setImagesLoaded(true);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === carouselImages.length) {
+          setImagesLoaded(true);
+        }
+      };
+      img.src = src;
+    });
+  }, []);
 
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
@@ -38,11 +62,20 @@ const HeroSection = () => {
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Carousel with Overlay */}
       <div className="absolute inset-0 z-0">
+        {/* Fallback gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90" />
+        
+        {/* Images */}
         {carouselImages.map((image, index) => <div key={index} className="absolute inset-0 transition-opacity duration-1000 ease-in-out" style={{
-        opacity: currentImageIndex === index ? 1 : 0,
+        opacity: (currentImageIndex === index && (imagesLoaded || loadedImages.has(index))) ? 1 : 0,
         zIndex: currentImageIndex === index ? 1 : 0
       }}>
-            <img src={image} alt={`Security Professional ${index + 1}`} className="w-full h-full object-cover" />
+            <img 
+              src={image} 
+              alt={`Security Professional ${index + 1}`} 
+              className="w-full h-full object-cover" 
+              loading={index === 0 ? "eager" : "lazy"}
+            />
           </div>)}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
         {/* Bottom gradient fade for smooth transition */}
