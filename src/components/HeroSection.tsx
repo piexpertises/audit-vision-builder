@@ -14,6 +14,7 @@ const HeroSection = () => {
   // Carousel state
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
@@ -22,6 +23,11 @@ const HeroSection = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, [carouselImages.length]);
+
+  // Handle image load errors
+  const handleImageError = (index: number) => {
+    setImageErrors(prev => new Set(prev).add(index));
+  };
   const stats = [{
     icon: Shield,
     label: t('hero.stats.experience'),
@@ -39,15 +45,15 @@ const HeroSection = () => {
       {/* Background Carousel with solid fallback */}
       <div className="absolute inset-0 z-0">
         {/* Solid gradient background - always visible immediately */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90 z-0" />
         
-        {/* Carousel images */}
-        {carouselImages.map((image, index) => (
+        {/* Carousel images - only show if not errored */}
+        {carouselImages.map((image, index) => !imageErrors.has(index) && (
           <div 
             key={index} 
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
             style={{
-              opacity: currentImageIndex === index ? 1 : 0,
+              opacity: currentImageIndex === index ? 0.4 : 0,
               zIndex: currentImageIndex === index ? 1 : 0
             }}
           >
@@ -57,6 +63,7 @@ const HeroSection = () => {
               className="w-full h-full object-cover" 
               loading={index === 0 ? "eager" : "lazy"}
               decoding="async"
+              onError={() => handleImageError(index)}
             />
           </div>
         ))}
