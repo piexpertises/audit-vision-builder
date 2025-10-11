@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
+import { useIsMobile } from '@/hooks/use-mobile';
 import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
 import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
 import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
@@ -10,42 +11,21 @@ const HeroSection = () => {
     t,
     isRTL
   } = useI18n();
+  const isMobile = useIsMobile();
 
-  // Carousel state
+  // Carousel state - disabled on mobile for performance
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
-  // Preload images
+  // Auto-advance carousel every 5 seconds (desktop only)
   useEffect(() => {
-    let loadedCount = 0;
-    carouselImages.forEach((src, index) => {
-      const img = new Image();
-      img.onload = () => {
-        loadedCount++;
-        setLoadedImages(prev => new Set(prev).add(index));
-        if (loadedCount === carouselImages.length) {
-          setImagesLoaded(true);
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === carouselImages.length) {
-          setImagesLoaded(true);
-        }
-      };
-      img.src = src;
-    });
-  }, []);
-
-  // Auto-advance carousel every 5 seconds
-  useEffect(() => {
+    if (isMobile) return; // Disable carousel on mobile
+    
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % carouselImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [carouselImages.length]);
+  }, [carouselImages.length, isMobile]);
   const stats = [{
     icon: Shield,
     label: t('hero.stats.experience'),
@@ -60,23 +40,43 @@ const HeroSection = () => {
     value: '200+'
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Carousel with Overlay */}
+      {/* Background with optimized mobile performance */}
       <div className="absolute inset-0 z-0">
-        {/* Fallback gradient background */}
+        {/* Gradient background - always visible */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90" />
         
-        {/* Images */}
-        {carouselImages.map((image, index) => <div key={index} className="absolute inset-0 transition-opacity duration-1000 ease-in-out" style={{
-        opacity: (currentImageIndex === index && (imagesLoaded || loadedImages.has(index))) ? 1 : 0,
-        zIndex: currentImageIndex === index ? 1 : 0
-      }}>
+        {/* Single static image for mobile, carousel for desktop */}
+        {isMobile ? (
+          // Mobile: single static image with lazy loading
+          <div className="absolute inset-0">
             <img 
-              src={image} 
-              alt={`Security Professional ${index + 1}`} 
-              className="w-full h-full object-cover" 
-              loading={index === 0 ? "eager" : "lazy"}
+              src={heroCarousel1} 
+              alt="Security Professional" 
+              className="w-full h-full object-cover opacity-40" 
+              loading="lazy"
             />
-          </div>)}
+          </div>
+        ) : (
+          // Desktop: full carousel
+          carouselImages.map((image, index) => (
+            <div 
+              key={index} 
+              className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
+              style={{
+                opacity: currentImageIndex === index ? 1 : 0,
+                zIndex: currentImageIndex === index ? 1 : 0
+              }}
+            >
+              <img 
+                src={image} 
+                alt={`Security Professional ${index + 1}`} 
+                className="w-full h-full object-cover" 
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </div>
+          ))
+        )}
+        
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
         {/* Bottom gradient fade for smooth transition */}
         <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/30 to-background z-10" />
