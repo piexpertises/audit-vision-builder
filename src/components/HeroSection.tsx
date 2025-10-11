@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
-import { useIsMobile } from '@/hooks/use-mobile';
 import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
 import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
 import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
@@ -11,21 +10,18 @@ const HeroSection = () => {
     t,
     isRTL
   } = useI18n();
-  const isMobile = useIsMobile();
 
-  // Carousel state - disabled on mobile for performance
+  // Carousel state
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Auto-advance carousel every 5 seconds (desktop only)
+  // Auto-advance carousel every 5 seconds
   useEffect(() => {
-    if (isMobile) return; // Disable carousel on mobile
-    
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % carouselImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [carouselImages.length, isMobile]);
+  }, [carouselImages.length]);
   const stats = [{
     icon: Shield,
     label: t('hero.stats.experience'),
@@ -40,42 +36,30 @@ const HeroSection = () => {
     value: '200+'
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with optimized mobile performance */}
+      {/* Background Carousel with solid fallback */}
       <div className="absolute inset-0 z-0">
-        {/* Gradient background - always visible */}
+        {/* Solid gradient background - always visible immediately */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90" />
         
-        {/* Single static image for mobile, carousel for desktop */}
-        {isMobile ? (
-          // Mobile: single static image with lazy loading
-          <div className="absolute inset-0">
+        {/* Carousel images */}
+        {carouselImages.map((image, index) => (
+          <div 
+            key={index} 
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
+            style={{
+              opacity: currentImageIndex === index ? 1 : 0,
+              zIndex: currentImageIndex === index ? 1 : 0
+            }}
+          >
             <img 
-              src={heroCarousel1} 
-              alt="Security Professional" 
-              className="w-full h-full object-cover opacity-40" 
-              loading="lazy"
+              src={image} 
+              alt={`Security Professional ${index + 1}`} 
+              className="w-full h-full object-cover" 
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
             />
           </div>
-        ) : (
-          // Desktop: full carousel
-          carouselImages.map((image, index) => (
-            <div 
-              key={index} 
-              className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
-              style={{
-                opacity: currentImageIndex === index ? 1 : 0,
-                zIndex: currentImageIndex === index ? 1 : 0
-              }}
-            >
-              <img 
-                src={image} 
-                alt={`Security Professional ${index + 1}`} 
-                className="w-full h-full object-cover" 
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            </div>
-          ))
-        )}
+        ))}
         
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
         {/* Bottom gradient fade for smooth transition */}
