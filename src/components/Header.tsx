@@ -133,8 +133,15 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             {/* Language Selector */}
             <div className="relative group">
-              <Button variant="ghost" size="sm" className={`gap-2 ${isScrolled ? 'text-[#D4AF37] hover:text-[#D4AF37]/80' : 'text-white/90 hover:text-white'} hover:bg-white/5 transition-colors duration-300`}>
-                <Globe size={16} />
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className={`gap-2 ${isScrolled ? 'text-[#D4AF37] hover:text-[#D4AF37]/80' : 'text-white/90 hover:text-white'} hover:bg-white/5 transition-colors duration-300`}
+                aria-label="Select language"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <Globe size={16} aria-hidden="true" />
               </Button>
               <div className="absolute top-full left-0 mt-2 bg-white/95 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50">
                 {languages.map((lang) => (
@@ -163,6 +170,7 @@ const Header = () => {
                 href={`https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={t('nav.contact')}
               >
                 {t('nav.contact')}
               </a>

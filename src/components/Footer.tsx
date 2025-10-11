@@ -42,6 +42,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 py-12 lg:py-16" dir="rtl">
+          {/* Mobile: Show only essential info */}
           {/* Company Info */}
           <div>
             <div className="flex flex-col items-center text-center mb-6">
@@ -71,8 +72,8 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Company Links */}
-          <div>
+          {/* Company Links - Hidden on mobile */}
+          <div className="hidden md:block">
             <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
               <Users className="h-5 w-5 text-accent" />
               {t('footer.company_title')}
@@ -145,11 +146,11 @@ const Footer = () => {
                   >
                     <a 
                       href={link.href}
-                      aria-label={link.label}
+                      aria-label={`${link.label} - ${link.href.includes('tel:') ? '050-730-0720' : link.href.includes('mailto:') ? 'infos.piexpertises@gmail.com' : 'Pi Expertises'}`}
                       target={link.href.startsWith('http') ? '_blank' : undefined}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     >
-                      <link.icon className="h-4 w-4" />
+                      <link.icon className="h-4 w-4" aria-hidden="true" />
                     </a>
                   </Button>
                 ))}
@@ -157,25 +158,26 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Language Selector Section */}
-          <div>
+          {/* Language Selector Section - Compact on mobile */}
+          <div className="md:col-span-2 lg:col-span-1">
             <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
               <Globe className="h-5 w-5 text-accent" />
               {language === 'he' ? 'בחר שפה' : language === 'en' ? 'Select Language' : 'Choisir la langue'}
             </h3>
-            <div className="space-y-3">
+            <div className="grid grid-cols-3 md:flex md:flex-col gap-3">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => setLanguage(lang.code)}
-                  className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-300 ${
+                  className={`flex flex-col md:flex-row items-center md:w-full gap-1 md:gap-3 px-2 md:px-4 py-2 rounded-lg transition-all duration-300 ${
                     language === lang.code 
                       ? 'bg-accent/20 text-accent border border-accent/40' 
                       : 'border border-border/30 text-foreground/70 hover:bg-accent/10 hover:border-accent/30'
                   }`}
+                  aria-label={`Switch to ${lang.label}`}
                 >
-                  <span className="text-xl">{lang.flag}</span>
-                  <span className="font-medium">{lang.label}</span>
+                  <span className="text-xl" aria-hidden="true">{lang.flag}</span>
+                  <span className="font-medium text-xs md:text-base">{lang.label}</span>
                 </button>
               ))}
             </div>

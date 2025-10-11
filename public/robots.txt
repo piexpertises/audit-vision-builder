@@ -1,14 +1,36 @@
+# Pi Expertises - Professional Security Consulting
+# https://piexpertises.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://piexpertises.com/sitemap.xml
+
+# Block access to sensitive files
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /src/
+
+# Allow major search engines
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
+User-agent: Slurp
+Allow: /
+
+# Allow social media crawlers for better sharing
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
 Allow: /

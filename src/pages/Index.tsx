@@ -8,6 +8,7 @@ import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
+import CookieConsent from '@/components/CookieConsent';
 import { useI18n } from '@/hooks/useI18n';
 
 const Index = () => {
@@ -31,6 +32,7 @@ const Index = () => {
         <ContactSection />
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 };

@@ -52,13 +52,20 @@ const SEO = ({ title, description, keywords, canonical, ogImage }: SEOProps) => 
     if (title) {
       updateOGMeta('og:title', title);
       updateMeta('twitter:title', title);
+      updateOGMeta('og:site_name', 'Pi Expertises');
     }
 
     if (ogImage) {
       updateOGMeta('og:image', ogImage);
       updateMeta('twitter:image', ogImage);
+      updateMeta('twitter:card', 'summary_large_image');
     }
 
+    // Add Open Graph type
+    updateOGMeta('og:type', 'website');
+    updateOGMeta('og:locale', language === 'he' ? 'he_IL' : language === 'fr' ? 'fr_FR' : 'en_US');
+
+    // Canonical URL
     if (canonical) {
       let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
       if (!link) {
@@ -69,9 +76,27 @@ const SEO = ({ title, description, keywords, canonical, ogImage }: SEOProps) => 
       link.href = canonical;
     }
 
-    // Update language
+    // Update language and direction
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+
+    // Add alternate language links
+    const addAlternateLink = (lang: string, url: string) => {
+      let link = document.querySelector(`link[rel="alternate"][hreflang="${lang}"]`) as HTMLLinkElement;
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'alternate';
+        link.setAttribute('hreflang', lang);
+        document.head.appendChild(link);
+      }
+      link.href = url;
+    };
+
+    const baseUrl = canonical || window.location.origin + window.location.pathname;
+    addAlternateLink('he', `${baseUrl}?lang=he`);
+    addAlternateLink('en', `${baseUrl}?lang=en`);
+    addAlternateLink('fr', `${baseUrl}?lang=fr`);
+    addAlternateLink('x-default', baseUrl);
   }, [title, description, keywords, canonical, ogImage, language]);
 
   return null;
