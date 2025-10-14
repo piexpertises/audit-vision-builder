@@ -62,7 +62,7 @@ const SecurityPlanWriting = () => {
         title={`${t('security_plans.title')} | Pi Expertises`}
         description={t('security_plans.intro')}
         keywords="security plan writing, business security plans, security documentation, facility security"
-        canonical="https://pi-expertises.com/security-plan-writing"
+        canonical="https://piexpertises.com/security-plan-writing"
       />
       <Header />
       

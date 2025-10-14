@@ -198,7 +198,7 @@ const Footer = () => {
               style={{ fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}
             >
               <a 
-                href="#privacy" 
+                href="/privacy-policy" 
                 className="hover:text-accent transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent rounded px-2 py-1"
               >
                 {t('footer.privacy')}

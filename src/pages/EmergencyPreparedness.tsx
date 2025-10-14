@@ -34,7 +34,7 @@ const EmergencyPreparedness = () => {
         title={`${t('emergency_prep.title')} | Pi Expertises`}
         description={t('emergency_prep.intro')}
         keywords="emergency preparedness, crisis management, business continuity, disaster recovery, organizational resilience"
-        canonical="https://pi-expertises.com/emergency-preparedness"
+        canonical="https://piexpertises.com/emergency-preparedness"
       />
       <Header />
       

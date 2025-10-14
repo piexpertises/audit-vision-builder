@@ -20,7 +20,7 @@ const Index = () => {
         title={`Pi Expertises - ${t('hero.subtitle')}`}
         description={t('about.intro')}
         keywords="security consulting, VIP protection, physical security, Israel security, event security, emergency response, Steve Belhasen, פאי אקספרטיס, ייעוץ ביטחוני"
-        canonical="https://pi-expertises.com/"
+        canonical="https://piexpertises.com/"
       />
       <Header />
       <main>

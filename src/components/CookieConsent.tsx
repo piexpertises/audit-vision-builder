@@ -86,7 +86,7 @@ const CookieConsent = () => {
               >
                 {text.message}{' '}
                 <a 
-                  href="#privacy" 
+                  href="/privacy-policy" 
                   className="text-accent hover:underline font-medium focus:outline-none focus:ring-2 focus:ring-accent rounded"
                 >
                   {text.privacy}

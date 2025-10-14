@@ -42,7 +42,7 @@ const MassEventManagement = () => {
         title={`${t('mass_events.title')} | Pi Expertises`}
         description={t('mass_events.intro')}
         keywords="mass events, event management, event security, festival security, concert security"
-        canonical="https://pi-expertises.com/mass-event-management"
+        canonical="https://piexpertises.com/mass-event-management"
       />
       <Header />
       
