@@ -1,60 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://piexpertises.com/</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="he" href="https://piexpertises.com/?lang=he"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://piexpertises.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://piexpertises.com/?lang=fr"/>
   </url>
-  
-  <!-- Security Consulting -->
+
   <url>
     <loc>https://piexpertises.com/security-consulting</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="he" href="https://piexpertises.com/security-consulting?lang=he"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://piexpertises.com/security-consulting?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://piexpertises.com/security-consulting?lang=fr"/>
   </url>
-  
-  <!-- Mass Event Management -->
+
   <url>
     <loc>https://piexpertises.com/mass-event-management</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="he" href="https://piexpertises.com/mass-event-management?lang=he"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://piexpertises.com/mass-event-management?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://piexpertises.com/mass-event-management?lang=fr"/>
   </url>
-  
-  <!-- Security Plan Writing -->
+
   <url>
     <loc>https://piexpertises.com/security-plan-writing</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="he" href="https://piexpertises.com/security-plan-writing?lang=he"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://piexpertises.com/security-plan-writing?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://piexpertises.com/security-plan-writing?lang=fr"/>
   </url>
-  
-  <!-- Emergency Preparedness -->
+
   <url>
     <loc>https://piexpertises.com/emergency-preparedness</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="he" href="https://piexpertises.com/emergency-preparedness?lang=he"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://piexpertises.com/emergency-preparedness?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://piexpertises.com/emergency-preparedness?lang=fr"/>
   </url>
-  
+
 </urlset>
