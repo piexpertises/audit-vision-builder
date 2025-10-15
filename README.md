@@ -3,7 +3,7 @@
 ## Project info
 
 **Company**: Pi Expertises (פאי אקספרטיס)
-**Website**: https://pi-expertises.com
+**Website**: https://piexpertises.com
 
 ## About
 
