@@ -52,7 +52,7 @@ const SEO = ({ title, description, keywords, canonical, ogImage }: SEOProps) => 
     if (title) {
       updateOGMeta('og:title', title);
       updateMeta('twitter:title', title);
-      updateOGMeta('og:site_name', 'Pi Expertises');
+      updateOGMeta('og:site_name', 'piexpertises.com');
     }
 
     if (ogImage) {

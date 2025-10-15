@@ -17,7 +17,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title={`Pi Expertises - ${t('hero.subtitle')}`}
+        title={`piexpertises.com - ${t('hero.subtitle')}`}
         description={t('about.intro')}
         keywords="security consulting, VIP protection, physical security, Israel security, event security, emergency response, Steve Belhasen, פאי אקספרטיס, ייעוץ ביטחוני"
         canonical="https://piexpertises.com/"
