@@ -231,6 +231,10 @@ const Header = () => {
                     src={logoImage} 
                     alt="Pi Expertises" 
                     className="h-9 w-auto"
+                    width="120"
+                    height="36"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <button
                     onClick={() => setIsMenuOpen(false)}
