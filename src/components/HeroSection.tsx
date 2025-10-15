@@ -131,15 +131,15 @@ const HeroSection = () => {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto px-4">
-            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center min-h-[200px] md:min-h-[180px]">
-                <div className="inline-flex items-center justify-center w-20 h-20 md:w-16 md:h-16 rounded-full mb-6 md:mb-4 transition-all duration-300 hover-scale flex-shrink-0" style={{
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto px-4">
+            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center py-6 md:min-h-[160px]">
+                <div className="inline-flex items-center justify-center w-16 h-16 md:w-16 md:h-16 rounded-full mb-4 transition-all duration-300 hover-scale flex-shrink-0" style={{
               backgroundColor: 'hsl(42 88% 65% / 0.2)'
             }}>
-                  <stat.icon className="h-10 w-10 md:h-8 md:w-8" style={{ color: 'hsl(42 88% 65%)' }} />
+                  <stat.icon className="h-8 w-8" style={{ color: 'hsl(42 88% 65%)' }} />
                 </div>
-                <div className="text-4xl md:text-3xl font-bold mb-3 md:mb-2" style={{ color: 'hsl(42 88% 65%)' }}>{stat.value}</div>
-                <div className="text-foreground/70 text-base md:text-sm uppercase tracking-wider px-2">{stat.label}</div>
+                <div className="text-3xl md:text-3xl font-bold mb-2" style={{ color: 'hsl(42 88% 65%)' }}>{stat.value}</div>
+                <div className="text-foreground/70 text-sm md:text-sm uppercase tracking-wider px-2">{stat.label}</div>
               </div>)}
           </div>
         </div>

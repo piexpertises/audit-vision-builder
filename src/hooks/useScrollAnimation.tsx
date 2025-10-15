@@ -7,27 +7,26 @@ interface UseScrollAnimationOptions {
 }
 
 export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
-  // Start with content visible to avoid white screen issues on mobile
+  // Always start visible to prevent white screens
   const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
 
   useEffect(() => {
-    // Only use IntersectionObserver if supported, otherwise content stays visible
+    // Only use IntersectionObserver if supported AND on larger screens
     if (!('IntersectionObserver' in window)) {
       return;
     }
 
-    // Check if device is mobile - if so, keep content visible
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Detect mobile using screen width (more reliable than user agent)
+    const isMobile = window.innerWidth < 768;
     if (isMobile) {
-      return; // Skip observer entirely for mobile
+      // Keep content visible on mobile - no animations
+      return;
     }
 
-    // Only on desktop, start hidden and animate in
-    setIsVisible(false);
-
+    // Desktop only: use intersection observer for scroll animations
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
