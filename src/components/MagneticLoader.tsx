@@ -211,6 +211,11 @@ const MagneticLoader: React.FC<MagneticLoaderProps> = ({ onComplete, duration = 
               src={logoImage}
               alt="Pi Expertises"
               className="w-full h-full object-contain"
+              width="200"
+              height="200"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
         </div>

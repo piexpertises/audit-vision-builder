@@ -55,6 +55,10 @@ const Footer = () => {
                   objectFit: 'contain'
                 }}
                 className="mb-3"
+                width="160"
+                height="64"
+                loading="lazy"
+                decoding="async"
               />
               <span 
                 className="font-bold text-accent"

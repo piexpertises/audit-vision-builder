@@ -66,6 +66,10 @@ const AboutIntroSection = () => {
                     src={steveProfile} 
                     alt="סטיב בלחסן - מייסד ומנהל" 
                     className="w-80 h-96 object-cover rounded-lg shadow-lg hover-glow transition-all duration-500"
+                    width="320"
+                    height="384"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-6 rounded-lg ring-4 ring-accent/20 pointer-events-none"></div>
                 </div>

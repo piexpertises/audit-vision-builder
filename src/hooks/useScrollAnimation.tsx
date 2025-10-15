@@ -19,11 +19,14 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
       return;
     }
 
-    // On desktop/supported browsers, start hidden and animate in
+    // Check if device is mobile - if so, keep content visible
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (!isMobile) {
-      setIsVisible(false);
+    if (isMobile) {
+      return; // Skip observer entirely for mobile
     }
+
+    // Only on desktop, start hidden and animate in
+    setIsVisible(false);
 
     const observer = new IntersectionObserver(
       ([entry]) => {

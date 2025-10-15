@@ -101,6 +101,11 @@ const Header = () => {
                 maxWidth: '160px',
                 objectFit: 'contain'
               }}
+              width="160"
+              height="56"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
 
