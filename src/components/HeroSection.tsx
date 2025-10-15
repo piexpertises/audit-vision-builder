@@ -1,13 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
+import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
+import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
+import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
 
 const HeroSection = () => {
-  const {
-    t,
-    isRTL
-  } = useI18n();
+  const { t, isRTL } = useI18n();
+
+  // Carousel state
+  const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
+
+  // Handle image load errors
+  const handleImageError = (index: number) => {
+    setImageErrors(prev => new Set(prev).add(index));
+  };
+
+  // Preload first image to avoid blocking
+  useEffect(() => {
+    const img = new Image();
+    img.src = heroCarousel1;
+    img.onload = () => setImagesLoaded(true);
+  }, []);
 
   const stats = [{
     icon: Shield,
@@ -23,13 +49,38 @@ const HeroSection = () => {
     value: '200+'
   }];
   
+  
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Optimized Static Background - No heavy images */}
+      {/* Optimized Background Carousel */}
       <div className="absolute inset-0 z-0">
-        {/* Primary gradient background - loads instantly */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-secondary/90" />
+        {/* Solid gradient background - always visible immediately */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90 z-0" />
         
-        {/* Overlay gradient for depth */}
+        {/* Carousel images - lazy loaded after initial render */}
+        {carouselImages.map((image, index) => !imageErrors.has(index) && (
+          <div 
+            key={index} 
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
+            style={{
+              opacity: imagesLoaded && currentImageIndex === index ? 0.35 : 0,
+              zIndex: currentImageIndex === index ? 1 : 0
+            }}
+          >
+            <img 
+              src={image} 
+              alt={`Security Professional ${index + 1}`} 
+              className="w-full h-full object-cover" 
+              width="1920"
+              height="1080"
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={index === 0 ? "high" : "low"}
+              onError={() => handleImageError(index)}
+            />
+          </div>
+        ))}
+        
+        {/* Overlay gradient for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
         
         {/* Bottom gradient fade for smooth transition */}
