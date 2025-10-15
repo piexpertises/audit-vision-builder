@@ -70,11 +70,10 @@ const HeroSection = () => {
               src={image} 
               alt={`Security Professional ${index + 1}`} 
               className="w-full h-full object-cover" 
-              width="1920"
-              height="1080"
+              width={1920}
+              height={1080}
               loading={index === 0 ? "eager" : "lazy"}
               decoding="async"
-              fetchPriority={index === 0 ? "high" : "low"}
               onError={() => handleImageError(index)}
             />
           </div>
