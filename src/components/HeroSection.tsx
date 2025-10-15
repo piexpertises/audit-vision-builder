@@ -2,26 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
+import { useIsMobile } from '@/hooks/use-mobile';
 import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
 import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
 import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
 
 const HeroSection = () => {
   const { t, isRTL } = useI18n();
+  const isMobile = useIsMobile();
 
-  // Carousel state
+  // Carousel state - only used on desktop
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  // Auto-advance carousel every 5 seconds
+  // Auto-advance carousel every 5 seconds - only on desktop
   useEffect(() => {
+    if (isMobile) return;
+    
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % carouselImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [carouselImages.length]);
+  }, [carouselImages.length, isMobile]);
 
   // Handle image load errors
   const handleImageError = (index: number) => {
@@ -51,33 +55,48 @@ const HeroSection = () => {
   
   
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Optimized Background Carousel */}
+      {/* Optimized Background - Static on mobile, Carousel on desktop */}
       <div className="absolute inset-0 z-0">
         {/* Solid gradient background - always visible immediately */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90 z-0" />
         
-        {/* Carousel images - lazy loaded after initial render */}
-        {carouselImages.map((image, index) => !imageErrors.has(index) && (
-          <div 
-            key={index} 
-            className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
-            style={{
-              opacity: imagesLoaded && currentImageIndex === index ? 0.35 : 0,
-              zIndex: currentImageIndex === index ? 1 : 0
-            }}
-          >
+        {isMobile ? (
+          /* Mobile: Single static optimized image */
+          <div className="absolute inset-0" style={{ opacity: 0.35, zIndex: 1 }}>
             <img 
-              src={image} 
-              alt={`Security Professional ${index + 1}`} 
+              src={heroCarousel1} 
+              alt="Security Professional" 
               className="w-full h-full object-cover" 
-              width={1920}
-              height={1080}
-              loading={index === 0 ? "eager" : "lazy"}
+              width={768}
+              height={1024}
+              loading="eager"
               decoding="async"
-              onError={() => handleImageError(index)}
             />
           </div>
-        ))}
+        ) : (
+          /* Desktop: Carousel images */
+          carouselImages.map((image, index) => !imageErrors.has(index) && (
+            <div 
+              key={index} 
+              className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
+              style={{
+                opacity: imagesLoaded && currentImageIndex === index ? 0.35 : 0,
+                zIndex: currentImageIndex === index ? 1 : 0
+              }}
+            >
+              <img 
+                src={image} 
+                alt={`Security Professional ${index + 1}`} 
+                className="w-full h-full object-cover" 
+                width={1920}
+                height={1080}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                onError={() => handleImageError(index)}
+              />
+            </div>
+          ))
+        )}
         
         {/* Overlay gradient for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
