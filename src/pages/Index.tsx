@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-import AboutIntroSection from '@/components/AboutIntroSection';
-import NewspaperArticleSection from '@/components/NewspaperArticleSection';
-import ServicesSection from '@/components/ServicesSection';
-import AboutSection from '@/components/AboutSection';
-import ContactSection from '@/components/ContactSection';
-import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import CookieConsent from '@/components/CookieConsent';
 import { useI18n } from '@/hooks/useI18n';
+
+// Lazy load non-critical sections to improve initial load time
+const AboutIntroSection = lazy(() => import('@/components/AboutIntroSection'));
+const NewspaperArticleSection = lazy(() => import('@/components/NewspaperArticleSection'));
+const ServicesSection = lazy(() => import('@/components/ServicesSection'));
+const AboutSection = lazy(() => import('@/components/AboutSection'));
+const ContactSection = lazy(() => import('@/components/ContactSection'));
+const Footer = lazy(() => import('@/components/Footer'));
+const CookieConsent = lazy(() => import('@/components/CookieConsent'));
 
 const Index = () => {
   const { t } = useI18n();
@@ -25,14 +27,18 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <AboutIntroSection />
-        <ServicesSection />
-        <AboutSection />
-        <NewspaperArticleSection />
-        <ContactSection />
+        <Suspense fallback={<div className="min-h-screen" />}>
+          <AboutIntroSection />
+          <ServicesSection />
+          <AboutSection />
+          <NewspaperArticleSection />
+          <ContactSection />
+        </Suspense>
       </main>
-      <Footer />
-      <CookieConsent />
+      <Suspense fallback={null}>
+        <Footer />
+        <CookieConsent />
+      </Suspense>
     </div>
   );
 };

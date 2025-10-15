@@ -69,10 +69,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["Inter", "Heebo", "system-ui", "-apple-system", "sans-serif"],
-        hebrew: ["Heebo", "Inter", "system-ui", "sans-serif"],
-        heading: ["Playfair Display", "Heebo", "serif"],
-        rubik: ["Rubik", "Heebo", "system-ui", "sans-serif"],
+        sans: ["-apple-system", "BlinkMacSystemFont", "Inter", "Heebo", "system-ui", "sans-serif"],
+        hebrew: ["system-ui", "Heebo", "Inter", "sans-serif"],
+        heading: ["system-ui", "Playfair Display", "Heebo", "serif"],
+        rubik: ["-apple-system", "BlinkMacSystemFont", "Rubik", "Heebo", "system-ui", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
