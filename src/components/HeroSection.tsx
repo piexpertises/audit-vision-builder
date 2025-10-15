@@ -1,33 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
-import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
-import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
-import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
+
 const HeroSection = () => {
   const {
     t,
     isRTL
   } = useI18n();
 
-  // Carousel state
-  const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-
-  // Auto-advance carousel every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex(prevIndex => (prevIndex + 1) % carouselImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [carouselImages.length]);
-
-  // Handle image load errors
-  const handleImageError = (index: number) => {
-    setImageErrors(prev => new Set(prev).add(index));
-  };
   const stats = [{
     icon: Shield,
     label: t('hero.stats.experience'),
@@ -41,37 +22,16 @@ const HeroSection = () => {
     label: t('hero.stats.projects'),
     value: '200+'
   }];
+  
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Carousel with solid fallback */}
+      {/* Optimized Static Background - No heavy images */}
       <div className="absolute inset-0 z-0">
-        {/* Solid gradient background - always visible immediately */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90 z-0" />
+        {/* Primary gradient background - loads instantly */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-secondary/90" />
         
-        {/* Carousel images - only show if not errored */}
-        {carouselImages.map((image, index) => !imageErrors.has(index) && (
-          <div 
-            key={index} 
-            className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
-            style={{
-              opacity: currentImageIndex === index ? 0.4 : 0,
-              zIndex: currentImageIndex === index ? 1 : 0
-            }}
-          >
-            <img 
-              src={image} 
-              alt={`Security Professional ${index + 1}`} 
-              className="w-full h-full object-cover" 
-              width="1920"
-              height="1080"
-              loading={index === 0 ? "eager" : "lazy"}
-              decoding="async"
-              fetchPriority={index === 0 ? "high" : "low"}
-              onError={() => handleImageError(index)}
-            />
-          </div>
-        ))}
-        
+        {/* Overlay gradient for depth */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80 z-10" />
+        
         {/* Bottom gradient fade for smooth transition */}
         <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/30 to-background z-10" />
       </div>
@@ -87,19 +47,18 @@ const HeroSection = () => {
       }} />
       </div>
 
-      <div className="container mx-auto px-4 relative">
+      <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Main Hero Content */}
-          <div className="animate-fade-up pt-20 md:pt-0">
-            <h1 className="font-bold mb-6 text-shadow animate-zoom-in px-4 font-rubik" style={{
+          {/* Main Hero Content - Visible immediately */}
+          <div className="pt-20 md:pt-0">
+            <h1 className="font-bold mb-6 text-shadow font-rubik" style={{
             fontSize: 'clamp(2rem, 8vw, 4.5rem)',
             lineHeight: '1.2',
             marginTop: 'clamp(80px, 12vh, 120px)'
           }}>
               <span className="block mb-2" style={{ color: 'hsl(42 88% 65%)' }}>{t('hero.title')}</span>
             </h1>
-            <p className="text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center animate-slide-up px-4" style={{
-            animationDelay: '0.2s',
+            <p className="text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center px-4" style={{
             fontSize: 'clamp(1.125rem, 3vw, 1.875rem)'
           }}>
               {t('hero.subtitle')}
@@ -107,9 +66,7 @@ const HeroSection = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-up ${isRTL ? 'sm:flex-row-reverse' : ''}`} style={{
-          animationDelay: '0.4s'
-        }}>
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
             <a href="#about-intro" className="inline-block">
               <Button size="lg" className="btn-hero group hover-scale hover-glow">
                 {t('hero.learn_more')}
@@ -124,14 +81,9 @@ const HeroSection = () => {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto animate-fade-up px-4" style={{
-          animationDelay: '0.6s'
-        }}>
-            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift animate-staggered-fade flex flex-col items-center justify-center min-h-[200px] md:min-h-[180px]" style={{
-            animationDelay: `${0.7 + index * 0.1}s`
-          }}>
-                <div className="inline-flex items-center justify-center w-20 h-20 md:w-16 md:h-16 rounded-full mb-6 md:mb-4 transition-all duration-300 hover-scale animate-float flex-shrink-0" style={{
-              animationDelay: `${index * 0.5}s`,
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto px-4">
+            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center min-h-[200px] md:min-h-[180px]">
+                <div className="inline-flex items-center justify-center w-20 h-20 md:w-16 md:h-16 rounded-full mb-6 md:mb-4 transition-all duration-300 hover-scale flex-shrink-0" style={{
               backgroundColor: 'hsl(42 88% 65% / 0.2)'
             }}>
                   <stat.icon className="h-10 w-10 md:h-8 md:w-8" style={{ color: 'hsl(42 88% 65%)' }} />
