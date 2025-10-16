@@ -1,11 +1,13 @@
 import React from 'react';
 import { Shield, Users, FileText, BookOpen, AlertTriangle, Lock } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const ServicesSection = () => {
   const { t, isRTL } = useI18n();
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  const isMobile = useIsMobile();
+  // Always visible on mobile, no animations
+  const isVisible = true;
 
   const services = [
     {
@@ -41,12 +43,12 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="relative py-20 bg-secondary/30" ref={ref}>
+    <section id="services" className="relative py-20 bg-secondary/30">
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-background pointer-events-none" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
+        <div className={`text-center max-w-3xl mx-auto mb-16 ${isMobile ? '' : 'transition-all duration-1000 animate-slide-up'} opacity-100`}>
           <h2 
             className="font-bold mb-6 text-foreground"
             style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}
@@ -67,8 +69,8 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className={`flex items-start gap-4 p-4 rounded-lg group hover-lift transition-all duration-700 ${isVisible ? 'animate-staggered-fade opacity-100' : 'opacity-0 translate-y-5'}`}
-              style={{ animationDelay: isVisible ? `${index * 0.1}s` : '0s' }}
+              className={`flex items-start gap-4 p-4 rounded-lg group ${isMobile ? '' : 'hover-lift transition-all duration-700 animate-staggered-fade'} opacity-100`}
+              style={{ animationDelay: isMobile ? '0s' : `${index * 0.1}s` }}
               role="article"
               aria-label={t(service.titleKey)}
             >

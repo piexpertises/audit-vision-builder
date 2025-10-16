@@ -105,16 +105,18 @@ const HeroSection = () => {
         <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/30 to-background z-10" />
       </div>
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 z-10">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-security-pulse" />
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-accent/20 rounded-full blur-2xl animate-security-pulse" style={{
-        animationDelay: '1s'
-      }} />
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-accent/15 rounded-full blur-xl animate-security-pulse" style={{
-        animationDelay: '2s'
-      }} />
-      </div>
+      {/* Animated Background Elements - Desktop only */}
+      {!isMobile && (
+        <div className="absolute inset-0 z-10">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-security-pulse" />
+          <div className="absolute bottom-20 right-10 w-24 h-24 bg-accent/20 rounded-full blur-2xl animate-security-pulse" style={{
+          animationDelay: '1s'
+        }} />
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-accent/15 rounded-full blur-xl animate-security-pulse" style={{
+          animationDelay: '2s'
+        }} />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
