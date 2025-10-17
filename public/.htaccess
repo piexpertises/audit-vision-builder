@@ -1,18 +1,14 @@
 # Enable HTTP/2 Server Push (if supported by hosting)
 <IfModule mod_headers.c>
-  # Cache static resources for 1 year
+  # Cache static resources
   <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|css|js)$">
-    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
   
-  # Cache HTML for 1 hour
+  # Cache HTML
   <FilesMatch "\.(html|htm)$">
-    Header set Cache-Control "public, max-age=3600, must-revalidate"
+    Header set Cache-Control "public, max-age=600"
   </FilesMatch>
-  
-  # Minimal security headers - removed CSP and other headers that might block Android browsers
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "SAMEORIGIN"
 </IfModule>
 
 # Enable Gzip compression
