@@ -1,5 +1,4 @@
 import React from 'react';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { 
   Accordion, 
   AccordionContent, 
@@ -10,7 +9,6 @@ import { Shield, CheckCircle, Users, List, Calendar, Award } from 'lucide-react'
 import { useI18n } from '@/hooks/useI18n';
 
 const NewspaperArticleSection = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
   const { t, isRTL } = useI18n();
 
   const faqItems = [
@@ -53,11 +51,11 @@ const NewspaperArticleSection = () => {
   ];
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-background via-muted/20 to-background" dir={isRTL ? 'rtl' : 'ltr'} ref={ref}>
+    <section className="relative py-20 bg-gradient-to-b from-background via-muted/20 to-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#D4AF37]">
               {t('newspaper.title')}
             </h2>
@@ -68,7 +66,7 @@ const NewspaperArticleSection = () => {
           </div>
           
           {/* FAQ Accordion */}
-          <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'animate-scale-in opacity-100' : 'opacity-0 scale-95'}`}>
+          <div>
             <Accordion type="single" collapsible className="space-y-4">
               {faqItems.map((item, index) => {
                 const Icon = item.icon;
@@ -107,7 +105,7 @@ const NewspaperArticleSection = () => {
           </div>
 
           {/* CTA Footer */}
-          <div className={`text-center mt-12 transition-all duration-1000 delay-500 ${isVisible ? 'animate-fade-in opacity-100' : 'opacity-0'}`}>
+          <div className="text-center mt-12">
             <div className="bg-gradient-to-r from-[#0D1B2A] via-[#1b4965] to-[#0D1B2A] rounded-xl p-8 shadow-lg border border-[#D4AF37]/20">
               <p className="text-xl md:text-2xl font-semibold text-[#D4AF37] mb-2">
                 {t('newspaper.cta_title')}

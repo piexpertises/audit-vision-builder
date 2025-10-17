@@ -1,15 +1,13 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useI18n } from '@/hooks/useI18n';
 import steveProfile from '@/assets/steve-belhasen-profile.jpg';
 
 const AboutIntroSection = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
   const { t, isRTL } = useI18n();
 
   return (
-    <section id="about-intro" className="relative py-20" dir={isRTL ? 'rtl' : 'ltr'} ref={ref}>
+    <section id="about-intro" className="relative py-20" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Glass Background Layer */}
       <div className="absolute inset-0">
         <div 
@@ -29,7 +27,7 @@ const AboutIntroSection = () => {
         
         {/* Section 1 - About Pi Expertises with Glass Cards */}
         <div className="max-w-6xl mx-auto">
-          <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-slide-up opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <div className="text-center mb-12">
             {/* Title Glass Card */}
             <div 
               className="inline-block px-8 py-6 rounded-2xl mb-6"
@@ -50,7 +48,7 @@ const AboutIntroSection = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Profile Photo */}
-            <div className={`flex justify-center lg:order-1 transition-all duration-1000 delay-200 ${isVisible ? 'animate-slide-right-new opacity-100' : 'opacity-0 translate-x-10'}`}>
+            <div className="flex justify-center lg:order-1">
               <div className="relative hover-lift">
                 <div 
                   className="p-6 rounded-2xl"
@@ -77,7 +75,7 @@ const AboutIntroSection = () => {
             </div>
 
             {/* Main About Content */}
-            <div className={`space-y-6 lg:order-2 transition-all duration-1000 delay-400 ${isVisible ? 'animate-slide-left opacity-100' : 'opacity-0 -translate-x-10'}`}>
+            <div className="space-y-6 lg:order-2">
               <div 
                 className="p-8 rounded-2xl hover-lift"
                 style={{
