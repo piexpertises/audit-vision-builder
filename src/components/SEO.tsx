@@ -46,7 +46,10 @@ const SEO = ({ title, description, keywords, canonical, ogImage }: SEOProps) => 
     }
 
     if (keywords) {
-      updateMeta('keywords', keywords);
+      // Add Hebrew SEO terms to keywords
+      const hebrewTerms = 'מנבט, מנב\'\'ט, פקם אבטחה, פק\'\'מ אבטחה, תיק שטח, סטיב בלחסן, Steve Bellahsen, הדרכות אבטחה, אבטחה מונעת';
+      const combinedKeywords = keywords.includes(hebrewTerms) ? keywords : `${keywords}, ${hebrewTerms}`;
+      updateMeta('keywords', combinedKeywords);
     }
 
     if (title) {

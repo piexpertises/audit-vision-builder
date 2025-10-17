@@ -19,7 +19,7 @@ const Index = () => {
       <SEO 
         title={`piexpertises.com - ${t('hero.subtitle')}`}
         description={t('about.intro')}
-        keywords="security consulting, VIP protection, physical security, Israel security, event security, emergency response, Steve Belhasen, פאי אקספרטיס, ייעוץ ביטחוני"
+        keywords="security consulting, VIP protection, physical security, Israel security, event security, emergency response, Steve Belhasen, Steve Bellahsen, סטיב בלחסן, פאי אקספרטיס, ייעוץ ביטחוני, מנבט, מנב''ט, פקם אבטחה, פק''מ אבטחה, תיק שטח, הדרכות אבטחה, אבטחה מונעת"
         canonical="https://piexpertises.com/"
       />
       <Header />
