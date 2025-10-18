@@ -7,6 +7,30 @@ import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { toast } from "sonner";
 import { useI18n } from '@/hooks/useI18n';
+import { z } from 'zod';
+
+// Validation schema with zod
+const contactFormSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters')
+    .regex(/^[a-zA-Z\u0590-\u05FF\s'-]+$/, 'Name contains invalid characters'),
+  phone: z.string()
+    .trim()
+    .min(9, 'Phone number is too short')
+    .max(20, 'Phone number is too long')
+    .regex(/^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/, 'Invalid phone number format'),
+  email: z.string()
+    .trim()
+    .email('Invalid email address')
+    .max(255, 'Email must be less than 255 characters')
+    .toLowerCase(),
+  message: z.string()
+    .trim()
+    .max(1000, 'Message must be less than 1000 characters')
+    .optional()
+});
 
 const ContactSection = () => {
   const { t, isRTL, language } = useI18n();
@@ -20,28 +44,44 @@ const ContactSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Build WhatsApp message with form data
-    const nameLabel = language === 'he' ? 'שם' : language === 'fr' ? 'Nom' : 'Name';
-    const phoneLabel = language === 'he' ? 'טלפון' : language === 'fr' ? 'Téléphone' : 'Phone';
-    const emailLabel = language === 'he' ? 'אימייל' : language === 'fr' ? 'Email' : 'Email';
-    const messageLabel = language === 'he' ? 'הודעה' : language === 'fr' ? 'Message' : 'Message';
-    
-    let whatsappMessage = `${nameLabel}: ${formData.name}\n${phoneLabel}: ${formData.phone}\n${emailLabel}: ${formData.email}`;
-    
-    if (formData.message.trim()) {
-      whatsappMessage += `\n${messageLabel}: ${formData.message}`;
+    // Validate form data with zod
+    try {
+      const validatedData = contactFormSchema.parse(formData);
+      
+      // Build WhatsApp message with validated data
+      const nameLabel = language === 'he' ? 'שם' : language === 'fr' ? 'Nom' : 'Name';
+      const phoneLabel = language === 'he' ? 'טלפון' : language === 'fr' ? 'Téléphone' : 'Phone';
+      const emailLabel = language === 'he' ? 'אימייל' : language === 'fr' ? 'Email' : 'Email';
+      const messageLabel = language === 'he' ? 'הודעה' : language === 'fr' ? 'Message' : 'Message';
+      
+      let whatsappMessage = `${nameLabel}: ${validatedData.name}\n${phoneLabel}: ${validatedData.phone}\n${emailLabel}: ${validatedData.email}`;
+      
+      if (validatedData.message && validatedData.message.trim()) {
+        whatsappMessage += `\n${messageLabel}: ${validatedData.message}`;
+      }
+      
+      const whatsappUrl = `https://wa.me/972507300720?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+      
+      // Reset form and show success message
+      setFormData({ name: '', phone: '', email: '', message: '' });
+      toast.success(t('form.success'), {
+        description: language === 'he' ? 'פותח WhatsApp...' : language === 'fr' ? 'Ouverture de WhatsApp...' : 'Opening WhatsApp...'
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        // Show first validation error
+        const firstError = error.errors[0];
+        toast.error(
+          language === 'he' ? 'שגיאה בטופס' : language === 'fr' ? 'Erreur de validation' : 'Validation Error',
+          {
+            description: firstError.message
+          }
+        );
+      }
     }
-    
-    const whatsappUrl = `https://wa.me/972507300720?text=${encodeURIComponent(whatsappMessage)}`;
-    
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
-    
-    // Reset form and show success message
-    setFormData({ name: '', phone: '', email: '', message: '' });
-    toast.success(t('form.success'), {
-      description: language === 'he' ? 'פותח WhatsApp...' : language === 'fr' ? 'Ouverture de WhatsApp...' : 'Opening WhatsApp...'
-    });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
