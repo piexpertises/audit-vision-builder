@@ -1,12 +1,16 @@
 // Fallback CSS pour Android WebView si les styles ne se chargent pas
 export function ensureCssApplied() {
-  try {
-    const test = document.createElement('div');
-    test.style.display = 'none';
-    document.body.appendChild(test);
-    const hasComputed = !!window.getComputedStyle(document.documentElement).getPropertyValue('--foreground');
-    document.body.removeChild(test);
+  // Vérifier que le DOM est prêt
+  if (document.readyState === 'loading') {
+    // Si le DOM n'est pas encore chargé, attendre
+    document.addEventListener('DOMContentLoaded', ensureCssApplied);
+    return;
+  }
 
+  try {
+    // Vérifier si les CSS sont déjà appliquées
+    const hasComputed = !!window.getComputedStyle(document.documentElement).getPropertyValue('--foreground');
+    
     // Si pas de CSS appliquée (Android preview capricieux), injecter un style minimal
     if (!hasComputed) {
       const s = document.createElement('style');
@@ -18,7 +22,12 @@ export function ensureCssApplied() {
           --primary: #1e40af;
           --radius: 0.5rem;
         }
-        html,body,#root { height:100%; margin:0; padding:0; }
+        html,body,#root { 
+          height: 100%; 
+          margin: 0; 
+          padding: 0; 
+          width: 100%;
+        }
         body { 
           color: var(--foreground); 
           background: var(--background); 

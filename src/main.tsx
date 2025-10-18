@@ -3,7 +3,11 @@ import App from "./App.tsx";
 import "./index.css";
 import { ensureCssApplied } from "./safetyCss";
 
-// Fallback CSS pour Android avant le render
-ensureCssApplied();
+// Appliquer le CSS fallback une fois que le DOM est prêt
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', ensureCssApplied);
+} else {
+  ensureCssApplied();
+}
 
 createRoot(document.getElementById("root")!).render(<App />);
