@@ -151,38 +151,174 @@
     transform: scaleX(-1);
   }
   
-  /* Critical RTL Mobile Fixes - Ensure content visibility */
-  [dir="rtl"] section,
-  [dir="rtl"] main {
-    direction: rtl !important;
+  /* ============================================
+     RTL (Right-to-Left) COMPREHENSIVE SUPPORT
+     For Hebrew language support on mobile and desktop
+     ============================================ */
+  
+  /**
+   * Base RTL Direction
+   * Ensures proper text flow and alignment for Hebrew
+   */
+  [dir="rtl"] {
+    direction: rtl;
     text-align: right;
   }
-  
-  [dir="rtl"] .container {
-    direction: rtl !important;
+
+  [dir="ltr"] {
+    direction: ltr;
+    text-align: left;
   }
-  
-  /* Force proper display on mobile RTL */
+
+  /**
+   * Container RTL Support
+   * Prevents content from being pushed off-screen
+   */
+  [dir="rtl"] .container {
+    direction: rtl;
+  }
+
+  /**
+   * Section & Main RTL Support
+   * Critical for mobile content visibility
+   */
+  [dir="rtl"] section,
+  [dir="rtl"] main {
+    direction: rtl;
+    text-align: right;
+  }
+
+  /**
+   * Flexbox RTL Utilities
+   * Reverses flex direction for RTL layouts
+   */
+  [dir="rtl"] .flex-row {
+    flex-direction: row-reverse;
+  }
+
+  @media (min-width: 640px) {
+    [dir="rtl"] .sm\:flex-row {
+      flex-direction: row-reverse;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    [dir="rtl"] .lg\:flex-row {
+      flex-direction: row-reverse;
+    }
+  }
+
+  /**
+   * Grid RTL Support
+   * Ensures proper grid flow in RTL
+   */
+  [dir="rtl"] .grid {
+    direction: rtl;
+  }
+
+  /**
+   * Text Alignment RTL Utilities
+   * Swaps left/right alignments
+   */
+  [dir="rtl"] .text-left {
+    text-align: right;
+  }
+
+  [dir="rtl"] .text-right {
+    text-align: left;
+  }
+
+  /**
+   * Spacing RTL Utilities
+   * Swaps margin/padding left/right values
+   */
+  [dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+  [dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+  [dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+  [dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+  [dir="rtl"] .pl-4 { padding-left: 0; padding-right: 1rem; }
+  [dir="rtl"] .pr-4 { padding-right: 0; padding-left: 1rem; }
+
+  /**
+   * Items Alignment RTL
+   * Swaps flex alignment for RTL
+   */
+  [dir="rtl"] .items-start {
+    align-items: flex-end;
+  }
+
+  [dir="rtl"] .items-end {
+    align-items: flex-start;
+  }
+
+  /**
+   * CRITICAL: Mobile RTL Fixes
+   * Prevents blank page on mobile Hebrew
+   * 
+   * Issue: On mobile, RTL + flexbox can push content off-screen
+   * Solution: Force proper flex direction and overflow handling
+   */
   @media (max-width: 640px) {
+    /**
+     * Prevent horizontal overflow
+     * Critical for mobile RTL content visibility
+     */
+    [dir="rtl"] body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /**
+     * Hero Section Mobile RTL
+     * Ensures content stays visible and centered
+     */
     [dir="rtl"] section#home {
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
+      width: 100%;
     }
-    
+
     [dir="rtl"] section#home .container {
       width: 100% !important;
       display: block !important;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
-    
+
+    /**
+     * Force column layout for all flex containers in RTL mobile
+     * Prevents content from being pushed off-screen
+     */
     [dir="rtl"] section#home .flex {
       flex-direction: column !important;
     }
+
+    /**
+     * General mobile RTL layout fixes
+     */
+    [dir="rtl"] main,
+    [dir="rtl"] section {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    /**
+     * Header and footer mobile RTL
+     */
+    [dir="rtl"] header,
+    [dir="rtl"] footer {
+      width: 100%;
+      overflow-x: hidden;
+    }
   }
-  
-  /* RTL button layout fixes */
+
+  /**
+   * Desktop RTL Button Layout
+   * Only apply row-reverse on larger screens
+   */
   @media (min-width: 640px) {
-    [dir="rtl"] section#home .flex {
+    [dir="rtl"] section#home .flex.sm\:flex-row {
       flex-direction: row-reverse;
     }
   }

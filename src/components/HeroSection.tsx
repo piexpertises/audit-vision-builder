@@ -54,6 +54,18 @@ const HeroSection = () => {
   }];
   
   
+  /**
+   * Hero Section with RTL Support
+   * 
+   * Critical for Hebrew mobile display:
+   * - Uses semantic HTML section with proper id
+   * - Flex layout centers content vertically
+   * - overflow-hidden prevents horizontal scroll
+   * - RTL handled by global CSS rules
+   * 
+   * Mobile RTL Fix: Global CSS forces flex-direction: column on mobile
+   * Desktop RTL: Global CSS applies row-reverse where needed
+   */
   return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Optimized Background - Static on mobile, Carousel on desktop */}
       <div className="absolute inset-0 z-0">
@@ -137,11 +149,16 @@ const HeroSection = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col gap-4 justify-center items-center mb-16">
+          {/* 
+            RTL Support: Uses flex-col on mobile, sm:flex-row on desktop
+            The RTL CSS automatically handles row-reverse for Hebrew on desktop
+            No inline dir attribute needed - handled globally
+          */}
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16`}>
             <a href="#about-intro" className="inline-block">
               <Button size="lg" className="btn-hero group hover-scale hover-glow">
                 {t('hero.learn_more')}
-                <ArrowRight className={`ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
+                <ArrowRight className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
               </Button>
             </a>
             <a href="#contact" className="inline-block">
@@ -152,6 +169,7 @@ const HeroSection = () => {
           </div>
 
           {/* Stats Section */}
+          {/* RTL Support: Grid automatically flows RTL when dir="rtl" set on parent */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto px-4">
             {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center py-6 md:min-h-[160px]">
                 <div className="inline-flex items-center justify-center w-16 h-16 md:w-16 md:h-16 rounded-full mb-4 transition-all duration-300 hover-scale flex-shrink-0" style={{
