@@ -25,6 +25,13 @@ export default defineConfig(({ mode }) => ({
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui-vendor': ['lucide-react', '@radix-ui/react-slot'],
         },
+        assetFileNames: (assetInfo) => {
+          // Ensure CSS files have proper naming and MIME type detection
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'assets/[name]-[hash].css';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
       },
     },
     minify: 'terser',
@@ -39,6 +46,7 @@ export default defineConfig(({ mode }) => ({
     cssCodeSplit: true,
     sourcemap: false,
     chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 0, // Force all assets to be files, not inline data URIs
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],

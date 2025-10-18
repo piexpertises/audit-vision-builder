@@ -1,5 +1,28 @@
+# Force correct MIME types
+<IfModule mod_mime.c>
+  AddType text/css .css
+  AddType application/javascript .js
+  AddType application/json .json
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType font/woff .woff
+  AddType font/woff2 .woff2
+</IfModule>
+
 # Enable HTTP/2 Server Push (if supported by hosting)
 <IfModule mod_headers.c>
+  # Force correct Content-Type for CSS files
+  <FilesMatch "\.css$">
+    Header set Content-Type "text/css; charset=utf-8"
+    Header set X-Content-Type-Options "nosniff"
+  </FilesMatch>
+  
+  # Force correct Content-Type for JS files
+  <FilesMatch "\.js$">
+    Header set Content-Type "application/javascript; charset=utf-8"
+  </FilesMatch>
+  
   # Cache static resources
   <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|css|js)$">
     Header set Cache-Control "public, max-age=604800"
