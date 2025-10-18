@@ -154,8 +154,12 @@
   /* Critical RTL Mobile Fixes - Ensure content visibility */
   [dir="rtl"] section,
   [dir="rtl"] main {
-    direction: rtl;
+    direction: rtl !important;
     text-align: right;
+  }
+  
+  [dir="rtl"] .container {
+    direction: rtl !important;
   }
   
   /* Force proper display on mobile RTL */
@@ -171,9 +175,15 @@
       display: block !important;
     }
     
-    [dir="rtl"] .flex-col {
-      display: flex !important;
+    [dir="rtl"] section#home .flex {
       flex-direction: column !important;
+    }
+  }
+  
+  /* RTL button layout fixes */
+  @media (min-width: 640px) {
+    [dir="rtl"] section#home .flex {
+      flex-direction: row-reverse;
     }
   }
 }
