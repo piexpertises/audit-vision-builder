@@ -122,16 +122,6 @@
     font-family: var(--font-body);
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    /* Disable all animations on mobile for Android compatibility */
-  }
-  
-  @media (max-width: 768px) {
-    *, *::before, *::after {
-      animation-duration: 0s !important;
-      animation-delay: 0s !important;
-      transition-duration: 0s !important;
-      transition-delay: 0s !important;
-    }
   }
   
   h1, h2, h3, h4, h5, h6 {
