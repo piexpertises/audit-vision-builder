@@ -132,46 +132,54 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Main Hero Content - Visible immediately */}
-          <div className="pt-20 md:pt-0">
-            <h1 className="font-bold mb-6 text-shadow font-rubik" style={{
-            fontSize: 'clamp(2rem, 8vw, 4.5rem)',
-            lineHeight: '1.2',
-            marginTop: 'clamp(80px, 12vh, 120px)'
-          }}>
-              <span className="block mb-2" style={{ color: 'hsl(42 88% 65%)' }}>{t('hero.title')}</span>
+          {/* Main Hero Content - Optimized for mobile responsive */}
+          <div className="pt-20 md:pt-0 flex flex-col items-center">
+            <h1 
+              className="font-bold mb-6 text-shadow font-rubik w-full"
+              style={{
+                fontSize: 'clamp(2rem, 8vw, 4.5rem)',
+                lineHeight: '1.2',
+                marginTop: 'clamp(80px, 12vh, 120px)'
+              }}
+            >
+              <span className="block mb-2" style={{ color: 'hsl(42 88% 65%)' }}>
+                {t('hero.title')}
+              </span>
             </h1>
-            <p className="text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center px-4" style={{
-            fontSize: 'clamp(1.125rem, 3vw, 1.875rem)'
-          }}>
+            <p 
+              className="text-foreground/90 mb-8 leading-relaxed max-w-3xl mx-auto font-bold text-center px-4 w-full"
+              style={{
+                fontSize: 'clamp(1.125rem, 3vw, 1.875rem)'
+              }}
+            >
               {t('hero.subtitle')}
             </p>
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Mobile Responsive */}
           {/* 
             RTL Support: Uses flex-col on mobile, sm:flex-row on desktop
             The RTL CSS automatically handles row-reverse for Hebrew on desktop
-            No inline dir attribute needed - handled globally
+            Added w-full for proper mobile display
           */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16`}>
-            <a href="#about-intro" className="inline-block">
-              <Button size="lg" className="btn-hero group hover-scale hover-glow">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 sm:mb-16 w-full px-4">
+            <a href="#about-intro" className="w-full sm:w-auto">
+              <Button size="lg" className="btn-hero group hover-scale hover-glow w-full sm:w-auto">
                 {t('hero.learn_more')}
                 <ArrowRight className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
               </Button>
             </a>
-            <a href="#contact" className="inline-block">
-              <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale">
+            <a href="#contact" className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale w-full sm:w-auto">
                 {t('hero.cta')}
               </Button>
             </a>
           </div>
 
-          {/* Stats Section */}
+          {/* Stats Section - Mobile Responsive */}
           {/* RTL Support: Grid automatically flows RTL when dir="rtl" set on parent */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto px-4">
-            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center py-6 md:min-h-[160px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto px-4 w-full">
+            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center py-6 md:min-h-[160px] w-full">
                 <div className="inline-flex items-center justify-center w-16 h-16 md:w-16 md:h-16 rounded-full mb-4 transition-all duration-300 hover-scale flex-shrink-0" style={{
               backgroundColor: 'hsl(42 88% 65% / 0.2)'
             }}>
