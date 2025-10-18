@@ -150,6 +150,32 @@
   html[dir="rtl"] .rtl-flip {
     transform: scaleX(-1);
   }
+  
+  /* Critical RTL Mobile Fixes - Ensure content visibility */
+  [dir="rtl"] section,
+  [dir="rtl"] main {
+    direction: rtl;
+    text-align: right;
+  }
+  
+  /* Force proper display on mobile RTL */
+  @media (max-width: 640px) {
+    [dir="rtl"] section#home {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+    
+    [dir="rtl"] section#home .container {
+      width: 100% !important;
+      display: block !important;
+    }
+    
+    [dir="rtl"] .flex-col {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+  }
 }
 
 @layer components {
