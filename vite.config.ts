@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => ({
       },
     },
     cssMinify: true,
-    cssCodeSplit: true,
+    cssCodeSplit: false, // Inline CSS dans le JS pour éviter les problèmes MIME Android
     sourcemap: false,
     chunkSizeWarningLimit: 1000,
     assetsInlineLimit: 0, // Force all assets to be files, not inline data URIs
