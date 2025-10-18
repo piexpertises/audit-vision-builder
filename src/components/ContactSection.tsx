@@ -118,17 +118,8 @@ const ContactSection = () => {
     },
   ];
 
-  /**
-   * Contact Section with RTL Support
-   * 
-   * RTL Considerations:
-   * - Form inputs have explicit dir attributes
-   * - Phone/email fields always LTR (international standard)
-   * - Text areas and names follow page direction
-   * - Button icons flip position based on RTL
-   */
   return (
-    <section id="contact" className="py-20 bg-secondary/30" dir={isRTL ? 'rtl' : 'ltr'}>
+    <section id="contact" className={`py-20 bg-secondary/30 ${isRTL ? 'dir-rtl' : 'dir-ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -256,14 +247,12 @@ const ContactSection = () => {
                   </p>
                 </div>
 
-                {/* RTL Support: Icon position changes based on text direction */}
                 <Button 
                   type="submit" 
                   className="w-full btn-hero group min-h-[44px] text-base font-semibold"
                 >
-                  {isRTL && <Send className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />}
+                  <Send className={`${isRTL ? 'mr-2' : 'ml-2'} h-5 w-5 group-hover:translate-x-1 transition-transform`} />
                   {t('contact.send')}
-                  {!isRTL && <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />}
                 </Button>
               </form>
             </CardContent>
@@ -287,11 +276,9 @@ const ContactSection = () => {
                 href={`https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2"
               >
-                  {isRTL && <Phone className="h-5 w-5" />}
+                  <Phone className="ml-2 h-5 w-5" />
                   {t('contact.call_now')}
-                  {!isRTL && <Phone className="h-5 w-5" />}
                 </a>
               </Button>
             </CardContent>

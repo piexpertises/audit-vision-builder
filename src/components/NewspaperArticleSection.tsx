@@ -79,9 +79,8 @@ const NewspaperArticleSection = () => {
                       animationDelay: `${index * 100}ms`
                     }}
                   >
-                    <AccordionTrigger className="hover:no-underline py-5 group">
-                      {/* RTL Support: reduced gap for better visual proximity */}
-                      <div className={`flex items-center gap-2 w-full ${isRTL ? 'text-right' : 'text-left'}`}>
+                    <AccordionTrigger className="text-right hover:no-underline py-5 group">
+                      <div className="flex items-center gap-4 w-full">
                         <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#D4AF37]/10 flex items-center justify-center group-hover:bg-[#D4AF37]/20 transition-colors">
                           <Icon className="w-5 h-5 text-[#D4AF37]" />
                         </div>
@@ -90,9 +89,8 @@ const NewspaperArticleSection = () => {
                         </span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className={`pb-6 pt-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                      {/* RTL Support: reduced margin for better alignment with icon */}
-                      <div className={`${isRTL ? 'mr-12' : 'ml-12'} text-base md:text-lg leading-relaxed text-muted-foreground`}>
+                    <AccordionContent className="text-right pb-6 pt-2">
+                      <div className="mr-14 text-base md:text-lg leading-relaxed text-muted-foreground">
                         {item.answer.split('|').map((part, i) => (
                           <p key={i} className={i > 0 ? 'mt-3' : ''}>
                             {part.trim()}

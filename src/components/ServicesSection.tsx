@@ -42,16 +42,8 @@ const ServicesSection = () => {
     },
   ];
 
-  /**
-   * Services Section with RTL Support
-   * 
-   * RTL Handling:
-   * - Grid layout automatically reverses in RTL
-   * - Text alignment handled by global CSS
-   * - Icons and content flow naturally in RTL
-   */
   return (
-    <section id="services" className="relative py-20 bg-secondary/30" dir={isRTL ? 'rtl' : 'ltr'}>
+    <section id="services" className="relative py-20 bg-secondary/30">
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-background pointer-events-none" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,12 +69,12 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className={`flex ${isRTL ? 'flex-row-reverse' : 'flex-row'} items-start gap-4 p-4 rounded-lg group ${isMobile ? '' : 'hover-lift transition-all duration-700 animate-staggered-fade'} opacity-100`}
+              className={`flex items-start gap-4 p-4 rounded-lg group ${isMobile ? '' : 'hover-lift transition-all duration-700 animate-staggered-fade'} opacity-100`}
               style={{ animationDelay: isMobile ? '0s' : `${index * 0.1}s` }}
               role="article"
               aria-label={t(service.titleKey)}
             >
-              {/* Icon - RTL Support: Position automatically adjusts via flex-row-reverse */}
+              {/* Icon */}
               <div 
                 className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-all duration-300 hover-scale"
                 aria-hidden="true"
@@ -90,7 +82,7 @@ const ServicesSection = () => {
                 <service.icon className="h-6 w-6 text-accent" />
               </div>
               
-              {/* Content - RTL Support: Text alignment handled by global CSS */}
+              {/* Content */}
               <div className="flex-1 min-w-0">
                 <h3 
                   className="font-semibold mb-2 text-foreground group-hover:text-accent transition-colors duration-300"
