@@ -311,11 +311,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('preferred-language', language);
     
     // Set document direction and language for RTL support
-    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
-    document.documentElement.lang = language;
-    
-    // Update body class for font selection
-    document.body.className = language === 'he' ? 'font-hebrew' : 'font-sans';
+    // Use requestAnimationFrame to ensure DOM is ready
+    const timer = requestAnimationFrame(() => {
+      document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+      document.documentElement.lang = language;
+      
+      // Add data attributes instead of replacing body classes
+      document.documentElement.setAttribute('data-language', language);
+      
+      // Handle RTL attribute
+      if (language === 'he') {
+        document.documentElement.setAttribute('data-rtl', 'true');
+      } else {
+        document.documentElement.removeAttribute('data-rtl');
+      }
+    });
+
+    return () => cancelAnimationFrame(timer);
   }, [language]);
 
   const t = (key: string): string => {
