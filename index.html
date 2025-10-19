@@ -13,29 +13,10 @@
     
     <!-- Critical CSS - Inline for instant render -->
     <style>
-      /* Prevent layout shift */
-      body { margin: 0; }
-      #root { min-height: 100vh; }
-      /* Font display optimization */
-      @font-face { font-display: swap; }
-      /* Reduce motion for accessibility */
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
-      }
+      *{box-sizing:border-box}body{margin:0}#root{min-height:100vh}@font-face{font-display:swap}
+      @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
     </style>
     
-    <!-- Google Analytics - Deferred -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
     
     <title>piexpertises.com - Professional Security Consulting | פאי אקספרטיס</title>
     <meta name="description" content="Pi Expertises: Professional security consulting, VIP protection, and emergency response services. Founded by Lt. Col. Steve Belhasen. Expert security solutions in Israel." />
@@ -107,6 +88,6 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx" defer></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,46 +1,21 @@
-// Fallback CSS pour Android WebView si les styles ne se chargent pas
+// Simplified CSS safety check - non-blocking
 export function ensureCssApplied() {
-  // Vérifier que le DOM est prêt
+  // Only run after DOM is ready
   if (document.readyState === 'loading') {
-    // Si le DOM n'est pas encore chargé, attendre
     document.addEventListener('DOMContentLoaded', ensureCssApplied);
     return;
   }
 
   try {
-    // Vérifier si les CSS sont déjà appliquées
-    const hasComputed = !!window.getComputedStyle(document.documentElement).getPropertyValue('--foreground');
+    // Simple check without blocking render
+    const hasStyles = !!window.getComputedStyle(document.documentElement).getPropertyValue('--foreground');
     
-    // Si pas de CSS appliquée (Android preview capricieux), injecter un style minimal
-    if (!hasComputed) {
-      const s = document.createElement('style');
-      s.setAttribute('data-fallback', 'true');
-      s.textContent = `
-        :root { 
-          --background: #ffffff; 
-          --foreground: #0d1b2a; 
-          --primary: #1e40af;
-          --radius: 0.5rem;
-        }
-        html,body,#root { 
-          height: 100%; 
-          margin: 0; 
-          padding: 0; 
-          width: 100%;
-        }
-        body { 
-          color: var(--foreground); 
-          background: var(--background); 
-          font-family: system-ui, -apple-system, sans-serif;
-          -webkit-text-size-adjust: 100%; 
-          -webkit-font-smoothing: antialiased;
-        }
-        * { box-sizing: border-box; }
-      `;
-      document.head.appendChild(s);
-      console.warn('[Android Fix] CSS fallback applied');
+    if (!hasStyles) {
+      const style = document.createElement('style');
+      style.textContent = ':root{--background:#fff;--foreground:#0d1b2a;--primary:#1e40af}*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif}';
+      document.head.appendChild(style);
     }
   } catch (err) {
-    console.error('[Android Fix] Error checking CSS:', err);
+    // Silent fail - don't block rendering
   }
 }
