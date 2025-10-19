@@ -1,111 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { useI18n } from '@/hooks/useI18n';
 
 const WhatsAppButton = () => {
   const { t } = useI18n();
   const whatsappNumber = '972507300720';
   const message = encodeURIComponent(t('navigation.whatsapp_message'));
-  
-  // Position state - null means use default sticky position
-  const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [dragStartTime, setDragStartTime] = useState(0);
-  const buttonRef = useRef<HTMLAnchorElement>(null);
-  
-  // Load saved position on mount
-  useEffect(() => {
-    try {
-      const savedPos = localStorage.getItem('whatsapp_button_position');
-      if (savedPos) {
-        const parsed = JSON.parse(savedPos);
-        if (parsed.isCustom) {
-          setPosition({ x: parsed.x, y: parsed.y });
-        }
-      }
-    } catch (e) {
-      console.error('Error loading WhatsApp button position:', e);
-    }
-  }, []);
-  
-  // Dragging functionality
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      
-      const newX = e.clientX - dragOffset.x;
-      const newY = e.clientY - dragOffset.y;
-      
-      // Keep within viewport bounds
-      const maxX = window.innerWidth - 60;
-      const maxY = window.innerHeight - 60;
-      
-      const boundedX = Math.max(10, Math.min(newX, maxX));
-      const boundedY = Math.max(10, Math.min(newY, maxY));
-      
-      setPosition({ x: boundedX, y: boundedY });
-    };
-    
-    const handleMouseUp = () => {
-      if (isDragging) {
-        setIsDragging(false);
-        // Save custom position
-        if (position) {
-          localStorage.setItem('whatsapp_button_position', JSON.stringify({
-            x: position.x,
-            y: position.y,
-            isCustom: true
-          }));
-        }
-      }
-    };
-    
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-      document.body.style.userSelect = 'none';
-      document.body.style.cursor = 'grabbing';
-    }
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.body.style.userSelect = '';
-      document.body.style.cursor = '';
-    };
-  }, [isDragging, dragOffset, position]);
-  
-  const handleMouseDown = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    setDragStartTime(Date.now());
-    
-    if (e.shiftKey || e.altKey) {
-      // Modifier key pressed = drag mode
-      e.preventDefault();
-      if (buttonRef.current) {
-        if (!position) {
-          const rect = buttonRef.current.getBoundingClientRect();
-          setPosition({ x: rect.left, y: rect.top });
-        }
-        const rect = buttonRef.current.getBoundingClientRect();
-        setDragOffset({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-        setIsDragging(true);
-      }
-    }
-  };
-  
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-  
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Prevent navigation if was dragging
-    if (isDragging) {
-      e.preventDefault();
-    }
-  };
   
   return (
     <>
@@ -124,32 +23,7 @@ const WhatsAppButton = () => {
           align-items: center;
           justify-content: center;
           box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-          transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s;
-          cursor: grab;
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-          user-select: none;
-        }
-        
-        .whatsapp-button:hover {
-          background: #20BA5A;
-          transform: scale(1.05);
-          box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
-        }
-        
-        .whatsapp-button.dragging {
-          cursor: grabbing !important;
-          transform: scale(1.1);
-          box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
-          animation: none;
-        }
-        
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.85;
-          }
+          transition: none;
         }
         
         @media (max-width: 768px) {
@@ -160,32 +34,14 @@ const WhatsAppButton = () => {
             bottom: 16px;
           }
         }
-        
-        @media (max-width: 480px) {
-          .whatsapp-button {
-            width: 50px;
-            height: 50px;
-          }
-        }
       `}</style>
       
       <a
-        ref={buttonRef}
         href={`https://wa.me/${whatsappNumber}?text=${message}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`whatsapp-button ${isDragging ? 'dragging' : ''}`}
-        aria-label={t('navigation.contact')}
-        title="WhatsApp (Shift+glisser pour déplacer)"
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onClick={handleClick}
-        style={position ? {
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          right: 'auto',
-          bottom: 'auto'
-        } : undefined}
+        className="whatsapp-button"
+        aria-label="WhatsApp"
       >
         <svg
           viewBox="0 0 24 24"

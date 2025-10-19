@@ -300,42 +300,12 @@ const translations: Record<Language, Record<string, string>> = {
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    // Check for URL parameter first
-    const urlParams = new URLSearchParams(window.location.search);
-    const langParam = urlParams.get('lang') as Language;
-    
-    // If lang parameter exists and is valid, use it
-    if (langParam && ['he', 'en', 'fr'].includes(langParam)) {
-      return langParam;
-    }
-    
-    // Default to Hebrew (ignore localStorage to ensure piexpertises.com always shows Hebrew)
-    return 'he';
-  });
+  const [language, setLanguage] = useState<Language>('he'); // Always default to Hebrew
 
   useEffect(() => {
-    // Save language preference to localStorage
-    localStorage.setItem('preferred-language', language);
-    
-    // Set document direction and language for RTL support
-    // Use requestAnimationFrame to ensure DOM is ready
-    const timer = requestAnimationFrame(() => {
-      document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
-      document.documentElement.lang = language;
-      
-      // Add data attributes instead of replacing body classes
-      document.documentElement.setAttribute('data-language', language);
-      
-      // Handle RTL attribute
-      if (language === 'he') {
-        document.documentElement.setAttribute('data-rtl', 'true');
-      } else {
-        document.documentElement.removeAttribute('data-rtl');
-      }
-    });
-
-    return () => cancelAnimationFrame(timer);
+    // Minimal DOM updates without requestAnimationFrame
+    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+    document.documentElement.lang = language;
   }, [language]);
 
   const t = (key: string): string => {

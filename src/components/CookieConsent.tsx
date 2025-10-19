@@ -8,21 +8,16 @@ const CookieConsent = () => {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    // Check if user has already accepted cookies
-    const cookieConsent = localStorage.getItem('cookie-consent');
-    if (!cookieConsent) {
-      // Show banner after 1 second delay
-      setTimeout(() => setShowBanner(true), 1000);
-    }
+    // Simplified - no localStorage check, just show after delay
+    const timer = setTimeout(() => setShowBanner(true), 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
     setShowBanner(false);
   };
 
   const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'declined');
     setShowBanner(false);
   };
 
@@ -58,7 +53,7 @@ const CookieConsent = () => {
 
   return (
     <div 
-      className="fixed bottom-0 left-0 right-0 z-[999] animate-slide-up"
+      className="fixed bottom-0 left-0 right-0 z-[999]"
       role="dialog"
       aria-label="Cookie consent banner"
       aria-describedby="cookie-message"
