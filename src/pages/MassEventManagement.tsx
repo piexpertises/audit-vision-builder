@@ -7,9 +7,11 @@ import { Users, Shield, Clipboard, GraduationCap, PhoneCall, AlertCircle, Award,
 import massEventHero from '@/assets/mass-event-hero.jpg';
 import { useI18n } from '@/hooks/useI18n';
 import SEO from '@/components/SEO';
+import FAQSection from '@/components/FAQSection';
+import { massEventsFAQ } from '@/data/faqData';
 
 const MassEventManagement = () => {
-  const { t, isRTL } = useI18n();
+  const { t, isRTL, language } = useI18n();
   const whatsappUrl = `https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`;
 
   const services = [
@@ -39,10 +41,28 @@ const MassEventManagement = () => {
   return (
     <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEO 
-        title={`${t('mass_events.title')} | Pi Expertises`}
-        description={t('mass_events.intro')}
-        keywords="mass events, event management, event security, festival security, concert security"
+        title="ניהול אירועים המוניים ואבטחה | Mass Event Management Israel | Pi Expertises"
+        description="מומחים בניהול ואבטחת אירועים המוניים בישראל. הכנת תוכניות אבטחה (פק''מ), ליווי רישוי ומנב''ט לאירועים. תקן ת''י 5688. שירותים בתל אביב, רעננה וכל הארץ. Expert mass event management and security in Israel - security plans, licensing support, SI 5688 standard compliance."
+        keywords="אירועים המוניים ישראל, אבטחת אירועים תל אביב, מנבט לאירועים רעננה, פקם לאירועים, mass event security Israel, festival security Tel Aviv, concert security, תקן תי 5688, event licensing, ליווי רישוי אירועים, Steve Belhasen"
         canonical="https://piexpertises.com/mass-event-management"
+        ogImage="https://piexpertises.com/mass-event-og.jpg"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Mass Event Management",
+          "alternateName": "ניהול אירועים המוניים",
+          "description": "Professional mass event management and security services in Israel",
+          "provider": {
+            "@type": "Organization",
+            "name": "Pi Expertises",
+            "url": "https://piexpertises.com"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Israel"
+          },
+          "serviceType": "Event Security Management"
+        }}
       />
       <Header />
       
@@ -307,6 +327,12 @@ const MassEventManagement = () => {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection 
+          title={language === 'he' ? 'שאלות נפוצות' : language === 'fr' ? 'Questions Fréquentes' : 'Frequently Asked Questions'}
+          items={massEventsFAQ[language] || massEventsFAQ.en}
+        />
       </main>
       
       <Footer />

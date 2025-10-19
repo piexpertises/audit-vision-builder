@@ -7,9 +7,10 @@ interface SEOProps {
   keywords?: string;
   canonical?: string;
   ogImage?: string;
+  schema?: any; // JSON-LD structured data
 }
 
-const SEO = ({ title, description, keywords, canonical, ogImage }: SEOProps) => {
+const SEO = ({ title, description, keywords, canonical, ogImage, schema }: SEOProps) => {
   const { language } = useI18n();
 
   useEffect(() => {
@@ -100,7 +101,19 @@ const SEO = ({ title, description, keywords, canonical, ogImage }: SEOProps) => 
     addAlternateLink('en', `${baseUrl}?lang=en`);
     addAlternateLink('fr', `${baseUrl}?lang=fr`);
     addAlternateLink('x-default', baseUrl);
-  }, [title, description, keywords, canonical, ogImage, language]);
+
+    // Add or update JSON-LD structured data
+    if (schema) {
+      let scriptElement = document.querySelector('script[type="application/ld+json"]#seo-schema');
+      if (!scriptElement) {
+        scriptElement = document.createElement('script');
+        scriptElement.setAttribute('type', 'application/ld+json');
+        scriptElement.setAttribute('id', 'seo-schema');
+        document.head.appendChild(scriptElement);
+      }
+      scriptElement.textContent = JSON.stringify(schema);
+    }
+  }, [title, description, keywords, canonical, ogImage, language, schema]);
 
   return null;
 };

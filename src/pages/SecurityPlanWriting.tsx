@@ -59,10 +59,28 @@ const SecurityPlanWriting = () => {
   return (
     <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEO 
-        title={`${t('security_plans.title')} | Pi Expertises`}
-        description={t('security_plans.intro')}
-        keywords="security plan writing, business security plans, security documentation, facility security"
+        title="כתיבת תוכניות אבטחה (פק''מ) ומנב''ט לרישוי | Security Plans Israel | Pi Expertises"
+        description="כתיבת תוכניות אבטחה (פק''מ) מקצועיות לרישוי עסקים וארגונים בישראל. מנב''ט מוסמך, ליווי רישוי מלא והטמעת תקנים. שירותים בתל אביב, רעננה וכל הארץ. Professional security plan writing (PAK'AM) for business licensing in Israel - certified security manager support."
+        keywords="פקם אבטחה ישראל, תוכנית אבטחה תל אביב, מנבט לרישוי רעננה, כתיבת פקם, security plan writing Israel, PAK'AM Israel, business licensing security, מנב''ט מוסמך, ליווי רישוי עסקים, Steve Belhasen, סטיב בלחסן"
         canonical="https://piexpertises.com/security-plan-writing"
+        ogImage="https://piexpertises.com/security-plans-og.jpg"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Security Plan Writing",
+          "alternateName": "כתיבת תוכניות אבטחה (פק''מ)",
+          "description": "Professional security plan writing and licensing support for businesses in Israel",
+          "provider": {
+            "@type": "Organization",
+            "name": "Pi Expertises",
+            "url": "https://piexpertises.com"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Israel"
+          },
+          "serviceType": "Security Plan Writing"
+        }}
       />
       <Header />
       

@@ -7,9 +7,11 @@ import { Shield, Users, Target, Award, CheckCircle, MessageSquare, FileText, Hea
 import securityBg from '@/assets/security-hero-bg.jpg';
 import { useI18n } from '@/hooks/useI18n';
 import SEO from '@/components/SEO';
+import FAQSection from '@/components/FAQSection';
+import { securityConsultingFAQ } from '@/data/faqData';
 
 const SecurityConsulting = () => {
-  const { t, isRTL } = useI18n();
+  const { t, isRTL, language } = useI18n();
   const whatsappUrl = `https://wa.me/972507300720?text=${encodeURIComponent(t('navigation.whatsapp_message'))}`;
 
   const services = [
@@ -39,10 +41,28 @@ const SecurityConsulting = () => {
   return (
     <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEO 
-        title={`${t('security_consulting.title')} | Pi Expertises`}
-        description={t('security_consulting.intro')}
-        keywords="security consulting, business security, risk assessment, security planning"
+        title="ייעוץ ביטחוני מקצועי בישראל | Security Consulting Israel | Pi Expertises"
+        description="שירותי ייעוץ ביטחוני מקצועיים לעסקים וארגונים בישראל. מומחים בהגנת עורף, אבטחה מונעת וניהול משברים. 20+ שנות ניסיון. שירותים בתל אביב, רעננה וכל הארץ. Professional security consulting services for businesses in Israel - preventive security, crisis management, rear defense."
+        keywords="ייעוץ ביטחוני ישראל, יועץ ביטחון תל אביב, אבטחה לעסקים רעננה, security consulting Israel, business security Tel Aviv, crisis management, הגנת עורף, אבטחה מונעת, ניהול משברים, Steve Belhasen, סטיב בלחסן"
         canonical="https://piexpertises.com/security-consulting"
+        ogImage="https://piexpertises.com/security-consulting-og.jpg"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Security Consulting Services",
+          "alternateName": "שירותי ייעוץ ביטחוני",
+          "description": "Professional security consulting for businesses and organizations in Israel",
+          "provider": {
+            "@type": "Organization",
+            "name": "Pi Expertises",
+            "url": "https://piexpertises.com"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Israel"
+          },
+          "serviceType": "Security Consulting"
+        }}
       />
       <Header />
       
@@ -347,6 +367,12 @@ const SecurityConsulting = () => {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection 
+          title={language === 'he' ? 'שאלות נפוצות' : language === 'fr' ? 'Questions Fréquentes' : 'Frequently Asked Questions'}
+          items={securityConsultingFAQ[language] || securityConsultingFAQ.en}
+        />
       </main>
       
       <Footer />

@@ -31,10 +31,28 @@ const EmergencyPreparedness = () => {
   return (
     <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEO 
-        title={`${t('emergency_prep.title')} | Pi Expertises`}
-        description={t('emergency_prep.intro')}
-        keywords="emergency preparedness, crisis management, business continuity, disaster recovery, organizational resilience"
+        title="הערכות חירום וניהול משברים | Emergency Preparedness Israel | Pi Expertises"
+        description="שירותי הערכות לשעת חירום וניהול משברים לעסקים וארגונים בישראל. BCP, DRP, חוסן ארגוני והכנה למצבי חירום. מומחים בתכנון רב-שנתי. שירותים בתל אביב, רעננה וכל הארץ. Expert emergency preparedness and crisis management services - BCP, DRP, organizational resilience."
+        keywords="הערכות חירום ישראל, ניהול משברים תל אביב, BCP Israel, DRP, חוסן ארגוני רעננה, emergency preparedness Israel, crisis management Tel Aviv, business continuity, disaster recovery, Steve Belhasen, סטיב בלחסן"
         canonical="https://piexpertises.com/emergency-preparedness"
+        ogImage="https://piexpertises.com/emergency-prep-og.jpg"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Emergency Preparedness",
+          "alternateName": "הערכות לשעת חירום",
+          "description": "Emergency preparedness and crisis management services for organizations in Israel",
+          "provider": {
+            "@type": "Organization",
+            "name": "Pi Expertises",
+            "url": "https://piexpertises.com"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Israel"
+          },
+          "serviceType": "Emergency Preparedness"
+        }}
       />
       <Header />
       
