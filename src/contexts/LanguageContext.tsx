@@ -26,7 +26,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     'hero.title': 'פאי אקספרטיס',
-    'hero.subtitle': 'בניית תוכניות אבטחה, ייעוץ ביטחוני וניהול מערך אבטחה',
+    'hero.subtitle': 'כתיבת תוכניות אבטחה, ייעוץ ביטחוני וניהול מערך אבטחה',
     'hero.cta': 'צור קשר',
     'hero.learn_more': 'למד עוד',
     
