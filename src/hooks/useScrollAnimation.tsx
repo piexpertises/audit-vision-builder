@@ -1,66 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 
-interface UseScrollAnimationOptions {
+interface UseScrollAnimationProps {
   threshold?: number;
   rootMargin?: string;
   triggerOnce?: boolean;
 }
 
-export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
-  const {
-    threshold = 0.1,
-    rootMargin = '0px',
-    triggerOnce = true,
-  } = options;
-
-  const [isVisible, setIsVisible] = useState(true); // Show immediately on mobile
+export const useScrollAnimation = (_props?: UseScrollAnimationProps) => {
+  const [isVisible] = useState(true); // Always visible - no animations
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    // Fallback for browsers without IntersectionObserver or on mobile with issues
-    if (typeof IntersectionObserver === 'undefined') {
-      setIsVisible(true);
-      return;
-    }
-
-    // Set a shorter timeout to ensure content displays quickly
-    const fallbackTimeout = setTimeout(() => {
-      setIsVisible(true);
-    }, 500);
-
-    try {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            clearTimeout(fallbackTimeout);
-            if (triggerOnce) {
-              observer.unobserve(element);
-            }
-          } else if (!triggerOnce) {
-            setIsVisible(false);
-          }
-        },
-        {
-          threshold,
-          rootMargin,
-        }
-      );
-
-      observer.observe(element);
-
-      return () => {
-        clearTimeout(fallbackTimeout);
-        observer.disconnect();
-      };
-    } catch (error) {
-      setIsVisible(true);
-      clearTimeout(fallbackTimeout);
-    }
-  }, [threshold, rootMargin, triggerOnce]);
 
   return { ref, isVisible };
 };

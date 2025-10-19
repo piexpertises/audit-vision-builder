@@ -15,7 +15,6 @@ const HeroSection = () => {
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  const [imagesLoaded, setImagesLoaded] = useState(true);
 
   // Auto-advance carousel every 5 seconds - only on desktop
   useEffect(() => {
@@ -31,12 +30,6 @@ const HeroSection = () => {
   const handleImageError = (index: number) => {
     setImageErrors(prev => new Set(prev).add(index));
   };
-
-  // Preload first image to avoid blocking - with immediate timeout
-  useEffect(() => {
-    // Display content immediately to reduce render delay
-    setImagesLoaded(true);
-  }, []);
 
   const stats = [{
     icon: Shield,
@@ -60,23 +53,17 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90 z-0" />
         
         {isMobile ? (
-          /* Mobile: Single static optimized image with error handling */
-          <div className="absolute inset-0" style={{ opacity: imagesLoaded ? 0.35 : 0, zIndex: 1 }}>
-            <picture>
-              <source type="image/webp" srcSet={heroCarousel1} />
-              <img 
-                src={heroCarousel1} 
-                alt="Professional security services - Steve Belhasen Pi Expertises" 
-                className="w-full h-full object-cover" 
-                width={768}
-                height={1024}
-                loading="eager"
-                decoding="async"
-                onError={() => {
-                  setImagesLoaded(true);
-                }}
-              />
-            </picture>
+          /* Mobile: Single static optimized image */
+          <div className="absolute inset-0" style={{ opacity: 0.35, zIndex: 1 }}>
+            <img 
+              src={heroCarousel1} 
+              alt="Professional security services - Steve Belhasen Pi Expertises" 
+              className="w-full h-full object-cover" 
+              width={768}
+              height={1024}
+              loading="eager"
+              decoding="sync"
+            />
           </div>
         ) : (
           /* Desktop: Carousel images */
@@ -85,23 +72,20 @@ const HeroSection = () => {
               key={index} 
               className="absolute inset-0 transition-opacity duration-1000 ease-in-out" 
               style={{
-                opacity: imagesLoaded && currentImageIndex === index ? 0.35 : 0,
+                opacity: currentImageIndex === index ? 0.35 : 0,
                 zIndex: currentImageIndex === index ? 1 : 0
               }}
             >
-              <picture>
-                <source type="image/webp" srcSet={image} />
-                <img 
-                  src={image} 
-                  alt={`Professional security consulting services ${index + 1} - Pi Expertises Israel`} 
-                  className="w-full h-full object-cover" 
-                  width={1920}
-                  height={1080}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                  onError={() => handleImageError(index)}
-                />
-              </picture>
+              <img 
+                src={image} 
+                alt={`Professional security consulting services ${index + 1} - Pi Expertises Israel`} 
+                className="w-full h-full object-cover" 
+                width={1920}
+                height={1080}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                onError={() => handleImageError(index)}
+              />
             </div>
           ))
         )}

@@ -118,10 +118,11 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground;
     font-family: var(--font-body);
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -135,29 +136,39 @@
     display: block;
   }
 
-  /* Prevent layout breaks on mobile */
+  /* Mobile optimizations - disable all animations */
   @media (max-width: 768px) {
-    * {
-      max-width: 100vw;
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      animation-delay: 0s !important;
+      transition-delay: 0s !important;
     }
     
-    /* Disable complex animations on mobile for better performance */
+    /* Force visibility */
     .animate-slide-up,
     .animate-zoom-in,
     .animate-staggered-fade,
     .animate-rotate-shield,
     .animate-slide-left,
-    .animate-slide-right {
-      animation: none !important;
+    .animate-slide-right,
+    .animate-fade-in,
+    .animate-slide-in-left,
+    .animate-slide-in-right {
       opacity: 1 !important;
       transform: none !important;
+      animation: none !important;
     }
     
-    /* Reduce motion for better mobile performance */
+    /* Disable hover effects */
     .hover-lift:hover,
     .hover-scale:hover,
     .hover-glow:hover {
-      transform: none;
+      transform: none !important;
+      box-shadow: none !important;
     }
   }
   
