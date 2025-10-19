@@ -72,9 +72,7 @@ const HeroSection = () => {
                 height={1024}
                 loading="eager"
                 decoding="async"
-                fetchPriority="high"
                 onError={() => {
-                  console.warn('Mobile hero image failed to load');
                   setImagesLoaded(true);
                 }}
               />
@@ -101,7 +99,6 @@ const HeroSection = () => {
                   height={1080}
                   loading={index === 0 ? "eager" : "lazy"}
                   decoding="async"
-                  fetchPriority={index === 0 ? "high" : "low"}
                   onError={() => handleImageError(index)}
                 />
               </picture>
