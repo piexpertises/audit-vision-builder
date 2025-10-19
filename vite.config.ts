@@ -40,10 +40,15 @@ export default defineConfig(({ mode }) => ({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        passes: 2,
+        passes: 3,
+        unsafe_math: true,
+        unsafe_methods: true,
       },
       mangle: {
         safari10: true,
+      },
+      format: {
+        comments: false,
       },
     },
     cssMinify: true,
@@ -51,6 +56,7 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     chunkSizeWarningLimit: 1000,
     assetsInlineLimit: 4096,
+    reportCompressedSize: false,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],

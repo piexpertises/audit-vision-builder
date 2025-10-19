@@ -11,6 +11,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
+    <!-- Critical CSS - Inline for instant render -->
+    <style>
+      /* Prevent layout shift */
+      body { margin: 0; }
+      #root { min-height: 100vh; }
+      /* Font display optimization */
+      @font-face { font-display: swap; }
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
     
     <!-- Google Analytics - Deferred -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -29,10 +45,13 @@
 
     <!-- Google Fonts for Multilingual Support - Async load to prevent render blocking -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Heebo:wght@400;600;700&family=Playfair+Display:wght@400;600&family=Rubik:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Heebo:wght@400;600;700&family=Playfair+Display:wght@400;600&family=Rubik:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Heebo:wght@400;600;700&family=Playfair+Display:wght@400;600&family=Rubik:wght@600;700;800&display=swap" media="print" onload="this.media='all'; this.onload=null;">
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Heebo:wght@400;600;700&family=Playfair+Display:wght@400;600&family=Rubik:wght@600;700;800&display=swap">
     </noscript>
+    
+    <!-- Preload hero image to reduce LCP -->
+    <link rel="preload" as="image" href="/src/assets/hero-carousel-1.jpg" fetchpriority="high">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

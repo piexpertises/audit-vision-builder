@@ -11,16 +11,11 @@ const HeroSection = () => {
   const { t, isRTL } = useI18n();
   const isMobile = useIsMobile();
 
-  console.log('[HeroSection] Rendering - isMobile:', isMobile);
-
   // Carousel state - only used on desktop
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  // On mobile, start with images loaded to ensure immediate display
-  const [imagesLoaded, setImagesLoaded] = useState(isMobile);
-
-  console.log('[HeroSection] State - imagesLoaded:', imagesLoaded, 'currentImageIndex:', currentImageIndex);
+  const [imagesLoaded, setImagesLoaded] = useState(true);
 
   // Auto-advance carousel every 5 seconds - only on desktop
   useEffect(() => {
@@ -37,41 +32,11 @@ const HeroSection = () => {
     setImageErrors(prev => new Set(prev).add(index));
   };
 
-  // Preload first image to avoid blocking - with timeout fallback
+  // Preload first image to avoid blocking - with immediate timeout
   useEffect(() => {
-    console.log('[HeroSection] useEffect - Starting image preload, isMobile:', isMobile);
-    
-    // Skip preloading on mobile - display immediately
-    if (isMobile) {
-      console.log('[HeroSection] Mobile detected - setting imagesLoaded to true immediately');
-      setImagesLoaded(true);
-      return;
-    }
-
-    // Set a timeout to ensure content displays even if images fail
-    const timeoutId = setTimeout(() => {
-      console.log('[HeroSection] Timeout reached - forcing imagesLoaded to true');
-      setImagesLoaded(true);
-    }, 2000); // Force display after 2 seconds
-
-    const img = new Image();
-    img.src = heroCarousel1;
-    img.onload = () => {
-      console.log('[HeroSection] Image loaded successfully');
-      setImagesLoaded(true);
-      clearTimeout(timeoutId);
-    };
-    img.onerror = () => {
-      console.warn('[HeroSection] Failed to load hero image, displaying content anyway');
-      setImagesLoaded(true);
-      clearTimeout(timeoutId);
-    };
-
-    return () => {
-      console.log('[HeroSection] Cleaning up image preload');
-      clearTimeout(timeoutId);
-    };
-  }, [isMobile]);
+    // Display content immediately to reduce render delay
+    setImagesLoaded(true);
+  }, []);
 
   const stats = [{
     icon: Shield,

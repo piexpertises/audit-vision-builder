@@ -23,15 +23,22 @@
     Header set Content-Type "application/javascript; charset=utf-8"
   </FilesMatch>
   
-  # Cache static resources
+  # Cache static resources aggressively (1 year)
   <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|css|js)$">
-    Header set Cache-Control "public, max-age=604800"
+    Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   
-  # Cache HTML
+  # Cache HTML (1 hour)
   <FilesMatch "\.(html|htm)$">
-    Header set Cache-Control "public, max-age=600"
+    Header set Cache-Control "public, max-age=3600"
   </FilesMatch>
+  
+  # Security headers
+  Header set X-Frame-Options "DENY"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
 # Enable Gzip compression
