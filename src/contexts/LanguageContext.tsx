@@ -301,6 +301,16 @@ const translations: Record<Language, Record<string, string>> = {
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>(() => {
+    // Check for URL parameter first
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang') as Language;
+    
+    if (langParam && ['he', 'en', 'fr'].includes(langParam)) {
+      // Save URL language to localStorage
+      localStorage.setItem('preferred-language', langParam);
+      return langParam;
+    }
+    
     // Get saved language from localStorage or default to Hebrew
     const savedLang = localStorage.getItem('preferred-language') as Language;
     return savedLang && ['he', 'en', 'fr'].includes(savedLang) ? savedLang : 'he';
