@@ -7,10 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="rAsU81ZY_-urv5aXwQtVL4GoJrYRgQgmUbEke1KTuyk" />
     
-    <!-- Preconnect to critical domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- ✅ PERFORMANCE BASE : préconnect + priorités de rendu -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://unpkg.com">
     
+    <style>
+      /* ✅ Empêche les polices de bloquer l'affichage */
+      @font-face { font-display: swap; }
+      /* ✅ Améliore le rendu des images hors écran (mobile) */
+      img[loading="lazy"] { content-visibility: auto; contain-intrinsic-size: 1px 300px; }
+      /* ✅ Réduit le coût des animations sur mobile */
+      @media (prefers-reduced-motion: reduce) {
+        * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+
+    <!-- ✅ HÉROS EN PRIORITÉ : preload de l'image hero principale -->
+    <link rel="preload" as="image" href="/src/assets/hero-carousel-1.jpg" imagesrcset="/src/assets/hero-carousel-1.jpg 640w, /src/assets/hero-carousel-1.jpg 1280w" imagesizes="(max-width:640px) 640px, 1280px">
+
+    <!-- ✅ MARQUEURS pour différer JS tiers depuis le BODY -->
+    <script>
+      // Helper global pour planifier les taches au bon moment
+      window.runLater = (fn) => {
+        if ('requestIdleCallback' in window) requestIdleCallback(fn, {timeout: 3000});
+        else setTimeout(fn, 2500);
+      };
+    </script>
     
     <!-- Google Analytics - Deferred -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -89,5 +113,80 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx" defer></script>
+
+    <!-- ✅ LAZY IMAGES GÉNÉRAL : ajoute lazy/decoding=async partout si manquant -->
+    <script>
+      (function () {
+        const imgs = document.querySelectorAll('img:not([loading])');
+        imgs.forEach(img => { img.setAttribute('loading','lazy'); img.setAttribute('decoding','async'); });
+      })();
+    </script>
+
+    <!-- ✅ SRCSET AUTOMATIQUE pour mobile/desktop -->
+    <script>
+      (function () {
+        const mq = window.matchMedia('(max-width: 640px)');
+        document.querySelectorAll('img[data-src-mobile]').forEach(img => {
+          const mobile = img.getAttribute('data-src-mobile');
+          const desk   = img.getAttribute('data-src-desktop') || img.src;
+          img.src = mq.matches ? mobile : desk;
+        });
+      })();
+    </script>
+
+    <!-- ✅ LAZY BACKGROUNDS : pour sections avec grosses images en background -->
+    <script>
+      (function () {
+        const els = document.querySelectorAll('[data-bg]');
+        if (!('IntersectionObserver' in window)) { els.forEach(e => e.style.backgroundImage = `url('${e.dataset.bg}')`); return; }
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(ent => {
+            if (ent.isIntersecting) {
+              ent.target.style.backgroundImage = `url('${ent.target.dataset.bg}')`;
+              io.unobserve(ent.target);
+            }
+          });
+        }, { rootMargin: '200px' });
+        els.forEach(e => io.observe(e));
+      })();
+    </script>
+
+    <!-- ✅ LAZY IFRAMES (maps/vidéos) -->
+    <script>
+      (function () {
+        document.querySelectorAll('iframe').forEach(f => {
+          if (!f.hasAttribute('loading')) f.setAttribute('loading','lazy');
+          f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+        });
+      })();
+    </script>
+
+    <!-- ✅ DIFFÉRER LES SCRIPTS TIERS NON CRITIQUES -->
+    <script>
+      // Charge tous les <script data-late-src="..."> après le chargement
+      function loadLateScript(src) {
+        const s = document.createElement('script');
+        s.src = src; s.async = true; s.defer = true;
+        document.body.appendChild(s);
+      }
+
+      window.runLater(() => {
+        // Activer data-late-src automatiquement
+        document.querySelectorAll('script[data-late-src]').forEach(el => loadLateScript(el.getAttribute('data-late-src')));
+      });
+    </script>
+
+    <!-- ✅ PREFETCH DES LIENS AU SURVOL (accélère la navigation intra-site) -->
+    <script>
+      (function () {
+        const add = (url) => {
+          const l = document.createElement('link'); l.rel='prefetch'; l.href=url; document.head.appendChild(l);
+        };
+        document.addEventListener('mouseover', e => {
+          const a = e.target.closest('a[href^="/"], a[href*="' + location.host + '"]');
+          if (a && !a.dataset.prefetched) { a.dataset.prefetched = '1'; add(a.href); }
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>
