@@ -1,10 +1,13 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { useI18n } from '@/hooks/useI18n';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import steveProfile from '@/assets/steve-belhasen-profile.jpg';
 
 const AboutIntroSection = () => {
   const { t, isRTL } = useI18n();
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
     <section id="about-intro" className="relative py-20" dir={isRTL ? 'rtl' : 'ltr'}>
@@ -27,10 +30,12 @@ const AboutIntroSection = () => {
         
         {/* Section 1 - About Pi Expertises with Glass Cards */}
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <div ref={titleRef} className="text-center mb-12">
             {/* Title Glass Card */}
             <div 
-              className="inline-block px-8 py-6 rounded-2xl mb-6"
+              className={`inline-block px-8 py-6 rounded-2xl mb-6 transition-all duration-700 ${
+                titleVisible ? 'opacity-100 animate-slide-up' : 'opacity-0 translate-y-10'
+              }`}
               style={{
                 background: 'hsl(210 20% 98% / 0.12)',
                 backdropFilter: 'blur(12px)',
@@ -46,9 +51,11 @@ const AboutIntroSection = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div ref={contentRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Profile Photo */}
-            <div className="flex justify-center lg:order-1">
+            <div className={`flex justify-center lg:order-1 transition-all duration-700 delay-200 ${
+              contentVisible ? 'opacity-100 animate-slide-right' : 'opacity-0 translate-x-10'
+            }`}>
               <div className="relative hover-lift">
                 <div 
                   className="p-6 rounded-2xl"
@@ -75,7 +82,9 @@ const AboutIntroSection = () => {
             </div>
 
             {/* Main About Content */}
-            <div className="space-y-6 lg:order-2">
+            <div className={`space-y-6 lg:order-2 transition-all duration-700 delay-300 ${
+              contentVisible ? 'opacity-100 animate-slide-left' : 'opacity-0 -translate-x-10'
+            }`}>
               <div 
                 className="p-8 rounded-2xl hover-lift"
                 style={{

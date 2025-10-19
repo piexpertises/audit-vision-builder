@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { toast } from "sonner";
 import { useI18n } from '@/hooks/useI18n';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { z } from 'zod';
 
 // Validation schema with zod
@@ -34,6 +35,8 @@ const contactFormSchema = z.object({
 
 const ContactSection = () => {
   const { t, isRTL, language } = useI18n();
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: formRef, isVisible: formVisible } = useScrollAnimation({ threshold: 0.1 });
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -122,7 +125,9 @@ const ContactSection = () => {
     <section id="contact" className={`py-20 bg-secondary/30 ${isRTL ? 'dir-rtl' : 'dir-ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div ref={headerRef} className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
+          headerVisible ? 'opacity-100 animate-slide-up' : 'opacity-0 translate-y-10'
+        }`}>
           <h2 
             className="font-bold mb-6 text-foreground"
             style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}
@@ -135,9 +140,11 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto">
+        <div ref={formRef} className="max-w-2xl mx-auto">
           {/* Contact Form */}
-          <Card className="card-security mb-8">
+          <Card className={`card-security mb-8 transition-all duration-700 delay-200 ${
+            formVisible ? 'opacity-100 animate-zoom-in' : 'opacity-0 scale-95'
+          }`}>
             <CardContent className="p-6 sm:p-8">
               <h3 
                 className="font-semibold mb-6 text-foreground"
@@ -259,7 +266,9 @@ const ContactSection = () => {
           </Card>
 
           {/* Call to Action */}
-          <Card className="card-security bg-gradient-to-r from-accent/10 to-accent/5 border-accent/20">
+          <Card className={`card-security bg-gradient-to-r from-accent/10 to-accent/5 border-accent/20 transition-all duration-700 delay-400 ${
+            formVisible ? 'opacity-100 animate-slide-up' : 'opacity-0 translate-y-10'
+          }`}>
             <CardContent className="p-8 text-center">
               <h4 className="text-xl font-semibold text-foreground mb-4">
                 {t('contact.emergency_title')}

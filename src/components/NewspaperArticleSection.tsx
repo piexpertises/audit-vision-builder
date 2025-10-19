@@ -7,9 +7,12 @@ import {
 } from "@/components/ui/accordion";
 import { Shield, CheckCircle, Users, List, Calendar, Award } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const NewspaperArticleSection = () => {
   const { t, isRTL } = useI18n();
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: faqRef, isVisible: faqVisible } = useScrollAnimation({ threshold: 0.1 });
 
   const faqItems = [
     {
@@ -55,7 +58,9 @@ const NewspaperArticleSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div ref={headerRef} className={`text-center mb-16 transition-all duration-700 ${
+            headerVisible ? 'opacity-100 animate-slide-up' : 'opacity-0 translate-y-10'
+          }`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#D4AF37]">
               {t('newspaper.title')}
             </h2>
@@ -66,7 +71,7 @@ const NewspaperArticleSection = () => {
           </div>
           
           {/* FAQ Accordion */}
-          <div>
+          <div ref={faqRef}>
             <Accordion type="single" collapsible className="space-y-4">
               {faqItems.map((item, index) => {
                 const Icon = item.icon;
@@ -74,9 +79,12 @@ const NewspaperArticleSection = () => {
                   <AccordionItem 
                     key={item.id} 
                     value={item.id}
-                    className="bg-card border border-border/40 rounded-lg px-6 shadow-sm hover:shadow-md transition-all duration-300 hover:border-[#D4AF37]/30"
+                    className={`bg-card border border-border/40 rounded-lg px-6 shadow-sm hover:shadow-md transition-all duration-700 hover:border-[#D4AF37]/30 ${
+                      faqVisible ? 'opacity-100 animate-staggered-fade' : 'opacity-0 translate-y-5'
+                    }`}
                     style={{
-                      animationDelay: `${index * 100}ms`
+                      animationDelay: faqVisible ? `${index * 100}ms` : '0ms',
+                      transitionDelay: faqVisible ? `${index * 100}ms` : '0ms'
                     }}
                   >
                     <AccordionTrigger className="text-right hover:no-underline py-5 group">
