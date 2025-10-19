@@ -20,28 +20,49 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
     const element = ref.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          if (triggerOnce) {
-            observer.unobserve(element);
+    // Fallback for browsers without IntersectionObserver or on mobile with issues
+    if (typeof IntersectionObserver === 'undefined') {
+      console.warn('IntersectionObserver not supported, showing content immediately');
+      setIsVisible(true);
+      return;
+    }
+
+    // Set a timeout to ensure content displays even if observer fails
+    const fallbackTimeout = setTimeout(() => {
+      console.log('Animation fallback triggered - ensuring visibility');
+      setIsVisible(true);
+    }, 3000);
+
+    try {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            clearTimeout(fallbackTimeout);
+            if (triggerOnce) {
+              observer.unobserve(element);
+            }
+          } else if (!triggerOnce) {
+            setIsVisible(false);
           }
-        } else if (!triggerOnce) {
-          setIsVisible(false);
+        },
+        {
+          threshold,
+          rootMargin,
         }
-      },
-      {
-        threshold,
-        rootMargin,
-      }
-    );
+      );
 
-    observer.observe(element);
+      observer.observe(element);
 
-    return () => {
-      observer.disconnect();
-    };
+      return () => {
+        clearTimeout(fallbackTimeout);
+        observer.disconnect();
+      };
+    } catch (error) {
+      console.error('IntersectionObserver error:', error);
+      setIsVisible(true);
+      clearTimeout(fallbackTimeout);
+    }
   }, [threshold, rootMargin, triggerOnce]);
 
   return { ref, isVisible };

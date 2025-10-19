@@ -11,11 +11,16 @@ const HeroSection = () => {
   const { t, isRTL } = useI18n();
   const isMobile = useIsMobile();
 
+  console.log('[HeroSection] Rendering - isMobile:', isMobile);
+
   // Carousel state - only used on desktop
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  // On mobile, start with images loaded to ensure immediate display
+  const [imagesLoaded, setImagesLoaded] = useState(isMobile);
+
+  console.log('[HeroSection] State - imagesLoaded:', imagesLoaded, 'currentImageIndex:', currentImageIndex);
 
   // Auto-advance carousel every 5 seconds - only on desktop
   useEffect(() => {
@@ -32,12 +37,41 @@ const HeroSection = () => {
     setImageErrors(prev => new Set(prev).add(index));
   };
 
-  // Preload first image to avoid blocking
+  // Preload first image to avoid blocking - with timeout fallback
   useEffect(() => {
+    console.log('[HeroSection] useEffect - Starting image preload, isMobile:', isMobile);
+    
+    // Skip preloading on mobile - display immediately
+    if (isMobile) {
+      console.log('[HeroSection] Mobile detected - setting imagesLoaded to true immediately');
+      setImagesLoaded(true);
+      return;
+    }
+
+    // Set a timeout to ensure content displays even if images fail
+    const timeoutId = setTimeout(() => {
+      console.log('[HeroSection] Timeout reached - forcing imagesLoaded to true');
+      setImagesLoaded(true);
+    }, 2000); // Force display after 2 seconds
+
     const img = new Image();
     img.src = heroCarousel1;
-    img.onload = () => setImagesLoaded(true);
-  }, []);
+    img.onload = () => {
+      console.log('[HeroSection] Image loaded successfully');
+      setImagesLoaded(true);
+      clearTimeout(timeoutId);
+    };
+    img.onerror = () => {
+      console.warn('[HeroSection] Failed to load hero image, displaying content anyway');
+      setImagesLoaded(true);
+      clearTimeout(timeoutId);
+    };
+
+    return () => {
+      console.log('[HeroSection] Cleaning up image preload');
+      clearTimeout(timeoutId);
+    };
+  }, [isMobile]);
 
   const stats = [{
     icon: Shield,
@@ -61,8 +95,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-secondary/90 z-0" />
         
         {isMobile ? (
-          /* Mobile: Single static optimized image */
-          <div className="absolute inset-0" style={{ opacity: 0.35, zIndex: 1 }}>
+          /* Mobile: Single static optimized image with error handling */
+          <div className="absolute inset-0" style={{ opacity: imagesLoaded ? 0.35 : 0, zIndex: 1 }}>
             <img 
               src={heroCarousel1} 
               alt="Security Professional" 
@@ -71,6 +105,10 @@ const HeroSection = () => {
               height={1024}
               loading="eager"
               decoding="async"
+              onError={() => {
+                console.warn('Mobile hero image failed to load');
+                setImagesLoaded(true); // Ensure content displays
+              }}
             />
           </div>
         ) : (
@@ -120,8 +158,8 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Main Hero Content - Visible immediately */}
-          <div className="pt-20 md:pt-0">
+          {/* Main Hero Content - Force visibility to prevent blank screen */}
+          <div className="pt-20 md:pt-0" style={{ opacity: 1, visibility: 'visible' }}>
             <h1 className="font-bold mb-6 text-shadow font-rubik" style={{
             fontSize: 'clamp(2rem, 8vw, 4.5rem)',
             lineHeight: '1.2',
