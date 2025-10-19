@@ -214,7 +214,6 @@ const MagneticLoader: React.FC<MagneticLoaderProps> = ({ onComplete, duration = 
               width="200"
               height="200"
               loading="eager"
-              fetchPriority="high"
               decoding="async"
             />
           </div>

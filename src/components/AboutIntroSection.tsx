@@ -77,7 +77,6 @@ const AboutIntroSection = () => {
                       height="384"
                       loading="lazy"
                       decoding="async"
-                      fetchPriority="low"
                     />
                   </picture>
                   <div className="absolute inset-6 rounded-lg ring-4 ring-accent/20 pointer-events-none"></div>

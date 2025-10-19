@@ -13,7 +13,7 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
     triggerOnce = true,
   } = options;
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Show immediately on mobile
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,16 +22,14 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
 
     // Fallback for browsers without IntersectionObserver or on mobile with issues
     if (typeof IntersectionObserver === 'undefined') {
-      console.warn('IntersectionObserver not supported, showing content immediately');
       setIsVisible(true);
       return;
     }
 
-    // Set a timeout to ensure content displays even if observer fails
+    // Set a shorter timeout to ensure content displays quickly
     const fallbackTimeout = setTimeout(() => {
-      console.log('Animation fallback triggered - ensuring visibility');
       setIsVisible(true);
-    }, 3000);
+    }, 500);
 
     try {
       const observer = new IntersectionObserver(
@@ -59,7 +57,6 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
         observer.disconnect();
       };
     } catch (error) {
-      console.error('IntersectionObserver error:', error);
       setIsVisible(true);
       clearTimeout(fallbackTimeout);
     }
