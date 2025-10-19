@@ -40,13 +40,17 @@ export default defineConfig(({ mode }) => ({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
       },
     },
     cssMinify: true,
-    cssCodeSplit: false, // Inline CSS dans le JS pour éviter les problèmes MIME Android
+    cssCodeSplit: true,
     sourcemap: false,
     chunkSizeWarningLimit: 1000,
-    assetsInlineLimit: 0, // Force all assets to be files, not inline data URIs
+    assetsInlineLimit: 4096,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],

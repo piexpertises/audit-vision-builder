@@ -67,15 +67,19 @@ const AboutIntroSection = () => {
                     boxShadow: '0 8px 32px hsl(216 18% 12% / 0.1)',
                   }}
                 >
-                  <img 
-                    src={steveProfile} 
-                    alt="סטיב בלחסן - מייסד ומנהל" 
-                    className="w-80 h-96 object-cover rounded-lg shadow-lg hover-glow transition-all duration-500"
-                    width="320"
-                    height="384"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source type="image/webp" srcSet={steveProfile} />
+                    <img 
+                      src={steveProfile} 
+                      alt="Steve Belhasen - Founder and Director of Pi Expertises, Security Consultant Israel" 
+                      className="w-80 h-96 object-cover rounded-lg shadow-lg hover-glow transition-all duration-500"
+                      width="320"
+                      height="384"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
+                    />
+                  </picture>
                   <div className="absolute inset-6 rounded-lg ring-4 ring-accent/20 pointer-events-none"></div>
                 </div>
               </div>

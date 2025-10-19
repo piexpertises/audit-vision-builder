@@ -97,19 +97,23 @@ const HeroSection = () => {
         {isMobile ? (
           /* Mobile: Single static optimized image with error handling */
           <div className="absolute inset-0" style={{ opacity: imagesLoaded ? 0.35 : 0, zIndex: 1 }}>
-            <img 
-              src={heroCarousel1} 
-              alt="Security Professional" 
-              className="w-full h-full object-cover" 
-              width={768}
-              height={1024}
-              loading="eager"
-              decoding="async"
-              onError={() => {
-                console.warn('Mobile hero image failed to load');
-                setImagesLoaded(true); // Ensure content displays
-              }}
-            />
+            <picture>
+              <source type="image/webp" srcSet={heroCarousel1} />
+              <img 
+                src={heroCarousel1} 
+                alt="Professional security services - Steve Belhasen Pi Expertises" 
+                className="w-full h-full object-cover" 
+                width={768}
+                height={1024}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                onError={() => {
+                  console.warn('Mobile hero image failed to load');
+                  setImagesLoaded(true);
+                }}
+              />
+            </picture>
           </div>
         ) : (
           /* Desktop: Carousel images */
@@ -122,16 +126,20 @@ const HeroSection = () => {
                 zIndex: currentImageIndex === index ? 1 : 0
               }}
             >
-              <img 
-                src={image} 
-                alt={`Security Professional ${index + 1}`} 
-                className="w-full h-full object-cover" 
-                width={1920}
-                height={1080}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-                onError={() => handleImageError(index)}
-              />
+              <picture>
+                <source type="image/webp" srcSet={image} />
+                <img 
+                  src={image} 
+                  alt={`Professional security consulting services ${index + 1} - Pi Expertises Israel`} 
+                  className="w-full h-full object-cover" 
+                  width={1920}
+                  height={1080}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={index === 0 ? "high" : "low"}
+                  onError={() => handleImageError(index)}
+                />
+              </picture>
             </div>
           ))
         )}
@@ -175,23 +183,23 @@ const HeroSection = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
-            <a href="#about-intro" className="inline-block">
-              <Button size="lg" className="btn-hero group hover-scale hover-glow">
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 px-4 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
+            <a href="#about-intro" className="inline-block w-full sm:w-auto">
+              <Button size="lg" className="btn-hero group hover-scale hover-glow w-full sm:w-auto min-h-[44px]">
                 {t('hero.learn_more')}
                 <ArrowRight className={`ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
               </Button>
             </a>
-            <a href="#contact" className="inline-block">
-              <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale">
+            <a href="#contact" className="inline-block w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 hover-scale w-full sm:w-auto min-h-[44px]">
                 {t('hero.cta')}
               </Button>
             </a>
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto px-4">
-            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center py-6 md:min-h-[160px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-3xl mx-auto px-4 sm:px-6">
+            {stats.map((stat, index) => <div key={index} className="text-center group hover-lift flex flex-col items-center justify-center py-6 md:min-h-[160px] min-h-[120px]">
                 <div className="inline-flex items-center justify-center w-16 h-16 md:w-16 md:h-16 rounded-full mb-4 transition-all duration-300 hover-scale flex-shrink-0" style={{
               backgroundColor: 'hsl(42 88% 65% / 0.2)'
             }}>

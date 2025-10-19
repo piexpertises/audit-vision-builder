@@ -68,11 +68,11 @@ const ServicesSection = () => {
         </div>
 
         {/* Services List */}
-        <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+        <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto px-4">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className={`flex items-start gap-4 p-4 rounded-lg group hover-lift transition-all duration-700 ${
+              className={`flex items-start gap-4 p-4 sm:p-6 rounded-lg group hover-lift transition-all duration-700 ${
                 servicesVisible ? 'opacity-100 animate-staggered-fade' : 'opacity-0 translate-y-5'
               }`}
               style={{ 
