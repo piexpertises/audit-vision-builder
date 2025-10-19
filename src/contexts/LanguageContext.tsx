@@ -305,15 +305,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const urlParams = new URLSearchParams(window.location.search);
     const langParam = urlParams.get('lang') as Language;
     
+    // If lang parameter exists and is valid, use it
     if (langParam && ['he', 'en', 'fr'].includes(langParam)) {
-      // Save URL language to localStorage
-      localStorage.setItem('preferred-language', langParam);
       return langParam;
     }
     
-    // Get saved language from localStorage or default to Hebrew
-    const savedLang = localStorage.getItem('preferred-language') as Language;
-    return savedLang && ['he', 'en', 'fr'].includes(savedLang) ? savedLang : 'he';
+    // Default to Hebrew (ignore localStorage to ensure piexpertises.com always shows Hebrew)
+    return 'he';
   });
 
   useEffect(() => {
