@@ -260,6 +260,12 @@
     "address": "Mevaseret Zion, Israël",
     "hours": "Dim-Jeu: 8:00-18:00"
   },
+  "accessibility": {
+    "tools": "Outils d'accessibilité",
+    "fontSize": "Taille du texte",
+    "contrast": "Contraste élevé",
+    "reset": "Réinitialiser"
+  },
   "footer": {
     "description": "Pi Expertises est un cabinet boutique de conseil en sécurité, anti-terrorisme et solutions de sécurité personnalisées",
     "company_title": "Entreprise",
