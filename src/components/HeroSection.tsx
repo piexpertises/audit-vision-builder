@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Award } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 import heroCarousel1 from '@/assets/hero-carousel-1.jpg';
 import heroCarousel2 from '@/assets/hero-carousel-2.jpg';
 import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
@@ -10,11 +11,25 @@ import heroCarousel3 from '@/assets/hero-carousel-3.jpg';
 const HeroSection = () => {
   const { t, isRTL } = useI18n();
   const isMobile = useIsMobile();
+  const [startAnimation, setStartAnimation] = useState(false);
 
   // Carousel state - only used on desktop
   const carouselImages = [heroCarousel1, heroCarousel2, heroCarousel3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+
+  // Compteurs animés
+  const experienceCount = useCounterAnimation(20, 2000, startAnimation);
+  const clientsCount = useCounterAnimation(500, 2500, startAnimation);
+  const projectsCount = useCounterAnimation(200, 2000, startAnimation);
+
+  // Démarrer l'animation au montage du composant
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStartAnimation(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Auto-advance carousel every 5 seconds - only on desktop
   useEffect(() => {
@@ -34,15 +49,18 @@ const HeroSection = () => {
   const stats = [{
     icon: Shield,
     label: t('hero.stats.experience'),
-    value: '20+'
+    value: experienceCount,
+    suffix: '+'
   }, {
     icon: Users,
     label: t('hero.stats.clients'),
-    value: '500+'
+    value: clientsCount,
+    suffix: '+'
   }, {
     icon: Award,
     label: t('hero.stats.projects'),
-    value: '200+'
+    value: projectsCount,
+    suffix: '+'
   }];
   
   
@@ -151,7 +169,9 @@ const HeroSection = () => {
             }}>
                   <stat.icon className="h-8 w-8" style={{ color: 'hsl(42 88% 65%)' }} />
                 </div>
-                <div className="text-3xl md:text-3xl font-bold mb-2" style={{ color: 'hsl(42 88% 65%)' }}>{stat.value}</div>
+                <div className="text-3xl md:text-3xl font-bold mb-2" style={{ color: 'hsl(42 88% 65%)' }}>
+                  +{stat.value}
+                </div>
                 <div className="text-foreground/70 text-sm md:text-sm uppercase tracking-wider px-2">{stat.label}</div>
               </div>)}
           </div>

@@ -288,7 +288,7 @@ const AccessibilityWidget = () => {
     <>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-20 left-4 z-50 rounded-full w-14 h-14 shadow-lg bg-primary hover:bg-primary/90"
+        className="fixed bottom-[96px] right-5 z-50 rounded-full w-14 h-14 shadow-lg bg-primary hover:bg-primary/90"
         size="icon"
         aria-label={t('accessibility.tools')}
       >

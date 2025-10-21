@@ -355,11 +355,11 @@ const Header = () => {
                         onClick={() => {
                           // Si on clique sur FR, rediriger vers piexpertises.com/fr
                           if (lang.code === 'fr') {
-                            window.location.href = 'https://piexpertises.com/fr';
-                          } else {
-                            setLanguage(lang.code);
-                            handleMenuItemClick();
+                            window.location.href = 'https://www.piexpertises.com/fr';
+                            return;
                           }
+                          setLanguage(lang.code);
+                          handleMenuItemClick();
                         }}
                         className="py-3 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{

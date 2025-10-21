@@ -174,10 +174,10 @@ const Footer = () => {
                   onClick={() => {
                     // Si on clique sur FR, rediriger vers piexpertises.com/fr
                     if (lang.code === 'fr') {
-                      window.location.href = 'https://piexpertises.com/fr';
-                    } else {
-                      setLanguage(lang.code);
+                      window.location.href = 'https://www.piexpertises.com/fr';
+                      return;
                     }
+                    setLanguage(lang.code);
                   }}
                   className={`flex flex-col md:flex-row items-center md:w-full gap-1 md:gap-3 px-2 md:px-4 py-2 rounded-lg transition-all duration-300 ${
                     language === lang.code 
