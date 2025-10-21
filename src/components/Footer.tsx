@@ -22,7 +22,6 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Phone, href: 'tel:050-730-0720', label: 'Phone' },
     { icon: Mail, href: 'mailto:infos.piexpertises@gmail.com', label: 'Email' },
     { icon: Globe, href: '#', label: 'Website' },
   ];
@@ -172,7 +171,14 @@ const Footer = () => {
               {languages.map((lang) => (
                 <button
                   key={lang.code}
-                  onClick={() => setLanguage(lang.code)}
+                  onClick={() => {
+                    // Si on clique sur FR, rediriger vers piexpertises.com/fr
+                    if (lang.code === 'fr') {
+                      window.location.href = 'https://piexpertises.com/fr';
+                    } else {
+                      setLanguage(lang.code);
+                    }
+                  }}
                   className={`flex flex-col md:flex-row items-center md:w-full gap-1 md:gap-3 px-2 md:px-4 py-2 rounded-lg transition-all duration-300 ${
                     language === lang.code 
                       ? 'bg-accent/20 text-accent border border-accent/40' 

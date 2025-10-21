@@ -353,8 +353,13 @@ const Header = () => {
                       <button
                         key={lang.code}
                         onClick={() => {
-                          setLanguage(lang.code);
-                          handleMenuItemClick();
+                          // Si on clique sur FR, rediriger vers piexpertises.com/fr
+                          if (lang.code === 'fr') {
+                            window.location.href = 'https://piexpertises.com/fr';
+                          } else {
+                            setLanguage(lang.code);
+                            handleMenuItemClick();
+                          }
                         }}
                         className="py-3 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
@@ -421,7 +426,7 @@ const Header = () => {
                       e.currentTarget.style.color = 'rgba(255, 255, 255, 0.80)';
                     }}
                   >
-                    {t('nav.phone')}
+                    050-730-0720
                   </a>
                 </div>
               </div>
