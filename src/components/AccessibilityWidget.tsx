@@ -139,7 +139,7 @@ const AccessibilityWidget = () => {
             className="fixed inset-0 bg-black/50 z-[60]"
             onClick={() => setIsOpen(false)}
           />
-          <div className="fixed top-4 right-4 z-[70] bg-white rounded-[24px] shadow-2xl w-[420px] max-h-[calc(100vh-32px)] overflow-hidden">
+          <div className="fixed top-24 right-6 z-[70] bg-white rounded-[24px] shadow-2xl w-[400px] max-h-[calc(100vh-140px)] overflow-hidden">
             <div className="sticky top-0 bg-[#0EA5E9] text-white rounded-t-[24px] px-6 py-4 flex justify-between items-center z-10">
               <h3 className="font-bold text-[20px]">{t('accessibility.tools')}</h3>
               <button
