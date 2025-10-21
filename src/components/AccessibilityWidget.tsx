@@ -158,7 +158,7 @@ const AccessibilityWidget = () => {
                     key={btn.id}
                     onClick={() => toggleFeature(btn.id)}
                     className={`
-                      py-3.5 px-3 text-[13px] font-medium rounded-[28px] border-[2.5px] transition-all leading-tight min-h-[58px] flex items-center justify-center
+                      py-3.5 px-2.5 text-[13px] font-semibold rounded-[32px] border-[2px] transition-all leading-tight min-h-[60px] flex items-center justify-center
                       ${activeFeatures.has(btn.id)
                         ? 'bg-[#0EA5E9] text-white border-[#0EA5E9]'
                         : 'bg-white text-gray-900 border-[#0EA5E9] hover:bg-blue-50'
@@ -170,32 +170,32 @@ const AccessibilityWidget = () => {
                 ))}
               </div>
 
-              <div className="space-y-4 bg-[#F7F7F7] rounded-[20px] p-5">
+              <div className="space-y-4 bg-[#F8F8F8] rounded-[20px] p-5">
                 <div>
                   <div className="flex justify-center items-center mb-4">
                     <label className="text-[17px] font-bold text-[#0EA5E9]">
                       {t('accessibility.fontSizeAdjust')}
                     </label>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-center gap-4">
                     <button
-                      onClick={() => adjustFontSize([Math.max(50, fontSize - 5)])}
-                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-100 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm"
+                      onClick={() => adjustFontSize([Math.min(200, fontSize + 5)])}
+                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-50 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm shrink-0"
                     >
                       +
                     </button>
-                    <span className="text-[20px] font-bold text-gray-900 min-w-[65px] text-center">{fontSize}%</span>
+                    <span className="text-[20px] font-bold text-gray-900 min-w-[70px] text-center shrink-0">{fontSize}%</span>
                     <Slider
                       value={[fontSize]}
                       onValueChange={adjustFontSize}
                       min={50}
                       max={200}
                       step={5}
-                      className="flex-1"
+                      className="flex-1 max-w-[180px]"
                     />
                     <button
-                      onClick={() => adjustFontSize([Math.min(200, fontSize + 5)])}
-                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-100 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm"
+                      onClick={() => adjustFontSize([Math.max(50, fontSize - 5)])}
+                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-50 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm shrink-0"
                     >
                       -
                     </button>
@@ -208,25 +208,25 @@ const AccessibilityWidget = () => {
                       {t('accessibility.wordSpacing')}
                     </label>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-center gap-4">
                     <button
-                      onClick={() => adjustWordSpacing([Math.max(0, wordSpacing - 0.5)])}
-                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-100 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm"
+                      onClick={() => adjustWordSpacing([Math.min(20, wordSpacing + 0.5)])}
+                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-50 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm shrink-0"
                     >
                       +
                     </button>
-                    <span className="text-[20px] font-bold text-gray-900 min-w-[65px] text-center">{wordSpacing.toFixed(1)}</span>
+                    <span className="text-[20px] font-bold text-gray-900 min-w-[70px] text-center shrink-0">{wordSpacing.toFixed(1)}</span>
                     <Slider
                       value={[wordSpacing]}
                       onValueChange={adjustWordSpacing}
                       min={0}
                       max={20}
                       step={0.5}
-                      className="flex-1"
+                      className="flex-1 max-w-[180px]"
                     />
                     <button
-                      onClick={() => adjustWordSpacing([Math.min(20, wordSpacing + 0.5)])}
-                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-100 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm"
+                      onClick={() => adjustWordSpacing([Math.max(0, wordSpacing - 0.5)])}
+                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-50 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm shrink-0"
                     >
                       -
                     </button>
@@ -239,25 +239,25 @@ const AccessibilityWidget = () => {
                       {t('accessibility.letterSpacing')}
                     </label>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-center gap-4">
                     <button
-                      onClick={() => adjustLetterSpacing([Math.max(0, letterSpacing - 0.25)])}
-                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-100 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm"
+                      onClick={() => adjustLetterSpacing([Math.min(10, letterSpacing + 0.25)])}
+                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-50 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm shrink-0"
                     >
                       +
                     </button>
-                    <span className="text-[20px] font-bold text-gray-900 min-w-[65px] text-center">{letterSpacing.toFixed(2)}</span>
+                    <span className="text-[20px] font-bold text-gray-900 min-w-[70px] text-center shrink-0">{letterSpacing.toFixed(2)}</span>
                     <Slider
                       value={[letterSpacing]}
                       onValueChange={adjustLetterSpacing}
                       min={0}
                       max={10}
                       step={0.25}
-                      className="flex-1"
+                      className="flex-1 max-w-[180px]"
                     />
                     <button
-                      onClick={() => adjustLetterSpacing([Math.min(10, letterSpacing + 0.25)])}
-                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-100 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm"
+                      onClick={() => adjustLetterSpacing([Math.max(0, letterSpacing - 0.25)])}
+                      className="h-10 w-10 rounded-full bg-white hover:bg-gray-50 font-bold text-[20px] flex items-center justify-center transition-colors border border-gray-200 shadow-sm shrink-0"
                     >
                       -
                     </button>
@@ -265,16 +265,16 @@ const AccessibilityWidget = () => {
                 </div>
               </div>
 
-              <div className="bg-[#FAFAFA] rounded-[20px] p-5">
+              <div className="bg-white rounded-[20px] p-5 border border-gray-100">
                 <h4 className="text-[16px] font-bold text-[#0EA5E9] mb-3 text-center">{t('accessibility.shortcuts')}</h4>
-                <p className="text-[12px] text-gray-600 leading-relaxed text-right">
+                <p className="text-[11px] text-gray-600 leading-relaxed text-right">
                   {t('accessibility.shortcutsHelp')}
                 </p>
               </div>
 
               <button
                 onClick={resetAccessibility}
-                className="w-full py-3 text-[16px] font-bold rounded-[28px] border-[2.5px] border-[#0EA5E9] bg-white text-[#0EA5E9] hover:bg-blue-50 transition-colors"
+                className="w-full py-3.5 text-[16px] font-bold rounded-[32px] border-[2px] border-[#0EA5E9] bg-white text-[#0EA5E9] hover:bg-blue-50 transition-colors"
               >
                 {t('accessibility.reset')}
               </button>
