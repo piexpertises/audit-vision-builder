@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Accessibility, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -12,6 +12,196 @@ const AccessibilityWidget = () => {
   const [activeFeatures, setActiveFeatures] = useState<Set<string>>(new Set());
   const { t } = useI18n();
   const speechHandlerRef = useRef<(() => void) | null>(null);
+
+  const enableReadingGuide = useCallback(() => {
+    // Supprimer l'ancien guide s'il existe
+    const existingGuide = document.getElementById('reading-guide');
+    if (existingGuide) {
+      existingGuide.remove();
+    }
+
+    // Créer le guide de lecture
+    const guide = document.createElement('div');
+    guide.id = 'reading-guide';
+    guide.style.cssText = `
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: transparent;
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 
+        0 -9999px 0 9999px rgba(0, 0, 0, 0.5),
+        0 9999px 0 9999px rgba(0, 0, 0, 0.5);
+    `;
+    document.body.appendChild(guide);
+
+    // Suivre la position de la souris
+    const moveGuide = (e: MouseEvent) => {
+      guide.style.top = `${e.clientY - 30}px`;
+    };
+
+    document.addEventListener('mousemove', moveGuide);
+
+    // Nettoyer lors du retrait du guide
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.removedNodes.forEach((node) => {
+          if (node === guide) {
+            document.removeEventListener('mousemove', moveGuide);
+            observer.disconnect();
+          }
+        });
+      });
+    });
+
+    observer.observe(document.body, { childList: true });
+  }, []);
+
+  const enableTextToSpeech = useCallback(() => {
+    if (!window.speechSynthesis) {
+      alert('La synthèse vocale n\'est pas supportée par votre navigateur.');
+      return;
+    }
+
+    // Attendre que les voix soient chargées
+    let voices = window.speechSynthesis.getVoices();
+    
+    // Si les voix ne sont pas encore chargées
+    if (voices.length === 0) {
+      window.speechSynthesis.addEventListener('voiceschanged', () => {
+        voices = window.speechSynthesis.getVoices();
+      });
+    }
+
+    // Nettoyer les anciens écouteurs
+    if (speechHandlerRef.current) {
+      document.removeEventListener('mouseup', speechHandlerRef.current);
+      document.removeEventListener('touchend', speechHandlerRef.current);
+    }
+
+    // Fonction pour lire le texte sélectionné
+    const speakSelectedText = () => {
+      const selection = window.getSelection()?.toString().trim();
+      if (selection && selection.length > 0) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(selection);
+        
+        // Trouver une voix hébraïque si disponible
+        const voices = window.speechSynthesis.getVoices();
+        const hebrewVoice = voices.find(voice => voice.lang.startsWith('he'));
+        if (hebrewVoice) {
+          utterance.voice = hebrewVoice;
+        }
+        
+        utterance.lang = 'he-IL';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    };
+
+    // Stocker la référence et ajouter les écouteurs
+    speechHandlerRef.current = speakSelectedText;
+    document.addEventListener('mouseup', speakSelectedText);
+    document.addEventListener('touchend', speakSelectedText);
+  }, []);
+
+  const toggleFeature = useCallback((feature: string) => {
+    setActiveFeatures(prev => {
+      const newFeatures = new Set(prev);
+      if (newFeatures.has(feature)) {
+        newFeatures.delete(feature);
+        document.documentElement.classList.remove(`a11y-${feature}`);
+        
+        // Arrêter la lecture vocale et nettoyer les écouteurs
+        if (feature === 'text-to-speech') {
+          if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+          }
+          if (speechHandlerRef.current) {
+            document.removeEventListener('mouseup', speechHandlerRef.current);
+            document.removeEventListener('touchend', speechHandlerRef.current);
+            speechHandlerRef.current = null;
+          }
+        }
+        
+        // Retirer le guide de lecture
+        if (feature === 'reading-guide') {
+          const guide = document.getElementById('reading-guide');
+          if (guide) {
+            guide.remove();
+          }
+        }
+      } else {
+        newFeatures.add(feature);
+        document.documentElement.classList.add(`a11y-${feature}`);
+        
+        // Activer la lecture vocale
+        if (feature === 'text-to-speech') {
+          enableTextToSpeech();
+        }
+        
+        // Activer le guide de lecture
+        if (feature === 'reading-guide') {
+          enableReadingGuide();
+        }
+      }
+      return newFeatures;
+    });
+  }, [enableTextToSpeech, enableReadingGuide]);
+
+  const adjustFontSize = useCallback((value: number[]) => {
+    const newSize = value[0];
+    setFontSize(newSize);
+    document.documentElement.style.fontSize = `${newSize}%`;
+  }, []);
+
+  const adjustWordSpacing = useCallback((value: number[]) => {
+    const spacing = value[0];
+    setWordSpacing(spacing);
+    document.documentElement.style.setProperty('--word-spacing', `${spacing}px`);
+  }, []);
+
+  const adjustLetterSpacing = useCallback((value: number[]) => {
+    const spacing = value[0];
+    setLetterSpacing(spacing);
+    document.documentElement.style.setProperty('--letter-spacing', `${spacing}px`);
+  }, []);
+
+  const resetAccessibility = useCallback(() => {
+    setFontSize(100);
+    setWordSpacing(0);
+    setLetterSpacing(0);
+    setActiveFeatures(new Set());
+    document.documentElement.style.fontSize = '100%';
+    document.documentElement.style.removeProperty('--word-spacing');
+    document.documentElement.style.removeProperty('--letter-spacing');
+    
+    // Arrêter la lecture vocale et nettoyer les écouteurs
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    if (speechHandlerRef.current) {
+      document.removeEventListener('mouseup', speechHandlerRef.current);
+      document.removeEventListener('touchend', speechHandlerRef.current);
+      speechHandlerRef.current = null;
+    }
+    
+    // Retirer le guide de lecture
+    const guide = document.getElementById('reading-guide');
+    if (guide) {
+      guide.remove();
+    }
+    
+    document.documentElement.className = document.documentElement.className
+      .split(' ')
+      .filter(c => !c.startsWith('a11y-'))
+      .join(' ');
+  }, []);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -62,7 +252,7 @@ const AccessibilityWidget = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [isOpen, fontSize, activeFeatures]);
+  }, [isOpen, fontSize, toggleFeature, adjustFontSize, resetAccessibility]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -76,109 +266,6 @@ const AccessibilityWidget = () => {
       }
     };
   }, []);
-
-  const toggleFeature = (feature: string) => {
-    const newFeatures = new Set(activeFeatures);
-    if (newFeatures.has(feature)) {
-      newFeatures.delete(feature);
-      document.documentElement.classList.remove(`a11y-${feature}`);
-      
-      // Arrêter la lecture vocale et nettoyer les écouteurs
-      if (feature === 'text-to-speech') {
-        if (window.speechSynthesis) {
-          window.speechSynthesis.cancel();
-        }
-        if (speechHandlerRef.current) {
-          document.removeEventListener('mouseup', speechHandlerRef.current);
-          document.removeEventListener('touchend', speechHandlerRef.current);
-          speechHandlerRef.current = null;
-        }
-      }
-    } else {
-      newFeatures.add(feature);
-      document.documentElement.classList.add(`a11y-${feature}`);
-      
-      // Activer la lecture vocale
-      if (feature === 'text-to-speech') {
-        enableTextToSpeech();
-      }
-    }
-    setActiveFeatures(newFeatures);
-  };
-
-  const enableTextToSpeech = () => {
-    if (!window.speechSynthesis) {
-      alert(t('accessibility.textToSpeechNotSupported') || 'La synthèse vocale n\'est pas supportée par votre navigateur.');
-      return;
-    }
-
-    // Nettoyer les anciens écouteurs
-    if (speechHandlerRef.current) {
-      document.removeEventListener('mouseup', speechHandlerRef.current);
-      document.removeEventListener('touchend', speechHandlerRef.current);
-    }
-
-    // Fonction pour lire le texte sélectionné
-    const speakSelectedText = () => {
-      const selection = window.getSelection()?.toString().trim();
-      if (selection && selection.length > 0) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(selection);
-        utterance.lang = 'he-IL'; // Hébreu
-        utterance.rate = 0.9;
-        utterance.pitch = 1;
-        window.speechSynthesis.speak(utterance);
-      }
-    };
-
-    // Stocker la référence et ajouter les écouteurs
-    speechHandlerRef.current = speakSelectedText;
-    document.addEventListener('mouseup', speakSelectedText);
-    document.addEventListener('touchend', speakSelectedText);
-  };
-
-  const adjustFontSize = (value: number[]) => {
-    const newSize = value[0];
-    setFontSize(newSize);
-    document.documentElement.style.fontSize = `${newSize}%`;
-  };
-
-  const adjustWordSpacing = (value: number[]) => {
-    const spacing = value[0];
-    setWordSpacing(spacing);
-    document.body.style.wordSpacing = `${spacing}px`;
-  };
-
-  const adjustLetterSpacing = (value: number[]) => {
-    const spacing = value[0];
-    setLetterSpacing(spacing);
-    document.body.style.letterSpacing = `${spacing}px`;
-  };
-
-  const resetAccessibility = () => {
-    setFontSize(100);
-    setWordSpacing(0);
-    setLetterSpacing(0);
-    setActiveFeatures(new Set());
-    document.documentElement.style.fontSize = '100%';
-    document.body.style.wordSpacing = 'normal';
-    document.body.style.letterSpacing = 'normal';
-    
-    // Arrêter la lecture vocale et nettoyer les écouteurs
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
-    if (speechHandlerRef.current) {
-      document.removeEventListener('mouseup', speechHandlerRef.current);
-      document.removeEventListener('touchend', speechHandlerRef.current);
-      speechHandlerRef.current = null;
-    }
-    
-    document.documentElement.className = document.documentElement.className
-      .split(' ')
-      .filter(c => !c.startsWith('a11y-'))
-      .join(' ');
-  };
 
   const accessibilityButtons = [
     { id: 'grayscale', label: t('accessibility.grayscale') },

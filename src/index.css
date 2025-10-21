@@ -102,6 +102,10 @@
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     
+    /* Accessibility Spacing */
+    --word-spacing: normal;
+    --letter-spacing: normal;
+    
     /* Animation Timing */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -480,23 +484,6 @@
   letter-spacing: 0.12em !important;
   word-spacing: 0.16em !important;
   line-height: 1.8 !important;
-}
-
-.a11y-reading-guide {
-  position: relative;
-}
-
-.a11y-reading-guide::before {
-  content: '';
-  position: fixed;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: hsl(var(--primary));
-  pointer-events: none;
-  z-index: 9999;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3);
 }
 
 .a11y-big-cursor-dark,
