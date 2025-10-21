@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Accessibility, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -11,6 +11,7 @@ const AccessibilityWidget = () => {
   const [letterSpacing, setLetterSpacing] = useState(0);
   const [activeFeatures, setActiveFeatures] = useState<Set<string>>(new Set());
   const { t } = useI18n();
+  const speechHandlerRef = useRef<(() => void) | null>(null);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -58,19 +59,82 @@ const AccessibilityWidget = () => {
     };
 
     document.addEventListener('keydown', handleKeyPress);
-    return () => document.removeEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
   }, [isOpen, fontSize, activeFeatures]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      if (speechHandlerRef.current) {
+        document.removeEventListener('mouseup', speechHandlerRef.current);
+        document.removeEventListener('touchend', speechHandlerRef.current);
+      }
+    };
+  }, []);
 
   const toggleFeature = (feature: string) => {
     const newFeatures = new Set(activeFeatures);
     if (newFeatures.has(feature)) {
       newFeatures.delete(feature);
       document.documentElement.classList.remove(`a11y-${feature}`);
+      
+      // Arrêter la lecture vocale et nettoyer les écouteurs
+      if (feature === 'text-to-speech') {
+        if (window.speechSynthesis) {
+          window.speechSynthesis.cancel();
+        }
+        if (speechHandlerRef.current) {
+          document.removeEventListener('mouseup', speechHandlerRef.current);
+          document.removeEventListener('touchend', speechHandlerRef.current);
+          speechHandlerRef.current = null;
+        }
+      }
     } else {
       newFeatures.add(feature);
       document.documentElement.classList.add(`a11y-${feature}`);
+      
+      // Activer la lecture vocale
+      if (feature === 'text-to-speech') {
+        enableTextToSpeech();
+      }
     }
     setActiveFeatures(newFeatures);
+  };
+
+  const enableTextToSpeech = () => {
+    if (!window.speechSynthesis) {
+      alert(t('accessibility.textToSpeechNotSupported') || 'La synthèse vocale n\'est pas supportée par votre navigateur.');
+      return;
+    }
+
+    // Nettoyer les anciens écouteurs
+    if (speechHandlerRef.current) {
+      document.removeEventListener('mouseup', speechHandlerRef.current);
+      document.removeEventListener('touchend', speechHandlerRef.current);
+    }
+
+    // Fonction pour lire le texte sélectionné
+    const speakSelectedText = () => {
+      const selection = window.getSelection()?.toString().trim();
+      if (selection && selection.length > 0) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(selection);
+        utterance.lang = 'he-IL'; // Hébreu
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        window.speechSynthesis.speak(utterance);
+      }
+    };
+
+    // Stocker la référence et ajouter les écouteurs
+    speechHandlerRef.current = speakSelectedText;
+    document.addEventListener('mouseup', speakSelectedText);
+    document.addEventListener('touchend', speakSelectedText);
   };
 
   const adjustFontSize = (value: number[]) => {
@@ -99,6 +163,17 @@ const AccessibilityWidget = () => {
     document.documentElement.style.fontSize = '100%';
     document.body.style.wordSpacing = 'normal';
     document.body.style.letterSpacing = 'normal';
+    
+    // Arrêter la lecture vocale et nettoyer les écouteurs
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    if (speechHandlerRef.current) {
+      document.removeEventListener('mouseup', speechHandlerRef.current);
+      document.removeEventListener('touchend', speechHandlerRef.current);
+      speechHandlerRef.current = null;
+    }
+    
     document.documentElement.className = document.documentElement.className
       .split(' ')
       .filter(c => !c.startsWith('a11y-'))
