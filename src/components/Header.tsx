@@ -353,11 +353,6 @@ const Header = () => {
                       <button
                         key={lang.code}
                         onClick={() => {
-                          // Si on clique sur FR, rediriger vers piexpertises.com/fr
-                          if (lang.code === 'fr') {
-                            window.location.href = 'https://www.piexpertises.com/fr';
-                            return;
-                          }
                           setLanguage(lang.code);
                           handleMenuItemClick();
                         }}
