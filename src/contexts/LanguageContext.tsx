@@ -300,7 +300,15 @@ const translations: Record<Language, Record<string, string>> = {
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('he'); // Always default to Hebrew
+  const [language, setLanguage] = useState<Language>(() => {
+    // Check URL path for language
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      if (path.includes('/fr')) return 'fr';
+      if (path.includes('/en')) return 'en';
+    }
+    return 'he'; // Default to Hebrew
+  });
 
   useEffect(() => {
     // Minimal DOM updates without requestAnimationFrame
