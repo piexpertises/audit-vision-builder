@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Globe, Shield, Users, FileText } from 'lucide-react';
+import { Phone, Mail, MapPin, Globe, Shield, Users, FileText, Linkedin, Instagram } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
 import { Language } from '@/contexts/LanguageContext';
 import logoImage from '@/assets/logo-pi-expertises-new.png';
@@ -23,6 +23,8 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Mail, href: 'mailto:infos.piexpertises@gmail.com', label: 'Email' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/steve-belhassen-a14084126', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/stevebelhassen?igsh=MWZlajExMG5rOTc2cA==', label: 'Instagram' },
     { icon: Globe, href: '#', label: 'Website' },
   ];
 
