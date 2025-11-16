@@ -17,44 +17,70 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Pi Expertises | ייעוץ ביטחוני ואבטחה בישראל | Security Consulting Israel"
-        description="מומחי אבטחה מובילים בישראל. ייעוץ ביטחוני, ניהול אירועים, הכנת תוכניות אבטחה (פק''מ) ומנב''ט לרישוי עסקים. שירותים בתל אביב, רעננה וכל הארץ. Leading security experts in Israel for VIP protection, event security management, and emergency preparedness."
-        keywords="ייעוץ ביטחוני ישראל, אבטחה תל אביב, מנבט רעננה, פקם אבטחה, security consulting Israel, VIP protection Tel Aviv, event security Raanana, Steve Belhasen, סטיב בלחסן, הגנה אישית, ניהול אירועים המוניים, הערכות חירום, פאי אקספרטיס, pi expertises, מנב''ט, הדרכות אבטחה"
+        title="Steve Belhassen - Pi Expertises | סטיב בלחסן | ייעוץ ביטחוני מקצועי בישראל"
+        description="סטיב בלחסן (Steve Belhassen) - מייסד ומנכ''ל Pi Expertises. מומחה ביטחון בכיר, יועץ אבטחה מוביל בישראל. התמחות בייעוץ ביטחוני, הגנת VIP, ניהול אירועים המוניים ותכנון חירום. שירותי אבטחה מקצועיים בתל אביב, רעננה וכל הארץ."
+        keywords="סטיב בלחסן, Steve Belhassen, Steve Belhasen, סטב בלחסן, יועץ ביטחון, מומחה אבטחה, ייעוץ ביטחוני ישראל, אבטחה תל אביב, מנבט רעננה, פקם אבטחה, security consultant Israel, VIP protection, הגנה אישית, ניהול אירועים המוניים, הערכות חירום, פאי אקספרטיס, pi expertises, מנב''ט, הדרכות אבטחה, אבטחה מונעת, תיק שטח"
         canonical="https://piexpertises.com/"
         ogImage="https://piexpertises.com/og-image.jpg"
         schema={{
           "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Pi Expertises",
-          "alternateName": "פאי אקספרטיס",
-          "url": "https://piexpertises.com",
-          "logo": "https://piexpertises.com/logo.png",
-          "description": "Professional security consulting firm in Israel specializing in VIP protection, mass event management, security plan writing, and emergency preparedness",
-          "foundingDate": "2016",
-          "founder": {
-            "@type": "Person",
-            "name": "Steve Belhasen",
-            "alternateName": "סטיב בלחסן",
-            "jobTitle": "Founder and Director"
-          },
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Raanana",
-            "addressRegion": "Central District",
-            "addressCountry": "IL"
-          },
-          "areaServed": {
-            "@type": "Country",
-            "name": "Israel"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+972-50-730-0720",
-            "contactType": "Customer Service",
-            "availableLanguage": ["Hebrew", "English", "French"]
-          },
-          "sameAs": [
-            "https://wa.me/972507300720"
+          "@graph": [
+            {
+              "@type": "Organization",
+              "name": "Pi Expertises",
+              "alternateName": ["פאי אקספרטיס", "Pi Expertises Israel"],
+              "url": "https://piexpertises.com",
+              "logo": "https://piexpertises.com/logo.png",
+              "description": "Professional security consulting firm in Israel founded by Steve Belhassen, specializing in VIP protection, mass event management, security plan writing, and emergency preparedness",
+              "foundingDate": "2016",
+              "founder": {
+                "@id": "https://piexpertises.com/#steve-belhassen"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Raanana",
+                "addressRegion": "Central District",
+                "addressCountry": "IL"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Israel"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+972-50-730-0720",
+                "contactType": "Customer Service",
+                "availableLanguage": ["Hebrew", "English", "French"]
+              },
+              "sameAs": [
+                "https://wa.me/972507300720",
+                "https://www.linkedin.com/in/steve-belhassen-a14084126",
+                "https://www.instagram.com/stevebelhassen"
+              ]
+            },
+            {
+              "@type": "Person",
+              "@id": "https://piexpertises.com/#steve-belhassen",
+              "name": "Steve Belhassen",
+              "alternateName": ["סטיב בלחסן", "Steve Belhasen", "סטב בלחסן"],
+              "jobTitle": ["Founder and CEO", "Security Consultant", "מומחה ביטחון", "יועץ אבטחה"],
+              "description": "Steve Belhassen is a leading security expert and consultant in Israel, founder of Pi Expertises. Former IDF officer specializing in VIP protection, event security, and emergency preparedness.",
+              "url": "https://piexpertises.com",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Pi Expertises"
+              },
+              "nationality": {
+                "@type": "Country",
+                "name": "Israel"
+              },
+              "knowsLanguage": ["Hebrew", "English", "French"],
+              "sameAs": [
+                "https://www.linkedin.com/in/steve-belhassen-a14084126",
+                "https://www.instagram.com/stevebelhassen",
+                "https://piexpertises.com"
+              ]
+            }
           ]
         }}
       />
